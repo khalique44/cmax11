@@ -1,0 +1,866 @@
+
+@font-face {
+    font-family: 'neighborregular';
+    src: url(../fonts/neighbor-webfont.eot);
+    src: url(../fonts/neighbor-webfont.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/neighbor-webfont.woff2) format('woff2'),
+    url(../fonts/neighbor-webfont.woff) format('woff'),
+    url(../fonts/neighbor-webfont.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'verbcondregular';
+    src: url(../fonts/verbcondregular-webfont.eot);
+    src: url(../fonts/verbcondregular-webfont.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/verbcondregular-webfont.woff2) format('woff2'),
+    url(../fonts/verbcondregular-webfont.woff) format('woff'),
+    url(../fonts/verbcondregular-webfont.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
+    /*font-family: 'verbcondregular', sans-serif;*/
+    background:#fff;
+    font-size: 18px;
+	color:#333;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 10px 0;
+    text-transform:inherit;
+
+}
+h1 {
+    font-size: 50px;
+    font-family: 'neighborregular';
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 34px;
+}
+
+h4 {
+    font-size: 28px;
+}
+
+h5 {
+    font-size: 24px;
+}
+
+h6 {
+    font-size: 20px;
+}
+p{
+	font-size:20px;
+    margin: 10px 0;
+    font-weight: 400;
+}
+
+ul{
+	margin:0;
+	padding:0;
+}
+
+li{
+	list-style:none;
+}
+
+
+a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+	font-size:25px;
+	font-weight:400;
+}
+a:hover,a:focus {
+    color: #c20505;
+    text-decoration: none;
+}
+
+.btn {
+    background: #c20505 none repeat scroll 0 0;
+    border-radius: 0;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 12px 35px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.btn:hover{
+    background: #fff;
+    color: #c20505;
+}
+input , select {
+    background: transparent none repeat scroll 0 0;
+    box-shadow: none;
+    color: #fff;
+    font-size: 25px;
+    max-width: 100%;
+    padding: 8px 15px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #fff ;
+}
+::-webkit-input-placeholder { / Chrome /
+color: #fff;
+}
+:-ms-input-placeholder { / IE 10+ /
+color: #fff;
+}
+::-moz-placeholder {
+    color: #fff!important;
+    opacity: 1;
+}
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+
+
+
+
+
+
+#home .parallax-window {
+     background: transparent none repeat scroll 0 0;
+     min-height: 1020px;
+     width: 100%;
+ }
+#registration .parallax-window {
+    background: transparent none repeat scroll 0 0;
+    min-height: 1020px;
+    width: 100%;
+}
+
+/*==================*/
+/*   Navigation     */
+/*==================*/
+.main-header {
+    display: inline-block;
+    padding: 100px 0 70px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+}
+.header-main-content {
+    padding: 35px 0 0;
+}
+.header-text-area {
+    margin: 0 auto;
+    max-width: 855px;
+    padding: 35px 0 0;
+    width: 100%;
+}
+.header-text-area h1 {
+    margin: 0;
+}
+
+/*==================*/
+/*    Home Page     */
+/*==================*/
+
+
+
+.login-register-section {
+    color: #fff;
+    padding: 20px 0;
+    position: relative;
+}
+.login-register-section::before {
+    background: #ccc6c6 none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    width: 2px;
+}
+
+.login-content {
+    margin: 0 auto;
+    max-width: 465px;
+    width: 100%;
+}
+.login-content .title {
+    padding: 15px 0;
+}
+.login-content .title h2 {
+    font-weight: 700;
+}
+.login-content .form-group {
+    margin-bottom: 20px;
+}
+.login-content input {
+    background: #fff none repeat scroll 0 0;
+    border: medium none;
+    color: #555555;
+}
+.login-content ::-webkit-input-placeholder { / Chrome /
+color: #555555;
+}
+.login-content :-ms-input-placeholder { / IE 10+ /
+color: #555555;
+}
+.login-content ::-moz-placeholder {
+    color: #555555!important;
+    opacity: 1;
+}
+.login-btn-area {
+    display: inline-block;
+    padding: 20px 0;
+    vertical-align: top;
+    width: 100%;
+}
+.login-btn {
+    float: left;
+}
+.caption {
+    float: right;
+    padding: 8px 30px 0 0;
+}
+
+.register-content {
+    margin: 0 auto;
+    max-width: 485px;
+    width: 100%;
+}
+
+.register-content .title {
+    padding: 15px 0 5px;
+}
+.register-content .title h2 {
+    font-weight: 700;
+}
+.register-content .description > p {
+    margin: 0 0 10px;
+}
+.register-btn {
+    padding: 15px 0;
+}
+
+
+
+
+/*======= Home Page Media Queries =======*/
+
+@media(max-width: 1199px){
+    h1{
+        font-size: 42px;
+    }
+    p {
+        font-size: 18px;
+    }
+    .main-header {
+        padding: 40px 0 30px;
+    }
+}
+
+
+@media(max-width: 991px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 28px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    h6 {
+        font-size: 18px;
+    }
+    a {
+        font-size:20px;
+        font-weight:400;
+    }
+    .btn {
+        font-size: 20px;
+        padding: 10px 25px;
+    }
+
+    #home .parallax-window {
+        min-height: 720px;
+    }
+    .main-header .logo img {
+        max-width: 150px;
+    }
+    .header-text-area {
+        max-width: 615px;
+    }
+    .main_header.logo img {
+        max-width: 150px;
+    }
+}
+
+
+@media(max-width: 767px){
+    h1 {
+        font-size: 34px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    h3 {
+        font-size: 26px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    h6 {
+        font-size: 18px;
+    }
+    p{
+        font-size: 18px;
+    }
+    a {
+        font-size:16px;
+    }
+    .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    .main-header {
+        padding: 40px 0 0;
+    }
+    .header-text-area {
+        padding: 10px 0 0;
+    }
+    .login-register-section::before {
+        height: 3px;
+        left: 50%;
+        position: absolute;
+        top: 55%;
+        transform: translate(-50%, -50%);
+        width: 360px;
+    }
+    .login-content {
+        text-align: center;
+        padding:20px 0 0;
+    }
+    .login-btn {
+        width: 100%;
+    }
+    .caption {
+        width: 100%;
+        padding:10px 0;
+    }
+    .register-content {
+        text-align: center;
+        padding: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 23px;
+    }
+    .login-register-section::before {
+        width: 300px;
+        top: 53%;
+    }
+    .main-header .logo img {
+        max-width: 100px;
+    }
+    .login-content {
+        padding: 0;
+    }
+    .register-content {
+        padding: 0;
+    }
+}
+
+
+
+
+
+
+/*====================*/
+/*  Latest Project    */
+/*====================*/
+
+.main-header.inner-page-header {
+    padding: 60px 0 40px;
+}
+.inner-page-header .logo img {
+    max-width: 115px;
+    width: 100%;
+}
+.inner-page-header .header-text-area {
+    max-width: 580px;
+    padding: 20px 0 0;
+}
+.inner-page-header .header-text-area h1 {
+    font-size: 34px;
+}
+
+.app-registration-form-sect {
+    padding: 10px 0;
+}
+.app-registration-content {
+    color: #fff;
+    margin: 0 auto;
+    max-width: 650px;
+    text-align: center;
+}
+.app-registration-content .form-group{
+margin: 20px 0;
+}
+.app-registration-content input {
+    opacity: 0.2;
+    padding: 40px 0;
+}
+.app-registration-content input:focus ,.app-registration-content input:hover{
+    opacity: 1;
+}
+.app-registration-content .title h2 {
+    font-size: 47px;
+    font-weight: 900;
+}
+.app-registration-btn {
+    padding: 50px;
+}
+
+                                                /*======= Media Queries =======*/
+
+
+@media(max-width: 767px){
+    .main-header.inner-page-header {
+        padding: 30px 0;
+    }
+    .inner-page-header .header-text-area {
+        padding: 10px 0 0;
+    }
+    .inner-page-header .header-text-area h1 {
+        font-size: 28px;
+    }
+    .app-registration-content .title h2 {
+        font-size: 32px;
+    }
+    .app-registration-content input {
+        padding: 15px 0;
+    }
+}
+@media (max-width: 480px) {
+    .inner-page-header .header-text-area h1 {
+        font-size: 24px;
+    }
+    .app-registration-content .title h2 {
+        font-size: 26px;
+    }
+    .app-registration-content input {
+        font-size: 16px;
+    }
+}
+
+
+
+/*====================*/
+/*  Inner Banner      */
+/*====================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.athlete-application {
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+    color: #fff;
+    margin: 0 auto;
+    max-width: 1040px;
+    padding: 30px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.athlete-application-content .title h3 {
+    font-weight: 700;
+}
+.step-progress-bar {
+    display: inline-block;
+    padding: 30px 0 35px;
+    vertical-align: top;
+    width: 100%;
+}
+.step-progress-bar .step {
+    background-color: transparent;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 20px;
+    height: 45px;
+    line-height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    width: 45px;
+    margin: 0 ;
+}
+.step-progress-bar .step.active{
+    background-color: #fff ;
+    color: #000;
+}
+.step-progress-bar .lines {
+    border-top: 3px solid #fff;
+    display: inline-block;
+    max-width: 40px;
+    vertical-align: middle;
+    width: 100%;
+    margin:0 -5px;
+}
+
+.athlete-application-form-sec {
+    margin: 0 auto;
+    max-width: 660px;
+    width: 100%;
+}
+
+.athlete-application-form-sec .steps-content .form-group {
+    display: inline-block;
+    float: left;
+    margin: 5px 20px;
+    width: 100%;
+}
+#stepTwo,#stepThree,#stepFour{
+    display: none;
+}
+.athlete-application-form-sec .steps-content input , .athlete-application-form-sec .steps-content select  {
+    padding: 10px 5px;
+}
+.athlete-application-form-sec .steps-content select:focus{
+    outline: none;
+}
+.athlete-application-form-sec .steps-content .radio-btn-option {
+    display: inline-block;
+    padding: 0 20px;
+    vertical-align: top;
+}
+.athlete-application-form-sec .steps-content .form-group.radio-field > label {
+    font-size: 25px;
+    font-weight: 400;
+}
+.athlete-application-form-sec .steps-content .radio-btn-option label {
+    font-weight: 400;
+    padding: 3px 10px;
+}
+.radio-btn-option input[type="radio"] {
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+}
+.radio-btn-option input[type=radio]:checked + label {
+    border: 2px solid #fff;
+}
+
+.radio-btn-option > input {
+    display: inline-block;
+    width: 8%;
+}
+.form-group.radio-field span {
+    display: block;
+    font-size: 15px;
+    text-align: left;
+}
+.btns-content {
+    display: inline-block;
+    padding: 30px 0;
+    vertical-align: top;
+}
+.step-two-top-padding {
+    padding: 95px 0 25px;
+}
+.rules-and-conditions > p {
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+}
+.custom-select {
+    padding: 5px 0 0;
+    position: relative;
+}
+.custom-select::after {
+    color: #fff;
+    content: "";
+    font-family: "FontAwesome";
+    font-size: 40px;
+    line-height: 50px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+.applicant-details-section {
+    display: inline-block;
+    padding: 15px 0 20px;
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+}
+.athlete-application-form-sec .steps-content .applicant-details-section .form-group {
+    margin: 12px 0;
+    text-align: left;
+    width: 50%;
+}
+.athlete-application-form-sec .steps-content .applicant-details-section .form-group > label {
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 400;
+    vertical-align: top;
+    padding-right: 5px;
+}
+.athlete-application-form-sec .steps-content .applicant-details-section input {
+    border: medium none;
+    display: inline-block;
+    height: auto;
+    max-width: 120px;
+    padding: 1px 5px;
+    width: 100%;
+}
+.step-four-cridentials {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+}
+
+.athlete-application-form-sec .steps-content .step-four-cridentials .form-group{
+    margin: 0;
+    text-align: left;
+}
+.athlete-application-form-sec .steps-content .step-four-cridentials > label
+{
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 400;
+    vertical-align: top;
+    padding-right: 5px;
+    width:100%;
+    max-width:470px;
+}
+.athlete-application-form-sec .steps-content .step-four-cridentials > input {
+    display: inline-block;
+    height: auto;
+    padding: 10px 0;
+    vertical-align: middle;
+    width: calc(100% - 500px);
+}
+#stepOne .step-one-fields .form-group.maxi-width {
+    max-width: 620px;
+    width: 100%;
+}
+#stepOne .step-one-fields .form-group.lg-field-width {
+    max-width: 410px;
+}
+#stepOne .step-one-fields .form-group.sm-field-width {
+    max-width: 160px;
+}
+#stepOne .step-one-fields .form-group.md-field-width {
+    max-width: 190px;
+}
+#stepOne .step-one-fields .form-group.custom-field-width {
+    max-width: 240px;
+}
+#stepOne .step-one-fields .form-group.radio-field {
+    max-width: 340px;
+    padding: 10px 0;
+    text-align: left;
+}
+#stepTwo .step-two-fields .form-group.lg-field-width {
+    max-width: 340px;
+}
+#stepTwo .step-two-fields .form-group.sm-custom-field-width{
+    max-width: 180px;
+}
+#stepTwo .step-two-fields .form-group.sm-field-width {
+    max-width: 240px;
+}
+#stepTwo .step-two-fields .form-group.md-field-width {
+    max-width: 290px;
+}
+#stepThree .step-three-fields .form-group.md-field-width {
+    max-width: 290px;
+}
+#stepThree .step-three-fields .form-group.radio-field {
+    padding: 15px 0 0;
+}
+.rules-description {
+    color: #fff;
+    margin: 0 auto;
+    max-width: 930px;
+    padding: 25px 15px 35px;
+    text-align: center;
+    width: 100%;
+}
+.rules-description > p {
+    font-size: 15px;
+}
+
+
+
+                                   /*======= Media Queries =======*/
+
+@media(max-width: 991px) {
+    .athlete-application {
+        max-width: 740px;
+        padding: 30px 15px;
+      }
+}
+
+
+@media(max-width:767px){
+
+    .athlete-application {
+        max-width: 480px;
+    }
+
+    #stepOne .step-one-fields .form-group.maxi-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.lg-field-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.sm-field-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.md-field-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.custom-field-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.radio-field {
+        max-width: 100%;
+    }
+    #stepTwo .step-two-fields .form-group.lg-field-width {
+        max-width: 100%;
+    }
+    #stepTwo .step-two-fields .form-group.sm-field-width {
+        max-width: 100%;
+    }
+    #stepTwo .step-two-fields .form-group.md-field-width {
+        max-width: 100%;
+    }
+    #stepThree .step-three-fields .form-group.md-field-width {
+        max-width: 100%;
+    }
+    #stepTwo .step-two-fields .form-group.sm-custom-field-width{
+        max-width: 180px;
+    }
+    .athlete-application-form-sec .steps-content .form-group {
+        margin: 10px 0;
+    }
+    .athlete-application-form-sec .steps-content input, .athlete-application-form-sec .steps-content select {
+        padding: 10px 0;
+        font-size: 18px;
+    }
+    .athlete-application-form-sec .steps-content input, .athlete-application-form-sec .steps-content select {
+        font-size: 18px;
+    }
+    .athlete-application-form-sec .steps-content .form-group.radio-field > label {
+        font-size: 18px;
+        padding-top: 5px;
+    }
+    .rules-description {
+        padding: 15px;
+    }
+    .btns-content {
+        padding: 20px 0;
+    }
+    .custom-select::after {
+        font-size: 28px;
+        line-height: 42px;
+    }
+    .form-group.radio-field span {
+        font-size: 14px;
+        text-align: center;
+    }
+    .athlete-application-form-sec .steps-content .step-four-cridentials .form-group {
+        text-align: center;
+    }
+    .athlete-application-form-sec .steps-content .applicant-details-section .form-group {
+        width: 100%;
+    }
+    .athlete-application-form-sec .steps-content .applicant-details-section .form-group > label {
+        font-size: 18px;
+    }
+    .athlete-application-form-sec .steps-content .applicant-details-section input {
+        max-width: 110px;
+    }
+    .athlete-application-form-sec .steps-content .step-four-cridentials > label {
+        font-size: 18px;
+        max-width: 100%;
+    }
+    .athlete-application-form-sec .steps-content .step-four-cridentials > input {
+        width: 100%;
+    }
+
+}
+
+@media(max-width: 480px) {
+    .athlete-application {
+        max-width: 300px;
+    }
+    .step-progress-bar .step {
+        border: 1px solid #fff;
+        font-size: 16px;
+        height: 32px;
+        line-height: 30px;
+        width: 32px;
+    }
+    .step-progress-bar .lines {
+        border-top: 1px solid #fff;
+    }
+    .athlete-application-form-sec .steps-content .radio-btn-option {
+        padding: 0 10px;
+    }
+}
+
+

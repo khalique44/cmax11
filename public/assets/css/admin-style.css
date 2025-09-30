@@ -1,0 +1,2758 @@
+
+@font-face {
+    font-family: 'neighborregular';
+    src: url(../fonts/neighbor-webfont.eot);
+    src: url(../fonts/neighbor-webfont.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/neighbor-webfont.woff2) format('woff2'),
+    url(../fonts/neighbor-webfont.woff) format('woff'),
+    url(../fonts/neighbor-webfont.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'verbcondregular';
+    src: url(../fonts/verbcondregular-webfont.eot);
+    src: url(../fonts/verbcondregular-webfont.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/verbcondregular-webfont.woff2) format('woff2'),
+    url(../fonts/verbcondregular-webfont.woff) format('woff'),
+    url(../fonts/verbcondregular-webfont.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+/*.action-buttons a.BE-btns{
+    background: #DC1C2E none repeat scroll 0 0;
+    !* border: 1px solid transparent; *!
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 6px;
+}*/
+.district-fields .action-btn {
+    border: 1px solid #DC1C2E;
+    background: #DC1C2E none repeat scroll 0 0;
+    color: #fff;
+    display:inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 8px;
+    margin:6px;
+}
+.district-fields .action-button{
+    border: 1px solid #DC1C2E;
+    background: #DC1C2E none repeat scroll 0 0;
+    color: #fff;
+    display:inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 8px;
+}
+/*a:hover,a:focus {
+    color: #DC1C2E;
+    text-decoration: none;
+    transition: all 0.4s ease 0s;
+}
+
+.BE-btn {
+    border: 1px solid #DC1C2E;
+    font-size: 22px;
+    padding: 7px 10px;
+}*/
+
+
+::-webkit-input-placeholder {
+    color: #fff;
+    opacity: 1 !important;
+}
+:-ms-input-placeholder {
+    color: #fff;
+    opacity: 1 !important;
+}
+::-moz-placeholder {
+    color: #fff!important;
+    opacity: 1 !important;
+}
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.title{
+    color: #fff;
+    text-align: center;
+}
+.index-background {
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    display: inline-block;
+    padding: 0 0 140px;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+}
+.inner-page-banner {
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    display: inline-block;
+    padding-bottom: 30px;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+}
+/*==================*/
+/*   Navigation     */
+/*==================*/
+.main-header {
+    display: inline-block;
+    padding: 95px 0 65px;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+}
+.header-main-content {
+    padding: 35px 0 0;
+}
+.header-text-area {
+    margin: 0 auto;
+    max-width: 855px;
+    padding: 35px 0 0;
+    width: 100%;
+}
+.header-text-area h1 {
+    margin: 0;
+}
+.header-text-area a:hover , .header-text-area a:focus{
+    color:#fff;
+}
+.main-header.inner-page-header {
+    padding: 55px 0 30px;
+}
+.main-header.inner-page-header.athlete-page-header {
+    padding: 30px 0 10px;
+}
+.inner-page-header .logo img {
+    height: auto;
+    max-width: 100%;
+}
+.inner-page-header .header-text-area {
+    max-width: 580px;
+    padding: 20px 0 0;
+}
+.inner-page-header .header-text-area h1 {
+    font-size: 34px;
+}
+.header-top-caption p {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+
+
+
+/*==================*/
+/*    Home Page     */
+/*==================*/
+
+.login-register-section {
+    color: #fff;
+    padding: 15px 0;
+    position: relative;
+}
+.login-register-section::before {
+    background: #ccc6c6 none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    width: 2px;
+}
+.login-register-section input, .login-register-section select {
+    padding: 8px 20px;
+}
+.login-content {
+    margin: 0 auto;
+    max-width: 465px;
+    width: 100%;
+}
+.login-content .title {
+    padding: 15px 0 5px;
+    text-align: left;
+}
+.login-content .title h2 {
+    font-weight: 700;
+}
+.login-content .form-group {
+    margin-bottom: 20px;
+}
+.login-content input {
+    background: #fff none repeat scroll 0 0;
+    border: medium none;
+    color: #555555;
+}
+.login-content ::-webkit-input-placeholder { / Chrome /
+color: #555555;
+}
+.login-content :-ms-input-placeholder { / IE 10+ /
+color: #555555;
+}
+.login-content ::-moz-placeholder {
+    color: #555555!important;
+    opacity: 1;
+}
+.login-btn-area {
+    display: inline-block;
+    padding: 20px 0;
+    vertical-align: top;
+    width: 100%;
+}
+.login-btn {
+    float: left;
+    padding-top: 2px;
+}
+.login-btn-area .caption {
+    float: right;
+    padding: 8px 30px 0 0;
+}
+.login-btn-area .caption > a {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 400;
+    padding-top: 10px;
+    text-transform: inherit;
+    vertical-align: middle;
+}
+.register-content {
+    margin: 0 auto;
+    max-width: 485px;
+    width: 100%;
+}
+.register-content .title {
+    padding: 15px 0 5px;
+    text-align: left;
+}
+.register-content .title h2 {
+    font-weight: 700;
+}
+.register-content .description > p {
+    margin: 0 0 10px;
+    line-height: 1.2;
+}
+.register-btn {
+    padding: 15px 0;
+}
+
+
+.registration-select-section-whole-content .title {
+    padding: 0 0 15px;
+}
+.registration-select-section-whole-content .title > h2 {
+    font-weight: 900;
+}
+.select-section-content .caption {
+    padding: 30px 0;
+    text-align: center;
+}
+.select-section-content .caption h2{
+    color: #fff;
+}
+.reg-select-card-section {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+}
+.team-selection-check {
+    display: inline-block;
+    margin: 0 25px;
+    vertical-align: top;
+}
+.checkbox-btn-option {
+    display: inline-block;
+    margin: 0 25px;
+    max-width: 275px;
+    position: relative;
+    width: 100%;
+    background: rgba(255,255,255,0.4);
+}
+.checkbox-btn-option input[type="radio"] {
+    cursor: pointer;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+.checkbox-btn-option .reg-card-content {
+    border: 5px solid #fff;
+    color: #ffff;
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+.checkbox-btn-option .reg-card-content .card-image {
+    padding: 45px 0 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+}
+
+.pre-create .checkbox-btn-option .reg-card-content .card-image {
+    padding: 45px 0 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+}
+
+.pre-main-content .right-side-section{
+    background: #ccc;
+}
+
+.checkbox-btn-option input[type=radio]:checked + .reg-card-content{
+    background: #fff;
+}
+
+.checkbox-btn-option input[type=radio]:checked + .reg-card-content .card-image img{
+    filter: brightness(1) invert(1);
+    transition: all 0.6s ease 0s;
+}
+.checkbox-btn-option input[type=radio]:checked + .reg-card-content .card-title h5{
+    color: #000;
+    transition: all 0.6s ease 0s;
+}
+.select-section-btn {
+    padding: 55px 0 70px;
+    text-align: center;
+}
+.select-section-btn a.btn {
+    padding: 15px 20px;
+   }
+.app-registration-form-sect {
+    padding: 10px 0;
+}
+.app-registration-content {
+    color: #fff;
+    margin: 0 auto;
+    max-width: 650px;
+    text-align: center;
+}
+.app-registration-content .form-group{
+    margin: 20px 0;
+}
+.app-registration-content input {
+    opacity: 0.2;
+    padding: 40px 0;
+}
+.app-registration-content input:focus ,.app-registration-content input:hover{
+    opacity: 1;
+}
+.app-registration-content .title h2 {
+    font-size: 47px;
+    font-weight: 900;
+}
+.app-registration-btn {
+    padding: 50px;
+}
+.athlete-application {
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+    color: #fff;
+    margin: 0 auto;
+    max-width: 1040px;
+    padding: 15px 0;
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+.athlete-application-content .title h3 {
+    font-weight: 700;
+    margin: 10px 0 0;
+}
+.step-progress-bar {
+    display: inline-block;
+    padding: 35px 0 25px;
+    vertical-align: top;
+    width: 100%;
+}
+.step-progress-bar .step {
+    background-color: transparent;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 20px;
+    height: 45px;
+    line-height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    width: 45px;
+    margin: 0 ;
+}
+.step-progress-bar .step.active{
+    background-color: #fff ;
+    color: #000;
+}
+.step-progress-bar .lines {
+    border-top: 3px solid #fff;
+    display: inline-block;
+    max-width: 40px;
+    vertical-align: middle;
+    width: 100%;
+    margin:0 -5px;
+}
+
+.athlete-application-form-sec {
+    margin: 0 auto;
+    max-width: 660px;
+    width: 100%;
+}
+.athlete-application-form-sec .steps-content .form-group {
+    display: inline-block;
+    float: left;
+    margin: 0 18px;
+    min-height: 73px;
+    width: 100%;
+    text-align: left;
+}
+.athlete-application-form-sec .steps-content #stepFour .form-group {
+    min-height: 55px;
+}
+#stepTwo,#stepThree,#stepFour{
+    display: none;
+}
+.athlete-application-form-sec .steps-content input, .athlete-application-form-sec .steps-content select {
+    padding: 5px;
+}
+.athlete-application-form-sec .steps-content select:focus{
+    outline: none;
+}
+.athlete-application-form-sec .steps-content .radio-btn-option {
+    display: inline-block;
+    padding: 0 0px;
+    vertical-align: top;
+}
+.athlete-application-form-sec .steps-content .form-group.radio-field > label {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: left;
+    margin-right: 13px;
+}
+.athlete-application-form-sec .steps-content .form-group.radio-field span {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+.athlete-application-form-sec .steps-content .radio-btn-option label {
+    padding: 5px 5px;
+    font-size: 18px;
+}
+.radio-btn-option input[type="radio"] {
+   /*cursor: pointer;*/
+   /* opacity: 0;*/
+   /* position: absolute;*/
+   /* z-index: 1;*/
+   /* height: 50px;*/
+    height: 20px;
+}
+.radio-btn-option input[type=radio]:checked + label {
+    /*border: 2px solid #fff;*/
+}
+
+.radio-btn-option > input {
+    display: inline-block;
+    /*width: 8%;*/
+}
+.btns-content {
+    display: inline-block;
+    padding: 30px 0;
+    vertical-align: top;
+    width: 100%;
+}
+.btns-content {
+    display: inline-block;
+    padding: 10px 0 10px;
+    vertical-align: top;
+    width: 100%;
+}
+.btns-content button.btn {
+    padding: 8px 15px;
+}
+.rules-and-regulation-links {
+    padding: 15px 0 10px;
+}
+.rules-and-regulation-links a {
+    font-size: 20px;
+    font-weight: 700;
+}
+.rules-conditions-desc > a {
+    font-size: 17px;
+    font-weight: 700;
+}
+.step-two-top-padding {
+    padding: 95px 0 25px;
+}
+.rules-and-conditions > p {
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+}
+.custom-select {
+    padding: 1px 0 0;
+    position: relative;
+}
+.custom-select::after {
+    color: #fff;
+    content: "";
+    font-family: "FontAwesome";
+    font-size: 40px;
+    line-height: 50px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.applicant-details-section {
+    display: inline-block;
+    padding: 15px 0 20px;
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+}
+.athlete-application-form-sec .steps-content .applicant-details-section .form-group {
+    margin: 12px 0;
+    text-align: left;
+    width: 50%;
+}
+.athlete-application-form-sec .steps-content .applicant-details-section .form-group > label {
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 400;
+    vertical-align: top;
+    padding-right: 5px;
+}
+.athlete-application-form-sec .steps-content .applicant-details-section input {
+    border: medium none;
+    display: inline-block;
+    height: auto;
+    max-width: 125px;
+    padding: 1px 5px;
+    width: 100%;
+}
+.step-four-cridentials {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+}
+
+.athlete-application-form-sec .steps-content .step-four-cridentials .form-group{
+    margin: 0;
+    text-align: left;
+}
+.athlete-application-form-sec .steps-content .step-four-cridentials > label
+{
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 400;
+    vertical-align: top;
+    padding-right: 5px;
+    width:100%;
+    max-width:470px;
+}
+.athlete-application-form-sec .steps-content .step-four-cridentials > input {
+    display: inline-block;
+    height: auto;
+    padding: 10px 0;
+    vertical-align: middle;
+    width: calc(100% - 500px);
+}
+#stepOne .step-one-fields .form-group.maxi-width {
+    max-width: 620px;
+    width: 100%;
+}
+#stepOne .step-one-fields .form-group.lg-field-width {
+    max-width: 410px;
+}
+#stepOne .step-one-fields .form-group.sm-field-width {
+    max-width: 170px;
+}
+#stepOne .step-one-fields .form-group.md-field-width {
+    max-width: 318px;
+}
+.date_of_birth_{
+    width: auto !important;
+    display: inline-block;
+    max-width: 138px;
+    text-align: center;
+    margin-left: 15px;
+    font-size: 13px;
+}
+
+#stepOne .step-one-fields .form-group.custom-field-width {
+    max-width: 240px;
+}
+#stepOne .step-one-fields .form-group.radio-field {
+    max-width: 270px;
+    text-align: left;
+}
+#stepTwo .step-two-fields .form-group.lg-field-width {
+    max-width: 340px;
+}
+#stepTwo .step-two-fields .form-group.sm-custom-field-width{
+    max-width: 180px;
+}
+#stepTwo .step-two-fields .form-group.sm-field-width {
+    max-width: 240px;
+}
+#stepTwo .step-two-fields .form-group.md-field-width {
+    max-width: 290px;
+}
+#stepThree .step-three-fields .form-group.md-field-width {
+    max-width: 290px;
+}
+#stepThree .step-three-fields .form-group.radio-field {
+    padding: 15px 0 0;
+}
+.rules-description {
+    color: #fff;
+    margin: 0 auto;
+    max-width: 930px;
+    padding: 20px 15px 0;
+    text-align: center;
+    width: 100%;
+}
+.rules-description > p {
+    font-size: 15px;
+}
+#pay-info .payment-form-fields .form-group {
+    display: inline-block;
+    float: left;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    width: 100%;
+}
+#pay-info .payment-form-fields .custom-select::after {
+    right: 10px;
+}
+#pay-info .payment-form-fields .form-group.lg-field-width {
+    max-width: 450px;
+}
+#pay-info .payment-form-fields .form-group.md-width {
+    max-width: 330px;
+}
+#pay-info .payment-form-fields .form-group.xs-field-width {
+    max-width: 150px;
+}
+#pay-info .payment-form-fields .form-group.sm-field-width {
+    max-width: 210px;
+}
+
+.year-info {
+    display: inline-block;
+    float: left;
+    max-width: 280px;
+    width: 100%;
+    padding: 5px 0;
+}
+.year-info > p {
+    font-size: 24px;
+}
+.year-info span {
+    display: inline;
+    padding-left: 25px;
+}
+.amount-info {
+    display: inline-block;
+    float: left;
+    max-width: 215px;
+    width: 100%;
+    padding: 5px 0;
+}
+.amount-info p {
+    font-size: 24px;
+}
+.amount-info span {
+    display: inline;
+    font-weight: 900;
+}
+
+.main-header.membership-header {
+    padding: 0;
+}
+.header-top-caption {
+    padding: 30px 0;
+}
+
+
+.membership-header  .logo {
+    margin: 0 auto;
+    max-width: 170px;
+    width: 100%;
+}
+.membership-card-details {
+    display: inline-block;
+    padding: 40px 0;
+    vertical-align: top;
+    width: 100%;
+}
+.membership-card-details li {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    justify-content: center;
+    min-height: 150px;
+    text-align: left;
+    vertical-align: middle;
+    width: 50%;
+}
+.membership-card-details li:nth-child(2n + 2){
+    text-align: right;
+}
+.membership-card-details p {
+    font-size: 40px;
+}
+.membership-card-details strong {
+    font-size: 55px;
+}
+form .form-label span {
+    color: red;
+}
+
+.btn-section {
+    display: inline-block;
+    padding: 40px 0 0;
+    position: relative;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+}
+.auth-code-img {
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.print-card-btn a.btn {
+    max-width: 260px;
+    padding: 7px 12px;
+    width: 100%;
+}
+.expiry-date {
+    padding: 25px 0 0;
+}
+.expiry-date > p {
+    font-size: 24px;
+    color: #fff;
+}
+.second-membership-card {
+    display: inline-block;
+    padding: 20px 0 40px;
+    vertical-align: top;
+    width: 100%;
+}
+.profile-pic {
+    float: left;
+    width: 290px;
+}
+.profile-pic > img {
+    max-width: 290px;
+    width: 100%;
+}
+.second-membership-card-header {
+    float: right;
+    width: calc(100% - 290px);
+}
+.second-membership-card-header  .main-header {
+    padding: 0;
+}
+
+.second-membership-card-header .header-top-caption {
+    padding: 0 0 30px;
+}
+.sec-membership-card-header-main-content {
+    float: right;
+    max-width: 700px;
+}
+.second-membership-card-header .sec-membership-card-header-main-content .header-top-caption p {
+    font-size: 26px;
+}
+.second-membership-card-header .sec-membership-card-header-main-content .logo img {
+    margin: 0 auto;
+    max-width: 170px;
+}
+.header-text-area {
+    padding: 30px 0 0;
+}
+.sec-membership-card-header-main-content .header-text-area h1 {
+    font-size: 40px;
+    margin: 0;
+}
+.backend-header {
+    background: #000 none repeat scroll 0 0;
+    display: inline-block;
+    padding: 10px 0 0;
+    vertical-align: top;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+}
+.backend-header .logo {
+    float: left;
+    text-align: center;
+    width: 630px;
+}
+
+.backend-header .header-title {
+    width: 50%;
+    float: left;
+    padding: 30px 0 0 0;
+}
+
+.logo  .logo-image > a {
+    display: inline-block;
+    padding: 0;
+}
+.logo .header-title a {
+    font-family: "neighborregular";
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: inherit;
+    display: inline-block;
+    width: 100%;
+}
+.backend-header .logo img {
+    display: block;
+    max-width: 220px;
+    width: 100%;
+    background: transparent;
+    border-radius: 0;
+}
+.backend-header-content-area {
+    float: right;
+    padding: 6px 0 0;
+    text-align: right;
+    width: calc(100% - 650px);
+}
+.name-title {
+    display: inline-block;
+    padding: 0 20px;
+    vertical-align: middle;
+}
+.name-title h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 20px;
+}
+.header-login-btn-area {
+    display: inline-block;
+}
+.header-login-btn-area a.btn {
+    background: transparent none repeat scroll 0 0;
+    border: 0;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 8px 18px;
+    background: #DC1C2E;
+    color: #fff;
+    border-radius: 3px;
+}
+.header-login-btn-area a.btn:hover{
+    background: #c9302c;
+    
+}
+.header-bottom {
+    background: #e9e9e9 none repeat scroll 0 0;
+    color: #000;
+    display: inline-block;
+    padding: 25px 0 30px;
+    vertical-align: top;
+    width: 100%;
+}
+.membership-date {
+    float: left;
+    width: 410px;
+}
+.membership-date h4 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.membership-card-print-area {
+    float: right;
+    text-align: right;
+    width: calc(100% - 410px);
+}
+.membership-card-print-area a.btn {
+    font-size: 22px;
+    padding: 8px 20px;
+}
+.rules-caption {
+    display: inline-block;
+    margin: 0 50px;
+}
+.membership-card-print-area .rules-caption a.btn{
+    background: transparent;
+    color: #000;
+    border-bottom: 2px solid #898989 ;
+}
+.membership-card-print-area .print-btn a.btn{
+    border: 1px solid transparent;
+}
+.membership-card-print-area .print-btn a.btn:hover {
+    border: 1px solid #DC1C2E;
+}
+.print-btn {
+    display: inline-block;
+}
+
+.user-backend-top-section {
+    padding: 20px 0;
+}
+.right-side {
+    float: right;
+}
+.user-backend-form-section {
+    max-width: 600px;
+    width: 100%;
+}
+.user-backend-form-section .title {
+    color: #000;
+    padding: 20px 0;
+    text-align: left;
+}
+
+.user-backend-form-section .form-group {
+    margin-bottom: 10px;
+}
+.user-backend-form-section ::-webkit-input-placeholder {
+    color: #1c9c9b;
+    opacity: 1;
+}
+.user-backend-form-section :-ms-input-placeholder {
+    color: #1c9c9b;
+    opacity: 1 !important;
+}
+.user-backend-form-section ::-moz-placeholder {
+    color: #1c9c9b!important;
+    opacity: 1 !important;
+}
+/*.submit-request-btn {
+    padding: 10px 0 20px;
+}*/
+/*.submit-request-btn button.btn {
+    border: 1px solid #DC1C2E;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 7px 10px;
+}*/
+.membership-renewal {
+    padding: 0 0 60px;
+}
+.membership-renewal .title{
+    text-align: left;
+}
+.membership-renewal .title > h4 {
+    color: #000;
+    font-size: 30px;
+    font-weight: 700;
+}
+.membership-renewal .description p {
+    color: #535353;
+    font-weight: 400;
+    margin: 0;
+}
+.membership-renewal .new-checkbox .check {
+    display: inline-block !important;
+    margin: 0 !important;
+    width: 15px;
+}
+.new-checkbox {
+    padding: 15px 0 0;
+}
+.membership-renewal .new-checkbox label {
+    color: #545454;
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 0;
+    padding-left: 15px;
+}
+.membership-renewal .renewal-btn {
+    padding: 20px 0;
+}
+.new-backend-design.membership-renewal {
+    padding: 30px 0 20px;
+}
+.terms-and-conditions-caption > p {
+    color: #535353;
+    font-size: 18px;
+    margin: 0;
+}
+
+.user-backend-form-section .form-group.lg-custom-field-width {
+    display: inline-block;
+    max-width: 280px;
+    width: 100%;
+}
+
+.user-backend-form-section .form-group.sm-custom-field-width {
+    display: inline-block;
+    max-width: 174px;
+    width: 100%;
+
+}
+#user-backend-second .user-backend-content{
+    padding:0 0 50px;
+}
+
+#admin-backend .user-backend-content {
+    padding: 200px 0 0;
+}
+.admin-page-whole-content {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    height: 100%;
+}
+.left-side-bar {
+    background: #e9e9e9;
+    float: left;
+    /*height: 100vh;*/
+    width: 300px;
+    padding: 30px 0;
+    vertical-align: top;
+    position: relative;
+    top: 77px;
+    left: 0;
+}
+.side-bar-content {
+	padding: 0;
+}
+.left-side-bar .panel {
+    background-color: transparent;
+    border: 1px solid transparent !important;
+    border-radius: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+    position: relative;
+}
+.left-side-bar .panel:hover{
+    background: #dcdcdc;
+}
+.side-bar-content .panel-heading {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 10px 0 10px 30px;
+}
+.side-bar-content .panel-group .panel + .panel {
+    margin-top: 0;
+}
+.side-bar-content .panel-group {
+    margin-bottom: 0;
+}
+.left-side-bar .panel-default > .panel-heading {
+    background-color: transparent;
+    border: medium none;
+    color: #333;
+    border-bottom: 1px solid #c8c8c8;
+    padding: 10px 0 14px 30px;
+}
+.side-bar-content .panel-title a img {
+    display: inline-block;
+    padding-right: 5px;
+    vertical-align: middle;
+    width: 19px;
+    height: auto;
+}
+.side-bar-content .panel-title a strong {
+    display: inline-block;
+    font-weight: 600;
+    vertical-align: middle;
+}
+.side-bar-content .panel-body {
+    background: #dcdcdc none repeat scroll 0 0;
+    border: medium none !important;
+    padding: 10px;
+}
+.accordions-content-link ul {
+    padding: 0 0 0 45px;
+}
+.side-bar-content .panel-title > a {
+    color: #000;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: inherit;
+    vertical-align: middle;
+    width: 100%;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.accordions-content-link a {
+    color: #000;
+    font-size: 16px;
+    text-transform: inherit;
+    position: relative;
+}
+.accordions-content-link a::before {
+    content: "" "";
+    font-family: fontawesome;
+    left: -15px;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+.accordions-content-link a:hover::before , .accordions-content-link a:focus::before{
+    opacity: 1;
+    visibility: visible;
+}
+.right-side-section {
+    float: right;
+    height: 100%;
+    padding: 104px 20px 20px;
+    width: calc(100% - 300px);
+}
+.admin-sec-btn-area {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 22px;
+}
+.district-form-content textarea.district-input-field {
+    height: 150px;
+}
+.report-title-section {
+    float: left;
+}
+.database-btn {
+    float: right;
+    padding-top: 10px;
+}
+/*
+.database-btn a.BE-btn {
+    background: #DC1C2E none repeat scroll 0 0;
+    
+    font-size: 14px;
+    font-weight: 700;
+    padding: 8px 10px;
+    color: #fff;
+    border-radius: 5px;
+}
+.database-btn a.BE-btn:hover  {
+    
+    color: #fff;
+    background-color: #c9302c;
+}
+.database-btn a.BE-btn:focus{
+    background: #DC1C2E none repeat scroll 0 0;
+    border: 1px solid transparent;
+    color: #fff;
+}*/
+.database-table-section {
+    padding: 20px 0 0;
+}
+.database-table-section .table {
+    margin-bottom: 0;
+}
+.database-table-section .table > thead > tr > th {
+    font-weight: 700 !important;
+    border: none !important;
+}
+
+.database-table-section .table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #f1f1f1;
+}
+
+.Search-bd-alert-model .modal {
+    background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0;
+}
+.Search-bd-alert-model .modal-dialog {
+    margin: 30px auto;
+    width: 760px;
+}
+.Search-bd-alert-model .modal-content {
+    border: medium none;
+    border-radius: 0;
+}
+.Search-bd-alert-model .modal-header {
+    border-bottom: medium none;
+    padding: 25px 15px;
+}
+.Search-bd-alert-model .modal-header .title h4{
+    color: #000;
+    font-weight:700;
+}
+.Search-bd-alert-model .modal-body {
+    padding: 5px 15px 40px;
+    position: relative;
+}
+.modal-inner-content {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+}
+.db-credentials {
+    margin: 0 auto;
+    max-width: 650px;
+    width: 100%;
+}
+
+.db-credentials .form-group {
+    float: left;
+    padding: 0 15px;
+    width: 50%;
+}
+
+.db-credentials label {
+    color: #000;
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+}
+
+.opt-select {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+}
+.database-select-option {
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+    vertical-align: top;
+    max-width: 80px;
+    width: 100%;
+}
+.database-select-option input[type="radio"] {
+    cursor: pointer;
+    height: 100%;
+    max-width: 80px;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+.database-select-option .opt-title {
+    border: 1px solid #1c9c9b;
+    color: #1c9c9b;
+    display: inline-block;
+    padding: 5px 15px;
+    text-align: center;
+    width: 100%;
+}
+.opt-title h5 {
+    font-size: 15px;
+    margin: 0;
+}
+.database-select-option input[type=radio]:checked + .opt-title{
+    background: #1c9c9b;
+    color:#000;
+}
+.db-credentials ::-webkit-input-placeholder {
+    color: #1c9c9b;
+    opacity: 1 !important;
+}
+.db-credentials :-ms-input-placeholder {
+    color: #1c9c9b;
+    opacity: 1 !important;
+}
+.db-credentials ::-moz-placeholder {
+    color: #1c9c9b!important;
+    opacity: 1 !important;
+}
+.modal-btn-area {
+    display: inline-block;
+    float: right;
+    padding-right: 15px;
+    padding-top: 5px;
+    text-align: right;
+    width: 100%;
+}
+.cvs-btn {
+    display: inline-block;
+    display: inline-block;
+    max-width: 100%;
+    text-align: right;
+    vertical-align: middle;
+    width: 100%;
+}
+.find-btn {
+    display: inline-block;
+    max-width: 70px;
+    vertical-align: middle;
+    width: 100%;
+    text-align: center;
+}
+.modal-btn {
+    border: 2px solid #DC1C2E;
+    color: #DC1C2E;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    max-width: 133px;
+    padding: 8px 10px;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+}
+.find-btn {
+    background: #DC1C2E none repeat scroll 0 0;
+    color: #fff;
+}
+.modal-btn:hover , .modal-btn:focus {
+    background: #DC1C2E none repeat scroll 0 0;
+    color: #fff;
+}
+.find-btn:hover , .find-btn:focus{
+    color: #DC1C2E;
+    background: #fff;
+}
+
+
+
+
+.d-radio {
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.district-form-content .custom-select::after {
+    color: #1c9c9b;
+    font-size: 24px;
+    line-height: 24px;
+    right: 15px;
+    top: 30px;
+}
+.district-form-content .minicolors-theme-default.minicolors {
+    width: 100%;
+}
+.district-form-content .minicolors-theme-default .minicolors-input {
+    width: 100%;
+}
+
+
+.select-box-background-color
+{
+    background:#504A4B;
+}
+
+.card-image img{
+    max-width: 175px;
+    opacity: 0.8;
+}
+
+.email-verification-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 640px;
+    text-align: center;
+    width: 100%;
+}
+
+.email-verification-content span
+{
+    color: #DC1C2E;
+    display: inline;
+    padding-right: 20px;
+}
+.email-verification-content p {
+    padding: 25px 0;
+    margin: 0;
+}
+
+
+
+
+.district-fields {
+    float: left;
+    padding: 0 5px;
+}
+
+
+
+
+.blue-bg{
+    background-color: #0054a5;
+}
+
+.index-lang .dropdown .dropdown-menu .lang img{
+    width: 35px;
+    margin-top: 5px;
+    float: right;
+}
+
+.index-lang .dropdown img{
+    width: 35px;
+    margin-top: 5px;
+    float: left;
+}
+
+.index-lang .dropdown button{
+    padding: 5px 15px;
+}
+
+.index-lang .dropdown .dropdown-menu .lang{
+    text-transform: none;
+    font-size: 18px;
+}
+
+.index-lang .dropdown-menu{
+    right: 0;
+    left: auto;
+}
+#table_main .cursor-pointer.sorting_1 {
+    position: relative;
+}
+#table_main .cursor-pointer.sorting_1:after {
+    content: '';
+    color: #979797;
+    content: "\f104";
+    cursor: pointer;
+    font-family: FontAwesome;
+    font-size: 17px;
+    left: 33px;
+    position: absolute;
+    top: 40%;
+    content: '\f0dc';
+}
+
+@media(max-width: 1199px){
+    h1{
+        font-size: 42px;
+    }
+    p {
+        font-size: 18px;
+    }
+    .main-header {
+        padding: 40px 0 30px;
+    }
+    .checkbox-btn-option {
+        display: inline-block;
+        margin: 0 5px;
+        max-width: 275px;
+        position: relative;
+        width: 100%;
+    }
+    .profile-pic {
+        float: left;
+        width: 180px;
+    }
+    .profile-pic > img {
+        max-width: 180px;
+        width: 100%;
+    }
+    .second-membership-card-header {
+        width: calc(100% - 180px);
+    }
+    .second-membership-card-header .header-top-caption {
+        padding: 0;
+    }
+    .header-text-area {
+        padding: 0;
+    }
+    .second-membership-card-header .sec-membership-card-header-main-content .logo {
+        padding: 0 0 10px;
+    }
+    /*.BE-btn {*/
+        /*border: 1px solid #DC1C2E;*/
+        /*font-size: 18px;*/
+        /*padding: 7px 10px;*/
+    /*}*/
+    .name-title h3 {
+        font-size: 24px;
+    }
+    .name-title {
+        padding: 0 15px;
+    }
+    .backend-header-content-area {
+        padding: 10px 0 0;
+    }
+    .membership-date {
+        float: left;
+        width: 300px;
+    }
+    .membership-date h4 {
+        font-size: 22px;
+        font-weight: 700;
+    }
+    .membership-card-print-area {
+        width: calc(100% - 300px);
+    }
+    .rules-caption {
+        margin: 0 15px;
+    }
+    .membership-card-print-area a.btn {
+        font-size: 16px;
+    }
+    .header-bottom {
+        padding: 10px 0;
+    }
+    .backend-header {
+        padding: 10px 0;
+    }
+   
+    .membership-renewal .title > h4 {
+        font-size: 24px;
+    }
+    .user-backend-form-section .form-group.lg-custom-field-width {
+        max-width: 100%;
+    }
+    .user-backend-form-section .form-group.sm-custom-field-width {
+        max-width: 100%;
+    }
+    .right-side-section {
+        padding: 20px;
+    }
+    .admin-page-whole-content {
+        height: 710px;
+    }
+    .database-table-section .table > tbody > tr > td, .database-table-section .table > thead > tr > th {
+        font-size: 15px;
+        padding: 5px 8px;
+    }
+    .report-title-section {
+        float: left;
+        width: 100%;
+    }
+
+    .report-title-section {
+        width: 100%;
+    }
+    .database-btn {
+        float: left;
+        padding: 20px 0;
+        width: 100%;
+    }
+
+}
+
+
+@media(max-width: 991px) {
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 28px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    h6 {
+        font-size: 18px;
+    }
+    a {
+        font-size:20px;
+        font-weight:400;
+    }
+
+    .tooltips .tooltiptext {
+        width: 100% !important;
+        right: auto !important;
+        top: 50px !important;
+
+    }
+    .btn {
+        font-size: 20px;
+        padding: 10px 25px;
+    }
+
+    #home .parallax-window {
+        min-height: 720px;
+    }
+    .main-header .logo img {
+        max-width: 150px;
+    }
+    .header-text-area {
+        max-width: 615px;
+    }
+    .main_header.logo img {
+        max-width: 150px;
+    }
+    .checkbox-btn-option {
+        margin: 0 5px;
+        max-width: 220px;
+    }
+    .checkbox-btn-option .reg-card-content .card-image {
+        padding: 20px 0;
+    }
+    .checkbox-btn-option .reg-card-content .card-image img {
+        max-width: 140px;
+    }
+    .select-section-content .caption {
+        padding: 0 0 15px;
+    }
+    .select-section-btn {
+        padding: 30px 0;
+        text-align: center;
+    }
+    .athlete-application {
+        max-width: 740px;
+        padding: 20px;
+    }
+    .step-progress-bar {
+        padding: 20px 0;
+    }
+    .membership-header  .logo {
+        margin: 0 auto;
+        max-width: 150px;
+        width: 100%;
+    }
+    .header-top-caption {
+        padding: 0;
+    }
+    .header-top-caption p {
+        font-size: 22px;
+    }
+    .membership-card-details strong {
+        font-size: 34px;
+    }
+    .membership-card-details p {
+        font-size: 28px;
+    }
+    .membership-card-details li {
+        min-height: 100px;
+    }
+    .second-membership-card .container {
+        padding: 0 15px !important;
+        width: 100%;
+    }
+    .second-membership-card-header .sec-membership-card-header-main-content .header-top-caption p {
+        font-size: 20px;
+    }
+    .header-text-area h1 {
+        font-size: 30px;
+
+    }
+    .second-membership-card-header .sec-membership-card-header-main-content .logo img {
+        margin: 0 auto;
+        max-width: 100px;
+    }
+    .membership-card-print-area a.btn {
+        font-size: 14px;
+    }
+    .rules-caption {
+        margin: 0 5px;
+    }
+    .membership-card-print-area .rules-caption a.btn {
+        padding: 0;
+    }
+    .membership-date h4 {
+        font-size: 20px;
+        font-weight: 700;
+    }
+    .name-title h3 {
+        font-size: 20px;
+    }
+    .header-login-btn-area a.btn {
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+    .backend-header-content-area {
+        padding: 15px 0 0;
+    }
+    .left-side-bar {
+        max-width: 200px;
+    }
+    .side-bar-content {
+        padding: 20px 0 0;
+    }
+    .side-bar-content .panel-heading {
+        padding: 10px 0 10px 15px;
+    }
+    .side-bar-content .panel-title > a {
+        font-size: 18px;
+    }
+    .accordions-content-link ul {
+        margin: 0;
+        padding: 0 0 0 25px;
+    }
+    .accordions-content-link a {
+        color: #000;
+        font-size: 14px;
+        text-transform: inherit;
+    }
+    .right-side-section {
+        width: calc(100% - 200px);
+    }
+    .right-side-section {
+        padding: 15px;
+    }
+
+    .report-title-section {
+        float: left;
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 767px) {
+
+    .non-athlete-lable label{
+        font-size: 16px !important;
+        width: auto !important;
+        float: left !important;
+
+    }
+
+    .non-athlete-lable input.date_of_birth_ {
+        display:inline-block !important;
+        width: auto !important;
+        float: left !important;
+        font-size: 16px !important;
+        margin-left: 0px !important;
+        padding-top: 0px !important;
+    }
+
+    .non-athlete-form .tooltiptext {
+        width: 100%;
+        right: auto;
+        top: 50px;
+    }
+
+    .non-athlete-step-2 .form-group select option {
+        margin: 0 50px 0 0 !important;
+    }
+
+    .non-athlete-step-2 .form-group input{
+        max-width: 100% !important;
+    }
+
+    .non-athlete-step-2 .form-group{
+        max-width: 100% !important;
+
+    }
+
+    .user-backend-form-section.right-side {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .user-backend-form-section {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .user-backend-form-section.left-side{
+        max-width: 100% !important;
+        width: 100% !important;
+
+    }
+
+    .user-backend-form-section.right-side{
+        max-width: 100% !important;
+        width: 100% !important;
+
+    }
+
+    .right-side {
+        float: left !important;
+    }
+
+
+    #backend-form .change-password-form .form-group label {
+        text-align: left;
+        width: 100%;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+
+
+
+}
+
+@media(max-width: 767px){
+    h1 {
+        font-size: 34px;
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    h3 {
+        font-size: 26px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    h6 {
+        font-size: 18px;
+    }
+    p{
+        font-size: 18px;
+    }
+    a {
+        font-size:16px;
+    }
+    .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    .main-header {
+        padding: 40px 0 0;
+    }
+    .header-text-area {
+        padding: 10px 0 0;
+    }
+    .login-register-section::before {
+        height: 3px;
+        left: 50%;
+        position: absolute;
+        top: 55%;
+        transform: translate(-50%, -50%);
+        width: 360px;
+    }
+    .login-content {
+        text-align: center;
+        padding:20px 0 0;
+    }
+    .login-btn {
+        width: 100%;
+    }
+    .caption {
+        width: 100%;
+        padding:10px 0;
+    }
+
+    .register-content {
+        text-align: center;
+        padding: 20px 0;
+    }
+    .main-header.inner-page-header {
+        padding: 30px 0;
+    }
+    .inner-page-header .header-text-area {
+        padding: 10px 0 0;
+    }
+    .inner-page-header .header-text-area h1 {
+        font-size: 28px;
+    }
+    .app-registration-content .title h2 {
+        font-size: 32px;
+    }
+    .app-registration-content input {
+        padding: 15px 0;
+    }
+    .checkbox-btn-option {
+        margin:5px;
+    }
+    .athlete-application {
+        max-width: 480px;
+    }
+    .athlete-application-form-sec .steps-content .form-group {
+        margin: 0;
+     }
+    #stepOne .step-one-fields .form-group.maxi-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.lg-field-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.sm-field-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.md-field-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.custom-field-width {
+        max-width: 100%;
+    }
+    #stepOne .step-one-fields .form-group.radio-field {
+        max-width: 100%;
+    }
+    #stepTwo .step-two-fields .form-group.lg-field-width {
+        max-width: 100%;
+    }
+    #stepTwo .step-two-fields .form-group.sm-field-width {
+        max-width: 100%;
+    }
+    #stepTwo .step-two-fields .form-group.md-field-width {
+        max-width: 100%;
+    }
+    #stepThree .step-three-fields .form-group.md-field-width {
+        max-width: 100%;
+    }
+    #stepTwo .step-two-fields .form-group.sm-custom-field-width{
+        max-width: 100%;
+    }
+
+    .athlete-application-form-sec .steps-content input, .athlete-application-form-sec .steps-content select {
+        padding: 10px 0;
+        font-size: 18px;
+    }
+    .athlete-application-form-sec .steps-content input, .athlete-application-form-sec .steps-content select {
+        font-size: 18px;
+    }
+    .athlete-application-form-sec .steps-content .form-group.radio-field > label {
+        font-size: 18px;
+        padding-top: 5px;
+    }
+    .rules-description {
+        padding: 15px;
+    }
+    .btns-content {
+        padding: 5px 0;
+    }
+    .rules-and-regulation-links {
+        padding: 5px 0;
+    }
+    .rules-and-regulation-links a {
+        font-size: 16px;
+    }
+    .custom-select::after {
+        font-size: 28px;
+        line-height: 42px;
+    }
+    .form-group.radio-field span {
+        font-size: 14px;
+        text-align: center;
+    }
+    .athlete-application-form-sec .steps-content .step-four-cridentials .form-group {
+        text-align: center;
+    }
+    .athlete-application-form-sec .steps-content .applicant-details-section .form-group {
+        width: 100%;
+    }
+    .athlete-application-form-sec .steps-content .applicant-details-section .form-group > label {
+        font-size: 18px;
+    }
+    .athlete-application-form-sec .steps-content .applicant-details-section input {
+        max-width: 110px;
+    }
+    .athlete-application-form-sec .steps-content .step-four-cridentials > label {
+        font-size: 18px;
+        max-width: 100%;
+    }
+    .athlete-application-form-sec .steps-content .step-four-cridentials > input {
+        width: 100%;
+    }
+    #pay-info .payment-form-fields .form-group.lg-field-width {
+        max-width: 100%;
+    }
+    #pay-info .payment-form-fields .form-group.md-width {
+        max-width: 100%;
+    }
+    #pay-info .payment-form-fields .form-group.xs-field-width {
+        max-width: 100%;
+    }
+    #pay-info .payment-form-fields .form-group.sm-field-width {
+        max-width: 100%;
+    }
+    .amount-info {
+        max-width: 225px;
+    }
+    .year-info {
+        max-width: 225px;
+    }
+    .year-info span {
+        padding-left: 5px;
+    }
+    .header-top-caption p {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 900;
+    }
+    .membership-card-details strong {
+        font-size: 26px;
+    }
+    .membership-card-details p {
+        font-size: 20px;
+    }
+    .membership-card-details li {
+        min-height: 80px;
+    }
+    .expiry-date > p {
+        font-size: 18px;
+    }
+    .print-card-btn a.btn {
+        max-width: 150px;
+
+    }
+    .btn-section {
+        padding: 20px 0 0;
+    }
+    .expiry-date {
+        padding: 0px 0 0;
+    }
+    .auth-code-img > img {
+        max-width: 60px;
+    }
+    .profile-pic {
+        width: 100px;
+    }
+    .second-membership-card-header {
+        width: calc(100% - 100px);
+    }
+    .second-membership-card-header .sec-membership-card-header-main-content .header-top-caption p {
+        font-size: 16px;
+    }
+    .header-text-area h1 {
+        font-size: 22px;
+    }
+    .second-membership-card-header .sec-membership-card-header-main-content .logo img {
+        margin: 0 auto;
+        max-width: 70px;
+    }
+    .backend-header .logo {
+        width: 100%;
+    }
+    .header-title {
+        margin: 0 auto;
+        max-width: 205px;
+    }
+    .backend-header-content-area {
+        text-align: center;
+        width: 100%;
+    }
+    .name-title h3 {
+        font-size: 16px;
+    }
+    .membership-date {
+        width: 100%;
+        text-align: center;
+    }
+    .membership-date h4 {
+        font-size: 16px;
+    }
+    .membership-card-print-area {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0 10px;
+    }
+    .user-backend-form-section {
+        max-width: 100%;
+        text-align: center;
+        padding: 20px 0 ;
+    }
+    .user-backend-form-section .title {
+        padding: 0 0 20px;
+        text-align: center;
+    }
+    .membership-renewal .title {
+        text-align: center;
+    }
+    .membership-renewal {
+        padding: 0 0 30px;
+        text-align: center;
+    }
+    .admin-page-whole-content {
+        height: 400px;
+    }
+    .side-bar-content .panel-title a img {
+        max-width: 15px;
+        padding-right: 0;
+    }
+    .side-bar-content .panel-title > a {
+        font-size: 14px;
+    }
+    .accordions-content-link ul {
+        padding: 0;
+    }
+    .accordions-content-link a {
+        display: inline-block;
+        font-size: 14px;
+        padding: 5px 24px;
+        width: 100%;
+    }
+    .left-side-bar {
+        max-width: 70px;
+    }
+    .right-side-section {
+        width: calc(100% - 70px);
+    }
+    .database-btn a.BE-btn {
+        display: inline-block;
+        float: none;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 5px 0;
+        padding: 10px;
+        text-align: center;
+        width: 100% !important;
+    }
+    .database-table-section .table-responsive {
+        height: 100%;
+    }
+    .database-table-section .table > tbody > tr > td, .database-table-section .table > thead > tr > th {
+        font-size: 12px;
+    }
+    .side-bar-content .panel-title a strong {
+        display: none;
+    }
+
+    .side-bar-content .panel-title a img {
+        max-width: 22px;
+        padding-right: 0;
+    }
+    .side-bar-content .panel-heading {
+        padding: 10px 0 ;
+        text-align: center;
+    }
+    .side-bar-content .collapse.in {
+        display: block;
+        height: 0;
+    }
+    .side-bar-content .panel-collapse.collapsing {
+        height: 0 !important;
+    }
+    .side-bar-content .panel-body {
+        transform: translateX(-100%);
+        z-index: -2;
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+    .accordions-content-link a::before {
+        content: "" "";
+        font-family: fontawesome;
+        left: 15px;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        visibility: hidden;
+        transform: translateY(-50%);
+    }
+    .left-side-bar {
+        position: relative !important;
+    }
+    .left-side-bar .panel {
+        position: static;
+    }
+    .side-bar-content .collapse.in .panel-body {
+        display: inline-block;
+        height: auto;
+        left: 100%;
+        padding: 50px 0;
+        top: 0;
+        transform: translate(0px, 0px);
+        transition: all 0.6s ease 0s;
+        width: 250px;
+        z-index: 9;
+    }
+    .side-bar-content .panel-title a::after {
+        content: "";
+        font-family: fontawesome;
+        font-size: 10px;
+        padding: 5px 5px 0;
+        position: absolute
+    }
+    .side-bar-content .panel-title a.arrow-right::after {
+        content: "\f053";
+        font-family: fontawesome;
+        font-size: 10px;
+        padding: 5px 5px 0;
+        position: absolute;
+    }
+    .db-credentials .form-group {
+        float: none;
+        margin-bottom: 10px;
+        padding: 0;
+        width: 100%;
+    }
+    .Search-bd-alert-model .modal-dialog {
+        max-width: 480px;
+        padding: 0 15px;
+        width: 100%;
+    }
+    .Search-bd-alert-model .modal-header {
+        padding: 10px ;
+    }
+    .modal-btn-area {
+        padding-top: 15px;
+    }
+    .db-credentials label {
+        color: #000;
+        display: inline-block;
+        font-size: 16px;
+        width: 100%;
+    }.db-credentials label {
+         font-size: 16px;
+     }
+    .register-content .title {
+        text-align: center;
+    }
+    .login-content .title {
+        text-align: center;
+    }
+
+    .database-table-section .dataTables_wrapper .dataTables_length {
+        padding: 10px;
+    }
+    .database-table-section .dataTables_wrapper .dataTables_filter {
+        float: right;
+        padding: 10px;
+    }
+    .district-form-content.add-new-district-form .form-group {
+        padding: 0;
+        width: 100%;
+    }
+    .database-table-section .dataTables_wrapper .dataTables_paginate {
+        padding: 0 0 10px;
+    }
+    .database-table-section .dataTables_wrapper table.dataTable tbody > tr > td {
+        font-size: 14px !important;
+        line-height: 1.2;
+        padding: 10px 10px !important;
+    }
+    .database-table-section .dataTables_wrapper table.dataTable thead > tr > th {
+        width: 100% !important;
+        font-size: 14px !important;
+        line-height: 1.2;
+        padding: 10px 10px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 23px;
+    }
+    .login-register-section::before {
+        width: 300px;
+        top: 53%;
+    }
+    .main-header .logo img {
+        max-width: 100px;
+    }
+    .login-content {
+        padding: 0;
+    }
+    .register-content {
+        padding: 0;
+    }
+    .inner-page-header .header-text-area h1 {
+        font-size: 24px;
+    }
+    .app-registration-content .title h2 {
+        font-size: 26px;
+    }
+    .app-registration-content input {
+        font-size: 16px;
+    }
+    .athlete-application {
+        max-width: 300px;
+    }
+    .step-progress-bar .step {
+        border: 1px solid #fff;
+        font-size: 16px;
+        height: 32px;
+        line-height: 30px;
+        width: 32px;
+    }
+    .step-progress-bar .lines {
+        border-top: 1px solid #fff;
+    }
+    .athlete-application-form-sec .steps-content .radio-btn-option {
+        padding: 0 0px;
+    }
+    .amount-info {
+        max-width: 100%;
+        padding: 0;
+    }
+    .year-info {
+        max-width: 100%;
+        padding: 0;
+    }
+    .year-info > p {
+        font-size: 20px;
+    }
+    .amount-info > p {
+        font-size: 20px;
+    }
+    .membership-card-details li {
+
+        display: inline-block;
+        min-height:100%;
+        width: 100%;
+    }
+    .membership-card-details li:nth-child(2n+2) {
+        text-align:left;
+    }
+    .membership-card-details strong {
+        font-size: 22px;
+    }
+    .membership-card-details p {
+        font-size: 18px;
+    }
+    .auth-code-img {
+        position: static;
+        transform: none;
+        padding: 10px 0 20px;
+    }
+    .second-membership-card-header {
+        width: 100%;
+    }
+    .profile-pic {
+        padding: 20px 0;
+        width: 100%;
+    }
+    .profile-pic > img {
+        display: block;
+        margin: 0 auto;
+    }
+    .second-membership-card-header {
+        padding: 0 0 20px;
+    }
+    .second-membership-card {
+        padding: 10px 0 0;
+    }
+    .profile-pic {
+        padding: 10px 0 0;
+    }
+    .BE-btn {
+        font-size: 14px;
+    }
+    .name-title {
+        padding: 0 5px;
+    }
+    .name-title h3 {
+        font-size: 14px;
+    }
+    .header-login-btn-area a.btn {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+    .print-btn {
+        padding-top: 10px;
+    }
+
+    .database-select-option {
+        margin-right: 0;
+    }
+    .district-form-content label {
+        margin-bottom: 5px;
+        max-width: 100%;
+    }
+    .district-form-content .district-input-field {
+        width: 100%;
+    }
+    .district-form-content .form-group {
+        margin-bottom: 15px;
+    }
+    .database-table-section .dataTables_wrapper .dataTables_length {
+        width: 100%;
+    }
+    .database-table-section .dataTables_wrapper .dataTables_filter {
+        width: 100%;
+    }
+}
+@media print {
+    .membership-card-details li {
+        -webkit-print-color-adjust: exact;
+        color: #fff;
+    }
+    .header-top-caption p {
+        -webkit-print-color-adjust: exact;
+        color: #fff;
+    }
+    .header-text-area a {
+        -webkit-print-color-adjust: exact;
+        color: #fff;
+    }
+    .expiry-date > p {
+        -webkit-print-color-adjust: exact;
+        color: #fff;
+    }
+}
+/*.modal-footer .btn {
+    background: #DC1C2E none repeat scroll 0 0;
+    border-radius: 0;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    
+}*/
+#main_header .logo a {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    max-width: 300px;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+
+.logo a img {
+    width:100%;
+    height: auto;
+        vertical-align: middle;
+}
+
+.logo-image {
+    width: 50%;
+    float: left;
+    /*margin: -9px 0 0 0;*/
+    text-align: left;
+}
+.tooltips {
+    position: relative;
+    /*display: inline-block;*/
+    border-bottom: 1px dotted black;
+}
+
+.tooltips .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -22px;
+    right: 100%;
+}
+.tooltips:hover .tooltiptext {
+    visibility: visible;
+    /*opacity: 1;*/
+}
+
+#table_main_wrapper .dt-buttons{
+    float: right;
+}#tbl_main_users_wrapper .dt-buttons{
+    float: right;
+}
+#table_main_users_wrapper .dt-buttons{
+    float: right;
+}
+
+#table_main_wrapper .dt-buttons a{
+    color: #fff;
+    font-weight: 700;
+    background: #DC1C2E none repeat scroll 0 0;
+    border: 1px solid #666;
+    padding: 5px 16px;
+}#tbl_main_users_wrapper .dt-buttons a{
+    color: #fff;
+    font-weight: 700;
+    background: #DC1C2E none repeat scroll 0 0;
+    border: 1px solid #666;
+    padding: 5px 16px;
+}
+
+#table_main_wrapper .dt-buttons a:focus{
+    color: #DC1C2E;
+}#tbl_main_users_wrapper .dt-buttons a:focus{
+    color: #DC1C2E;
+}
+
+#table_main_wrapper .dt-buttons a:hover{
+    color: #DC1C2E;
+    background: #fff;
+}#tbl_main_users_wrapper .dt-buttons a:hover{
+    color: #DC1C2E;
+    background: #fff;
+}
+
+/**/
+#table_main_users_wrapper .dt-buttons a{
+    color: #fff;
+    font-weight: 700;
+    background: #DC1C2E none repeat scroll 0 0;
+    border: 1px solid #666;
+    padding: 5px 16px;
+}
+
+#table_main_users_wrapper .dt-buttons a:focus{
+    color: #DC1C2E;
+}
+
+#table_main_users_wrapper .dt-buttons a:hover{
+    color: #DC1C2E;
+    background: #fff;
+}
+
+.h-selctor{
+    font-size: 20px;
+    border:2px solid #1c9c9b;
+    border-bottom:2px solid #1c9c9b;
+    color: #1c9c9b;
+}
+
+#modalCreditCardForm .modal-content{
+    max-width: 475px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+#modalCreditCardForm .modal-header button{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 30px;
+}
+#modalCreditCardForm .modal-header .alert-dismissible{
+    padding-right: 15px !important;
+    margin-top: 24px;
+}
+@media (max-width: 767px) {
+    #modalCreditCardForm .modal-header{
+        padding: 0 !important;
+    }
+    #modalCreditCardForm .modal-header button.close{
+        font-size: 30px;
+    }
+}
+
+
+tbody td.sorting_1{
+    cursor: move ;
+}
+
+
+/* Added By KHL */
+.display-none{
+    display: none !important;
+}
+/* Ajax Loader */
+.lds-dual-ring.hidden { 
+display: none;
+}
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 5% auto;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,.8);
+    z-index: 999999;
+    opacity: 1;
+    transition: all 0.5s;
+}
+.already-booked{
+    background-color: #ff0000;
+    color: #ffffff;
+}
+
+.data-passed {
+    background-color: #DC1C2E;
+}
+
+
+/* ----- */
+
+.form-group label.form-label {
+    font-size: 16px;
+    font-weight: 600;
+    
+    padding-top:10px;
+}
+.property-form-ul{
+    background-color: #e8e6e6;
+    padding: 10px;
+    border-radius: 3px;
+}
+.property-form-ul li {
+    padding: 5px;
+}
+.display-cats {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.display-cats li {
+  display: inline-block;
+  margin-right: 10px; /* spacing between items */
+}
+/* ----- */
+
+
+.file-pond-preview-wrapper {
+    position: relative; 
+    display: inline-block; 
+    margin-right: 10px;
+}
+.file-pond-preview-wrapper img {
+     
+    height: 100px; 
+    object-fit: cover; 
+    border: 1px solid rgb(204, 204, 204); 
+    border-radius: 4px;
+}
+.file-pond-preview-wrapper span {
+    color: rgb(231, 76, 60);    
+    
+    border-radius: 50%; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 12px;
+   
+}
+
+.pac-container {
+    position: absolute !important;
+}
+.pac-container {
+    z-index: 10000 !important; /* Ensure it's above modals etc. */
+    width: 35% !important;    /* Make it match the input width */
+    max-width: none !important;
+    box-sizing: border-box;
+}
+#gmap-location {
+    width: 100%;
+}
+
+.my-location-wrapper .pac-container {
+    width: 100% !important;
+}
+
+#autocomplete {
+    width:500px;
+    position: absolute;
+}
+
+.pac-container:after{
+    content:"";
+    padding:1px 1px 1px 0;
+    height:16px;
+    text-align:right;
+    display:block;
+}
+
+
+.pond-container {
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+
+.accordion-button:not(.collapsed) {
+  background-color: #ddd; /* When open */
+}
+.accordion-button.collapsed {
+  background-color: #ddd; /* When closed */
+}
+.district-back-del-btn-area{
+    float: right;
+}
+label.featured-image-checkbox-label{
+    display: block;
+}
+
+
+.preview-box{
+
+    vertical-align: bottom;
+    height: 20%;
+    width: 20%;
+}
+
+/* Media Gallery */
+.uploaded-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+.uploaded-images img {
+    border-radius: 6px;
+    max-width: 75%;
+    height: auto;
+    border: 1px solid #ccc;
+}
+.media-thumb {
+    width: 175px;           /* fixed width */
+    height: 220px;          /* fixed height */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    background: #fff;
+}
+
+.media-thumb img {
+    width: 100%;
+    height: 130px;          /* fixed height for image area */
+    object-fit: cover;      /* crop & center to keep ratio */
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.media-thumb label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.media-thumb .remove-media {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
+}

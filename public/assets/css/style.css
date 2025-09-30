@@ -1,0 +1,213 @@
+
+/* ------ Start code by KHL ------ */
+.hidden{
+    display: none;
+}
+
+/* Ajax Loader */
+.lds-dual-ring.hidden { 
+display: none;
+}
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 5% auto;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,.8);
+    z-index: 999999;
+    opacity: 1;
+    transition: all 0.5s;
+}
+
+.already-booked{
+    background-color: #ff0000;
+    color: #ffffff;
+}
+
+.choose-file-area {
+    background-color: #ddd;
+    padding: 7px 0px 0px 10px;
+    margin: 0px 0px 0 0;
+    cursor: pointer;
+}
+ul.paymentplan-area {
+    display: flex;
+    justify-content: flex-end; /* aligns all items to the right */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.paymentplan-area li {
+    width: 100%;
+
+}
+
+ul.paymentplan-area li img {
+    width: 250px;
+    
+}
+
+#progress ul.paymentplan-area {
+    display: inline-block;
+}
+
+#progress ul.paymentplan-area li {
+    width: 170px;
+    display: inline-block;
+
+}
+
+#progress ul.paymentplan-area li img {
+    width: 100%;
+    height: 123px;
+    
+}
+
+
+p.loc-txt {
+    
+    width: 100%;
+}
+
+#project-list p.loc-txt {
+    
+    width: 95%;
+}
+.font-size-12{
+  font-size: 12px;
+}
+.suggestion-item:hover{
+  background-color: #1049AB;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  #compare-box {
+    left: 0;
+    right: 0;
+    border-radius: 1rem 1rem 0 0;
+  }
+  #compare-items {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+  #compare-items div {
+    min-width: 120px;
+    white-space: nowrap;
+  }
+}
+.btn-grey{
+    background-color: #CCCCCC;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    text-transform: capitalize;
+    border: 1px solid #CCCCCC;
+    border-radius: 50px;
+    padding: 10px 30px;
+    transition: 0.5s;
+}
+.btn-grey:hover{
+    background-color: #E2DEDC;
+    border-color: #E2DEDC;
+    color: #000;
+}
+
+/* Price Range Slider */
+.dropdown-price-range {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+}
+.dropdown-price-range-toggle {
+    padding: 2px 0px 2px 2px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    /* margin: 3px; */
+    background-color: #fff;
+    margin: -1px 0px 0px 0px;
+    width: 100%;
+}
+.dropdown-price-range-menu {
+    display: none;
+    position: absolute;
+    
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    width: 435px;
+    z-index: 1000;
+}
+#price-range { margin: 10px 0; }
+
+.dropdown-price-range-toggle::after{
+    content: "▼"; /* or "" */
+    float: right;
+    margin: 5px 5px 0 0;
+    color: #aaa;
+    font-size: 10px;
+}
+
+.banner-form .type-number {
+    border: 1px solid #aaa;
+    padding: 5px 5px 1px 5px;
+}
+
+.page-navigation ul li {
+  margin-right : 5px;
+}
+div#suggestions {
+    height: 244px;
+    overflow: auto;
+   width: 295px;
+}
+div#suggestions .suggestion-item {
+    font-size: 14px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+p.listing-short-desc {
+  font-size: 14px;
+}
+.width-100-pc{
+  width: 100% !important;
+}
+.width-23-pc{
+  width: 23% !important;
+}
+/* ------ End code by KHL ------ */
+
+
+
+
+
+
