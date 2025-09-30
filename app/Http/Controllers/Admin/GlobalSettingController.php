@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Helpers\RosenHelper;
+use App\Http\Helpers\GeneralHelper;
 
 class GlobalSettingController extends Controller
 {
@@ -15,14 +15,14 @@ class GlobalSettingController extends Controller
      */
     public function index()
     {
-        $header_logo = RosenHelper::getOption('header_logo');
-        $footer_logo = RosenHelper::getOption('footer_logo');
-        $footer_text_under_logo = RosenHelper::getOption('footer_text_under_logo');
-        $facebook_url = RosenHelper::getOption('facebook_url');
-        $footer_center_column_heading = RosenHelper::getOption('footer_center_column_heading');
-        $footer_last_column_heading = RosenHelper::getOption('footer_last_column_heading');
-        $copy_right_text = RosenHelper::getOption('copy_right_text');
-        $global_date_format = RosenHelper::getOption('global_date_format');
+        $header_logo = GeneralHelper::getOption('header_logo');
+        $footer_logo = GeneralHelper::getOption('footer_logo');
+        $footer_text_under_logo = GeneralHelper::getOption('footer_text_under_logo');
+        $facebook_url = GeneralHelper::getOption('facebook_url');
+        $footer_center_column_heading = GeneralHelper::getOption('footer_center_column_heading');
+        $footer_last_column_heading = GeneralHelper::getOption('footer_last_column_heading');
+        $copy_right_text = GeneralHelper::getOption('copy_right_text');
+        $global_date_format = GeneralHelper::getOption('global_date_format');
         
         return view('admin.global_settings.edit',compact('header_logo','footer_logo','footer_text_under_logo','facebook_url','footer_center_column_heading','footer_last_column_heading','copy_right_text','global_date_format'));
     }
@@ -87,12 +87,12 @@ class GlobalSettingController extends Controller
 
         
         
-        RosenHelper::setOption('footer_text_under_logo',$request->footer_text_under_logo);
-        RosenHelper::setOption('facebook_url',$request->facebook_url);
-        RosenHelper::setOption('footer_center_column_heading',$request->footer_center_column_heading);
-        RosenHelper::setOption('footer_last_column_heading',$request->footer_last_column_heading);
-        RosenHelper::setOption('copy_right_text',$request->copy_right_text);
-        RosenHelper::setOption('global_date_format',$request->global_date_format);
+        GeneralHelper::setOption('footer_text_under_logo',$request->footer_text_under_logo);
+        GeneralHelper::setOption('facebook_url',$request->facebook_url);
+        GeneralHelper::setOption('footer_center_column_heading',$request->footer_center_column_heading);
+        GeneralHelper::setOption('footer_last_column_heading',$request->footer_last_column_heading);
+        GeneralHelper::setOption('copy_right_text',$request->copy_right_text);
+        GeneralHelper::setOption('global_date_format',$request->global_date_format);
         
 
         if(!empty($request->header_logo)){
@@ -102,7 +102,7 @@ class GlobalSettingController extends Controller
             $fullFileName = str_replace(" ","_",$fullFileName);
             $request->header_logo->move(public_path('assets/'.$folderName), $fullFileName);
             $header_logo = 'assets/'.$folderName.'/'.$fullFileName;
-            RosenHelper::setOption('header_logo',$header_logo);
+            GeneralHelper::setOption('header_logo',$header_logo);
         }
 
         if(!empty($request->footer_logo)){
@@ -112,7 +112,7 @@ class GlobalSettingController extends Controller
             $fullFileName = str_replace(" ","_",$fullFileName);
             $request->footer_logo->move(public_path('assets/'.$folderName), $fullFileName);
             $footer_logo = 'assets/'.$folderName.'/'.$fullFileName;
-            RosenHelper::setOption('footer_logo',$header_logo);
+            GeneralHelper::setOption('footer_logo',$footer_logo);
         }
         
 
