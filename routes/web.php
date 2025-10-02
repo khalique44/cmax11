@@ -160,7 +160,7 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::get('cms-pages/contact-us', [AdminCmsPage::class,'contactUs'])->name('cmspages.contactus');
         Route::get('cms-pages/our-agents', [AdminCmsPage::class,'ourAgents'])->name('cmspages.our_agents');
         Route::get('cms-pages/faqs', [AdminCmsPage::class,'faqs'])->name('cmspages.faqs');
-        Route::get('cms-pages/privay-policy', [AdminCmsPage::class,'privacyPolicy'])->name('cmspages.privay-policy');
+        Route::get('cms-pages/privacy-policy', [AdminCmsPage::class,'privacyPolicy'])->name('cmspages.privay-policy');
         Route::get('cms-pages/terms-and-conditions', [AdminCmsPage::class,'termsAndConditions'])->name('cmspages.terms_and_conditions');
         Route::post('cms-pages/save-about-us',[AdminCmsPage::class,'saveAboutUs'])->name('cmspages.save-aboutus');
         Route::post('cms-pages/save-career', [AdminCmsPage::class,'saveCareer'])->name('cmspages.save-career');
@@ -211,6 +211,10 @@ Route::get('/project/{slug}',  [FrontProjectController::class, 'show'])->name('p
 Route::get('/about-us', [CmsPage::class, 'showAboutUs'])->name('aboutus.show');
 Route::get('/career', [CmsPage::class, 'showCareer'])->name('career.show');
 Route::get('/contact-us', [CmsPage::class, 'showContactUs'])->name('contactus.show');
+Route::get('/our-agents', [CmsPage::class, 'showOurAgents'])->name('ouragents.show');
+Route::get('/faqs', [CmsPage::class, 'showFaqs'])->name('faqs.show');
+Route::get('/privacy-policy', [CmsPage::class, 'showPrivacyPolicy'])->name('privacy_policy.show');
+Route::get('/terms-and-conditions', [CmsPage::class, 'showTermsAndConditions'])->name('terms_and_conditions.show');
 Route::post('/contact-submit', [CmsPage::class, 'submitContactUs'])->name('contact.submit');
 Route::post('/property-submit', [CmsPage::class, 'submitInquiryForm'])->name('property.submit');
 

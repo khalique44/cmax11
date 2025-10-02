@@ -15,8 +15,8 @@
            <div class="col-md-3 ps-md-5">
               <h4 class="footer-h">Company</h4>
               <ul class="footer-list">
-                 <li class="mb-2"><a href="#">Our Agents</a></li>
-                 <li class="mb-2"><a href="#">FAQS</a></li>
+                 <li class="mb-2"><a href="{{route('ouragents.show')}}">Our Agents</a></li>
+                 <li class="mb-2"><a href="{{route('faqs.show')}}">FAQS</a></li>
                  <li class="mb-2"><a href="{{route('aboutus.show')}}">About Us</a></li>
                  <li class="mb-2"><a href="{{route('contactus.show')}}">Contact Us</a></li>
               </ul>
@@ -50,8 +50,8 @@
               <span class="foot-st">{{ $copy_right_text }}</span>
            </div>
            <div class="col-md-6 text-center text-md-end">
-              <a href="#">Terms & Conditions</a>
-              <a href="#" class="ms-5">Privacy Policy</a>
+              <a href="{{route('terms_and_conditions.show')}}">Terms & Conditions</a>
+              <a href="{{route('privacy_policy.show')}}" class="ms-5">Privacy Policy</a>
            </div>
         </div>
      </div>
