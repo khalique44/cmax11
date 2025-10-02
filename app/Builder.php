@@ -15,7 +15,7 @@ class Builder extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes, OptimizesMedia;
 
     protected $fillable = [
-        'builder_name','mobile_number','email','address','is_active'
+        'builder_name','mobile_number','email','address','is_active','builder_logo'
 
     ];
 

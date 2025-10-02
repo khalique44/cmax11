@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Carbon\Carbon;
 use App\Project;
 use App\Property;
 use App\Amenity;
@@ -72,11 +72,16 @@ class ProjectController extends Controller
                     $newStatus = $project->is_featured == 1 ? 0 : 1;
                     return '<a href="#" data-status="'.$newStatus.'" data-status-type="is_featured" data-status-label="'.$newLabel.'" class="updateStatus" data-model-name="project" data-id="'.$project->id.'" title="Click to '.$newLabel.'" >'.$statusHtml.'</a>';                    
                 }) */
-                ->editColumn('refreshed_at', function($project) {
+                ->editColumn('refreshed_at', function($project) { 
+                    if($project->is_refresh_expired === false)  {
+                       $btnColor = 'btn-secondary remove_refresh_project';   
+                       $title = $project->refresh_days_remaining." days remaining";                   
+                    }else{
+                       $btnColor = 'btn-primary refresh_project'; 
+                       $title = "Click to Refresh";                      
+                    }
                     
-                    return '<a href="'.route('projects.refresh', $project->id).'" class="btn btn-sm btn-warning"
-                                onclick="return confirm(\'Are you sure you want to refresh this project?\')">
-                                🔄 Refresh
+                    return '<a href="javascript:;" class="btn btn-sm '.$btnColor.' " data-project_id="'.$project->id.'" title="'.$title.'" ><i class="fa fa-refresh"></i>
                             </a>';                    
                 })
 

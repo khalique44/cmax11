@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Helpers\GeneralHelper;
+use App\Http\Helpers\FileHelper;
 
 class CmsPage extends Controller
 {
@@ -153,35 +154,24 @@ class CmsPage extends Controller
         GeneralHelper::setOption('aboutus_meta_description',$request->aboutus_meta_description);
         GeneralHelper::setOption('aboutus_meta_keywords',$request->aboutus_meta_keywords);
 
-        $folderName = 'about_us_images';
+        if ($request->hasFile('aboutus_header_image')) {
 
-        if(!empty($request->aboutus_header_image)){
+            $url = FileHelper::uploadImage($request->file('aboutus_header_image'), 'about_us_images');
             
-            $fileName = pathinfo($request->aboutus_header_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->aboutus_header_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->aboutus_header_image->move(public_path('uploads/'.$folderName), $fullFileName);
-            $url = 'uploads/'.$folderName.'/'.$fullFileName;
             GeneralHelper::setOption('aboutus_header_image',$url);
         }
 
-        if(!empty($request->aboutus_section3_image1)){
-            
-            $fileName = pathinfo($request->aboutus_section3_image1->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->aboutus_section3_image1->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->aboutus_section3_image1->move(public_path('uploads/'.$folderName), $fullFileName);
-            $url = 'uploads/'.$folderName.'/'.$fullFileName;
+        if ($request->hasFile('aboutus_section3_image1')) {
+
+            $url = FileHelper::uploadImage($request->file('aboutus_section3_image1'), 'about_us_images');
+
             GeneralHelper::setOption('aboutus_section3_image1',$url);
         }
 
-        if(!empty($request->aboutus_section3_image2)){
-            
-            $fileName = pathinfo($request->aboutus_section3_image2->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->aboutus_section3_image2->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->aboutus_section3_image2->move(public_path('uploads/'.$folderName), $fullFileName);
-            $url = 'uploads/'.$folderName.'/'.$fullFileName;
+        if ($request->hasFile('aboutus_section3_image2')) {
+
+            $url = FileHelper::uploadImage($request->file('aboutus_section3_image2'), 'about_us_images');
+
             GeneralHelper::setOption('aboutus_section3_image2',$url);
         }
 
@@ -232,15 +222,10 @@ class CmsPage extends Controller
         GeneralHelper::setOption('career_meta_description',$request->career_meta_description);
         GeneralHelper::setOption('career_meta_keywords',$request->career_meta_keywords);
 
-        $folderName = 'career_images';
+        if ($request->hasFile('career_header_image')) {
 
-        if(!empty($request->career_header_image)){
-            
-            $fileName = pathinfo($request->career_header_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->career_header_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->career_header_image->move(public_path('uploads/'.$folderName), $fullFileName);
-            $url = 'uploads/'.$folderName.'/'.$fullFileName;
+            $url = FileHelper::uploadImage($request->file('career_header_image'), 'career_images');
+
             GeneralHelper::setOption('career_header_image',$url);
         }
 
@@ -305,16 +290,222 @@ class CmsPage extends Controller
         GeneralHelper::setOption('contact_meta_description',$request->contact_meta_description);
         GeneralHelper::setOption('contact_meta_keywords',$request->contact_meta_keywords);
 
-        $folderName = 'contact_us_images';
-
         if(!empty($request->contact_header_image)){
             
-            $fileName = pathinfo($request->contact_header_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->contact_header_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->contact_header_image->move(public_path('uploads/'.$folderName), $fullFileName);
-            $url = 'uploads/'.$folderName.'/'.$fullFileName;
+            $url = FileHelper::uploadImage($request->file('contact_header_image'), 'contact_us_images');
+            
             GeneralHelper::setOption('contact_header_image',$url);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Settings Saved Successfully!',
+            
+        ]);
+    }
+
+    public function ourAgents(){
+
+        $our_agents_title = GeneralHelper::getOption('our_agents_title');
+        $our_agents_description = GeneralHelper::getOption('our_agents_description');
+        $our_agents_header_image = GeneralHelper::getOption('our_agents_header_image');
+        
+        $our_agents_meta_title = GeneralHelper::getOption('our_agents_meta_title');
+        $our_agents_meta_description = GeneralHelper::getOption('our_agents_meta_description');
+        $our_agents_meta_keywords = GeneralHelper::getOption('our_agents_meta_keywords');
+
+        return view('admin.cms_pages.our_agents.edit',compact(
+            'our_agents_title',
+            'our_agents_header_image',
+            'our_agents_description',
+                        
+            'our_agents_meta_title',
+            'our_agents_meta_description',
+            'our_agents_meta_keywords',
+        
+
+            ));
+    }
+
+    public function saveOurAgents(Request $request){
+
+        $request->validate([
+            'our_agents_title' => 'required|max:255',
+            'our_agents_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920,max_height=915',
+           
+        ]);        
+        
+        GeneralHelper::setOption('our_agents_title',$request->our_agents_title);
+        GeneralHelper::setOption('our_agents_description',$request->our_agents_description);    
+        
+        GeneralHelper::setOption('our_agents_meta_title',$request->our_agents_meta_title);
+        GeneralHelper::setOption('our_agents_meta_description',$request->our_agents_meta_description);
+        GeneralHelper::setOption('our_agents_meta_keywords',$request->our_agents_meta_keywords);        
+
+        if(!empty($request->our_agents_header_image)){
+            
+            $url = FileHelper::uploadImage($request->file('our_agents_header_image'), 'our_agents_images');
+            
+            GeneralHelper::setOption('our_agents_header_image',$url);
+        }
+
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Settings Saved Successfully!',
+            
+        ]);
+    }
+
+    public function faqs(){
+
+        $faqs_title = GeneralHelper::getOption('faqs_title');
+        $faqs_header_image = GeneralHelper::getOption('faqs_header_image');        
+        $faqs_description = GeneralHelper::getOption('faqs_description');        
+       
+        $faqs_meta_title = GeneralHelper::getOption('faqs_meta_title');
+        $faqs_meta_description = GeneralHelper::getOption('faqs_meta_description');
+        $faqs_meta_keywords = GeneralHelper::getOption('faqs_meta_keywords');
+
+        return view('admin.cms_pages.faqs.edit',compact(
+            'faqs_title',
+            'faqs_header_image',
+            'faqs_description',
+                          
+            'faqs_meta_title',
+            'faqs_meta_description',
+            'faqs_meta_keywords',
+        
+
+            ));
+    }
+
+    public function saveFaqs(Request $request){
+
+        $request->validate([
+            'faqs_title' => 'required|max:255',            
+            'faqs_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920,max_height=915',
+           
+        ]);        
+        
+        GeneralHelper::setOption('faqs_title',$request->faqs_title);
+        GeneralHelper::setOption('faqs_description',$request->faqs_description);       
+        
+        GeneralHelper::setOption('faqs_meta_title',$request->faqs_meta_title);
+        GeneralHelper::setOption('faqs_meta_description',$request->faqs_meta_description);
+        GeneralHelper::setOption('faqs_meta_keywords',$request->faqs_meta_keywords);        
+
+        if(!empty($request->faqs_header_image)){
+            
+            $url = FileHelper::uploadImage($request->file('faqs_header_image'), 'faqs_images');
+            
+            GeneralHelper::setOption('faqs_header_image',$url);
+        }
+
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Settings Saved Successfully!',
+            
+        ]);
+    }
+
+    public function privacyPolicy(){
+
+        $privacy_policy_title = GeneralHelper::getOption('privacy_policy_title');
+        $privacy_policy_header_image = GeneralHelper::getOption('privacy_policy_header_image');        
+        $privacy_policy_description = GeneralHelper::getOption('privacy_policy_description');        
+       
+        $privacy_policy_meta_title = GeneralHelper::getOption('privacy_policy_meta_title');
+        $privacy_policy_meta_description = GeneralHelper::getOption('privacy_policy_meta_description');
+        $privacy_policy_meta_keywords = GeneralHelper::getOption('privacy_policy_meta_keywords');
+
+        return view('admin.cms_pages.privacy_policy.edit',compact(
+            'privacy_policy_title',
+            'privacy_policy_header_image',
+            'privacy_policy_description',
+                          
+            'privacy_policy_meta_title',
+            'privacy_policy_meta_description',
+            'privacy_policy_meta_keywords',
+        
+
+            ));
+    }
+
+    public function savePrivacyPolicy(Request $request){
+
+        $request->validate([
+            'privacy_policy_title' => 'required|max:255',            
+            'privacy_policy_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920,max_height=915',
+           
+        ]);        
+        
+        GeneralHelper::setOption('privacy_policy_title',$request->privacy_policy_title);
+        GeneralHelper::setOption('privacy_policy_description',$request->privacy_policy_description);       
+        
+        GeneralHelper::setOption('privacy_policy_meta_title',$request->privacy_policy_meta_title);
+        GeneralHelper::setOption('privacy_policy_meta_description',$request->privacy_policy_meta_description);
+        GeneralHelper::setOption('privacy_policy_meta_keywords',$request->privacy_policy_meta_keywords);        
+
+        if(!empty($request->privacy_policy_header_image)){
+            
+            $url = FileHelper::uploadImage($request->file('privacy_policy_header_image'), 'privacy_policy_images');
+            
+            GeneralHelper::setOption('privacy_policy_header_image',$url);
+        }
+
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Settings Saved Successfully!',
+            
+        ]);
+    }
+
+    public function termsAndConditions(){
+
+        $terms_and_conditions_title = GeneralHelper::getOption('terms_and_conditions_title');
+        $terms_and_conditions_header_image = GeneralHelper::getOption('terms_and_conditions_header_image');        
+        $terms_and_conditions_description = GeneralHelper::getOption('terms_and_conditions_description');        
+       
+        $terms_and_conditions_meta_title = GeneralHelper::getOption('terms_and_conditions_meta_title');
+        $terms_and_conditions_meta_description = GeneralHelper::getOption('terms_and_conditions_meta_description');
+        $terms_and_conditions_meta_keywords = GeneralHelper::getOption('terms_and_conditions_meta_keywords');
+
+        return view('admin.cms_pages.terms_and_conditions.edit',compact(
+            'terms_and_conditions_title',
+            'terms_and_conditions_header_image',
+            'terms_and_conditions_description',
+                          
+            'terms_and_conditions_meta_title',
+            'terms_and_conditions_meta_description',
+            'terms_and_conditions_meta_keywords',
+        
+
+            ));
+    }
+
+    public function saveTermsAndConditions(Request $request){
+
+        $request->validate([
+            'terms_and_conditions_title' => 'required|max:255',            
+            'terms_and_conditions_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920,max_height=915',
+           
+        ]);        
+        
+        GeneralHelper::setOption('terms_and_conditions_title',$request->terms_and_conditions_title);
+        GeneralHelper::setOption('terms_and_conditions_description',$request->terms_and_conditions_description);       
+        
+        GeneralHelper::setOption('terms_and_conditions_meta_title',$request->terms_and_conditions_meta_title);
+        GeneralHelper::setOption('terms_and_conditions_meta_description',$request->terms_and_conditions_meta_description);
+        GeneralHelper::setOption('terms_and_conditions_meta_keywords',$request->terms_and_conditions_meta_keywords);        
+
+        if(!empty($request->terms_and_conditions_header_image)){
+            
+            $url = FileHelper::uploadImage($request->file('terms_and_conditions_header_image'), 'terms_and_conditions_images');
+            
+            GeneralHelper::setOption('terms_and_conditions_header_image',$url);
         }
 
 

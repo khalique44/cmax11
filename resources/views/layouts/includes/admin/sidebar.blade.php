@@ -37,7 +37,7 @@
                     <h4 class="panel-title">
                         <a data-bs-toggle="collapse" href="#collapse5" role="button" aria-expanded="false" aria-controls="collapse5">
                         
-                            <i class="fa fa-mountain-city"></i>
+                            <i class="fa fa-building"></i>
                             <strong>Projects</strong>
                         </a>
                     </h4>
@@ -77,7 +77,7 @@
                     <h4 class="panel-title">
                         <a data-bs-toggle="collapse" href="#collapse4" role="button" aria-expanded="false" aria-controls="collapse4">
                         
-                            <i class="fa fa-building-user"></i>
+                            <i class="fa fa-user"></i>
                             <strong>Builders</strong>
                         </a>
                     </h4>
@@ -111,6 +111,10 @@
                                 <li><a href="{{url('admin/cms-pages/about-us/')}}">About Us</a></li>
                                 <li><a href="{{url('admin/cms-pages/contact-us/')}}">Contact Us</a></li>
                                 <li><a href="{{url('admin/cms-pages/career/')}}">Career</a></li>
+                                <li><a href="{{url('admin/cms-pages/our-agents/')}}">Our Agents</a></li>
+                                <li><a href="{{url('admin/cms-pages/faqs/')}}">FAQs</a></li>
+                                <li><a href="{{url('admin/cms-pages/privacy-policy/')}}">Privacy Policy</a></li>
+                                <li><a href="{{url('admin/cms-pages/terms-and-conditions/')}}">Terms & Conditions</a></li>
                                 
                                 
                             </ul>
@@ -133,6 +137,26 @@
                             <ul>
                                 <li><a href="{{url('admin/blog/posts')}}">All Posts</a></li>
                                 <li><a href="{{url('admin/blog/posts/create')}}">Add New Post</a></li>                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-bs-toggle="collapse" href="#collapse8" role="button" aria-expanded="false" aria-controls="collapse8">
+                        
+                            <i class="fa fa-file"></i>
+                            <strong>Features</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse8" class="panel-collapse collapse {!! str_contains($url,'/features') ? 'show' : '' !!}">
+                    <div class="panel-body">
+                        <div class="accordions-content-link">
+                            <ul>
+                                <li><a href="{{url('admin/blog/posts')}}">All Features</a></li>
+                                <li><a href="{{url('admin/features/create')}}">Add New Post</a></li>                                
                             </ul>
                         </div>
                     </div>

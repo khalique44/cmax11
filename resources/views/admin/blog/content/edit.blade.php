@@ -72,9 +72,9 @@
 
                                         @if(!empty($record->file_url))
                                         <div class="m-2">
-                                            <a href="{!! url('public') !!}/{{$record->file_url}}" target="_blank" class="available-image-area">
+                                            <a href="{{asset($record->file_url)}}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$record->file_url}}" class="logo" alt="Logo" width="150">
+                                                <img src="{{asset($record->file_url)}}" class="logo" alt="Logo" width="150">
                                                 
                                             </a>
                                         </div>
@@ -91,9 +91,9 @@
 
                                         @if(!empty($record->header_image))
                                         <div class="m-2">
-                                            <a href="{!! url('public') !!}/{{$record->header_image}}" target="_blank" class="available-image-area">
+                                            <a href="{{asset($record->header_image)}}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$record->header_image}}" class="logo" alt="Logo" width="150">
+                                                <img src="{{asset($record->header_image)}}" class="logo" alt="Logo" width="150">
                                                 
                                             </a>
                                         </div>

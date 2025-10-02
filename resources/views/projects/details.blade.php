@@ -396,12 +396,12 @@
                                     <div class="col-md-4">
                                             
                                         @php 
-                                            $builderImages = $project->builder->getMedia('images');
-                                            $firstImage = $builderImages->first();
+                                            $builder_logo = $project->builder->builder_logo ?? asset('assets/img/no-image-1080x1080.png');
+                                            
 
                                         @endphp
                                         <div class="display-builder-logo">
-                                            <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="Builder Image" class="img-fluid mx-auto d-block" 
+                                            <img src="{{ asset($builder_logo) }}" alt="Builder Image" class="img-fluid mx-auto d-block" 
     style="max-width: 180px;">  
                                         </div>             
                                        

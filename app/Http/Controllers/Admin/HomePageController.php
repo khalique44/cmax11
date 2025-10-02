@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\GeneralHelper;
+use App\Http\Helpers\FileHelper;
 
 class HomePageController extends Controller
 {
@@ -83,56 +84,36 @@ class HomePageController extends Controller
             
         ]);
 
-        if(!empty($request->first_box_offer_image)){
-            $folderName = 'home_section_project_types';
-            $fileName = pathinfo($request->first_box_offer_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->first_box_offer_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->first_box_offer_image->move(public_path('assets/'.$folderName), $fullFileName);
-            $first_box_offer_image = 'assets/'.$folderName.'/'.$fullFileName;
-            GeneralHelper::setOption('first_box_offer_image',$first_box_offer_image);
+        if($request->hasFile('first_box_offer_image')){           
+
+            $fileUrl = FileHelper::uploadImage($request->file('first_box_offer_image'), 'home_section_project_types');           
+            GeneralHelper::setOption('first_box_offer_image',$fileUrl);
         }
 
-        if(!empty($request->second_box_offer_image)){
-            $folderName = 'home_section_project_types';
-            $fileName = pathinfo($request->second_box_offer_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->second_box_offer_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->second_box_offer_image->move(public_path('assets/'.$folderName), $fullFileName);
-            $second_box_offer_image = 'assets/'.$folderName.'/'.$fullFileName;
-            GeneralHelper::setOption('second_box_offer_image',$second_box_offer_image);
+        if($request->hasFile('second_box_offer_image')){           
+
+            $fileUrl = FileHelper::uploadImage($request->file('second_box_offer_image'), 'home_section_project_types');           
+            GeneralHelper::setOption('second_box_offer_image',$fileUrl);
         }
 
-        if(!empty($request->third_box_offer_image)){
-            $folderName = 'home_section_project_types';
-            $fileName = pathinfo($request->third_box_offer_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->third_box_offer_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->third_box_offer_image->move(public_path('assets/'.$folderName), $fullFileName);
-            $third_box_offer_image = 'assets/'.$folderName.'/'.$fullFileName;
-            GeneralHelper::setOption('third_box_offer_image',$third_box_offer_image);
+        if($request->hasFile('third_box_offer_image')){           
+
+            $fileUrl = FileHelper::uploadImage($request->file('third_box_offer_image'), 'home_section_project_types');           
+            GeneralHelper::setOption('third_box_offer_image',$fileUrl);
         }
 
+        if($request->hasFile('fourth_box_offer_image')){           
 
-        if(!empty($request->fourth_box_offer_image)){
-            $folderName = 'home_section_project_types';
-            $fileName = pathinfo($request->fourth_box_offer_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->fourth_box_offer_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->fourth_box_offer_image->move(public_path('assets/'.$folderName), $fullFileName);
-            $fourth_box_offer_image = 'assets/'.$folderName.'/'.$fullFileName;
-            GeneralHelper::setOption('fourth_box_offer_image',$fourth_box_offer_image);
+            $fileUrl = FileHelper::uploadImage($request->file('fourth_box_offer_image'), 'home_section_project_types');           
+            GeneralHelper::setOption('fourth_box_offer_image',$fileUrl);
         }
-
-        
+       
         
         GeneralHelper::setOption('home_section_project_type',$request->home_section_project_type);
         GeneralHelper::setOption('first_box_offer',$request->first_box_offer);
         GeneralHelper::setOption('second_box_offer',$request->second_box_offer);
         GeneralHelper::setOption('third_box_offer',$request->third_box_offer);
-        GeneralHelper::setOption('fourth_box_offer',$request->fourth_box_offer);
-
-        
+        GeneralHelper::setOption('fourth_box_offer',$request->fourth_box_offer);        
 
         return redirect('/admin/home-page/project-types')->with('success', 'Data saved successfully!');
     }

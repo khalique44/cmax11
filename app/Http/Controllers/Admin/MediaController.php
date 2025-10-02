@@ -36,7 +36,7 @@ class MediaController extends Controller
 
         return response()->json([
             'id' => $media->id,
-            'url' => $media->getUrl('thumb'),
+            'url' => $media->getUrl('webp'),
             'path' => $media->getPath(), // important for revert!
             'name' => $media->name, // important for revert!
             'size' => $media->size, // important for revert!

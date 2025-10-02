@@ -11,6 +11,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use App\Http\Helpers\GeneralHelper;
+use Carbon\Carbon;
+
 
 class Project extends Model implements HasMedia
 {
@@ -49,7 +51,12 @@ class Project extends Model implements HasMedia
 
     public static function getAllProjects(){
 
-		return Project::with('offers','floorPlan', 'media')->latest()->get();
+		$projects = Project::with('offers', 'floorPlan', 'media')
+		->orderByRaw("CASE WHEN refreshed_at >= ? THEN 0 ELSE 1 END", [now()->subMonth()])
+		->orderBy('position', 'asc')
+		->orderBy('created_at', 'desc')
+		->get();
+		return $projects;
 	}
 
 	public function offers()
@@ -164,5 +171,16 @@ class Project extends Model implements HasMedia
 
 	public function featuredImage(){
 		return $this->belongsTo(\Spatie\MediaLibrary\MediaCollections\Models\Media::class, 'featured_media_id');
+	}
+
+	public function getIsRefreshExpiredAttribute()
+	{
+		return $this->refreshed_at?->lt(now()->subMonth());
+	}
+
+	public function getRefreshDaysRemainingAttribute()
+	{
+		$expiryDate = $this->refreshed_at?->copy()->addMonth();
+		return floor(now()->diffInDays($expiryDate, false));
 	}
 }

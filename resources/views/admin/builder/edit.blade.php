@@ -23,7 +23,7 @@
                     <div class="col-xs-12">
                         <div class="">
                             
-                            <form class="has-filepond" method="POST"  enctype="multipart/form-data" id="builder-form-update">
+                            <form class="" method="POST"  enctype="multipart/form-data" id="builder-form-update">
                                  {{csrf_field()}}
                                 @method('PUT')
                                 <input type="hidden" name="builder_id" value="{{ $record->id }}">
@@ -62,49 +62,16 @@
                                 <div class="col-xs-12 mb-3 mt-3">   
                                     <div class="form-group">
                                         <!-- File Upload -->
-                                        <div class="pond-container">
-                                            <label>Upload Images</label>
-                                            <input type="file" name="filepond[]" id="filepond" multiple class="filepond">
-                                            <input type="hidden" id="uploaded-files" name="uploaded_files[]" />
-                                            <input type="hidden" id="deleted-files" name="deleted_files[]" />
-                                        </div>
-
-                                        <div class="uploaded-images file-pond-preview-wrapper" id="uploaded-preview" id="uploaded-preview" data-upload-type="default" data-allow-reorder="true" data-max-files="10" data-collection="default" data-preview="uploaded-preview">
-                                            @if(isset($record))
-                                                @foreach($record->getMedia('images') as $media)
-                                                <div class="preview-box remove-media" data-media-id="{{ $media->id }}">
-                                                    <div>
-                                                        <img src="{{ str_replace('storage','storage/app/public',$media->getUrl()) }}" alt="uploaded" style="width: 150px;">
-                                                    </div>
-                                                    <div>
-                                                        <span title="Remove" class="remove-media " >Remove</span>
-                                                    </div>
-                                                </div>
-                                                @endforeach
-                                            @endif
-
-
-                                            @php 
-                                                $existingImages = $record->getMedia('images')->map(function ($media) {
-                                                    return [
-                                                        'source' => $media->id,
-                                                        'options' => [
-                                                            'type' => 'local',
-                                                            'file' => [
-                                                                'name' => $media->file_name,
-                                                                'size' => $media->size,
-                                                                'type' => $media->mime_type,
-                                                            ],
-                                                            'metadata' => [
-                                                                'poster' => $media->getUrl() // or getFullUrl()
-                                                            ]
-                                                        ]
-                                                    ];
-                                                });
-                                            @endphp
-
+                                        
+                                        <label>Upload Logo</label>
+                                        <input type="file" name="builder_logo_file" id="builder_logo"  class="form-control">
                                             
-                                        </div>
+                                        @if(!empty($record->builder_logo))
+                                            <a href="{{asset($record->builder_logo)}}" target="_blank">
+                                                <img src="{{asset($record->builder_logo)}}" class="logo" alt="Logo" width="100px"></a>
+                                        @endif
+
+
                                         
                                     </div>
 

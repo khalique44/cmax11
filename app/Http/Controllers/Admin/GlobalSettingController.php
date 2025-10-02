@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\GeneralHelper;
+use App\Http\Helpers\FileHelper;
 
 class GlobalSettingController extends Controller
 {
@@ -96,22 +97,12 @@ class GlobalSettingController extends Controller
         
 
         if(!empty($request->header_logo)){
-            $folderName = 'header_logo';
-            $fileName = pathinfo($request->header_logo->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->header_logo->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->header_logo->move(public_path('assets/'.$folderName), $fullFileName);
-            $header_logo = 'assets/'.$folderName.'/'.$fullFileName;
+            $header_logo = FileHelper::uploadImage($request->file('header_logo'), 'header_logo');
             GeneralHelper::setOption('header_logo',$header_logo);
         }
 
         if(!empty($request->footer_logo)){
-            $folderName = 'footer_logo';
-            $fileName = pathinfo($request->footer_logo->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->footer_logo->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->footer_logo->move(public_path('assets/'.$folderName), $fullFileName);
-            $footer_logo = 'assets/'.$folderName.'/'.$fullFileName;
+            $footer_logo = FileHelper::uploadImage($request->file('footer_logo'), 'footer_logo');
             GeneralHelper::setOption('footer_logo',$footer_logo);
         }
         

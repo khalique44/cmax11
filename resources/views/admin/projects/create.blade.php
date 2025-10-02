@@ -604,7 +604,9 @@
                                                 @foreach($project->getMedia('payment_plan') as $media)
                                                 <div class="preview-box remove-media" data-media-id="{{ $media->id }}">
                                                     <div class="media-thumb">
-                                                        <img src="{{ asset($media->getUrl()) }}" alt="uploaded" >
+                                                        <a href="{{ asset($media->getUrl('webp')) }}" target="_blank" data-fancybox="payment-preview">
+                                                            <img src="{{ asset($media->getUrl()) }}" alt="uploaded" >
+                                                        </a>
                                                         <div class="remove-media">
                                                             <span title="Remove" class="remove-media " >Remove</span>
                                                         </div>
@@ -653,7 +655,9 @@
                                                 @foreach($project->getMedia('project_progress') as $media)
                                                 <div class="preview-box remove-media" data-media-id="{{ $media->id }}">
                                                     <div class="media-thumb">
-                                                        <img src="{{ asset($media->getUrl()) }}" alt="uploaded" >
+                                                        <a href="{{ asset($media->getUrl('webp')) }}" target="_blank" data-fancybox="project-progress-preview">
+                                                            <img src="{{ asset($media->getUrl('webp')) }}" alt="uploaded" >
+                                                        </a>
                                                         <div class="remove-media">
                                                             <span title="Remove" class="remove-media " >Remove</span>
                                                         </div>
@@ -697,12 +701,14 @@
                                         <input type="file" name="project_gallery[]" multiple class="form-control filepond"  >
                                         <input type="hidden" id="uploaded-files" name="uploaded_files[]" data-max-files="10" />
                                             <input type="hidden" id="deleted-files" name="deleted_files[]" />
-                                        <div class="uploaded-images file-pond-preview-wrapper" id="gallery-preview" data-upload-type="gallery" data-allow-reorder="true"   data-preview="gallery-preview" data-collection="project_gallery">
+                                        <div class="uploaded-images file-pond-preview-wrapper gallery" id="gallery-preview" data-upload-type="gallery" data-allow-reorder="true"   data-preview="gallery-preview" data-collection="project_gallery">
                                             @if(isset($project))
                                                 @foreach($project->getMedia('project_gallery') as $media)
                                                 <div class="preview-box remove-media" data-media-id="{{ $media->id }}">
                                                     <div class="media-thumb">
-                                                        <img src="{{ asset($media->getUrl()) }}" alt="uploaded" style="">
+                                                        <a href="{{ asset($media->getUrl('webp')) }}" target="_blank" data-fancybox="gallery-preview" >
+                                                            <img src="{{ asset($media->getUrl('webp')) }}" alt="uploaded" style="">
+                                                        </a>
                                                         <label class="form-label featured-image-checkbox-label"><input type="radio" name="featured_image" value="{{ $media->id }}" @checked($project->featured_media_id === $media->id)> Set Featured</label>
                                                         <div class="remove-media">
                                                             <span title="Remove" class="remove-media " >Remove</span>

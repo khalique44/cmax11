@@ -55,9 +55,9 @@
                                 @if(!empty($first_box_offer_image))
                                     <div class="col-md-2">                       
                                         <div class="form-group">
-                                            <a href="{!! url('public') !!}/{{$first_box_offer_image}}" target="_blank" class="available-image-area">
+                                            <a href="{{ asset($first_box_offer_image) }}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$first_box_offer_image}}" class="header-image" title="Header Image" alt="" width="50%">                                                    
+                                                <img src="{{ asset($first_box_offer_image) }}" class="header-image" title="Header Image" alt="" width="50%">                                                    
                                             </a>                                          
                                             
                                         </div>
@@ -90,9 +90,9 @@
                                 @if(!empty($second_box_offer_image))
                                     <div class="col-md-2">                       
                                         <div class="form-group">
-                                            <a href="{!! url('public') !!}/{{$second_box_offer_image}}" target="_blank" class="available-image-area">
+                                            <a href="{{ asset($second_box_offer_image) }}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$second_box_offer_image}}" class="header-image" title="Header Image" alt="" width="50%">                                                    
+                                                <img src="{{ asset($second_box_offer_image) }}" class="header-image" title="Header Image" alt="" width="50%">                                                    
                                             </a>                                          
                                             
                                         </div>
@@ -125,9 +125,9 @@
                                 @if(!empty($third_box_offer_image))
                                     <div class="col-md-2">                       
                                         <div class="form-group">
-                                            <a href="{!! url('public') !!}/{{$third_box_offer_image}}" target="_blank" class="available-image-area">
+                                            <a href="{{ asset($third_box_offer_image) }}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$third_box_offer_image}}" class="header-image" title="Header Image" alt="" width="50%">                                                    
+                                                <img src="{{ asset($third_box_offer_image) }}" class="header-image" title="Header Image" alt="" width="50%">                                                    
                                             </a>                                          
                                             
                                         </div>
@@ -160,9 +160,9 @@
                                 @if(!empty($fourth_box_offer_image))
                                     <div class="col-md-2">                       
                                         <div class="form-group">
-                                            <a href="{!! url('public') !!}/{{$fourth_box_offer_image}}" target="_blank" class="available-image-area">
+                                            <a href="{{ asset($fourth_box_offer_image) }}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$fourth_box_offer_image}}" class="header-image" title="Header Image" alt="" width="50%">                                                    
+                                                <img src="{{ asset($fourth_box_offer_image) }}" class="header-image" title="Header Image" alt="" width="50%">                                                    
                                             </a>                                          
                                             
                                         </div>

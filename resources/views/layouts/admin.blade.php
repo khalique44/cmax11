@@ -5,7 +5,7 @@
     <title>Cmax | Admin </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="admin_url" content="{{ url('admin') }}">
-    <link href="{!! asset('assets/fontawesome/css/all.min.css') !!}" rel="stylesheet">
+    <link href="{!! asset('assets/css/font-awesome-4.6.3.css') !!}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{!! asset('assets/css/animate.css')!!}" rel="stylesheet">
     <link href="{!! asset('assets/css/admin-style.css') !!}" rel="stylesheet">
@@ -36,7 +36,12 @@
     <!-- Include Google Places API JS -->
 
     <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_map_api') }}&libraries=places"></script>
-    
+    <!-- Fancybox CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+
+<!-- Fancybox JS -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
 
     <style>
         .number_arrow::-webkit-inner-spin-button,
@@ -113,7 +118,7 @@
             <div class="logo">
                 <div  class="logo-image">
                     @php $header_logo = App\Http\Helpers\GeneralHelper::getOption('header_logo') @endphp
-                    <a href="{!! route('admin.dashboard') !!}" style="background:none; height: auto;"><img src="@if(!empty($header_logo))  {{ asset($header_logo) }} @else {!! asset('assets/images/logo-white.png') !!} @endif" class="logo" alt="Logo"></a>
+                    <a href="{!! route('home') !!}" target="_blank" style="background:none; height: auto;"><img src="@if(!empty($header_logo))  {{ asset($header_logo) }} @else {!! asset('assets/images/logo-white.png') !!} @endif" class="logo" alt="Logo"></a>
                 </div>
                 
             </div>

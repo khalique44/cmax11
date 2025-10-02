@@ -35,11 +35,6 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 
-
-
-
-
-
 Route::get('/routecache', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
 });
@@ -53,53 +48,19 @@ Route::get('resend-verification-mail/{token}', [HomeController::class, 'resendMa
 Route::get('waiting-for-approval/{token}', [UsersController::class, 'waitingForApprovalProUser'])->name('waiting-for-approval');
 
 
-Route::group(['namespace'=>'Auth'],function (){
-
-    
-    Route::get('login',  [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('login',  [LoginController::class, 'login']);
-    Auth::routes(['register' => false]);
-    Auth::routes(['password/reset' => false]);
-    
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-    Route::post('logout',  [LoginController::class, 'logout'])->name('logout');
-
-    Route::get('password/reset', function (){
-            return redirect('/login');
-    });
-    //Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    //Route::get('password/reset/{token}/{email}', 'ResetPasswordController@showResetForm')->name('password.reset');
-    //Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');   
-
-});
-
-//Route::get('email-verification/{token}', 'UsersController@verifyUser')->name('email_verification');
 
 
-Route::group(['middleware' => ['auth']], function() {
 
-    Route::group(['middleware' => ['verified']], function() {       
-
-        Route::post('change-password','UsersController@changePassword')->name('change_password');
-        Route::post('update-address','UsersController@updateAddress')->name('update_address');
-        
-    });
-    Route::get('verify-email','UsersController@verifyEmail')->name('verify_email');
-    Route::get('resend-account-verify-email','UsersController@resendEmailVerifyMail')->name('resend_account_verify_email');
-    Route::get('dashboard','UsersController@dashboard')->name('dashboard');   
-    
-   
-});
 
 Route::group(array('prefix'=>'admin'), function (){
 
     //Route::get('/','AdminController@welcome')->name('admin.welcome');
-
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login',[LoginController::class, 'login']);
     Route::get('logout',[LoginController::class, 'logout'])->name('admin.logout');
     //https://stackoverflow.com/questions/77101604/target-class-admin-does-not-exist
     Route::group(array('middleware'=>'admin'), function (){
+       
         Route::get('dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('dashboard/get_users',[AdminController::class, 'getUsers'])->name('admin.dashboard.get_users');
         Route::get('dashboard/{id}',[AdminController::class, 'showDashboard'])->name('admin.showDashboard');		
@@ -107,7 +68,7 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::get('change-password',[ResetPasswordController::class, 'changePassword']);
         Route::post('change-password',[ResetPasswordController::class, 'updatePassword']);
 
-        Route::group(['prefix'=>'blog','namespace'=>'Blog'], function (){
+        Route::group(['prefix'=>'blog'], function (){
             Route::resource('general_settings', GeneralSettingController::class);
             Route::resource('posts', PostController::class);
             Route::post('posts/update_position',[PostController::class, 'updatePosition']);
@@ -194,13 +155,22 @@ Route::group(array('prefix'=>'admin'), function (){
         });
 
 
-        Route::get('cms-pages/about-us', [CmsPage::class,'aboutUs'])->name('cmspages.aboutus');
-        Route::get('cms-pages/career', [CmsPage::class,'career'])->name('cmspages.career');
-        Route::get('cms-pages/contact-us', [CmsPage::class,'contactUs'])->name('cmspages.contactus');
-        Route::post('cms-pages/save-about-us',[CmsPage::class,'saveAboutUs'])->name('cmspages.save-aboutus');
-        Route::post('cms-pages/save-career', [CmsPage::class,'saveCareer'])->name('cmspages.save-career');
+        Route::get('cms-pages/about-us', [AdminCmsPage::class,'aboutUs'])->name('cmspages.aboutus');
+        Route::get('cms-pages/career', [AdminCmsPage::class,'career'])->name('cmspages.career');
+        Route::get('cms-pages/contact-us', [AdminCmsPage::class,'contactUs'])->name('cmspages.contactus');
+        Route::get('cms-pages/our-agents', [AdminCmsPage::class,'ourAgents'])->name('cmspages.our_agents');
+        Route::get('cms-pages/faqs', [AdminCmsPage::class,'faqs'])->name('cmspages.faqs');
+        Route::get('cms-pages/privay-policy', [AdminCmsPage::class,'privacyPolicy'])->name('cmspages.privay-policy');
+        Route::get('cms-pages/terms-and-conditions', [AdminCmsPage::class,'termsAndConditions'])->name('cmspages.terms_and_conditions');
+        Route::post('cms-pages/save-about-us',[AdminCmsPage::class,'saveAboutUs'])->name('cmspages.save-aboutus');
+        Route::post('cms-pages/save-career', [AdminCmsPage::class,'saveCareer'])->name('cmspages.save-career');
+        Route::post('cms-pages/save-contact-us', [AdminCmsPage::class,'saveContactUs'])->name('cmspages.save-contactus');
         Route::post('get-sub-area/{id}', [ProjectController::class,'getSubAreas'])->name('project.get-sub-area');
-        Route::post('cms-pages/save-contact-us', [ProjectController::class,'saveContactUs'])->name('cmspages.save-contactus');
+        Route::post('cms-pages/save-our-agents', [AdminCmsPage::class,'saveOurAgents'])->name('cmspages.save-our-agents');
+        Route::post('cms-pages/save-faqs', [AdminCmsPage::class,'saveFaqs'])->name('cmspages.save-faqs');
+        Route::post('cms-pages/save-privacy-policy', [AdminCmsPage::class,'savePrivacyPolicy'])->name('cmspages.save-privacy-policy');
+        Route::post('cms-pages/save-terms-and-conditions', [AdminCmsPage::class,'saveTermsAndConditions'])->name('cmspages.save-terms-and-conditions');
+        
         Route::resource('testimonials', TestimonialController::class);
         Route::get('project/update-status', [ProjectController::class,'updateStatus'])->name('project.update-status');
         Route::post('project/update-position', [ProjectController::class,'updatePosition'])->name('project.update-position');
@@ -234,7 +204,8 @@ Route::get('/search-area', [HomeController::class, 'searchArea'])->name('search-
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.list');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('show');
 
-Route::get('/projects', [FrontProjectController::class, 'index'])->name('allprojects');
+Route::get('/project', [FrontProjectController::class, 'searchResults'])->name('allprojects');
+Route::get('/projects', [FrontProjectController::class, 'searchResults'])->name('allprojects');
 Route::get('/projects/search-results', [FrontProjectController::class, 'searchResults'])->name('search-results');
 Route::get('/project/{slug}',  [FrontProjectController::class, 'show'])->name('project.show');
 Route::get('/about-us', [CmsPage::class, 'showAboutUs'])->name('aboutus.show');

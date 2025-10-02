@@ -33,7 +33,7 @@
 
 <!-- begin:: Page -->
 <div class="kt-grid kt-grid--ver kt-grid--root">
-    <div class="kt-grid__item kt-grid__item--fluid kt-grid  kt-error-v6" style="background-image: url('/public/assets/images/bg7.jpg');">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid  kt-error-v6" style="background-image: asset('assets/images/bg7.jpg');">
         <div class="kt-error_container">
             <div class="kt-error_subtitle kt-font-light">
                 <h1 class="kt-error-v1__number">404</h1>

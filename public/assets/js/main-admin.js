@@ -463,7 +463,15 @@ FilePond.setOptions({
                             wrapper.dataset.mediaId = data.id;
 
                             const img = document.createElement('img');
-                            img.src = data.url.replace("storage", "storage/app/public");
+                            img.src = data.url;
+
+                            const link = document.createElement('a');
+                            link.href = data.url;
+                            link.target = "_blank"; // opens in new tab
+                            link.setAttribute("data-fancybox", preview_id);
+                            link.appendChild(img);
+
+                            
 
                             const removeBtn = document.createElement('span');
                             removeBtn.classList.add('remove-media');
@@ -477,7 +485,7 @@ FilePond.setOptions({
 
                             const thumb = document.createElement('div');
                             thumb.classList.add('media-thumb');
-                            thumb.appendChild(img);
+                            thumb.appendChild(link);
                             console.log('preview_id:',preview_id)
                             if(preview_id == 'gallery-preview'){
                                 // Create radio input
@@ -840,4 +848,48 @@ $(document).on("change", "[name='featured_image']", function () {
         hideAjaxLoader();
     })
     .catch(err => console.error('❌ Error:', err)); */
+});
+
+$(document).on('click', 'a.refresh_project', function(){
+    var project_id = $(this).data('project_id');
+
+    Swal.fire({
+        title: 'Are you sure you want to refresh this project?',
+        text: "The porject will be refrehsed for one month period.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#146c43',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, Refresh it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if(typeof project_id === 'number' && !isNaN(project_id) && project_id !== null){
+                
+                document.location=$('meta[name="admin_url"]').attr('content')+"/projects/"+project_id+"/refresh";
+            }
+        }
+    });
+    
+});
+
+$(document).on('click', 'a.remove_refresh_project', function(){
+    var project_id = $(this).data('project_id');
+
+    Swal.fire({
+        title: 'Are you sure you want to clear this project from refreshed list?',
+        text: "The porject will be clear from refreshed list.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, Clear from Refresh!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if(typeof project_id === 'number' && !isNaN(project_id) && project_id !== null){
+                
+                document.location=$('meta[name="admin_url"]').attr('content')+"/projects/"+project_id+"/refresh";
+            }
+        }
+    });
+    
 });
