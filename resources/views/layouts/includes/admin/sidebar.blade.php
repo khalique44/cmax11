@@ -155,7 +155,7 @@
                     <div class="panel-body">
                         <div class="accordions-content-link">
                             <ul>
-                                <li><a href="{{url('admin/blog/posts')}}">All Features</a></li>
+                                <li><a href="{{url('admin/features')}}">All Features</a></li>
                                 <li><a href="{{url('admin/features/create')}}">Add New Post</a></li>                                
                             </ul>
                         </div>
