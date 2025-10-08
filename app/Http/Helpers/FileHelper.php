@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Spatie\ImageOptimizer\OptimizerChainFactory;
+use Illuminate\Support\Str;
 
 class FileHelper
 {
@@ -81,5 +82,82 @@ class FileHelper
         }
 
         return Storage::url($path);
+    }
+
+     /**
+     * Upload only non-image documents (CSV, Excel, PDF)
+     * Stores in storage/app/public/{folder} by default (disk = 'public')
+     *
+     * @param UploadedFile $file
+     * @param string $folder  // default 'document' (will be storage/app/public/document)
+     * @param string $disk    // default 'public' (change to 'local' if you want storage/app/{folder})
+     * @return string         // stored path (e.g. document/filename.ext)
+     * @throws \Exception
+     */
+    public static function uploadDocument($file, string $folder = 'document', string $disk = 'public'): string
+    {
+        $allowedExtensions = ['csv', 'xls', 'xlsx', 'pdf'];
+        $allowedMimeTypes = [
+            'text/csv',
+            'text/plain', // some CSVs upload as text/plain
+            'application/vnd.ms-excel', // xls
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // xlsx
+            'application/pdf',
+            'application/octet-stream', // fallback for some clients
+        ];
+
+        $extension = strtolower($file->getClientOriginalExtension());
+        $clientMime = $file->getClientMimeType() ?? $file->getMimeType();
+
+        if (!in_array($extension, $allowedExtensions) || !in_array($clientMime, $allowedMimeTypes)) {
+           throw new \Exception("Invalid file type. Only CSV, Excel (xls/xlsx) and PDF files are allowed.");
+        }
+
+        // build unique file name
+        $fileName = now()->format('YmdHis') . '_' . Str::random(8) . '.' . $extension;
+
+        
+
+        // store using Laravel Storage (disk 'public' -> storage/app/public)
+        $storedPath = $file->storeAs($folder, $fileName, $disk); // returns "document/filename.ext"       
+
+        if (!$storedPath) {
+            throw new \Exception("Failed to store the file.");
+        }
+
+        return 'storage/'.$storedPath;
+    }
+
+    /**
+     * Delete a stored file (works with Storage disk)
+     *
+     * @param string|null $path e.g. 'document/filename.pdf'
+     * @param string $disk
+     * @return bool
+     */
+    public static function deleteFile(?string $path, string $disk = 'public'): bool
+    {
+        
+        if (!$path) return false;
+        $path = str_replace("storage/","",$path);
+        return Storage::disk($disk)->delete($path);
+    }
+
+    /**
+     * Download a stored file (returns a Response for controller)
+     *
+     * @param string $path e.g. 'document/filename.pdf'
+     * @param string $disk
+     * @param string|null $downloadName optional friendly file name for download
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
+    public static function downloadFile(string $path, string $disk = 'public', ?string $downloadName = null)
+    {
+        $path = str_replace("storage/","",$path);
+        if (!$path || !Storage::disk($disk)->exists($path)) {
+            abort(404, 'File not found.');
+        }
+
+        return Storage::disk($disk)->download($path, $downloadName ?? basename($path));
     }
 }

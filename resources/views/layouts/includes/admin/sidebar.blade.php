@@ -161,6 +161,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-bs-toggle="collapse" href="#collapse9" role="button" aria-expanded="false" aria-controls="collapse9">
+                        
+                            <i class="fa fa-file"></i>
+                            <strong>Surveys</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse9" class="panel-collapse collapse {!! str_contains($url,'/surveys') ? 'show' : '' !!}">
+                    <div class="panel-body">
+                        <div class="accordions-content-link">
+                            <ul>
+                                <li><a href="{{url('admin/surveys')}}">All Surveys</a></li>
+                                <li><a href="{{url('admin/surveys/create')}}">Add New Survey</a></li>                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>    
                     
 
@@ -192,8 +212,8 @@
                                 
                                 <li><a href="{{url('admin/users')}}">Users</a></li>
                                 <li><a href="{{url('admin/global-settings')}}">Global Settings</a></li>
-                                <li><a href="{{url('admin/logs')}}">Logs</a></li>
-                                <li><a href="{{url('admin/global-styling')}}">Styling</a></li>
+                                <!-- <li><a href="{{url('admin/logs')}}">Logs</a></li>
+                                <li><a href="{{url('admin/global-styling')}}">Styling</a></li> -->
                                 <li><a href="{{url('admin/change-password')}}">Change Admin Password</a></li>
                             </ul>
                         </div>

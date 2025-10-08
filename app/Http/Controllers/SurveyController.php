@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Helpers\GeneralHelper;
+use App\Http\Helpers\FileHelper;
 use Illuminate\Http\Request;
+use App\AreaSurvey;
 
 class SurveyController extends Controller
 {
@@ -82,5 +84,12 @@ class SurveyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function downloadDocument($id)
+    {
+        $record = AreaSurvey::findOrFail($id);       
+        
+        return FileHelper::downloadFile($record->file_url);
     }
 }

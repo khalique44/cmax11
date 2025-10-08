@@ -2776,3 +2776,14 @@ img.header-image {
     width: 100px;
     height: auto;
 }
+
+div#suggestions {
+    height: 244px;
+    overflow: auto;
+   width: 295px;
+}
+div#suggestions .suggestion-item {
+    font-size: 14px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}

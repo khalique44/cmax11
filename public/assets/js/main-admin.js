@@ -162,10 +162,6 @@ function successCallback(response){
 }
 
 
-
-
-
-
 /*-----CMAX----*/
 
 $(document).on("submit","form#builder-form",function(e){
@@ -231,6 +227,53 @@ function cmsSuccessCallback(response){
             displayMsg(msgArea,response.message,msgType);           
 
         },1000);
+    }else{
+
+         displayMsg(msgArea,response.message,msgType);
+    }
+    
+}
+
+
+$(document).on("submit","form#area-survey-form",function(e){
+    e.preventDefault();    
+    var frm = $('form#area-survey-form');
+    var formData = new FormData(frm[0]);
+    ajaxPostRequest("/surveys",formData,surveySuccessCallback,ajaxErrorCallback,true);    
+
+});
+
+$(document).on("submit","form#survey-form-update",function(e){
+    e.preventDefault();    
+    var survey_id = $('input[name="survey_id"]').val();
+    //var formData = $(this).serializeArray();
+    var frm = $('form#survey-form-update');
+    var formData = new FormData(frm[0]);
+    ajaxPostRequest("/surveys/"+survey_id,formData,surveySuccessCallback,ajaxErrorCallback,true);    
+
+});
+
+function surveySuccessCallback(response){
+
+    var  msgArea = $('.ajax-msg');
+    var msgType = 'error';
+
+    if(response.status && response.status == 'success'){
+        msgType = 'success'; 
+        displayMsg(msgArea,response.message,msgType);
+            if(response.action == 'created')  {
+                
+                $("form#area-survey-form")[0].reset();            
+                setTimeout(function(){ 
+                    document.location = $('meta[name="admin_url"]').attr('content')+"/surveys";
+                },1000);
+            }else{
+                setTimeout(function(){ 
+                    location.reload();
+                },1000);
+            }            
+            
+            
     }else{
 
          displayMsg(msgArea,response.message,msgType);
@@ -344,8 +387,10 @@ function ajaxErrorCallback(response){
         displayMsg(msgArea,html,msgType);         
         
     }else{
+        
+        var msg = (response.responseJSON.message) ?response.responseJSON.message : 'Server Error!';
 
-        displayMsg(msgArea,'Server Error!',msgType);
+        displayMsg(msgArea,msg,msgType);
     }
 }
 
@@ -892,4 +937,119 @@ $(document).on('click', 'a.remove_refresh_project', function(){
         }
     });
     
+});
+
+$('#search-area').on('keyup', function(e){
+    e.preventDefault(); 
+    var query = $(this).val();
+    var data = {query:query};
+
+    //ajaxPostRequest("/search-area",data,searchAreaCallback,ajaxErrorCallback,true);
+    $('#suggestions').html('<i class="fa fa-spinner fa-spin"></i>').show();
+    var formData = {query:query};
+    //showAjaxLoader();
+    $.ajax({
+        url: "/search-area",
+        type: "GET",
+        data: formData,
+        dataType: "json",
+        //contentType: false,
+        //processData: false, 
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        success: function(data) {
+            searchAreaCallback(data);
+            //hideAjaxLoader();
+        }
+    });
+});
+
+// When clicking a suggestion
+$(document).on('click', '.suggestion-item', function(){
+    $('#search-area').val($(this).text());
+    $('#suggestions').hide();
+});
+
+// Hide if clicked outside
+$(document).click(function(e) {
+    if (!$(e.target).closest('#search-area, #suggestions').length) {
+        $('#suggestions').hide();
+    }
+});
+
+function searchAreaCallback(response){
+    var  msgArea = $('.ajax-msg');
+    var msgType = 'error';
+    
+        msgType = 'success'; 
+
+        let suggestions = '';
+        response.forEach(function(item){
+            suggestions += '<div class="suggestion-item" style="padding:5px; cursor:pointer; font-size:11px;">'+item+'</div>';
+        });
+        $('#suggestions').html(suggestions).show();
+    
+
+    if(typeof response.errors !== 'undefined'){
+        $(response.errors).each(function(i,o){
+             displayMsg(msgArea,o,msgType);
+        });
+    }else{
+        //displayMsg(msgArea,response.msg,msgType);
+    }
+}
+
+$(document).on('click', 'a.remove_file', function(){
+    var id = $(this).data('id');
+    var path = $(this).data('path');
+
+    Swal.fire({
+        title: 'Are you sure you want to remove this file?',
+        text: "The file will be removed from disk.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, Remove!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if(path !== null){
+                
+                document.location=path;
+            }
+        }
+    });
+    
+});
+
+$(function(){
+    $('#datepicker').datepicker({
+        todayHighlight:true,
+        startDate:'now',
+        format: "yyyy-mm-dd",
+        default: 'yyyy-mm-dd',
+        autoclose: true
+        /*beforeShowDay: function(date){                            
+            var formattedDate = formatDate(date);                            
+            if ($.inArray(formattedDate.toString(), available_Dates) == -1){
+                return {
+                    enabled : false
+                };
+            }
+            return;
+        }*/
+    });
+
+    var existingDate = $('#survey_date').val();
+    console.log('existingDate:',existingDate);
+    if (existingDate) {
+        
+        $('#datepicker').datepicker('setDate', existingDate);
+    }
+
+    $('#datepicker').datepicker().on('changeDate', function(e) {
+        var selectedDate = e.format(0,"yyyy-mm-dd");
+        $("input#survey_date").val(selectedDate);   
+
+        
+    });
 });

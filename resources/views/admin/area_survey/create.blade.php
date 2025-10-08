@@ -5,17 +5,17 @@
         <div class="right-section-content">
             <div class="admin-sec-btn-area">
                 <div class="report-title-section">
-                    <h4>Create Builder</h4>
+                    <h4>Create Survey</h4>
                 </div>
                 <div class="district-back-del-btn-area">
                     <div class="distrcit-back-btn">
-                        <a href="{{url('admin/builders/')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-sm btn-warning">Back</a>
+                        <a href="{{url('admin/area_surveys/')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-sm btn-warning">Back</a>
 
                     </div>
                 </div>
             </div>
             <!--  ===============================  -->
-            <!--  ======= Builders Section ===========  -->
+            <!--  ======= area_surveys Section ===========  -->
             <!--  ===============================  -->
             <div class="container mt-3">
                 <div class="row">
@@ -23,47 +23,48 @@
                     <div class="col-xs-12">
                         <div class="">
                             
-                            <form class="" method="POST" action="{{url('admin/builders/')}}" enctype="multipart/form-data" id="builder-form">
+                            <form class="" method="POST" action="{{url('admin/area_surveys/')}}" enctype="multipart/form-data" id="area-survey-form">
                                  {{csrf_field()}}
                                 
                                     
-                                <div class="col-xs-12 mb-3 mt-3">
-                                    <div class="form-group">
-                                        <label>*Builder Name :</label>
-                                        <input type="text" name="builder_name" id="builder_name" title="enter builder name!" class="district-input-field form-control" placeholder="Builder Name" required value="{{old('builder_name')}}">                                    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">                                       
+                                            <label class="form-label">Area</label>
+                                            <select name="area" id="area" class="form-control select2" required>
+                                                <option value="">Select Area</option>
+                                                @foreach($areas as $key => $area)
+                                                    <option value="{{ $area }}" >{{ ($area) }}</option>
+                                                @endforeach
+                                            </select>
+                                                            
+                                        </div>
+                                    </div>
+                                     <div class="col-md-6">
+                                        <div class="form-group">                                       
+                                            <label class="form-label">Survey Date</label>
+                                            <div id="datepicker"></div>
+                                            <input type="hidden" class="form-control" value="" id="survey_date" name="survey_date" placeholder="Survey Date" required>
+                                            
+                                                            
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 mb-3 mt-3">
+                                <div class="col-xs-12 mb-3 mt-3">   
                                     <div class="form-group">
-                                        <label>*Email :</label>
-                                        <input type="text" name="email" id="email" title="enter email!" class="district-input-field form-control" placeholder="Email Address"  value="{{old('email')}}" required >                                    
+                                        <!-- File Upload -->                                        
+                                        <label class="form-label">Upload File (CSV,EXCEL,PDF)</label>
+                                        <input type="file" name="file_url" id="file_url"  class="form-control" accept=".xlsx,.xls,.csv,application/pdf" required>
                                     </div>
                                 </div>
-
-
-                                <div class="col-xs-12 mb-3 mt-3">
-                                    <div class="form-group">
-                                        <label>*Mobile Number :</label>
-                                        <input type="text" name="mobile_number" id="mobile_number" title="Enter mobile number!" class="district-input-field form-control" molaceholder="Mobile Number"  value="{{old('mobile_number')}}" required >                                    
-                                    </div>
-                                </div>
-
-
-                                <div class="col-xs-12 mb-3 mt-3">
-                                    <div class="form-group">
-                                        <label>*Address :</label>
-                                        <input type="text" name="address" id="address" title="Enter Address!" class="district-input-field form-control" molaceholder="Address"  value="{{old('address')}}">                                    
-                                    </div>
-                                </div>                                
-                               
                                 
                                 <div class="col-xs-12 mb-3 mt-3">   
                                     <div class="form-group">
                                         <!-- File Upload -->
                                         
-                                        <label>Upload Logo</label>
-                                        <input type="file" name="builder_logo_file" id="builder_logo"  class="form-control">
+                                        <label class="form-label">Upload Thumbnail</label>
+                                        <input type="file" name="thumbnail_url" id="thumbnail_url"  class="form-control" accept="image/*">
                                             
                                                          
                                     </div>
@@ -86,8 +87,6 @@
                                         <button type="submit" href="javascript:void(0);" id="btn_save" class="btn btn-success">
                                             Save
                                         </button>
-
-                                        <a href="{{url('admin/builders/')}}"  class="btn btn-warning">Back</a>
                                         
                                     </div>
                                 </div>
@@ -103,7 +102,5 @@
 
 @endsection
 @section('scripts')
-
-
 
 @endsection

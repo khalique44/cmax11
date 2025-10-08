@@ -9,7 +9,7 @@
                 </div>
                 <div class="district-back-del-btn-area">
                     <div class="distrcit-back-btn">
-                        <a href="{{url('admin/builders/')}}" data-toggle="" data-target="#search-db-model"  class="btn">Back</a>
+                        <a href="{{url('admin/builders/')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-sm btn-warning">Back</a>
 
                     </div>
                 </div>
@@ -96,6 +96,7 @@
                                             Save
                                         </button>
                                         
+                                        <a href="{{url('admin/builders/')}}"  class="btn btn-warning">Back</a>
                                     </div>
                                 </div>
                             </form>

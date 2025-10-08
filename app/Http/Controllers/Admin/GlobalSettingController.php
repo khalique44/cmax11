@@ -20,12 +20,15 @@ class GlobalSettingController extends Controller
         $footer_logo = GeneralHelper::getOption('footer_logo');
         $footer_text_under_logo = GeneralHelper::getOption('footer_text_under_logo');
         $facebook_url = GeneralHelper::getOption('facebook_url');
+        $instagram_url = GeneralHelper::getOption('instagram_url');
+        $twitter_url = GeneralHelper::getOption('twitter_url');
+        $youtube_url = GeneralHelper::getOption('youtube_url');       
         $footer_center_column_heading = GeneralHelper::getOption('footer_center_column_heading');
         $footer_last_column_heading = GeneralHelper::getOption('footer_last_column_heading');
         $copy_right_text = GeneralHelper::getOption('copy_right_text');
         $global_date_format = GeneralHelper::getOption('global_date_format');
         
-        return view('admin.global_settings.edit',compact('header_logo','footer_logo','footer_text_under_logo','facebook_url','footer_center_column_heading','footer_last_column_heading','copy_right_text','global_date_format'));
+        return view('admin.global_settings.edit',compact('header_logo','footer_logo','footer_text_under_logo','facebook_url','instagram_url','twitter_url','youtube_url','footer_center_column_heading','footer_last_column_heading','copy_right_text','global_date_format'));
     }
 
     /**
@@ -90,6 +93,9 @@ class GlobalSettingController extends Controller
         
         GeneralHelper::setOption('footer_text_under_logo',$request->footer_text_under_logo);
         GeneralHelper::setOption('facebook_url',$request->facebook_url);
+        GeneralHelper::setOption('instagram_url',$request->instagram_url);
+        GeneralHelper::setOption('twitter_url',$request->twitter_url);
+        GeneralHelper::setOption('youtube_url',$request->youtube_url);
         GeneralHelper::setOption('footer_center_column_heading',$request->footer_center_column_heading);
         GeneralHelper::setOption('footer_last_column_heading',$request->footer_last_column_heading);
         GeneralHelper::setOption('copy_right_text',$request->copy_right_text);

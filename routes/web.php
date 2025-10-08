@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\AreaSurveyController;
 
 Route::get('/routecache', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
@@ -184,8 +185,9 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::get('feature/update-status', [FeatureController::class,'updateStatus'])->name('feature.update-status');
         Route::post('/media/{media}/set-featured', [MediaController::class,'setFeatured'])->name('media.setFeatured');
         Route::get('/projects/{project}/refresh', [ProjectController::class,'refresh'])->name('projects.refresh');
-
-        
+        Route::resource('surveys',AreaSurveyController::class);
+        Route::get('survey-data', [AreaSurveyController::class, 'getSurveys'])->name('surveys.data');
+        Route::get('/survey/remove-file/{id}', [AreaSurveyController::class, 'removeFile'])->name('file.remove');
 
 
     });
@@ -230,6 +232,7 @@ Route::get('/compare/add/{id}', [ProjectCompareController::class, 'add'])->name(
 Route::get('/compare/remove/{id}', [ProjectCompareController::class, 'remove'])->name('projects.compare.remove');
 Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
+Route::get('/survey/download/{id}', [SurveyController::class, 'downloadDocument'])->name('file.download');
 
 
 
