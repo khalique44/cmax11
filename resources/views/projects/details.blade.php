@@ -70,7 +70,7 @@
             <div class="col-md-6">
                 @if(!empty($firstImage))
                     <a href="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" data-lightbox="gallery-group">
-                        <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="" class="w-100">
+                        <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="" class="w-100 main-img-detail-pg">
                     </a>
                 @endif
             </div>

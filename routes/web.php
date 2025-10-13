@@ -233,6 +233,8 @@ Route::get('/compare/remove/{id}', [ProjectCompareController::class, 'remove'])-
 Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
 Route::get('/survey/download/{id}', [SurveyController::class, 'downloadDocument'])->name('file.download');
+Route::get('/survey/filter-data', [SurveyController::class, 'filterData'])->name('survey.filterData');
+
 
 
 

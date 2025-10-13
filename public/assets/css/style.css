@@ -204,6 +204,11 @@ p.listing-short-desc {
 .width-23-pc{
   width: 23% !important;
 }
+
+img.main-img-detail-pg {
+  max-height: 500px;
+  min-height: 300px;
+}
 /* ------ End code by KHL ------ */
 
 

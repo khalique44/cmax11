@@ -20,21 +20,47 @@
 	 <div data-aos="fade-in" class="row justify-content-center">
 			 <div class="col-lg-10">
 					<form class="banner-form">
+
 						 <div class="row g-2">
 								<div class="col-md-12">
 									 <div class="row">
 										<div class="col-md-4">
 										 <label class="form-label">Select Area</label>
-										 <input type="text" class="form-control" value="Clifton Block 1" readonly>
+										 <select name="area" class="form-control select2" id="full_area" >
+											<option value="">All Area</option>
+											@if(!empty($uniqueAreaSurveys))
+												@foreach($uniqueAreaSurveys as $record)
+													<option value="{{$record->area_id.'|'.$record->sub_area_id}}">{{$record->full_area}}</option>
+												@endforeach
+											@endif
+										 </select>
+										 
 									 </div>
-									 <div class="col-md-4">
-										 <label class="form-label">Choose Category</label>
-										 <select class="form-select">
-											<option selected>Builder</option>
+									<div class="col-md-2">
+										<label class="form-label">Select Year</label>
+										@php $currentYear = now()->year; @endphp
+										<select id="yearSelect" class="form-select select2">
+											<option value="">All Years</option>
+											@foreach ($years as $year)
+												<option value="{{ $year }}" >
+													{{ $year }}
+												</option>
+											@endforeach
+										</select>
+									</div>
+									<div class="col-md-2">
+										<label class="form-label">Select Month</label>
+										<select id="monthSelect" class="form-select select2">
+											<option value="">All Months</option>
+											@foreach ($months as $num => $month)
+												<option value="{{ $month }}" >
+													{{ \Carbon\Carbon::create()->month($month)->format('F') }}
+												</option>
+											@endforeach
 										</select>
 									</div>
 									<div class="col-md-4 text-end pt-2">
-									 <button type="submit" class="btn btn-primary mt-3 w-100">Get Survey</button>
+									 <button type="button" onClick="fetchFilters();" class="btn btn-primary mt-3 w-100">Get Survey</button>
 								 </div>
 							 </div>
 						 </div>
@@ -50,67 +76,8 @@
 
 <section class="survey-boxes py-5">
 	 <div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					 <div class="survey-box">
-							<div class="image">
-								 <img src="{!! asset('assets/img/clifton-bg1.png') !!}" alt="">
-							</div>
-							<div class="text-center mt-2">
-								 <button class="btn btn-red w-100"><i class="fa fa-cloud-download"></i> Clifton PDF</button>
-							</div>
-					 </div>
-				</div>
-				<div class="col-md-4">
-					 <div class="survey-box">
-							<div class="image">
-								 <img src="{!! asset('assets/img/clifton-bg1.png') !!}" alt="">
-							</div>
-							<div class="text-center mt-2">
-								 <button class="btn btn-red w-100"><i class="fa fa-cloud-download"></i> DHA PDF</button>
-							</div>
-					 </div>
-				</div>
-				<div class="col-md-4">
-					 <div class="survey-box">
-							<div class="image">
-								 <img src="{!! asset('assets/img/clifton-bg1.png') !!}" alt="">
-							</div>
-							<div class="text-center mt-2">
-								 <button class="btn btn-red w-100"><i class="fa fa-cloud-download"></i> Scheme 45 PDF</button>
-							</div>
-					 </div>
-				</div>
-				<div class="col-md-4">
-					 <div class="survey-box">
-							<div class="image">
-								 <img src="{!! asset('assets/img/clifton-bg1.png') !!}" alt="">
-							</div>
-							<div class="text-center mt-2">
-								 <button class="btn btn-red w-100"><i class="fa fa-cloud-download"></i> Clifton PDF</button>
-							</div>
-					 </div>
-				</div>
-				<div class="col-md-4">
-					 <div class="survey-box">
-							<div class="image">
-								 <img src="{!! asset('assets/img/clifton-bg1.png') !!}" alt="">
-							</div>
-							<div class="text-center mt-2">
-								 <button class="btn btn-red w-100"><i class="fa fa-cloud-download"></i> DHA PDF</button>
-							</div>
-					 </div>
-				</div>
-				<div class="col-md-4">
-					 <div class="survey-box">
-							<div class="image">
-								 <img src="{!! asset('assets/img/clifton-bg1.png') !!}" alt="">
-							</div>
-							<div class="text-center mt-2">
-								 <button class="btn btn-red w-100"><i class="fa fa-cloud-download"></i> Scheme 45 PDF</button>
-							</div>
-					 </div>
-				</div>
+			<div class="row" id="surveyResults">
+				<div class="text-muted text-center">Select any area, year or month to display surveys.</div>
 		 </div>
 	 </div>
 </section>

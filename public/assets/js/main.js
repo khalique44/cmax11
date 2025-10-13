@@ -665,3 +665,51 @@ function addCompareMultiple() {
 }
 
 
+$(document).ready(function() {
+    
+
+    // include monthSelect now
+   // $('#areaSelect, #subAreaSelect, #yearSelect, #monthSelect').change(fetchFilters);
+
+    // initial load
+    //fetchFilters();
+});
+function fetchFilters() {
+        let full_area = $('#full_area').val();
+        let year = $('#yearSelect').val();
+        let month = $('#monthSelect').val(); // added
+
+        if(full_area == ''){
+            displayMsg('',"Please, Select Area",'error');
+            return false;
+        }
+
+        $('#surveyResults').html('<p class="text-muted text-center">Loading...</p>');
+        showAjaxLoader();
+        $.ajax({
+            url: $('meta[name="home_url"]').attr('content')+"/survey/filter-data",
+            type: "GET",
+            data: { full_area, year, month }, // added
+            success: function(res) {
+
+                let yearOptions = '<option value="">All Years</option>';
+                $.each(res.years, function(_, y) {
+                    yearOptions += `<option value="${y}">${y}</option>`;
+                });
+                //$('#yearSelect').html(yearOptions);
+
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                    "July", "August", "September", "October", "November", "December"];
+
+                let monthOptions = '<option value="">All Months</option>';
+                $.each(res.months, function(_, m) {
+                    monthOptions += `<option value="${m}">${monthNames[m-1]}</option>`;
+                });
+                //$('#monthSelect').html(monthOptions);                
+
+                $('#surveyResults').html(res.html);
+
+                hideAjaxLoader();
+            }
+        });
+    }

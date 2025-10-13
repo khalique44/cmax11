@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Http\Helpers\FileHelper;
+use Illuminate\Validation\Rule;
 
 
 class AreaSurveyController extends Controller
@@ -74,11 +75,23 @@ class AreaSurveyController extends Controller
         //dd($request->file_url);
         $validator = Validator::make($request->all(), [
             'area' => 'required',          
-            'survey_date' => 'required',
+            //'survey_date' => 'required',
             //'file_url' => 'required|file|mimes:csv,xls,xlsx,pdf|max:10240',     
-            'file_url' =>'required|max:10240|mimetypes:application/csv,application/excel,application/vnd.ms-excel,application/vnd.msexcel,text/csv,text/anytext,text/plain,text/x-c',      
+            'file_url' =>'required|max:10240|mimetypes:application/csv,application/excel,application/vnd.ms-excel,application/vnd.msexcel,text/csv,text/anytext,text/plain,text/x-c,application/pdf',      
             'thumbnail_url' => 'image|max:2048',
-        ]);     
+            'survey_date' => [
+            'required',
+            'date',
+                    Rule::unique('area_surveys')->where(function ($query) use ($request) {
+                        
+                        return $query->where('area_id', $this->getAreaId($request->area))
+                                    ->where('sub_area_id', $this->getSubAreaId($request->area));
+                    }),
+                ],
+            ], 
+                [
+                'survey_date.unique' => 'A survey for this Area, Sub Area, and Date already exists.',
+            ]);     
         
 
         if ($validator->fails()) {
@@ -86,20 +99,13 @@ class AreaSurveyController extends Controller
                 'status' => 'error',
                 'errors' => $validator->errors()
             ], 422);
-        }
-
-        $searchArea = explode(' - ', $request->area);
-        $areaKey = $searchArea[0] ?? '';
-        $subAreaKey = $searchArea[1] ?? '';
-
-        $area = Area::where('name',$areaKey)->first('id');
-        $subArea = SubArea::where('name',$subAreaKey)->first('id');
+        }       
 
         // Using bootstrap switcher which return on/off text
         $request->merge([
             'is_active' => $request->has('is_active') ? 1 : 0,
-            'area_id' => $area->id ?? 0,
-            'sub_area_id' => $subArea->id ?? 0,
+            'area_id' => $this->getAreaId($request->area) ?? 0,
+            'sub_area_id' => $this->getSubAreaId($request->area) ?? 0,
         ]);
                 
         $record = AreaSurvey::create($request->except('_token'));
@@ -167,9 +173,22 @@ class AreaSurveyController extends Controller
 
         $validator = Validator::make($request->all(), [
             'area' => 'required',          
-            'survey_date' => 'required',
-            'file_url' =>'required|max:10240|mimetypes:application/csv,application/excel,application/vnd.ms-excel,application/vnd.msexcel,text/csv,text/anytext,text/plain,text/x-c,application/pdf',        
+            //'survey_date' => 'required',
+            'file_url' =>'max:10240|mimetypes:application/csv,application/excel,application/vnd.ms-excel,application/vnd.msexcel,text/csv,text/anytext,text/plain,text/x-c,application/pdf',        
             'thumbnail_url' => 'image|max:2048',
+            'survey_date' => [
+                'required',
+                'date',
+                    Rule::unique('area_surveys')
+                        ->ignore($survey->id) // 👈 Ignore current record
+                        ->where(function ($query) use ($request) {
+                            return $query->where('area_id', $this->getAreaId($request->area))
+                                        ->where('sub_area_id', $this->getSubAreaId($request->area));
+                        }),
+                ],
+            ],
+        [
+            'survey_date.unique' => 'A survey for this Area, Sub Area, and Date already exists.',
         ]);
         
 
@@ -180,18 +199,11 @@ class AreaSurveyController extends Controller
             ], 422);
         }
 
-        $searchArea = explode(' - ', $request->area);
-        $areaKey = $searchArea[0] ?? '';
-        $subAreaKey = $searchArea[1] ?? '';
-
-        $area = Area::where('name',$areaKey)->first('id');
-        $subArea = SubArea::where('name',$subAreaKey)->first('id');
-
-        // Using bootstrap switcher which return on/off text
+             // Using bootstrap switcher which return on/off text
         $request->merge([
             'is_active' => $request->has('is_active') ? 1 : 0,
-            'area_id' => $area->id ?? 0,
-            'sub_area_id' => $subArea->id ?? 0,
+            'area_id' => $this->getAreaId($request->area) ?? 0,
+            'sub_area_id' => $this->getSubAreaId($request->area) ?? 0,
         ]); 
         
         $isUpdated = $survey->update($request->except('_token','survey_id'));
@@ -264,4 +276,30 @@ class AreaSurveyController extends Controller
 
         return redirect()->back()->with('success', 'File removed successfully.');
     }
+
+    public function getAreaId($fullArea)
+    {
+        $searchedArea = explode(' - ', $fullArea);
+        $areaName = trim($searchedArea[0] ?? '');
+
+        if (empty($areaName)) {
+            return false;
+        }
+
+        return Area::where('name', $areaName)->value('id');
+    }
+
+    public function getSubAreaId($fullArea)
+    {
+        $searchedArea = explode(' - ', $fullArea);
+        $subAreaName = trim($searchedArea[1] ?? '');
+
+        if (empty($subAreaName)) {
+            return false;
+        }
+
+        return SubArea::where('name', $subAreaName)->value('id');
+    }
+
+    
 }

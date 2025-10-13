@@ -175,9 +175,9 @@
                 </div>
             </div>
         @elseif(count($projects) == 1)
-            <div class="text-center"><h5>Please add minimum 2 projects to Compare!</h5></div>
+            <div class="text-center text-muted"><h5>Please add minimum 2 projects to Compare!</h5></div>
         @else
-            <div class="text-center"><h5>No projects selected for comparison.</h5></div>
+            <div class="text-center text-muted"><h5>No projects selected for comparison.</h5></div>
         @endif
 
     </div>
