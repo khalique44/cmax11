@@ -72,4 +72,14 @@ class MediaController extends Controller
 
         return response()->json(['success' => true, 'message' => 'Featured image set successfully']);
     }
+
+    public function reorder(Request $request)
+    {
+        foreach ($request->order as $item) {
+            Media::where('id', $item['id'])
+                ->update(['order_column' => $item['position']]);
+        }
+
+        return response()->json(['success' => true]);
+    }
 }

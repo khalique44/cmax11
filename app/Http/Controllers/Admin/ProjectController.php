@@ -117,13 +117,14 @@ class ProjectController extends Controller
         $cities = GeneralHelper::getCitiesByCountry(166);
         $price_types = config('constants.price_types');
         $offering = config('constants.offering');    
+        $payment_plan_duration = config('constants.payment_plan_duration');    
         $areas = Area::orderBy('name' , 'asc')->get();
         $sub_areas = SubArea::orderBy('name' , 'asc')->get();
         $features = Feature::where('is_active',1)->orderBy('name' , 'asc')->get();
         $is_show_survey_fields = false;
         
         
-        return view('admin.projects.create', compact('users','builders','progress','offering','area_types','bedrooms','bathrooms','cities','price_types','features','areas','sub_areas','is_show_survey_fields'));
+        return view('admin.projects.create', compact('users','builders','progress','offering','area_types','bedrooms','bathrooms','cities','price_types','features','areas','sub_areas','is_show_survey_fields','payment_plan_duration'));
     }
 
     /**
@@ -144,6 +145,7 @@ class ProjectController extends Controller
             'builder_id' => 'required',
             'city_id' => 'required',
             'location' => 'required',            
+            'payment_plan_duration' => 'required',            
             'images.*' => 'image|max:10240',
             'offering' => 'required|array|min:1|in:'.implode(",",$offering),
             'area_id' => 'required',
@@ -385,13 +387,14 @@ class ProjectController extends Controller
         $cities = GeneralHelper::getCitiesByCountry(166);
         $price_types = config('constants.price_types');
         $offering = config('constants.offering');       
+        $payment_plan_duration = config('constants.payment_plan_duration');
         $features = Feature::where('is_active',1)->orderBy('name' , 'asc')->get();   
         $areas = Area::orderBy('name' , 'asc')->get();
         $sub_areas = SubArea::orderBy('name' , 'asc')->get();   
         $is_show_survey_fields = GeneralHelper::showSurveyFileds($project);
         
         
-        return view('admin.projects.create', compact('project','users','builders','progress','offering','area_types','bedrooms','bathrooms','cities','price_types','features','areas','sub_areas','is_show_survey_fields'));
+        return view('admin.projects.create', compact('project','users','builders','progress','offering','area_types','bedrooms','bathrooms','cities','price_types','features','areas','sub_areas','is_show_survey_fields','payment_plan_duration'));
     }
 
     /**
@@ -412,6 +415,7 @@ class ProjectController extends Controller
             'builder_id' => 'required',
             'city_id' => 'required',
             'location' => 'required',            
+            'payment_plan_duration' => 'required',            
             'images.*' => 'image|max:2048',
             'offering' => 'required|array|min:1|in:'.implode(",",$offering),
             'area_id' => 'required',

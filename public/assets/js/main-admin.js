@@ -1,6 +1,9 @@
 
 $(function(){
-	$("select.select2").select2();
+	$("select.select2").select2({
+        
+        placeholder: $("select.select2").data('placeholder'),
+    });
 });
 
 function showAjaxLoader(){
@@ -504,8 +507,11 @@ FilePond.setOptions({
                         const container = document.getElementById(previewContainerId);
                         if (container) {
                             const wrapper = document.createElement('div');
-                            wrapper.classList.add('preview-box');
+                            wrapper.classList.add('media-item');
+                            wrapper.classList.add('preview-box');                           
+                            wrapper.classList.add('remove-media');
                             wrapper.dataset.mediaId = data.id;
+                            wrapper.dataset.id = data.id;
 
                             const img = document.createElement('img');
                             img.src = data.url;
@@ -1053,3 +1059,81 @@ $(function(){
         
     });
 });
+
+$(document).ready(function() {
+    let gallery_preview = document.getElementById('gallery-preview');
+
+    Sortable.create(gallery_preview, {
+        animation: 150,
+        onEnd: function (evt) {
+            var order = [];
+
+            $('#gallery-preview .media-item').each(function(index) {
+                order.push({
+                    id: $(this).data('id'),
+                    position: index + 1
+                });
+            });
+
+            updateMediaPosition(order);
+        }
+    });
+
+    let progress_preview = document.getElementById('project-progress-preview');
+
+    Sortable.create(progress_preview, {
+        animation: 150,
+        onEnd: function (evt) {
+            var order = [];
+
+            $('#project-progress-preview .media-item').each(function(index) {
+                order.push({
+                    id: $(this).data('id'),
+                    position: index + 1
+                });
+            });
+
+            updateMediaPosition(order);
+        }
+    });
+
+    let payment_preview = document.getElementById('payment-preview');
+
+    Sortable.create(payment_preview, {
+        animation: 150,
+        onEnd: function (evt) {
+            var order = [];
+
+            $('#payment-preview .media-item').each(function(index) {
+                order.push({
+                    id: $(this).data('id'),
+                    position: index + 1
+                });
+            });
+
+            updateMediaPosition(order);
+        }
+    });
+});
+
+
+function updateMediaPosition(order){
+    console.log('order:',order);
+    // Send AJAX to backend
+    $.ajax({
+        url: $('meta[name="admin_url"]').attr('content')+'/media/reorder',
+        method: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            order: order
+        },
+        success: function(response) {
+            displayMsg('','Reorder saved','success');
+            console.log('Reorder saved');
+        },
+        error: function(xhr) {
+            displayMsg('','Error saving order:'+ xhr.responseText,'error');
+            console.error('Error saving order:', xhr.responseText);
+        }
+    });
+}

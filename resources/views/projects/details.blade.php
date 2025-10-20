@@ -59,10 +59,10 @@
 
         <div class="row galleria mt-3">
           @php
-            $paymentPlans = $project->getMedia('payment_plan');                        
-            $projectProgress = $project->getMedia('project_progress');                        
+            $paymentPlans = $project->getMedia('payment_plan')->sortBy('order_column');                        
+            $projectProgress = $project->getMedia('project_progress')->sortBy('order_column');                        
             $gallery = $project->getMedia('project_gallery'
-            );
+            )->sortBy('order_column');
             $firstImage = ($project->featuredImage) ? $project->featuredImage : $gallery->first();  // Get the first media
             $remainingImages = $gallery->slice(1);  // Skip the first media
           @endphp

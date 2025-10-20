@@ -150,6 +150,17 @@
                             @endforeach
                           </select>
                        </div>
+                       <div class="row">
+                                          <div class="col-md-3">
+                                             <label class="form-label">Payment Plan</label>
+                                             <select class="form-select select2" name="payment_plan_duration" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($payment_plan_duration as $key => $ppd)
+                                                   <option value="{{ $key }}" @selected(isset($searchedData) && $searchedData['payment_plan_duration'] ==  $key )>{{ $ppd }}</option>
+                                                @endforeach
+                                             </select>
+                                          </div>
+                                      </div>
                        <div class="col-md-12 text-center">
                          <button type="submit" class="btn btn-primary mt-3 w-25" title="Search"><i class="fa fa-search" aria-hidden="true"></i></button>
                        </div>
@@ -226,6 +237,8 @@
                </div>
                
             </div>
+
+            
 
             <button class="find-btn w-100 mt-5">Find</button>
          </div>

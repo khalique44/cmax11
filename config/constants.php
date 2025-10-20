@@ -66,4 +66,17 @@ return [
                         ],
     'compare_project_limit' => 4,
     'admin_email' => env('ADMIN_EMAIL', 'khalique.ahmed3@gmail.com'),
+    'payment_plan_duration' => [
+                                1 => '1 Year',
+                                2 => '2 Years',
+                                3 => '3 Years',
+                                4 => '4 Years',
+                                5 => '5 Years',
+                                6 => '6 Years',
+                                7 => '7 Years',
+                                8 => '8 Years',
+                                9 => '9 Years',
+                                10 => '10 Years+',
+
+                            ]
 ];

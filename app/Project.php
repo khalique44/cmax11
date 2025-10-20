@@ -19,7 +19,13 @@ class Project extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes, OptimizesMedia;
 
     protected $fillable = [        
-    	'builder_id','city_id','area_id','sub_area_id','project_title','description','progress','area','location','latitude','longitude','logo_url','offering','is_lease','is_active','added_by','rate_per_square','development_charges','utility_charges','distance','project_floors','project_start_date', 'is_featured','is_popular','position','featured_media_id','refreshed_at'
+    	'builder_id','city_id','area_id','sub_area_id','project_title','description','progress','area','location','latitude','longitude','logo_url','offering','is_lease','is_active','added_by','rate_per_square','development_charges','utility_charges','distance','project_floors','project_start_date', 'is_featured','is_popular','position','featured_media_id','refreshed_at','payment_plan_duration'
+    ];
+
+	protected $casts = [
+        'created_at' => 'date:Y-M-d',
+		'refreshed_at' => 'datetime',
+		'payment_plan_duration' => 'array',
     ];
 
     protected static function boot()
@@ -74,11 +80,7 @@ class Project extends Model implements HasMedia
 	     return $this->belongsToMany(Feature::class, 'project_features', 'project_id', 'feature_id');
 	}
 
-	protected $casts = [
-        'created_at' => 'date:Y-M-d',
-		'refreshed_at' => 'datetime',
-    ];
-
+	
     public function builder()
 	{
 	    return $this->belongsTo(Builder::class);

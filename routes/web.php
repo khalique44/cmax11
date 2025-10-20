@@ -188,6 +188,8 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::resource('surveys',AreaSurveyController::class);
         Route::get('survey-data', [AreaSurveyController::class, 'getSurveys'])->name('surveys.data');
         Route::get('/survey/remove-file/{id}', [AreaSurveyController::class, 'removeFile'])->name('file.remove');
+        Route::post('/media/reorder', [MediaController::class, 'reorder'])->name('admin.media.reorder');
+
 
 
     });

@@ -44,6 +44,7 @@ class HomeController extends Controller
         $property_types = config('constants.property_types');
         $bedrooms = config('constants.bedrooms');
         $offering = config('constants.offering');
+        $payment_plan_duration = config('constants.payment_plan_duration');
         $popular_projects = Project::with('offers','floorPlan','builder')->where('is_popular',true)->take(3)->orderBy('position', 'asc')->get();
         $latestPosts = Post::where('status', 'yes')
         ->latest()  // created_at DESC
@@ -66,7 +67,7 @@ class HomeController extends Controller
             $header_image = url('public') .'/'.$data->header_image;
           } 
         }
-        return view('home',compact('data','header_image','testimonials','builders','progress','property_types','bedrooms','offering','popular_projects','latestPosts','compare','first_box_offer_count','second_box_offer_count','third_box_offer_count','fourth_box_offer_count'));
+        return view('home',compact('data','header_image','testimonials','builders','progress','property_types','bedrooms','offering','popular_projects','latestPosts','compare','first_box_offer_count','second_box_offer_count','third_box_offer_count','fourth_box_offer_count','payment_plan_duration'));
         
         //return '<H2>Coming Soon</H2';
     }

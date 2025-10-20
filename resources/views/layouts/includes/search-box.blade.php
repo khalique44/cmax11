@@ -87,7 +87,7 @@
                           <div class="collapse" id="collapseExample">
                              <div class="card card-body my-cutom-card-body">
                                 <div class="row">
-                                   <div class="col-md-11">
+                                   <div class="col-md-12">
                                       <div class="row">
                                          <div class="col-md-3">
                                             <label class="form-label">Property Type</label>
@@ -187,6 +187,17 @@
                                               @endforeach
                                             </select>
                                         </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-3">
+                                             <label class="form-label">Payment Plan</label>
+                                             <select class="form-select select2" name="payment_plan_duration" style="width: 100%;">
+                                                <option value="">Select</option>
+                                                @foreach($payment_plan_duration as $key => $ppd)
+                                                   <option value="{{ $key }}" >{{ $ppd }}</option>
+                                                @endforeach
+                                             </select>
+                                          </div>
                                       </div>
                                    </div>
                                 </div>
