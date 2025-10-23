@@ -599,7 +599,7 @@
                                         <select data-placeholder="Select Payment Plan Duration" name="payment_plan_duration[]" id="payment_plan_duration" class="form-control select2" multiple  >
                                             <option value="">Select Payment Plan Duration</option>
                                             @foreach($payment_plan_duration as $key => $ppd)
-                                                <option value="{{ $key }}" @selected(isset($project) && in_array($key,$project->payment_plan_duration) )  >{{ ucfirst($ppd) }}</option>
+                                                <option value="{{ $key }}" @selected(isset($project->payment_plan_duration) && in_array($key,$project->payment_plan_duration) )  >{{ ucfirst($ppd) }}</option>
                                             @endforeach
                                         </select>
                                         <div class="">&nbsp;</div>
