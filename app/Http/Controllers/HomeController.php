@@ -85,25 +85,43 @@ class HomeController extends Controller
     }*/
 
 
-    public function searchArea(Request $request){
-      $query = $request->get('query');
+    public function searchArea(Request $request)
+    {
+        $query = $request->get('query');
 
-      $results = Area::with('subAreas')
-          ->where('name', 'like', '%' . $query . '%')
-          ->orderBy('name', 'asc') // Order areas alphabetically
-          ->get()
-          ->flatMap(function ($area) {
-              $list = collect([$area->name]); // Add area name first
-              foreach ($area->subAreas->sortBy('name') as $subArea) { // Order sub-areas alphabetically
-                  $list->push($area->name . ' - ' . $subArea->name);
-              }
-              return $list;
-          })
-          ->take(50)
-          ->values();
+        // Fetch areas that match OR whose sub-areas match the query
+        $results = Area::with(['subAreas' => function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%')
+                ->orderBy('name', 'asc');
+            }])
+            ->where('name', 'like', '%' . $query . '%')
+            ->orWhereHas('subAreas', function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%');
+            })
+            ->orderBy('name', 'asc')
+            ->get()
+            ->flatMap(function ($area) use ($query) {
+                $list = collect();
 
-      return response()->json($results);
+                // Include the area itself if it matches
+                if (stripos($area->name, $query) !== false) {
+                    $list->push($area->name);
+                }
+
+                // Include matching subareas
+                foreach ($area->subAreas as $subArea) {
+                    $list->push($area->name . ' - ' . $subArea->name);
+                }
+
+                return $list;
+            })
+            ->unique() // remove duplicates if any
+            ->take(50)
+            ->values();
+
+        return response()->json($results);
     }
+
 
 
    

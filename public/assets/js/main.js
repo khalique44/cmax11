@@ -175,10 +175,18 @@ function displayMsg(msgArea, msg, msgType){
 
 }
 
-
-$('#search-area').on('keyup', function(e){
+let selectedIndex = -1; // for arrow key navigation
+$('#search-area').on('input', function(e){
     e.preventDefault(); 
-    var query = $(this).val();
+    
+    const query = $(this).val().trim();
+
+        // Only proceed if query has at least 2 characters
+        if (query.length < 2) {
+            $('#suggestions').hide();
+            return;
+        }
+        if (!/^[a-zA-Z0-9\s]+$/.test(query)) return;
     var data = {query:query};
 
     //ajaxPostRequest("/search-area",data,searchAreaCallback,ajaxErrorCallback,true);
@@ -194,8 +202,12 @@ $('#search-area').on('keyup', function(e){
         //processData: false, 
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         success: function(data) {
+            if (data.length === 0) {
+                $('#suggestions').hide();
+                return;
+            }
             searchAreaCallback(data);
-            //hideAjaxLoader();
+            selectedIndex = -1; // reset highlight
         }
     });
 });
@@ -222,28 +234,38 @@ function searchAreaCallback(response){
     }
 }
 
+    
 
 $(document).ready(function(){
     $("select.select2").select2();
-    /*$('#search-box').on('keyup', function(){
-        var query = $(this).val();
-        if(query.length > 1){
-            $.ajax({
-                url: '/search', // Your backend route here
-                type: 'GET',
-                data: { q: query },
-                success: function(data){
-                    let suggestions = '';
-                    data.forEach(function(item){
-                        suggestions += '<div class="suggestion-item" style="padding:5px; cursor:pointer;">'+item+'</div>';
-                    });
-                    $('#suggestions').html(suggestions).show();
-                }
-            });
+
+    // Keyboard navigation (Up/Down/Enter)
+    $('#search-area').on('keydown', function(e) {
+        const items = $('.suggestion-item');
+
+        if (items.length === 0) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex + 1) % items.length;
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (selectedIndex >= 0) {
+                $('#search-area').val($(items[selectedIndex]).text());
+                $('#suggestions').hide();
+            }
+            return;
         } else {
-            $('#suggestions').hide();
+            return; // don't affect other keys
         }
-    });*/
+
+        // Highlight the active item
+        items.removeClass('bg-primary text-white');
+        $(items[selectedIndex]).addClass('bg-primary text-white');
+    });
 
     // When clicking a suggestion
     $(document).on('click', '.suggestion-item', function(){
