@@ -156,7 +156,7 @@
                                              <select class="form-select select2" name="payment_plan_duration" style="width: 100%;">
                                                 <option value="">Select</option>
                                                 @foreach($payment_plan_duration as $key => $ppd)
-                                                   <option value="{{ $key }}" @selected(isset($searchedData) && $searchedData['payment_plan_duration'] ==  $key )>{{ $ppd }}</option>
+                                                   <option value="{{ $key }}" @selected(isset($searchedData['payment_plan_duration']) && $searchedData['payment_plan_duration'] ==  $key )>{{ $ppd }}</option>
                                                 @endforeach
                                              </select>
                                           </div>
