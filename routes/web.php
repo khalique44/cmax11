@@ -36,12 +36,12 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\AreaSurveyController;
 
-Route::get('/routecache', function (){
+/* Route::get('/routecache', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
 });
 Route::get('/routeconfig', function (){
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
-});
+}); */
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -56,7 +56,7 @@ Route::get('waiting-for-approval/{token}', [UsersController::class, 'waitingForA
 Route::group(array('prefix'=>'admin'), function (){
 
     //Route::get('/','AdminController@welcome')->name('admin.welcome');
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::get('secure-login', [LoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login',[LoginController::class, 'login']);
     Route::get('logout',[LoginController::class, 'logout'])->name('admin.logout');
     //https://stackoverflow.com/questions/77101604/target-class-admin-does-not-exist
@@ -200,9 +200,11 @@ Route::get('/home', function () {
     return redirect('/admin/dashboard');
 });
 Route::get('/admin', function () {
-    return redirect('/admin/login');
+    abort(404);
 });
-
+Route::get('/admin/login', function () {
+    abort(404);
+});
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search-area', [HomeController::class, 'searchArea'])->name('search-area');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.list');
