@@ -14,7 +14,7 @@
                              
                         @endphp
                         @if(!empty($firstImage))
-                            <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="" width="100%">
+                            <img src="{{  $firstImage->getUrl('webp') ?? '' }}" alt="" width="100%">
                         @else
                             <img src="{{ asset('assets/img/no-image-1080x1080.png') }}" alt="" width="100%">
                         @endif

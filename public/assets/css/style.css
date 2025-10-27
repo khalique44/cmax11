@@ -185,12 +185,12 @@ p.loc-txt {
 .page-navigation ul li {
   margin-right : 5px;
 }
-div#suggestions {
+div.suggestions {
     height: 244px;
     overflow: auto;
    width: 295px;
 }
-div#suggestions .suggestion-item {
+div.suggestions .suggestion-item {
     font-size: 14px !important;
     padding-top: 3px !important;
     padding-bottom: 3px !important;

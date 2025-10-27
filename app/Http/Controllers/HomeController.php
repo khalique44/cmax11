@@ -87,40 +87,60 @@ class HomeController extends Controller
 
     public function searchArea(Request $request)
     {
-        $query = $request->get('query');
+        $query = trim($request->get('query'));
 
-        // Fetch areas that match OR whose sub-areas match the query
-        $results = Area::with(['subAreas' => function ($q) use ($query) {
-                $q->where('name', 'like', '%' . $query . '%')
-                ->orderBy('name', 'asc');
+        // Split query if contains hyphen
+        $searchArea = explode('-', $query, 2);
+        $areaPart = trim($searchArea[0] ?? '');
+        $subAreaPart = trim($searchArea[1] ?? '');
+
+        $results = Area::with(['subAreas' => function ($q) use ($subAreaPart, $query) {
+                // Filter subareas only if searching specifically for them
+                if ($subAreaPart) {
+                    $q->where('name', 'like', '%' . $subAreaPart . '%');
+                }
+                $q->orderBy('name', 'asc');
             }])
-            ->where('name', 'like', '%' . $query . '%')
-            ->orWhereHas('subAreas', function ($q) use ($query) {
-                $q->where('name', 'like', '%' . $query . '%');
+            ->when($subAreaPart, function ($q) use ($areaPart, $subAreaPart) {
+                // If hyphen present → search both Area + SubArea parts
+                $q->where('name', 'like', '%' . $areaPart . '%')
+                ->orWhereHas('subAreas', function ($sub) use ($subAreaPart) {
+                    $sub->where('name', 'like', '%' . $subAreaPart . '%');
+                });
+            }, function ($q) use ($query) {
+                // If no hyphen → search only Area but will include all its SubAreas
+                $q->where('name', 'like', '%' . $query . '%')
+                ->orWhereHas('subAreas', function ($sub) use ($query) {
+                    $sub->where('name', 'like', '%' . $query . '%');
+                });
             })
             ->orderBy('name', 'asc')
             ->get()
-            ->flatMap(function ($area) use ($query) {
+            ->flatMap(function ($area) use ($query, $subAreaPart) {
                 $list = collect();
 
-                // Include the area itself if it matches
-                if (stripos($area->name, $query) !== false) {
+                // Always include matching Area name
+                if (stripos($area->name, $query) !== false || !$subAreaPart) {
                     $list->push($area->name);
                 }
 
-                // Include matching subareas
-                foreach ($area->subAreas as $subArea) {
+                // Always include *all* subareas for a matching area
+                foreach ($area->subAreas->sortBy('name') as $subArea) {
                     $list->push($area->name . ' - ' . $subArea->name);
                 }
 
                 return $list;
             })
-            ->unique() // remove duplicates if any
+            ->unique()
             ->take(50)
             ->values();
 
         return response()->json($results);
     }
+
+
+
+
 
 
 

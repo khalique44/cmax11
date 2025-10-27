@@ -176,21 +176,24 @@ function displayMsg(msgArea, msg, msgType){
 }
 
 let selectedIndex = -1; // for arrow key navigation
-$('#search-area').on('input', function(e){
+$('#search-area, #search-area-mobile').on('input', function(e){
     e.preventDefault(); 
     
     const query = $(this).val().trim();
 
         // Only proceed if query has at least 2 characters
         if (query.length < 2) {
-            $('#suggestions').hide();
+            
+            $('.suggestions').hide();
             return;
         }
-        if (!/^[a-zA-Z0-9\s]+$/.test(query)) return;
+        console.log("Test:"+ (!/^[a-zA-Z0-9\s-]+$/.test(query)));
+        if (!/^[a-zA-Z0-9\s-]+$/.test(query)) return;
+        
     var data = {query:query};
 
     //ajaxPostRequest("/search-area",data,searchAreaCallback,ajaxErrorCallback,true);
-    $('#suggestions').html('<i class="fa fa-spinner fa-spin"></i>').show();
+    $('.suggestions').html('<i class="fa fa-spinner fa-spin"></i>').show();
     var formData = {query:query};
     //showAjaxLoader();
     $.ajax({
@@ -203,7 +206,7 @@ $('#search-area').on('input', function(e){
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         success: function(data) {
             if (data.length === 0) {
-                $('#suggestions').hide();
+                $('.suggestions').hide();
                 return;
             }
             searchAreaCallback(data);
@@ -222,7 +225,7 @@ function searchAreaCallback(response){
         response.forEach(function(item){
             suggestions += '<div class="suggestion-item" style="padding:5px; cursor:pointer; font-size:11px;">'+item+'</div>';
         });
-        $('#suggestions').html(suggestions).show();
+        $('.suggestions').html(suggestions).show();
     
 
     if(typeof response.errors !== 'undefined'){
@@ -240,7 +243,7 @@ $(document).ready(function(){
     $("select.select2").select2();
 
     // Keyboard navigation (Up/Down/Enter)
-    $('#search-area').on('keydown', function(e) {
+    $('#search-area, #search-area-mobile').on('keydown', function(e) {
         const items = $('.suggestion-item');
 
         if (items.length === 0) return;
@@ -255,7 +258,8 @@ $(document).ready(function(){
             e.preventDefault();
             if (selectedIndex >= 0) {
                 $('#search-area').val($(items[selectedIndex]).text());
-                $('#suggestions').hide();
+                $('#search-area-mobile').val($(items[selectedIndex]).text());
+                $('.suggestions').hide();
             }
             return;
         } else {
@@ -270,13 +274,14 @@ $(document).ready(function(){
     // When clicking a suggestion
     $(document).on('click', '.suggestion-item', function(){
         $('#search-area').val($(this).text());
-        $('#suggestions').hide();
+        $('#search-area-mobile').val($(this).text());
+        $('.suggestions').hide();
     });
 
     // Hide if clicked outside
     $(document).click(function(e) {
-        if (!$(e.target).closest('#search-area, #suggestions').length) {
-            $('#suggestions').hide();
+        if (!$(e.target).closest('#search-area, #search-area-mobile .suggestions').length) {
+            $('.suggestions').hide();
         }
     });
 
