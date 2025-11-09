@@ -737,10 +737,11 @@ span.number {
     width: auto;
 }
 .galleria-inside{
-    height: 204px;
+   
     overflow: hidden;
     margin-bottom: 15px;
     position: relative;
+    min-height:170px;
 }
 .galleria-inside .btn-showgal{
     position: absolute;
@@ -1126,6 +1127,7 @@ display: contents;
 }
 .comparison-row .badge{
     margin-right: 5px;
+    margin-bottom: 5px;
 }
 
 .row-label {
@@ -1144,7 +1146,7 @@ font-size: 14px;
 padding: 20px;
 border-right: 1px solid #e2e8f0;
 border-top: 1px solid #e2e8f0;
-display: flex;
+/* display: flex; */
 align-items: center;
 font-size: 14px;
 color: #334155;

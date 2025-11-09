@@ -2787,3 +2787,6 @@ div#suggestions .suggestion-item {
     padding-top: 3px !important;
     padding-bottom: 3px !important;
 }
+.very-small-text {
+  font-size: 0.7em; /* Or any desired smaller value */
+}

@@ -88,9 +88,26 @@ ul.paymentplan-area li img {
 #progress ul.paymentplan-area li img {
     width: 100%;
     height: 123px;
+    padding-bottom: 7px;
     
 }
 
+#paymentplan ul.paymentplan-area {
+    display: inline-block;
+}
+
+#paymentplan ul.paymentplan-area li {
+    width: 170px;
+    display: inline-block;
+
+}
+
+#paymentplan ul.paymentplan-area li img {
+    width: 100%;
+    height: 123px;
+    padding-bottom: 7px;
+    
+}
 
 p.loc-txt {
     
@@ -207,9 +224,129 @@ p.listing-short-desc {
 
 img.main-img-detail-pg {
   max-height: 500px;
-  min-height: 300px;
+  min-height: 340px;
 }
+
+/* Container */
+.select2-container--default .select2-selection--multiple {
+  background-color: #f8f9fa;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  min-height: 45px;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Selected tags (choices) */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #007bff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 3px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* Close (x) icon */
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: #fff;
+  margin-right: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Search input inside multiple box */
+.select2-container--default .select2-selection--multiple .select2-search__field {
+  border: none !important;
+  outline: none !important;
+  margin: 8px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+/* Dropdown styling */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Dropdown box */
+.select2-dropdown {
+  border-radius: 10px;
+  border: 1px solid #007bff;
+  overflow: hidden;
+}
+
+.row-value .features img, span {
+  padding: 5px;
+  font-size: 12px;
+}
+.row-value .features img{
+  width: 20px;
+}
+.galleria-inside{
+  min-height: 150px;
+  max-height: 150px;
+}
+.galleria-inside-img {
+  width: 100%;
+ 
+  max-height: 150px;
+}
+
+.gallery-main{
+  min-width: 500px;         /* set desired box width */
+  height: 410px;        /* set desired box height */
+  overflow: hidden;     /* prevent image overflow */
+  
+  
+  display: inline-block;
+  margin: 5px;
+  position: relative;
+}
+.gallery-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fill box without distortion, crop if needed */
+    object-position: center;
+    display: block;
+    border-radius: 5px;
+}
+
+.gallery-box {
+    width: 290px;         /* set desired box width */
+    height: 200px;  
+     
+    overflow: hidden;     /* prevent image overflow */
+    
+    
+    display: inline-block;
+    margin: 5px;
+    position: relative;
+    padding: 0 5px 0 10px;
+}
+
+.gallery-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* fill box without distortion, crop if needed */
+    object-position: center;
+    display: block;
+    border-radius: 5px;
+}
+.feature-compare{
+  margin-bottom: 10px;
+}
+.feature-img-compare img{
+  width: 20px;
+}
+
 /* ------ End code by KHL ------ */
+
 
 
 

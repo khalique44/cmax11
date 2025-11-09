@@ -28,6 +28,8 @@ class Project extends Model implements HasMedia
 		'payment_plan_duration' => 'array',
     ];
 
+	protected $appends = ['alt_location'];
+
     protected static function boot()
 	{
 	    parent::boot();

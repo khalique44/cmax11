@@ -92,9 +92,12 @@ class ProjectController extends Controller
                     $statusHtml = GeneralHelper::getStatusLabel($label,$color);
                     $newLabel = $project->is_popular == 1 ? 'No' : 'Yes';
                     $newStatus = $project->is_popular == 1 ? 0 : 1;
-                    return '<a href="#" data-status="'.$newStatus.'" data-status-type="is_popular" data-status-label="'.$newLabel.'" class="updateStatus" data-model-name="project" data-id="'.$project->id.'" title="Click to '.$newLabel.'" >'.$statusHtml.'</a>';                    
+                    return '<a href="#" data-status="'.$newStatus.'" data-status-type="is_popular" data-status-label="'.$newLabel.'" class="updateStatus" data-model-name="project" data-id="'.$project->id.'" title="Click to '.$newLabel.'" >'.$statusHtml.'</a>';
+                                        
+                })->editColumn('project_title', function($project) {
+                    return $project->project_title.'<br><div class="very-small-text text-muted"><i class="fa fa-map-marker"></i> '.$project->alt_location.'</div>';                    
                 })
-                ->rawColumns(['action','is_active','refreshed_at','is_popular'])
+                ->rawColumns(['action','is_active','refreshed_at','is_popular','project_title'])
                 ->toJson();
         }
     }

@@ -58,6 +58,6 @@ class LoginController extends Controller
     {
         $this->guard('admin')->logout();
         $request->session()->invalidate();
-        return redirect('admin/login');
+        return redirect('admin/secure-login');
     }
 }

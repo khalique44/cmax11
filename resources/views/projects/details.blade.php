@@ -68,9 +68,11 @@
 
             <div class="col-md-6">
                 @if(!empty($firstImage))
-                    <a href="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" data-lightbox="gallery-group">
-                        <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="" class="w-100 main-img-detail-pg">
-                    </a>
+                    <div class="gallery-main">
+                        <a href="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" data-lightbox="gallery-group">
+                            <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="" class="w-100 main-img-detail-pg">
+                        </a>
+                    </div>
                 @endif
             </div>
             <div class="col-md-6">
@@ -78,8 +80,8 @@
                     @if(!empty($remainingImages))
                       @foreach($remainingImages as $key => $media)
                         <div class="col-md-6" {!! ($key > 4) ? "style='display:none;'" : "" !!}>
-                          <div class="galleria-inside">
-                              <a href="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" data-lightbox="gallery-group"><img src="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" alt="" class="w-100"></a>
+                          <div class="gallery-box">
+                              <a href="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" data-lightbox="gallery-group"><img src="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" alt="" class=""></a>
                               @if($key == 4)
                                 <a href="#" class="btn-showgal"><img src="{{ asset('assets/img/gallery-iconwhite.png') }}" alt=""> Show all photos</a>
                               @endif

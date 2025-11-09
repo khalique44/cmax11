@@ -276,6 +276,10 @@ $(document).ready(function(){
         $('#search-area').val($(this).text());
         $('#search-area-mobile').val($(this).text());
         $('.suggestions').hide();
+        if (window.location.href.indexOf("compare") > -1) {
+            // Run your function here
+            searchCompareProjects();
+        }
     });
 
     // Hide if clicked outside
@@ -662,8 +666,8 @@ function removeCompare(id) {
 function addCompareMultiple() {
 
     showAjaxLoader();   
-    var ids = $("select.compare-select-box").val();
-
+    var ids = $("select#compare-projects").val();
+    console.log('ids:'+ids);
     $.ajax({
         url: $('meta[name="home_url"]').attr('content')+"/compare/add-multiple",
         type: "POST",
@@ -673,13 +677,20 @@ function addCompareMultiple() {
         //processData: false, 
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         success: function(data) {
+            
             if(data.status == 'success'){
-                displayMsg('','Project added to compare.','success')
-                location.reload();
+                if(data.project_count > 1){
+                    displayMsg('','Project added to compare.','success');
+                }else if(data.project_count == 1){
+                    displayMsg('','Please add minimum 2 projects to Compare!','danger');
+                }else{
+                    displayMsg('','No projects selected for comparison.','danger');
+                }
+                $(".load-compare-list").html(data.html);
             }else{
                 displayMsg('',data.message,'error')
             }        
-            
+            hideAjaxLoader();
             
         },
         error: function(){
@@ -740,3 +751,50 @@ function fetchFilters() {
             }
         });
     }
+
+    $(document).on('change', '#property_type, #property_type, #bedrooms, #builder_id, #progress', function(e) {
+        e.preventDefault();
+        
+            searchCompareProjects();
+        
+    });
+function searchCompareProjects(){
+
+    var search_area = $('#search-area').val();
+    var property_type = $('#property_type').val();
+    var bedrooms = $('#bedrooms').val();
+    var builder_id = $('#builder_id').val();
+    var progress = $('#progress').val();
+    showAjaxLoader();
+    $.ajax({
+        url: $('meta[name="home_url"]').attr('content')+"/compare/search",
+        method: 'GET',
+        data: {search_area:search_area,property_type:property_type,bedrooms:bedrooms,builder_id:builder_id,progress:progress},
+        success: function(projects) {
+            let $select = $('#compare-projects');
+            $select.empty();
+
+            if (projects.length > 0) {
+                $select.attr("data-placeholder","Select Projects to compare");
+                $.each(projects, function(i, project) {
+                    $select.append('<option value="'+project.id+'">'+project.project_title+' ('+project.alt_location+')</option>');
+                });
+            } else {
+                $select.append('<option disabled>No projects found</option>');
+                $select.attr("data-placeholder","No projects found");
+                
+            }
+
+            $select.trigger('change'); // refresh Select2
+            $('.select2-container .selection .select2-selection').trigger('click');
+            hideAjaxLoader();
+        },
+        error: function(){
+            displayMsg('','Server Error! Please reload and try again.','error');
+            hideAjaxLoader();
+        },
+        always: function(){
+            hideAjaxLoader();
+        }
+    });
+}

@@ -234,10 +234,13 @@ Route::post('/compare/clear', [ProjectCompareController::class, 'ajaxClear'])->n
 Route::get('/compare', [ProjectCompareController::class, 'index'])->name('projects.compare');
 Route::get('/compare/add/{id}', [ProjectCompareController::class, 'add'])->name('projects.compare.add');
 Route::get('/compare/remove/{id}', [ProjectCompareController::class, 'remove'])->name('projects.compare.remove');
+Route::get('/compare/search', [ProjectCompareController::class, 'searchProject'])->name('compare.searchProject');
 Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
 Route::get('/survey/download/{id}', [SurveyController::class, 'downloadDocument'])->name('file.download');
 Route::get('/survey/filter-data', [SurveyController::class, 'filterData'])->name('survey.filterData');
+
+
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\Builder;
 use Illuminate\Http\Request;
 
 class ProjectCompareController extends Controller
@@ -37,8 +38,12 @@ class ProjectCompareController extends Controller
 
         $allProjects = Project::where('is_active', true)->orderBy('position','asc')->get(['id', 'project_title']);
         $projects = Project::with('offers','floorPlan','builder')->whereIn('id', $compare)->get();
+		$offering = config('constants.offering');
+		$bedrooms = config('constants.bedrooms');
+		$builders = Builder::where('is_active',1)->orderBy('builder_name','asc')->get();
+		$progress = config('constants.progress');
 
-        return view('projects.compare', compact('projects','allProjects','compare'));
+        return view('projects.compare', compact('projects','allProjects','compare','offering','bedrooms','builders','progress'));
     }
 
 
@@ -81,7 +86,8 @@ class ProjectCompareController extends Controller
 	    
 
 	    $projects = Project::whereIn('id', $compare)->get(['id', 'project_title']);
-	    return response()->json(['status' => 'success', 'projects' => $projects]);
+        $html =  view('projects.partials.compare_list', compact('projects'))->render();
+	    return response()->json(['status' => 'success','project_count' => count($projects), 'html' => $html]);
 	}
 
 	public function ajaxRemove(Request $request)
@@ -101,6 +107,91 @@ class ProjectCompareController extends Controller
 	    session()->forget('compare');
 	    return response()->json(['status' => 'success', 'projects' => []]);
 	}
+
+
+	 public function searchProject(Request $request){
+
+        $searchArea      = $request->input('search_area');
+        $builderId       = $request->input('builder_id');        
+        $progress        = $request->input('progress');
+        $propertyType    = $request->input('property_type');        
+        $bedrooms        = $request->input('bedrooms');
+        //$offer           = $request->input('offer');         
+        $searchedData    = $request->all();               
+        $compare        = session()->get('compare', []);  
+        
+        \DB::enableQueryLog();
+
+        $searchArea = explode(' - ', $searchArea);
+        $area = $searchArea[0] ?? '';
+        $subArea = $searchArea[1] ?? '';
+
+        $projects = Project::query()
+        
+
+        ->when($area || $subArea, function ($query) use ($area, $subArea) {
+			$query->where(function ($q) use ($area, $subArea) {
+				if ($area) {
+					$q->whereHas('area', function ($qa) use ($area) {
+						$qa->where('name', 'like', '%' . $area . '%');
+					});
+				}
+
+				if ($subArea) {
+					$q->whereHas('subArea', function ($qs) use ($subArea) {
+						$qs->where('name', 'like', '%' . $subArea . '%');
+					});
+				}
+			});
+		})        
+
+        // Builder ID
+        ->when($builderId && $builderId != 'Select', function ($query) use ($builderId) {
+            $query->where('builder_id', $builderId);
+        })        
+
+        // Progress (e.g., under-construction, completed)
+        ->when($progress && $progress != 'Select', function ($query) use ($progress) {
+            $query->where('progress', $progress);
+        }) 
+		
+		/* ->when($propertyType, function ($query, $propertyType) {
+			$types = explode(",", $propertyType);
+			$query->where(function ($q) use ($types) {
+				foreach ($types as $type) {
+					$q->orWhereRaw("FIND_IN_SET(?, offering)", [$type]);
+				}
+			});
+		}) */
+
+        // Bedrooms (assuming 'bedrooms' field in project_offers table)
+        ->when($bedrooms, function ($query, $bedrooms) {
+            $query->whereHas('offers', function ($q) use ($bedrooms) {
+                $q->where('bedrooms', $bedrooms);
+            });
+        })
+        
+        ->when($propertyType, function ($query, $offer) {
+            $query->whereHas('offers', function ($q) use ($offer) {
+                $q->where('offer', $offer);
+            });
+        });      
+		
+
+        $projects = $projects->with(['Area', 'subArea'])
+        ->where('is_active', true)
+        //->orderByRaw("CASE WHEN refreshed_at >= ? THEN 0 ELSE 1 END", [now()->subMonth()])
+        ->orderBy('position', 'asc')
+        ->orderBy('created_at', 'desc')
+        ->get();
+        //dd(\DB::getQueryLog());
+        
+
+        if ($request->ajax()) {
+            return response()->json($projects);
+        }
+
+    }
 
 }
 
