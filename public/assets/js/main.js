@@ -694,7 +694,8 @@ function addCompareMultiple() {
             
         },
         error: function(){
-            displayMsg('','Server Error! Please reload and try again.','error')
+            displayMsg('','Server Error! Please reload and try again.','error');
+            hideAjaxLoader();
         },
         always: function(){
             hideAjaxLoader();

@@ -72,8 +72,8 @@ class ProjectCompareController extends Controller
 	    $compare = session()->get('compare', []);
 
 	    if(!empty($ids)){
-	    	foreach ($ids as $key => $id) {
-	    		if (!in_array($id, $compare)) {
+	    	foreach ($ids as $key => $id) {                
+	    		if (!in_array($id, array_values($compare))) {                    
 			        if (count($compare) >= config('constants.compare_project_limit')) {
 			            return response()->json(['status' => 'error', 'message' => 'You can only compare up to '.config('constants.compare_project_limit').' projects.']);
 			        }
@@ -85,9 +85,10 @@ class ProjectCompareController extends Controller
 	    }
 	    
 
-	    $projects = Project::whereIn('id', $compare)->get(['id', 'project_title']);
+	    $projects = Project::with('offers','floorPlan','builder')->whereIn('id', $compare)->get();
         $html =  view('projects.partials.compare_list', compact('projects'))->render();
 	    return response()->json(['status' => 'success','project_count' => count($projects), 'html' => $html]);
+        
 	}
 
 	public function ajaxRemove(Request $request)

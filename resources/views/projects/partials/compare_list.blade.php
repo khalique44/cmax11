@@ -1,4 +1,5 @@
 @if(count($projects) > 1)
+
 <!-- Comparison Container -->
     <div class="comparison-container cols-{{ count($projects) }}">
         <div class="property-headers">
@@ -33,7 +34,7 @@
             @foreach($projects as $project)
                 <div class="row-value">
                     <span class="location-icon">📍</span>
-                    {{ $project->location }}
+                    {{ $project->alt_location }}
                 </div>
             @endforeach
         </div>
@@ -78,7 +79,7 @@
                         </thead>
                         <tbody>
                             <tr class="dimensions-row">
-                                <td></td>
+                                <td><strong>Title:</strong></td>
                                 @foreach($project->offers as $index => $savedOffer)
                                         
                                         <td>{{ $savedOffer->title ?? '' }}</td>
@@ -87,7 +88,7 @@
                                 @endforeach
                             </tr>
                             <tr class="dimensions-row">
-                                <td><i class="fa fa-bed" title="Number of Bedrooms"></i></td>
+                                <td><strong>Bedrooms:</strong></td>
                                 @foreach($project->offers as $index => $savedOffer)
                                         
                                         
@@ -98,11 +99,33 @@
                             </tr>
 
                             <tr class="dimensions-row">
-                                <td><i class="fa fa-calendar" title="Installment"></i></td>
+                                <td><strong>Unit Price:</strong></td>
+                                @foreach($project->offers as $index => $savedOffer)
+                                        
+                                        
+                                        <td>{{ GeneralHelper::cleanDecimal($savedOffer->price_from) }}
+                                                                    {{ $savedOffer->price_from_in_format }}</td>
+                                        
+                                    
+                                @endforeach
+                            </tr>
+
+                            <tr class="dimensions-row">
+                                <td><strong>Installment Plan:</strong></td>
                                 @foreach($project->offers as $index => $savedOffer)
                                         
 
-                                        <td> {!! $savedOffer->is_installment > 0 ? '<span class="badge bg-success">Yes</span> ' : '<span class="badge bg-danger">No</span>' !!}</td>
+                                        <td> {!! $savedOffer->is_installment > 0 ? '<span class="badge bg-success">'. $savedOffer->number_of_instalments .' Instalmments</span> ' : '<span class="badge bg-danger">No</span>' !!}</td>
+                                        
+                                    
+                                @endforeach
+                            </tr>
+                            <tr class="dimensions-row">
+                                <td><strong>Monthly Installment:</strong></td>
+                                @foreach($project->offers as $index => $savedOffer)
+                                        
+
+                                        <td> {!! $savedOffer->is_installment > 0 ? '<span class="badge bg-success">'. $savedOffer->monthly_installment .' PKR</span> ' : '<span class="badge bg-danger">No</span>' !!}</td>
                                         
                                     
                                 @endforeach

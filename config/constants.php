@@ -64,7 +64,7 @@ return [
                             'Hospital',                            
                             'Educational Area',                            
                         ],
-    'compare_project_limit' => 4,
+    'compare_project_limit' => 2,
     'admin_email' => env('ADMIN_EMAIL', 'khalique.ahmed3@gmail.com'),
     'payment_plan_duration' => [
                                 1 => '1 Year',
