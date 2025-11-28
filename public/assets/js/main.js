@@ -781,7 +781,7 @@ function searchCompareProjects(){
                     $select.append('<option value="'+project.id+'" data-location="'+project.alt_location+'" data-builder="'+project.builder.builder_name+'">'+project.project_title+' </option>');
                 });
             } else {
-                $select.append('<option disabled>No projects found</option>');
+                $select.append('<option disabled data-location="" data-builder="">No projects found</option>');
                 $select.attr("data-placeholder","No projects found");
                 
             }
