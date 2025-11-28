@@ -70,7 +70,9 @@ class ProjectCompareController extends Controller
 	{
 	    $ids = $request->ids;
 	    $compare = session()->get('compare', []);
-
+        if(count($compare) > 1){
+            session()->forget('compare');
+        }
 	    if(!empty($ids)){
 	    	foreach ($ids as $key => $id) {                
 	    		if (!in_array($id, array_values($compare))) {                    
@@ -148,7 +150,7 @@ class ProjectCompareController extends Controller
 
         // Builder ID
         ->when($builderId && $builderId != 'Select', function ($query) use ($builderId) {
-            $query->where('builder_id', $builderId);
+            $query->whereIn('builder_id', $builderId);
         })        
 
         // Progress (e.g., under-construction, completed)
@@ -179,7 +181,7 @@ class ProjectCompareController extends Controller
         });      
 		
 
-        $projects = $projects->with(['Area', 'subArea'])
+        $projects = $projects->with(['Area', 'subArea','Builder'])
         ->where('is_active', true)
         //->orderByRaw("CASE WHEN refreshed_at >= ? THEN 0 ELSE 1 END", [now()->subMonth()])
         ->orderBy('position', 'asc')

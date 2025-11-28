@@ -110,6 +110,14 @@ class SurveyController extends Controller
         return FileHelper::downloadFile($record->file_url);
     }
 
+    public function viewDocument($id)
+    {
+        $record = AreaSurvey::findOrFail($id);  
+
+        return FileHelper::viewFile($record->file_url);
+    }
+
+
     public function filterData(Request $request)
     {
          \DB::enableQueryLog();

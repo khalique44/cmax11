@@ -5,6 +5,7 @@
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Helpers\FileHelper;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectCompareController;
@@ -238,8 +239,21 @@ Route::get('/compare/search', [ProjectCompareController::class, 'searchProject']
 Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
 Route::get('/survey/download/{id}', [SurveyController::class, 'downloadDocument'])->name('file.download');
+Route::get('/survey/view/{id}', [SurveyController::class, 'viewDocument'])->name('file.view');
 Route::get('/survey/filter-data', [SurveyController::class, 'filterData'])->name('survey.filterData');
 
+Route::get('/file/view/{path}', function ($path) {
+    return FileHelper::viewFile($path);
+})->where('path', '.*');
+
+Route::get('/{path}', function ($path) {
+    return view('pdf-viewer', ['path' => $path]);
+})->where('path', '.*');
+
+// Download route
+Route::get('/download/{path}', function ($path) {
+    return FileHelper::downloadFile($path);
+})->where('path', '.*');
 
 
 

@@ -13,7 +13,7 @@
     <div class="container">
         <!-- Filter Section -->
 
-        <div class="filter-section">
+        <div class="filter-section compare-pg">
             <div class="filter-grid">
                 <div class="filter-group">
                     <input type="text" class="filter-select font-size-12" value="" id="search-area" name="search-area" placeholder="Search Area">
@@ -43,8 +43,8 @@
                 </div>
                 
                 <div class="filter-group">
-                    <select class="filter-select " name="builder_id" id="builder_id" title="Select Builder">
-                        <option value="" selected >Builder</option>
+                    <select class="filter-select select2" name="builder_id[]" id="builder_id" title="Select Builder" multiple data-placeholder="Select Builder">
+                        
                         <@foreach($builders as $builder)
                             <option value="{{ $builder->id }}">{{ ucfirst($builder->builder_name) }}</option>
                         @endforeach

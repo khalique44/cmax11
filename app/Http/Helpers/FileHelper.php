@@ -160,4 +160,29 @@ class FileHelper
 
         return Storage::disk($disk)->download($path, $downloadName ?? basename($path));
     }
+
+    public static function viewFile(string $path, string $disk = 'public')
+    {
+        $path = str_replace("storage/", "", $path);
+
+        if (!Storage::disk($disk)->exists($path)) {
+            abort(404, 'File not found.');
+        }
+
+        $fullPath = Storage::disk($disk)->path($path);
+        $mimeType = Storage::disk($disk)->mimeType($path);
+
+        return response()->file($fullPath, [
+            'Content-Type' => $mimeType,
+            'Content-Disposition' => 'inline; filename="'.basename($path).'"'
+        ]);
+    }
+
+    public static function isPdf($path)
+    {
+        return strtolower(pathinfo($path, PATHINFO_EXTENSION)) === 'pdf';
+    }
+
+
+
 }

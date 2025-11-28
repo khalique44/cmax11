@@ -20,7 +20,7 @@
               </ul>
               <div class="tab-content" id="myTabContent">
                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <form class="banner-form" action="{{route('search-results')}}">
+                    <form class="banner-form search-box-home" action="{{route('search-results')}}">
                        <div class="row g-2">
                           <div class="col-md-11">
                              <div class="row">
@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-md-3">
                                   <label class="form-label">Monthly Installment</label>
-                                  <select class="form-select select2" name="monthly_installment" id="monthly_installment">
+                                  <select class="form-select select2" name="monthly_installment" id="monthly_installment_mobile">
                                     <option value="">Select</option>
                                     <option value="50000:100000" >50,000 ~ 100,000</option>
                                     <option value="100000:150000" >100,000 ~ 150,000</option>
@@ -226,23 +226,23 @@
              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
            </div>
            <div class="offcanvas-body">
-              <form class="banner-form" action="{{route('search-results')}}">
+              <form class="banner-form search-box-home" action="{{route('search-results')}}">
                        <div class="row g-2">
                           <div class="col-md-11">
                              <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-xs-12">
                                    <label class="form-label">City</label>
                                    <input type="text" class="form-control font-size-12"  id="city_id" name="city_id" placeholder="Search in City" value="Karachi" readonly="" disabled="">
                                    
 
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-xs-12">
                                    <label class="form-label">Area</label>
                                    <input type="text" class="form-control font-size-12" value="" id="search-area-mobile" name="search-area" placeholder="Search Area">
                                    <div class="suggestions" style="border:1px solid #ddd; display:none; position:absolute; background:#fff; z-index:999;"></div>
 
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-xs-12">
                                    <label class="form-label">Select Builder</label>
                                    <select class="form-select select2" name="builder_id">1
                                       <option value="" selected >Select</option>
@@ -251,10 +251,10 @@
                                       @endforeach
                                    </select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-xs-12">
                                   <label class="form-label">Monthly Installment</label>
                                   <select class="form-select select2" name="monthly_installment" id="monthly_installment">
-                                    <option value="">Select</option>
+                                    <option value="" selected>Select</option>
                                     <option value="50000:100000" >50,000 ~ 100,000</option>
                                     <option value="100000:150000" >100,000 ~ 150,000</option>
                                     <option value="150000:200000" >150,000 ~ 200,000</option>
@@ -288,7 +288,7 @@
                                 <div class="row">
                                    <div class="col-md-12">
                                       <div class="row">
-                                         <div class="col-md-3">
+                                         <div class="col-md-3 col-xs-12">
                                             <label class="form-label">Property Type</label>
                                             <select class="form-select select2" name="property_type" style="width: 100%;">
                                               <option value="" >Select</option>
@@ -297,7 +297,7 @@
                                                 @endforeach
                                             </select>
                                          </div>
-                                         <div class="col-md-3">
+                                         <div class="col-md-3 col-xs-12">
                                             <label class="form-label">Price Range</label>
                                             <div class="dropdown-price-range">
                                               <div class="dropdown-price-range-toggle">Select Price Range</div>
@@ -367,7 +367,7 @@
                                             </div>
                                             
                                          </div>
-                                         <div class="col-md-3">
+                                         <div class="col-md-3 col-xs-12">
                                             <label class="form-label">Bed</label>
                                             <select class="form-select select2" name="bedrooms" style="width: 100%;">
                                               <option value="">Select</option>
@@ -376,7 +376,7 @@
                                               @endforeach
                                             </select>
                                          </div>
-                                         <div class="col-md-3">
+                                         <div class="col-md-3 col-xs-12">
                                             <label class="form-label" >Progress</label>
 
                                             <select class="form-select select2" name="progress" style="width: 100%;">
@@ -388,7 +388,7 @@
                                         </div>
                                       </div>
                                       <div class="row">
-                                          <div class="col-md-3">
+                                          <div class="col-md-3 col-xs-12">
                                              <label class="form-label">Payment Plan</label>
                                              <select class="form-select select2" name="payment_plan_duration" style="width: 100%;">
                                                 <option value="">Select</option>
@@ -402,7 +402,7 @@
                                 </div>
                              </div>
                           </div>
-                          <div class="col-md-1 text-end pt-2">
+                          <div class="col-md-1 col-xs-12 text-end pt-2">
                                 <button type="submit" class="btn btn-primary mt-3"><i class="fa fa-search" aria-hidden="true"></i></button>
                           </div>
                        </div>

@@ -778,7 +778,7 @@ function searchCompareProjects(){
             if (projects.length > 0) {
                 $select.attr("data-placeholder","Select Projects to compare");
                 $.each(projects, function(i, project) {
-                    $select.append('<option value="'+project.id+'">'+project.project_title+' ('+project.alt_location+')</option>');
+                    $select.append('<option value="'+project.id+'" data-location="'+project.alt_location+'" data-builder="'+project.builder.builder_name+'">'+project.project_title+' </option>');
                 });
             } else {
                 $select.append('<option disabled>No projects found</option>');
@@ -799,3 +799,38 @@ function searchCompareProjects(){
         }
     });
 }
+
+// style multi select box for compare page project dropdown
+$(document).ready(function () {
+
+    function formatOption(option) {
+        if (!option.id) {
+            return option.text; // for placeholder
+        }
+
+        var $element = $(option.element);
+        var location = $element.data('location');
+        var builder = $element.data('builder');
+
+        var html =
+            '<div style="padding:5px;">' +
+                '<div style="font-weight:600; font-size:14px;">' + option.text + '</div>' +
+                '<div style="font-size:12px; color:#777;">Location: <strong>' + location + '</strong></div>' +
+                '<div style="font-size:12px; color:#555;">Builder: <strong>' + builder + '</strong></div>' +
+            '</div>';
+
+        return $(html);
+    }
+
+    function formatSelection(option) {
+        return option.text; // keep simple OR add custom HTML
+    }
+
+    $('select#compare-projects').select2({
+        width: '100%',
+        templateResult: formatOption,
+        templateSelection: formatSelection,
+        escapeMarkup: function (markup) { return markup; } // allow HTML
+    });
+
+});

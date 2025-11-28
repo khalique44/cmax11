@@ -1,7 +1,7 @@
 <section class="inner-banner">
    <div class="container">
       <div data-aos="fade-in" class="row d-none d-md-block">
-          <form class="banner-form">
+          <form class="banner-form search-box-projects">
               <div class="row g-2">
                  <div class="col-md-12">
                     <div class="row">
