@@ -51,11 +51,11 @@
                         </ul>
                         <hr>
                         <div class="row mt-4 align-items-center">
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <h6 class="crore-h"><span style="font-size: 13px;">Starting Price</span><br>{{ $project->offers->min('price_from') ?? '' }} {{ $project->offers->first()->price_from_in_format ?? '' }}</h6>
                             </div>
                             
-                            <div class="col-8 text-end">
+                            <div class="col-md-8 text-md-end">
                                 @if(in_array($project->id, $compare))
                                 <a href="javascript:;" class="detail-btn btn-grey"  onclick="removeCompare('{{ $project->id }}')">Remove from Compare</a>
                                 @else

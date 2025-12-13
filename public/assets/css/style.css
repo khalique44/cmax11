@@ -245,22 +245,27 @@ img.main-img-detail-pg {
 
 /* Selected tags (choices) */
 .compare-pg .select2-container--default .select2-selection--multiple .select2-selection__choice {
-  background-color: #007bff;
+  background-color: #003da5;
   border: none;
-  padding: 5px 10px;
+  padding: 5px 10px 5px 15px;
   border-radius: 20px;
   margin: 3px;
-  font-size: 14px;
+  font-size: 10px;
   display: flex;
   align-items: center;
+  color: #fff;
 }
+
 
 /* Close (x) icon */
 .compare-pg .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-  color: #fff;
-  margin-right: 5px;
-  font-weight: bold;
-  cursor: pointer;
+    color: #fff;
+    margin-right: 0;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+    border: none;
+    margin-left: 2px;
 }
 
 /* Search input inside multiple box */
@@ -268,8 +273,12 @@ img.main-img-detail-pg {
   border: none !important;
   outline: none !important;
   margin: 8px;
-  padding: 5px;
+  padding: 0;
   font-size: 14px;
+}
+
+.compare-pg .select2-container--default .select2-selection--multiple .select2-search__field::placeholder{
+  color: #ffffff;
 }
 
 /* Dropdown styling */
@@ -315,16 +324,13 @@ img.main-img-detail-pg {
 }
 
 .gallery-box {
-    width: 290px;         /* set desired box width */
+    width: 100%;         /* set desired box width */
     height: 200px;  
-     
     overflow: hidden;     /* prevent image overflow */
-    
-    
     display: inline-block;
-    margin: 5px;
+    margin: 5px 0;
     position: relative;
-    padding: 0 5px 0 10px;
+    padding: 0;
 }
 
 .gallery-box img {
@@ -348,6 +354,22 @@ img.main-img-detail-pg {
     height: auto !important;
     max-height: 600px !important;
     object-fit: contain;
+}
+
+ul#select2-compare-projects-container{
+   display: inline-flex;
+}
+.compare-pg .select2-container--default .select2-selection--multiple{
+    height: 45px;
+    overflow: auto;
+    padding: 3px;
+    color: #fff;
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+.filter-group[data-select2-id="select2-data-59-uv2u"] ul#select2-builder_id-container{
+
 }
 
 /* ------ End code by KHL ------ */

@@ -6,7 +6,7 @@
 
   @include('layouts.includes.nav')
       
-  <section class="gallery-area pt-5 pb-5">
+  <section class="gallery-area pt-5 pb-md-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
@@ -20,12 +20,12 @@
                     <a href="#" class="launch-btn red-bg position-static">{{ $progress[$project->progress] ?? '' }}</a>
                     <a href="#" class="launch-btn position-static">{{ $project->offering ?? '' }}</a>
                </div>
-               <h1 class="mt-2 mainhead-inner">{{ $project->project_title }}</h1>
+               <h1 class="mt-4 mt-md-2 mainhead-inner">{{ $project->project_title }}</h1>
                <p class="loc-txt"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $project->alt_location ?? '' }} <a href="#location" title="See on the Map"><i class="fa fa-eye"></i></a></p>
 
 
             </div>
-            <div class="col-md-6 text-end">
+            <div class="col-md-6 text-md-end">
                 <h2 class="Starting-price mb-4"><span>Starting From</span>
 
                     {{ $project->price_range['min']['amount'] ?? ''}}
@@ -33,7 +33,7 @@
                     {{ $project->price_range['min']['unit'] ?? '' }} 
                     
                 </h2>
-                <div class="d-flex justify-content-end ">
+                <div class="d-md-flex justify-content-end details-btnss">
                     <div class="mb-2 me-2">
 
                         @if(in_array($project->id, $compare))
@@ -79,7 +79,7 @@
                 <div class="row">
                     @if(!empty($remainingImages))
                       @foreach($remainingImages as $key => $media)
-                        <div class="col-md-6" {!! ($key > 4) ? "style='display:none;'" : "" !!}>
+                        <div class="col-6" {!! ($key > 4) ? "style='display:none;'" : "" !!}>
                           <div class="gallery-box">
                               <a href="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" data-lightbox="gallery-group"><img src="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" alt="" class=""></a>
                               @if($key == 4)

@@ -5,13 +5,13 @@
               <div class="row g-2">
                  <div class="col-md-12">
                     <div class="row">
-                      <div class="col-md-2">
+                      <div class="col-md-3">
                            <label class="form-label">City</label>
                            <input type="text" class="form-control font-size-12"  id="city_id" name="city_id" placeholder="Search in City" value="Karachi" readonly="" disabled="">
                            
 
                       </div>
-                       <div class="col-md-4">
+                       <div class="col-md-3">
                           <label class="form-label">Area</label>
                           <input type="text" class="form-control" id="search-area" name="search-area" placeholder="Search Area" value="{{ $searchedData && isset($searchedData['search-area']) ? $searchedData['search-area'] : '' }}" >
                           <div class="suggestions" style="border:1px solid #ddd; display:none; position:absolute; background:#fff; z-index:999;"></div>

@@ -67,7 +67,7 @@
                 
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-lg-10">
                     <select class="filter-select select2" id="compare-projects" multiple="" data-placeholder="Select Project" title="Select Project" >
                         @if(count($allProjects) > 0)
                             @foreach($allProjects as $project)
@@ -77,7 +77,7 @@
                         
                     </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-lg-2">
                     <div class="text-left"><button class="add-to-compare" onclick="addCompareMultiple();">Add to Compare</button></div>
                 </div>
             </div>
