@@ -787,7 +787,7 @@ function searchCompareProjects(){
             }
 
             $select.trigger('change'); // refresh Select2
-            $('.select2-container .selection .select2-selection').trigger('click');
+            $('.select2-container .selection .select2-selection #select2-compare-projects-container').trigger('click');
             hideAjaxLoader();
         },
         error: function(){
