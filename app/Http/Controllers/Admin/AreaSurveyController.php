@@ -77,7 +77,7 @@ class AreaSurveyController extends Controller
             'area' => 'required',          
             //'survey_date' => 'required',
             //'file_url' => 'required|file|mimes:csv,xls,xlsx,pdf|max:10240',     
-            'file_url' =>'required|max:10240|mimetypes:application/csv,application/excel,application/vnd.ms-excel,application/vnd.msexcel,text/csv,text/anytext,text/plain,text/x-c,application/pdf',      
+            'file_url' =>'required|max:10240|mimetypes:application/csv,text/csv,text/anytext,text/plain,text/x-c,application/pdf',      
             'thumbnail_url' => 'image|max:2048',
             'survey_date' => [
             'required',
@@ -174,7 +174,7 @@ class AreaSurveyController extends Controller
         $validator = Validator::make($request->all(), [
             'area' => 'required',          
             //'survey_date' => 'required',
-            'file_url' =>'max:10240|mimetypes:application/csv,application/excel,application/vnd.ms-excel,application/vnd.msexcel,text/csv,text/anytext,text/plain,text/x-c,application/pdf',        
+            'file_url' =>'max:10240|mimetypes:application/csv,text/csv,text/anytext,text/plain,text/x-c,application/pdf',        
             'thumbnail_url' => 'image|max:2048',
             'survey_date' => [
                 'required',

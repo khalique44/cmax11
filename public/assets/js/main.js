@@ -543,10 +543,6 @@ $(document).ready(function() {
 
     // handle compare select box
 
-    $('.compare-select-box').select2({
-        maximumSelectionLength: 4
-      });
-
 });
 
 
@@ -830,6 +826,7 @@ $(document).ready(function () {
         width: '100%',
         templateResult: formatOption,
         templateSelection: formatSelection,
+        maximumSelectionLength: 2,
         escapeMarkup: function (markup) { return markup; } // allow HTML
     });
 

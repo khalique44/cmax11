@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('project_offers', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('project_id');
-            $table->enum('offer', ['flats','offices','plots','shops']);
+            $table->enum('offer', ['flats','offices','plots','shops','villas']);
             $table->string('title')->nullable();            
             $table->decimal('area', 8, 0)->nullable(); 
             $table->string('area_type')->nullable(); 

@@ -71,7 +71,8 @@
                     <select class="filter-select select2" id="compare-projects" multiple="" data-placeholder="Select Project" title="Select Project" >
                         @if(count($allProjects) > 0)
                             @foreach($allProjects as $project)
-                                <option value="{{ $project->id }}" @selected(in_array($project->id,$compare)) {{ in_array($project->id,$compare) ? 'data-added=1' : 'data-added=0' }}>{{ $project->project_title }}</option>
+                            
+                                <option value="{{ $project->id }}" data-location="{{$project->alt_location}}" data-builder="{{ $project->builder?->builder_name }}" @selected(in_array($project->id,$compare)) {{ in_array($project->id,$compare) ? 'data-added=1' : 'data-added=0' }}>{{ $project->project_title }}</option>
                             @endforeach
                         @endif
                         

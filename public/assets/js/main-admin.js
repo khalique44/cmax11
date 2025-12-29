@@ -1030,7 +1030,7 @@ $(document).on('click', 'a.remove_file', function(){
 $(function(){
     $('#datepicker').datepicker({
         todayHighlight:true,
-        startDate:'-15d',
+        startDate:'-5y',
         format: "yyyy-mm-dd",
         default: 'yyyy-mm-dd',
         autoclose: true

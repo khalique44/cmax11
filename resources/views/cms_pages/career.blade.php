@@ -56,18 +56,12 @@
 							</div>
 
 							<div class="form-group mt-3">
-								<select name="" id="" class="form-select">
+								<select name="area_of_interest" id="area_of_interest" class="form-select">
 									<option value="">Areas of Interest</option>
-									<option value="">Option</option>
+									<option value="Marketing">Marketing</option>
+									<option value="Sales">Sales</option>
+									<option value="HR">HR</option>
 								</select>
-							</div>
-
-							<div class="form-group mt-3 text-start">
-								<div class="upload-btn-wrapper">
-									<button class="btn">Upload your CV</button>
-									<input type="file" name="myfile" />
-								</div>
-
 							</div>
 
 							<div class="form-group mt-3">

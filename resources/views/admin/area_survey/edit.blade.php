@@ -56,8 +56,8 @@
                                     <div class="col-xs-{!! !empty($record->file_url) ? '6' : '12' !!} mb-3 mt-3">   
                                         <div class="form-group">
                                             <!-- File Upload -->                                        
-                                            <label class="form-label">Upload File (CSV,EXCEL,PDF)</label>
-                                            <input type="file" name="file_url" id="file_url"  class="form-control" accept=".xlsx,.xls,.csv,application/pdf" >
+                                            <label class="form-label">Upload File (CSV,PDF)</label>
+                                            <input type="file" name="file_url" id="file_url"  class="form-control" accept=".csv,application/pdf" >
                                         </div>
                                     </div>
 

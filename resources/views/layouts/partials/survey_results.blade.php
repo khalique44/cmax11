@@ -15,13 +15,13 @@
                     <div class="text-center mt-2">
                         <p class="btn btn-red w-100">{{ $s->full_area . ', ' ?? ''  }} {{ $s->formatted_survey_date ?? '' }}</p>
                         @if($isPdf)
-                            <a href="{{ url('/'.$s->file_url) }}" class="btn btn-success" target="_blank" title="View PDF File">
+                            <a href="{{ url('/survey/view/'.$s->id) }}" class="btn btn-success" target="_blank" title="View PDF File">
                                 <i class="fa fa-eye"></i>
                             </a>
                             
                         @endif
 
-                        <a href="{{ url('/download/'.$s->file_url) }}" class="btn btn-success" target="_blank" title="Download  File">
+                        <a href="{{ url('/survey/download/'.$s->id) }}" class="btn btn-success" target="_blank" title="Download  File">
                             <i class="fa fa-cloud-download"></i>
                         </a>
                         

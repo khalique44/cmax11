@@ -19,17 +19,19 @@ class SurveyController extends Controller
     {
         $uniqueAreaSurveys = AreaSurvey::with(['area', 'subArea'])
         ->select('area_id', 'sub_area_id')
-        ->groupBy('sub_area_id')
+        ->groupBy('sub_area_id','area_id')
         ->get();    
         //$years = GeneralHelper::getYears(3,0);
         //$months = GeneralHelper::getMonths();
-        $years = $uniqueAreaSurveys
+        $survey_date = AreaSurvey::select('survey_date')->get();
+
+        $years = $survey_date
         ->map(fn($s) => Carbon::parse($s->survey_date)->year)
         ->unique()
         ->sortDesc()
         ->values();
 
-        $months = $uniqueAreaSurveys
+        $months = $survey_date
         ->map(fn($s) => Carbon::parse($s->survey_date)->month)
         ->unique()
         ->sort()

@@ -22,9 +22,9 @@
       </div>
       <div class="row">
          <div data-aos="fade-up" class="col-6 col-md-6 col-lg-3 mb-3 mb-md-0">
-            <a href="{{route('search-results')}}?search-area=&builder_id=&monthly_installment=&property_type={{ !empty($first_box_offer) ? $first_box_offer : 'Apartment'}}&price_from=&price_to=&bedrooms=&progress=">
+            <a href="{{route('search-results')}}?search-area=&builder_id=&monthly_installment=&property_type={{ !empty($first_box_offer) ? $first_box_offer : 'Flats'}}&price_from=&price_to=&bedrooms=&progress=">
             <div class="property-div text-center" style="{{  $first_box_offer_image  }}">
-               <p class="pt-4 mb-0 ap-h">{{ !empty($first_box_offer) ? $first_box_offer : 'Apartment'}}</p>
+               <p class="pt-4 mb-0 ap-h">{{ !empty($first_box_offer) ? $first_box_offer : 'Flats'}}</p>
                <p class="mb-0 ap-p">{{ $first_box_offer_count ?? '0'}} Properties</p>
             </div>
             </a>
