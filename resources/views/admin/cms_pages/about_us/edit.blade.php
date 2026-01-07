@@ -86,7 +86,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Description</label>
-                                        <textarea name="aboutus_section1_description1" id="aboutus_section1_description1" rows="6" class="form-control" >{{ old('aboutus_section1_description1', $aboutus_section1_description1 ?? '') }}</textarea>
+                                        <textarea name="aboutus_section1_description1" id="aboutus_section1_description1" rows="6" class="form-control txtEditor" >{{ old('aboutus_section1_description1', $aboutus_section1_description1 ?? '') }}</textarea>
                                     </div>
                                 </div>                                
                                 
@@ -109,7 +109,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Description</label>
-                                        <textarea name="aboutus_section2_description1" id="aboutus_section2_description1" rows="6" class="form-control" >{{ old('aboutus_section2_description1', $aboutus_section2_description1 ?? '') }}</textarea>
+                                        <textarea name="aboutus_section2_description1" id="aboutus_section2_description1" rows="6" class="form-control txtEditor" >{{ old('aboutus_section2_description1', $aboutus_section2_description1 ?? '') }}</textarea>
                                     </div>
                                 </div>                                
                                 
@@ -133,13 +133,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Description 1</label>
-                                        <textarea name="aboutus_section3_description1" id="aboutus_section3_description1" rows="6" class="form-control" >{{ old('aboutus_section3_description1', $aboutus_section3_description1 ?? '') }}</textarea>
+                                        <textarea name="aboutus_section3_description1" id="aboutus_section3_description1" rows="6" class="form-control txtEditor" >{{ old('aboutus_section3_description1', $aboutus_section3_description1 ?? '') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Description 2</label>
-                                        <textarea name="aboutus_section3_description2" id="aboutus_section3_description2" rows="6" class="form-control" >{{ old('aboutus_section3_description2', $aboutus_section3_description2 ?? '') }}</textarea>
+                                        <textarea name="aboutus_section3_description2" id="aboutus_section3_description2" rows="6" class="form-control txtEditor" >{{ old('aboutus_section3_description2', $aboutus_section3_description2 ?? '') }}</textarea>
                                     </div>
                                 </div>
 

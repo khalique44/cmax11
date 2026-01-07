@@ -178,9 +178,12 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::post('project/update-position', [ProjectController::class,'updatePosition'])->name('project.update-position');
         Route::post('/areas', [MainAreaController::class,'store'])->name('areas.store');
         Route::post('/sub-areas', [SubAreaController::class,'store'])->name('subareas.store');
-        
+        Route::get('home-page/popular-locations', [HomePageController::class,'sectionPopularLocations'])->name('home-section.popular-locations');
+        Route::put('home-page/update-popular-locations', [HomePageController::class,'updatePopularLocations'])->name('home-section.update-popular-locations');
+
         Route::get('home-page/project-types', [HomePageController::class,'sectionProjectTypes'])->name('home-section.project-types');
         Route::resource('home-page', HomePageController::class);
+        
         Route::resource('features', FeatureController::class);
         Route::get('/feature-data', [FeatureController::class,'getFeatures'])->name('features.data');
         Route::get('feature/update-status', [FeatureController::class,'updateStatus'])->name('feature.update-status');

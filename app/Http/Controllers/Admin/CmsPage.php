@@ -275,7 +275,7 @@ class CmsPage extends Controller
             'contact_email_address' => 'required|email|max:255',
             'contact_address' => 'required|max:255',
             'contact_embed_map' => 'required|max:510',
-            'contact_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920,max_height=915',
+            'contact_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000',
            
         ]);        
         
@@ -331,7 +331,7 @@ class CmsPage extends Controller
 
         $request->validate([
             'our_agents_title' => 'required|max:255',
-            'our_agents_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920,max_height=915',
+            'our_agents_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000',
            
         ]);        
         
@@ -384,7 +384,7 @@ class CmsPage extends Controller
 
         $request->validate([
             'faqs_title' => 'required|max:255',            
-            'faqs_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920,max_height=915',
+            'faqs_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000',
            
         ]);        
         
@@ -490,7 +490,7 @@ class CmsPage extends Controller
 
         $request->validate([
             'terms_and_conditions_title' => 'required|max:255',            
-            'terms_and_conditions_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920,max_height=915',
+            'terms_and_conditions_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000',
            
         ]);        
         

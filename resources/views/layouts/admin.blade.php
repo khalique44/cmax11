@@ -192,7 +192,7 @@
 
 
 <script src="{!! asset('assets/js/bootstrap-colorpicker.js') !!}"></script>
-<script src="{!! asset('assets/js/ckeditor.js') !!}"></script>
+<script src="https://cdn.tiny.cloud/1/gb5nlk8i6mdnt7nm1bjr4pwtpwvjmhg83sxzdd4dqv2wki3m/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="{!! asset('assets/js/jquery.timepicker.min.js') !!}"></script>
 
 <!-- FilePond Scripts -->
@@ -244,7 +244,29 @@ function demoFromHTML() {
 /* Common alert box for confirm to delete in modules*/
 
 $(document).ready(function() {
-    if($("textarea#txtEditor").length > 0){
+
+    tinymce.init({
+    selector: '#txtEditor,.txtEditor',
+    plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+    toolbar: 'undo redo | blocks | fontSize | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+    // Customizing the Font Size list
+    font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* if($("textarea#txtEditor").length > 0){
         ClassicEditor
         .create(document.querySelector('#txtEditor'))
         .then(editor => {
@@ -253,7 +275,7 @@ $(document).ready(function() {
         .catch(error => {
             console.error(error);
         });
-    }
+    } */
 
     /*document.querySelectorAll('.editor').forEach(el => {
         ClassicEditor.create(el)
