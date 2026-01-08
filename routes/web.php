@@ -180,6 +180,9 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::post('/sub-areas', [SubAreaController::class,'store'])->name('subareas.store');
         Route::get('home-page/popular-locations', [HomePageController::class,'sectionPopularLocations'])->name('home-section.popular-locations');
         Route::put('home-page/update-popular-locations', [HomePageController::class,'updatePopularLocations'])->name('home-section.update-popular-locations');
+        Route::get('home-page/dream-property', [HomePageController::class,'sectionDreamProperty'])->name('home-section.dream-property');
+        Route::put('home-page/update-dream-property', [HomePageController::class,'updateDreamProperty'])->name('home-section.update-dream-property');
+        
 
         Route::get('home-page/project-types', [HomePageController::class,'sectionProjectTypes'])->name('home-section.project-types');
         Route::resource('home-page', HomePageController::class);

@@ -103,11 +103,12 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapse6" class="panel-collapse collapse {!! str_contains($url,'/admin/cms-pages') || str_contains($url,'/home-page/project-types') ? 'show' : '' !!}">
+                <div id="collapse6" class="panel-collapse collapse {!! str_contains($url,'/admin/cms-pages') || str_contains($url,'/home-page/project-types') || str_contains($url,'/home-page/popular-locations') ? 'show' : '' !!}">
                     <div class="panel-body">
                         <div class="accordions-content-link">
                             <ul>
                                 <li><a href="{{url('admin/home-page/project-types/')}}">Home Section Project Type</a></li>
+                                <li><a href="{{url('admin/home-page/popular-locations/')}}">Home Section Popular Locations</a></li>
                                 <li><a href="{{url('admin/cms-pages/about-us/')}}">About Us</a></li>
                                 <li><a href="{{url('admin/cms-pages/contact-us/')}}">Contact Us</a></li>
                                 <li><a href="{{url('admin/cms-pages/career/')}}">Career</a></li>

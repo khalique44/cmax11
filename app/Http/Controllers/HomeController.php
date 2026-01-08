@@ -56,10 +56,57 @@ class HomeController extends Controller
         $third_box_offer = GeneralHelper::getOption('third_box_offer');
         $fourth_box_offer = GeneralHelper::getOption('fourth_box_offer');
 
-        $first_box_offer_count = ProjectOffer::where('offer', strtolower($first_box_offer))->count();
+        $first_box_offer_count = Project::whereHas('offers', function ($q) use ($first_box_offer) {
+            $q->where('offer', strtolower($first_box_offer));
+        })->count();
+        $second_box_offer_count = Project::whereHas('offers', function ($q) use ($second_box_offer) {
+            $q->where('offer', strtolower($second_box_offer));
+        })->count();
+        $third_box_offer_count = Project::whereHas('offers', function ($q) use ($third_box_offer) {
+            $q->where('offer', strtolower($third_box_offer));
+        })->count();
+        $fourth_box_offer_count = Project::whereHas('offers', function ($q) use ($fourth_box_offer) {
+            $q->where('offer', strtolower($fourth_box_offer));
+        })->count();
+
+        /* $first_box_offer_count = ProjectOffer::where('offer', strtolower($first_box_offer))->count();
         $second_box_offer_count = ProjectOffer::where('offer', strtolower($second_box_offer))->count();
         $third_box_offer_count = ProjectOffer::where('offer', strtolower($third_box_offer))->count();
-        $fourth_box_offer_count = ProjectOffer::where('offer', strtolower($fourth_box_offer))->count();
+        $fourth_box_offer_count = ProjectOffer::where('offer', strtolower($fourth_box_offer))->count(); */
+
+        $first_box_area_id = GeneralHelper::getOption('first_box_location');
+        $second_box_area_id = GeneralHelper::getOption('second_box_location');
+        $third_box_area_id = GeneralHelper::getOption('third_box_location');
+        $fourth_box_area_id = GeneralHelper::getOption('fourth_box_location');
+        $fifth_box_area_id = GeneralHelper::getOption('fifth_box_location');
+        $sixth_box_area_id = GeneralHelper::getOption('sixth_box_location');
+
+        $first_box_location = Area::where('id', $first_box_area_id)->value('name');                
+        $second_box_location = Area::where('id', $second_box_area_id)->value('name');        
+        $third_box_location = Area::where('id', $third_box_area_id)->value('name');
+        $fourth_box_location = Area::where('id', $fourth_box_area_id)->value('name');        
+        $fifth_box_location = Area::where('id', $fifth_box_area_id)->value('name');       
+        $sixth_box_location = Area::where('id', $sixth_box_area_id)->value('name');
+      
+
+        $first_box_location_count = Project::whereHas('area', function ($q) use ($first_box_area_id) {
+            $q->where('area_id', strtolower($first_box_area_id));
+        })->count();
+        $second_box_location_count = Project::whereHas('area', function ($q) use ($second_box_area_id) {
+            $q->where('area_id', strtolower($second_box_area_id));
+        })->count();
+        $third_box_location_count = Project::whereHas('area', function ($q) use ($third_box_area_id) {
+            $q->where('area_id', strtolower($third_box_area_id));
+        })->count();
+        $fourth_box_location_count = Project::whereHas('area', function ($q) use ($fourth_box_area_id) {
+            $q->where('area_id', strtolower($fourth_box_area_id));
+        })->count();
+        $fifth_box_location_count = Project::whereHas('area', function ($q) use ($fifth_box_area_id) {
+            $q->where('area_id', strtolower($fifth_box_area_id));
+        })->count();
+        $sixth_box_location_count = Project::whereHas('area', function ($q) use ($sixth_box_area_id) {
+            $q->where('area_id', strtolower($sixth_box_area_id));
+        })->count();
 
         if(!empty($data->header_image)){
             
@@ -67,7 +114,7 @@ class HomeController extends Controller
             $header_image = url('public') .'/'.$data->header_image;
           } 
         }
-        return view('home',compact('data','header_image','testimonials','builders','progress','property_types','bedrooms','offering','popular_projects','latestPosts','compare','first_box_offer_count','second_box_offer_count','third_box_offer_count','fourth_box_offer_count','payment_plan_duration'));
+        return view('home',compact('data','header_image','testimonials','builders','progress','property_types','bedrooms','offering','popular_projects','latestPosts','compare','first_box_offer_count','second_box_offer_count','third_box_offer_count','fourth_box_offer_count','payment_plan_duration','first_box_location','second_box_location','third_box_location','fourth_box_location','fifth_box_location','sixth_box_location','first_box_location_count','second_box_location_count','third_box_location_count','fourth_box_location_count','fifth_box_location_count','sixth_box_location_count'));
         
         //return '<H2>Coming Soon</H2';
     }

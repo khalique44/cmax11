@@ -256,4 +256,36 @@ class HomePageController extends Controller
 
         return view('admin.home_page.home_page_sections.popular_locations.edit',compact('areas','home_section_popular_location','first_box_location','first_box_location_image','second_box_location','second_box_location_image','third_box_location','third_box_location_image','fourth_box_location','fourth_box_location_image','fifth_box_location','fifth_box_location_image','sixth_box_location','sixth_box_location_image'));
     }
+
+    public function sectionDreamProperty(){
+
+        $home_section_dream_property = GeneralHelper::getOption('home_section_dream_property');
+        $section_dream_property = GeneralHelper::getOption('section_dream_property');       
+
+
+        return view('admin.home_page.home_page_sections.dream_property.edit',compact('home_section_dream_property','section_dream_property'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDreamProperty(Request $request)
+    {
+        $request->validate([
+            'home_section_dream_property' => 'required',
+            'section_dream_property' => 'required',
+            
+            
+        ]);       
+        
+        GeneralHelper::setOption('home_section_dream_property',$request->home_section_dream_property);
+        GeneralHelper::setOption('section_dream_property',$request->section_dream_property);
+            
+
+        return redirect('/admin/home-page/dream-property')->with('success', 'Data saved successfully!');
+    }
 }
