@@ -175,14 +175,25 @@ function displayMsg(msgArea, msg, msgType){
 
 }
 
-
-$('#search-area').on('keyup', function(e){
+let selectedIndex = -1; // for arrow key navigation
+$('#search-area, #search-area-mobile').on('input', function(e){
     e.preventDefault(); 
-    var query = $(this).val();
+    
+    const query = $(this).val().trim();
+
+        // Only proceed if query has at least 2 characters
+        if (query.length < 2) {
+            
+            $('.suggestions').hide();
+            return;
+        }
+        console.log("Test:"+ (!/^[a-zA-Z0-9\s-]+$/.test(query)));
+        if (!/^[a-zA-Z0-9\s-]+$/.test(query)) return;
+        
     var data = {query:query};
 
     //ajaxPostRequest("/search-area",data,searchAreaCallback,ajaxErrorCallback,true);
-    $('#suggestions').html('<i class="fa fa-spinner fa-spin"></i>').show();
+    $('.suggestions').html('<i class="fa fa-spinner fa-spin"></i>').show();
     var formData = {query:query};
     //showAjaxLoader();
     $.ajax({
@@ -194,8 +205,12 @@ $('#search-area').on('keyup', function(e){
         //processData: false, 
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         success: function(data) {
+            if (data.length === 0) {
+                $('.suggestions').hide();
+                return;
+            }
             searchAreaCallback(data);
-            //hideAjaxLoader();
+            selectedIndex = -1; // reset highlight
         }
     });
 });
@@ -210,7 +225,7 @@ function searchAreaCallback(response){
         response.forEach(function(item){
             suggestions += '<div class="suggestion-item" style="padding:5px; cursor:pointer; font-size:11px;">'+item+'</div>';
         });
-        $('#suggestions').html(suggestions).show();
+        $('.suggestions').html(suggestions).show();
     
 
     if(typeof response.errors !== 'undefined'){
@@ -222,39 +237,55 @@ function searchAreaCallback(response){
     }
 }
 
+    
 
 $(document).ready(function(){
     $("select.select2").select2();
-    /*$('#search-box').on('keyup', function(){
-        var query = $(this).val();
-        if(query.length > 1){
-            $.ajax({
-                url: '/search', // Your backend route here
-                type: 'GET',
-                data: { q: query },
-                success: function(data){
-                    let suggestions = '';
-                    data.forEach(function(item){
-                        suggestions += '<div class="suggestion-item" style="padding:5px; cursor:pointer;">'+item+'</div>';
-                    });
-                    $('#suggestions').html(suggestions).show();
-                }
-            });
+
+    // Keyboard navigation (Up/Down/Enter)
+    $('#search-area, #search-area-mobile').on('keydown', function(e) {
+        const items = $('.suggestion-item');
+
+        if (items.length === 0) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex + 1) % items.length;
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (selectedIndex >= 0) {
+                $('#search-area').val($(items[selectedIndex]).text());
+                $('#search-area-mobile').val($(items[selectedIndex]).text());
+                $('.suggestions').hide();
+            }
+            return;
         } else {
-            $('#suggestions').hide();
+            return; // don't affect other keys
         }
-    });*/
+
+        // Highlight the active item
+        items.removeClass('bg-primary text-white');
+        $(items[selectedIndex]).addClass('bg-primary text-white');
+    });
 
     // When clicking a suggestion
     $(document).on('click', '.suggestion-item', function(){
         $('#search-area').val($(this).text());
-        $('#suggestions').hide();
+        $('#search-area-mobile').val($(this).text());
+        $('.suggestions').hide();
+        if (window.location.href.indexOf("compare") > -1) {
+            // Run your function here
+            searchCompareProjects();
+        }
     });
 
     // Hide if clicked outside
     $(document).click(function(e) {
-        if (!$(e.target).closest('#search-area, #suggestions').length) {
-            $('#suggestions').hide();
+        if (!$(e.target).closest('#search-area, #search-area-mobile .suggestions').length) {
+            $('.suggestions').hide();
         }
     });
 
@@ -512,10 +543,6 @@ $(document).ready(function() {
 
     // handle compare select box
 
-    $('.compare-select-box').select2({
-        maximumSelectionLength: 4
-      });
-
 });
 
 
@@ -635,8 +662,8 @@ function removeCompare(id) {
 function addCompareMultiple() {
 
     showAjaxLoader();   
-    var ids = $("select.compare-select-box").val();
-
+    var ids = $("select#compare-projects").val();
+    console.log('ids:'+ids);
     $.ajax({
         url: $('meta[name="home_url"]').attr('content')+"/compare/add-multiple",
         type: "POST",
@@ -646,17 +673,25 @@ function addCompareMultiple() {
         //processData: false, 
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         success: function(data) {
+            
             if(data.status == 'success'){
-                displayMsg('','Project added to compare.','success')
-                location.reload();
+                if(data.project_count > 1){
+                    displayMsg('','Project added to compare.','success');
+                }else if(data.project_count == 1){
+                    displayMsg('','Please add minimum 2 projects to Compare!','danger');
+                }else{
+                    displayMsg('','No projects selected for comparison.','danger');
+                }
+                $(".load-compare-list").html(data.html);
             }else{
                 displayMsg('',data.message,'error')
             }        
-            
+            hideAjaxLoader();
             
         },
         error: function(){
-            displayMsg('','Server Error! Please reload and try again.','error')
+            displayMsg('','Server Error! Please reload and try again.','error');
+            hideAjaxLoader();
         },
         always: function(){
             hideAjaxLoader();
@@ -665,3 +700,134 @@ function addCompareMultiple() {
 }
 
 
+$(document).ready(function() {
+    
+
+    // include monthSelect now
+   // $('#areaSelect, #subAreaSelect, #yearSelect, #monthSelect').change(fetchFilters);
+
+    // initial load
+    //fetchFilters();
+});
+function fetchFilters() {
+        let full_area = $('#full_area').val();
+        let year = $('#yearSelect').val();
+        let month = $('#monthSelect').val(); // added
+
+        if(full_area == ''){
+            displayMsg('',"Please, Select Area",'error');
+            return false;
+        }
+
+        $('#surveyResults').html('<p class="text-muted text-center">Loading...</p>');
+        showAjaxLoader();
+        $.ajax({
+            url: $('meta[name="home_url"]').attr('content')+"/survey/filter-data",
+            type: "GET",
+            data: { full_area, year, month }, // added
+            success: function(res) {
+
+                let yearOptions = '<option value="">All Years</option>';
+                $.each(res.years, function(_, y) {
+                    yearOptions += `<option value="${y}">${y}</option>`;
+                });
+                //$('#yearSelect').html(yearOptions);
+
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                                    "July", "August", "September", "October", "November", "December"];
+
+                let monthOptions = '<option value="">All Months</option>';
+                $.each(res.months, function(_, m) {
+                    monthOptions += `<option value="${m}">${monthNames[m-1]}</option>`;
+                });
+                //$('#monthSelect').html(monthOptions);                
+
+                $('#surveyResults').html(res.html);
+
+                hideAjaxLoader();
+            }
+        });
+    }
+
+    $(document).on('change', '#property_type, #property_type, #bedrooms, #builder_id, #progress', function(e) {
+        e.preventDefault();
+        
+            searchCompareProjects();
+        
+    });
+function searchCompareProjects(){
+
+    var search_area = $('#search-area').val();
+    var property_type = $('#property_type').val();
+    var bedrooms = $('#bedrooms').val();
+    var builder_id = $('#builder_id').val();
+    var progress = $('#progress').val();
+    showAjaxLoader();
+    $.ajax({
+        url: $('meta[name="home_url"]').attr('content')+"/compare/search",
+        method: 'GET',
+        data: {search_area:search_area,property_type:property_type,bedrooms:bedrooms,builder_id:builder_id,progress:progress},
+        success: function(projects) {
+            let $select = $('#compare-projects');
+            $select.empty();
+
+            if (projects.length > 0) {
+                $select.attr("data-placeholder","Select Projects to compare");
+                $.each(projects, function(i, project) {
+                    $select.append('<option value="'+project.id+'" data-location="'+project.alt_location+'" data-builder="'+project.builder.builder_name+'">'+project.project_title+' </option>');
+                });
+            } else {
+                $select.append('<option disabled data-location="" data-builder="">No projects found</option>');
+                $select.attr("data-placeholder","No projects found");
+                
+            }
+
+            $select.trigger('change'); // refresh Select2
+            $('.select2-container .selection .select2-selection #select2-compare-projects-container').trigger('click');
+            hideAjaxLoader();
+        },
+        error: function(){
+            displayMsg('','Server Error! Please reload and try again.','error');
+            hideAjaxLoader();
+        },
+        always: function(){
+            hideAjaxLoader();
+        }
+    });
+}
+
+// style multi select box for compare page project dropdown
+$(document).ready(function () {
+
+    function formatOption(option) {
+        if (!option.id) {
+            return option.text; // for placeholder
+        }
+
+        var $element = $(option.element);
+        var location = $element.data('location');
+        var builder = $element.data('builder');
+
+        var html =
+            '<div style="padding:5px;">' +
+                '<div style="font-weight:600; font-size:14px;">' + option.text + '</div>' +
+                '<div style="font-size:12px; color:#777;">Location: <strong>' + location + '</strong></div>' +
+                '<div style="font-size:12px; color:#555;">Builder: <strong>' + builder + '</strong></div>' +
+            '</div>';
+
+        return $(html);
+    }
+
+    function formatSelection(option) {
+        return option.text; // keep simple OR add custom HTML
+    }
+
+    $('select#compare-projects').select2({
+        width: '100%',
+        templateResult: formatOption,
+        templateSelection: formatSelection,
+        maximumSelectionLength: 2,
+        escapeMarkup: function (markup) { return markup; } // allow HTML
+    });
+
+});

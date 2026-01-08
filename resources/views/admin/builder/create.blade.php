@@ -5,11 +5,11 @@
         <div class="right-section-content">
             <div class="admin-sec-btn-area">
                 <div class="report-title-section">
-                    <h4>Creat Builder</h4>
+                    <h4>Create Builder</h4>
                 </div>
                 <div class="district-back-del-btn-area">
                     <div class="distrcit-back-btn">
-                        <a href="{{url('admin/builders/')}}" data-toggle="" data-target="#search-db-model"  class="btn">Back</a>
+                        <a href="{{url('admin/builders/')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-sm btn-warning">Back</a>
 
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="col-xs-12">
                         <div class="">
                             
-                            <form class="has-filepond" method="POST" action="{{url('admin/builders/')}}" enctype="multipart/form-data" id="builder-form">
+                            <form class="" method="POST" action="{{url('admin/builders/')}}" enctype="multipart/form-data" id="builder-form">
                                  {{csrf_field()}}
                                 
                                     
@@ -61,18 +61,12 @@
                                 <div class="col-xs-12 mb-3 mt-3">   
                                     <div class="form-group">
                                         <!-- File Upload -->
-                                        <div class="pond-container">
-                                            <label>Upload Images</label>
-                                            <input type="file" name="filepond[]" id="filepond"  class="filepond">
-                                        </div>
-
-                                        <div class="uploaded-images file-pond-preview-wrapper" id="uploaded-preview" data-upload-type="default" data-allow-reorder="true" data-max-files="10" data-collection="default" data-preview="uploaded-preview">
-                                            
-                                        </div>
                                         
+                                        <label>Upload Logo</label>
+                                        <input type="file" name="builder_logo_file" id="builder_logo"  class="form-control">
+                                            
+                                                         
                                     </div>
-
-
                                 </div>  
 
                                                           
@@ -92,6 +86,8 @@
                                         <button type="submit" href="javascript:void(0);" id="btn_save" class="btn btn-success">
                                             Save
                                         </button>
+
+                                        <a href="{{url('admin/builders/')}}"  class="btn btn-warning">Back</a>
                                         
                                     </div>
                                 </div>

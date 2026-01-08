@@ -1437,6 +1437,15 @@ form .form-label span {
     content: '\f0dc';
 }
 
+#projectsTable tr td:first-child {
+   
+     
+    cursor: move;
+    
+    
+}
+
+
 @media(max-width: 1199px){
     h1{
         font-size: 42px;
@@ -2743,6 +2752,7 @@ label.featured-image-checkbox-label{
     object-fit: cover;      /* crop & center to keep ratio */
     border-radius: 4px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .media-thumb label {
@@ -2755,4 +2765,28 @@ label.featured-image-checkbox-label{
     color: red;
     font-weight: bold;
     text-decoration: none;
+}
+.media-thumb a {
+    text-align: center;
+}
+img.header-image {
+    border-radius: 10px;
+    border: 3px solid #ccc;
+    margin: 5px;
+    width: 100px;
+    height: auto;
+}
+
+div#suggestions {
+    height: 244px;
+    overflow: auto;
+   width: 295px;
+}
+div#suggestions .suggestion-item {
+    font-size: 14px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+}
+.very-small-text {
+  font-size: 0.7em; /* Or any desired smaller value */
 }

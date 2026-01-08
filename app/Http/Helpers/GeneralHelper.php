@@ -262,6 +262,21 @@ class GeneralHelper
 
     }
 
+    public static function getYears($previous = 5, $forward = 1){
+        $currentYear = now()->year;
+		$years = range($currentYear - $previous, $currentYear + $forward);
+        return $years;
+    }
+
+    public static function getMonths(){
+        
+        return $months = [
+                    1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April',
+                    5 => 'May', 6 => 'June', 7 => 'July', 8 => 'August',
+                    9 => 'September', 10 => 'October', 11 => 'November', 12 => 'December'
+                ];
+    }  					
+
     /*public static function timeTo24($time){
 
         if(str_contains($time,'AM'){

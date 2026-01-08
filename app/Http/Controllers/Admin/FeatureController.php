@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables;
 use App\Http\Helpers\GeneralHelper;
+use App\Http\Helpers\FileHelper;
 
 class FeatureController extends Controller
 {
@@ -50,7 +51,7 @@ class FeatureController extends Controller
                 ->editColumn('file_url', function($feature) { 
                    
                     if(!empty($feature->file_url)){
-                        $fileUrl = url('public') ."/". $feature->file_url;
+                        $fileUrl =  asset($feature->file_url);
                         return '<img src="'.$fileUrl.'" width="50">'; 
                     }else{
                         return 'N/A'; 
@@ -91,16 +92,11 @@ class FeatureController extends Controller
 
         $data = $request->except(['_method','_token']);
         
-       
         if(!empty($request->file_url)){
-            $folderName = 'feature_images';
-            $fileName = pathinfo($request->file_url->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->file_url->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->file_url->move(public_path('assets/'.$folderName), $fullFileName);
-            $data['file_url'] = 'assets/'.$folderName.'/'.$fullFileName;
-        }       
-        
+            $file_url = FileHelper::uploadImage($request->file('file_url'), 'feature_images');
+            $data['file_url'] = $file_url;
+        }
+                
         Feature::Create($data);            
 
         return redirect('/admin/features/')->with('success', 'Record saved successfully!');
@@ -160,15 +156,9 @@ class FeatureController extends Controller
                 'file_url' =>  'mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             ]);
 
-           
-            $folderName = 'feature_images';
             
-            $fileName = pathinfo($request->file_url->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->file_url->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->file_url->move(public_path('assets/'.$folderName), $fullFileName);
-            $data['file_url'] = 'assets/'.$folderName.'/'.$fullFileName;
-            
+            $file_url = FileHelper::uploadImage($request->file('file_url'), 'feature_images');
+            $data['file_url'] = $file_url;     
 
         }else{
 

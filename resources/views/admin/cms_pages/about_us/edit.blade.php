@@ -57,9 +57,9 @@
                                 @if(!empty($aboutus_header_image))
                                     <div class="col-md-2">                       
                                         <div class="form-group">
-                                            <a href="{!! url('public') !!}/{{$aboutus_header_image}}" target="_blank" class="available-image-area">
+                                            <a href="{{asset($aboutus_header_image)}}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$aboutus_header_image}}" class="header-image" title="Header Image" alt="" width="50%">                                                    
+                                                <img src="{{asset($aboutus_header_image)}}" class="header-image" title="Header Image" alt="" width="50%">                                                    
                                             </a>                                          
                                             
                                         </div>
@@ -86,7 +86,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Description</label>
-                                        <textarea name="aboutus_section1_description1" id="aboutus_section1_description1" rows="6" class="form-control" >{{ old('aboutus_section1_description1', $aboutus_section1_description1 ?? '') }}</textarea>
+                                        <textarea name="aboutus_section1_description1" id="aboutus_section1_description1" rows="6" class="form-control txtEditor" >{{ old('aboutus_section1_description1', $aboutus_section1_description1 ?? '') }}</textarea>
                                     </div>
                                 </div>                                
                                 
@@ -109,7 +109,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Description</label>
-                                        <textarea name="aboutus_section2_description1" id="aboutus_section2_description1" rows="6" class="form-control" >{{ old('aboutus_section2_description1', $aboutus_section2_description1 ?? '') }}</textarea>
+                                        <textarea name="aboutus_section2_description1" id="aboutus_section2_description1" rows="6" class="form-control txtEditor" >{{ old('aboutus_section2_description1', $aboutus_section2_description1 ?? '') }}</textarea>
                                     </div>
                                 </div>                                
                                 
@@ -133,13 +133,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Description 1</label>
-                                        <textarea name="aboutus_section3_description1" id="aboutus_section3_description1" rows="6" class="form-control" >{{ old('aboutus_section3_description1', $aboutus_section3_description1 ?? '') }}</textarea>
+                                        <textarea name="aboutus_section3_description1" id="aboutus_section3_description1" rows="6" class="form-control txtEditor" >{{ old('aboutus_section3_description1', $aboutus_section3_description1 ?? '') }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Description 2</label>
-                                        <textarea name="aboutus_section3_description2" id="aboutus_section3_description2" rows="6" class="form-control" >{{ old('aboutus_section3_description2', $aboutus_section3_description2 ?? '') }}</textarea>
+                                        <textarea name="aboutus_section3_description2" id="aboutus_section3_description2" rows="6" class="form-control txtEditor" >{{ old('aboutus_section3_description2', $aboutus_section3_description2 ?? '') }}</textarea>
                                     </div>
                                 </div>
 
@@ -152,12 +152,12 @@
                                     </div>
                                     
                                 </div>
-                                @if(!empty($aboutus_section3_image2))
+                                @if(!empty($aboutus_section3_image1))
                                     <div class="col-md-2">                       
                                         <div class="form-group">
-                                            <a href="{!! url('public') !!}/{{$aboutus_section3_image1}}" target="_blank" class="available-image-area">
+                                            <a href="{{asset($aboutus_section3_image1)}}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$aboutus_section3_image1}}" class="image" title="Image 1" alt="" width="50%">                                                    
+                                                <img src="{{asset($aboutus_section3_image1)}}" class="header-image" title="Image 1" alt="" width="50%">                                                    
                                             </a>                                          
                                             
                                         </div>
@@ -177,9 +177,9 @@
                                 @if(!empty($aboutus_section3_image2))
                                     <div class="col-md-2">                       
                                         <div class="form-group">
-                                            <a href="{!! url('public') !!}/{{$aboutus_section3_image2}}" target="_blank" class="available-image-area">
+                                            <a href="{{asset($aboutus_section3_image2)}}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$aboutus_section3_image2}}" class="image" title="Image 2" alt="" width="50%">                                                    
+                                                <img src="{{asset($aboutus_section3_image2)}}" class="header-image" title="Image 2" alt="" width="50%">                                                    
                                             </a>                                          
                                             
                                         </div>

@@ -3,6 +3,10 @@
   $contact_email_address = GeneralHelper::getOption('contact_email_address');        
   $contact_address = GeneralHelper::getOption('contact_address');
   $copy_right_text = GeneralHelper::getOption('copy_right_text');
+  $facebook_url = GeneralHelper::getOption('facebook_url');
+  $instagram_url = GeneralHelper::getOption('instagram_url');
+  $twitter_url = GeneralHelper::getOption('twitter_url');
+  $youtube_url = GeneralHelper::getOption('youtube_url');
 @endphp
 <div class="header-top">
    <div class="container">
@@ -12,10 +16,18 @@
             <span><a href="mailto:{{$contact_email_address}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{$contact_email_address}}</a></span>
          </div>
          <div class="col-md-6 text-center text-md-end">
-            <span class="pe-3"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></span>
-            <span class="pe-3"><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></span>
-            <span class="pe-3"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></span>
-            <span class="pe-3"><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></span>
+            @if($facebook_url)
+            <span class="pe-3"><a href="{{$facebook_url}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></span>
+            @endif
+            @if($instagram_url)
+               <span class="pe-3"><a href="{{$instagram_url}}" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></span>
+            @endif
+            @if($twitter_url)
+               <span class="pe-3"><a href="{{$twitter_url}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></span>
+            @endif
+            @if($youtube_url)
+               <span class="pe-3"><a href="{{$youtube_url}}" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a></span>
+            @endif
          </div>
       </div>
    </div>
@@ -48,9 +60,9 @@
             <li class="nav-item">
                <a class="nav-link" href="{{ route('projects.compare'); }}">Compare</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                <a class="nav-link" href="#">Properties for Sale</a>
-            </li>
+            </li> -->
             <li class="nav-item">
                <a class="nav-link menu-btn" href="{{ route('contactus.show'); }}">Contact Us</a>
             </li>

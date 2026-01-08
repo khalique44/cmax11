@@ -36,7 +36,7 @@ class MediaController extends Controller
 
         return response()->json([
             'id' => $media->id,
-            'url' => $media->getUrl('thumb'),
+            'url' => $media->getUrl('webp'),
             'path' => $media->getPath(), // important for revert!
             'name' => $media->name, // important for revert!
             'size' => $media->size, // important for revert!
@@ -71,5 +71,15 @@ class MediaController extends Controller
         $model->save();
 
         return response()->json(['success' => true, 'message' => 'Featured image set successfully']);
+    }
+
+    public function reorder(Request $request)
+    {
+        foreach ($request->order as $item) {
+            Media::where('id', $item['id'])
+                ->update(['order_column' => $item['position']]);
+        }
+
+        return response()->json(['success' => true]);
     }
 }

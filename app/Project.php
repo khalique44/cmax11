@@ -11,14 +11,24 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use App\Http\Helpers\GeneralHelper;
+use Carbon\Carbon;
+
 
 class Project extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia, SoftDeletes, OptimizesMedia;
 
     protected $fillable = [        
-    	'builder_id','city_id','area_id','sub_area_id','project_title','description','progress','area','location','latitude','longitude','logo_url','offering','is_lease','is_active','added_by','rate_per_square','development_charges','utility_charges','distance','project_floors','project_start_date', 'is_featured','is_popular','position','featured_media_id','refreshed_at'
+    	'builder_id','city_id','area_id','sub_area_id','project_title','description','progress','area','location','latitude','longitude','logo_url','offering','is_lease','is_active','added_by','rate_per_square','development_charges','utility_charges','distance','project_floors','project_start_date', 'is_featured','is_popular','position','featured_media_id','refreshed_at','payment_plan_duration'
     ];
+
+	protected $casts = [
+        'created_at' => 'date:Y-M-d',
+		'refreshed_at' => 'datetime',
+		'payment_plan_duration' => 'array',
+    ];
+
+	protected $appends = ['alt_location'];
 
     protected static function boot()
 	{
@@ -49,7 +59,12 @@ class Project extends Model implements HasMedia
 
     public static function getAllProjects(){
 
-		return Project::with('offers','floorPlan', 'media')->latest()->get();
+		$projects = Project::with('offers', 'floorPlan', 'media')
+		->orderByRaw("CASE WHEN refreshed_at >= ? THEN 0 ELSE 1 END", [now()->subMonth()])
+		->orderBy('position', 'asc')
+		->orderBy('created_at', 'desc')
+		->get();
+		return $projects;
 	}
 
 	public function offers()
@@ -67,11 +82,7 @@ class Project extends Model implements HasMedia
 	     return $this->belongsToMany(Feature::class, 'project_features', 'project_id', 'feature_id');
 	}
 
-	protected $casts = [
-        'created_at' => 'date:Y-M-d',
-		'refreshed_at' => 'datetime',
-    ];
-
+	
     public function builder()
 	{
 	    return $this->belongsTo(Builder::class);
@@ -164,5 +175,16 @@ class Project extends Model implements HasMedia
 
 	public function featuredImage(){
 		return $this->belongsTo(\Spatie\MediaLibrary\MediaCollections\Models\Media::class, 'featured_media_id');
+	}
+
+	public function getIsRefreshExpiredAttribute()
+	{
+		return $this->refreshed_at?->lt(now()->subMonth());
+	}
+
+	public function getRefreshDaysRemainingAttribute()
+	{
+		$expiryDate = $this->refreshed_at?->copy()->addMonth();
+		return floor(now()->diffInDays($expiryDate, false));
 	}
 }

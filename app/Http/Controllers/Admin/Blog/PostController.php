@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables;
+use App\Http\Helpers\FileHelper;
 
 class PostController extends Controller
 {
@@ -39,7 +40,7 @@ class PostController extends Controller
                                         </a>';
                 })
                 ->editColumn('file_url', function($post) {
-                    $img = '<a href="'.asset('public/'.$post->file_url).'" target="_blank" ><img src="'.asset('public/'.$post->file_url).'" width="150" ></a>';
+                    $img = '<a href="'.asset($post->file_url).'" target="_blank" ><img src="'.asset($post->file_url).'" width="150" ></a>';
                     return  $img;
                 })
                 ->rawColumns(['action','file_url'])
@@ -73,21 +74,14 @@ class PostController extends Controller
         $data = $request->except(['_method','_token']);
         
         if(!empty($request->file_url)){
-            $folderName = 'blog_images';
-            $fileName = pathinfo($request->file_url->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->file_url->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->file_url->move(public_path('assets/'.$folderName), $fullFileName);
-            $data['file_url'] = 'assets/'.$folderName.'/'.$fullFileName;
+            $file_url = FileHelper::uploadImage($request->file('file_url'), 'blog_images');
+            $data['file_url'] = $file_url;
         }   
 
         if(!empty($request->header_image)){
-            $folderName = 'blog_header_images';
-            $fileName = pathinfo($request->header_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->header_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->header_image->move(public_path('assets/'.$folderName), $fullFileName);
-            $data['header_image'] = 'assets/'.$folderName.'/'.$fullFileName;
+          
+            $header_image = FileHelper::uploadImage($request->file('header_image'), 'blog_header_images');
+            $data['header_image'] = $header_image;
         }     
         
         Post::Create($data);            
@@ -139,36 +133,24 @@ class PostController extends Controller
         $file_url = "";
         $header_image = "";
 
-        if(!empty($request->file_url)){
+        if($request->hasFile('file_url')){
 
             $request->validate([
                      
                 'file_url' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
+            ]);          
 
-           
-   
-            $folderName = 'blog_images';
-            $fileName = pathinfo($request->file_url->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->file_url->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->file_url->move(public_path('assets/'.$folderName), $fullFileName);
-            $file_url  = 'assets/'.$folderName.'/'.$fullFileName;
+            $file_url = FileHelper::uploadImage($request->file('file_url'), 'blog_images');              
             
-            
-
+              
         }else{
 
             array_push($excludeParams,'file_url');
         }
 
-        if(!empty($request->header_image)){
-            $folderName = 'blog_header_images';
-            $fileName = pathinfo($request->header_image->getClientOriginalName(), PATHINFO_FILENAME);           
-            $fullFileName = $fileName."-".time().'.'.$request->header_image->getClientOriginalExtension();
-            $fullFileName = str_replace(" ","_",$fullFileName);
-            $request->header_image->move(public_path('assets/'.$folderName), $fullFileName);
-            $header_image = 'assets/'.$folderName.'/'.$fullFileName;
+        if($request->hasFile('header_image')){
+            
+            $header_image = FileHelper::uploadImage($request->file('header_image'), 'blog_header_images'); 
            
         }else{
 
@@ -186,7 +168,6 @@ class PostController extends Controller
 
         $data['status'] = $request->has('status') ? 'yes' : 'no'; 
         
-
         
         Post::Where('id',$id)
             ->update($data);         

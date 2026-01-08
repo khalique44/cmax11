@@ -203,4 +203,93 @@ class CmsPage extends Controller
 
         return response()->json(['message' => 'Your inquiry has been sent successfully!']);
     }
+
+
+    public function showOurAgents(){
+        $our_agents_title = GeneralHelper::getOption('our_agents_title');
+        $our_agents_header_image = GeneralHelper::getOption('our_agents_header_image');
+        $our_agents_description = GeneralHelper::getOption('our_agents_description');        
+
+        $our_agents_meta_title = GeneralHelper::getOption('our_agents_meta_title');
+        $our_agents_meta_description = GeneralHelper::getOption('our_agents_meta_description');
+        $our_agents_meta_keywords = GeneralHelper::getOption('our_agents_meta_keywords');
+
+        return view('cms_pages.our_agents',compact(
+            'our_agents_title',
+            'our_agents_header_image',
+            'our_agents_description',            
+
+            'our_agents_meta_title',
+            'our_agents_meta_description',
+            'our_agents_meta_keywords',
+        
+
+            ));
+    }
+
+    public function showFaqs(){
+        $faqs_title = GeneralHelper::getOption('faqs_title');
+        $faqs_header_image = GeneralHelper::getOption('faqs_header_image');
+        $faqs_description = GeneralHelper::getOption('faqs_description');        
+
+        $faqs_meta_title = GeneralHelper::getOption('faqs_meta_title');
+        $faqs_meta_description = GeneralHelper::getOption('faqs_meta_description');
+        $faqs_meta_keywords = GeneralHelper::getOption('faqs_meta_keywords');
+
+        return view('cms_pages.faqs',compact(
+            'faqs_title',
+            'faqs_header_image',
+            'faqs_description',            
+
+            'faqs_meta_title',
+            'faqs_meta_description',
+            'faqs_meta_keywords',
+        
+
+            ));
+    }
+
+    public function showPrivacyPolicy(){
+        $privacy_policy_title = GeneralHelper::getOption('privacy_policy_title');
+        $privacy_policy_header_image = GeneralHelper::getOption('privacy_policy_header_image');
+        $privacy_policy_description = GeneralHelper::getOption('privacy_policy_description');        
+
+        $privacy_policy_meta_title = GeneralHelper::getOption('privacy_policy_meta_title');
+        $privacy_policy_meta_description = GeneralHelper::getOption('privacy_policy_meta_description');
+        $privacy_policy_meta_keywords = GeneralHelper::getOption('privacy_policy_meta_keywords');
+
+        return view('cms_pages.privacy_policy',compact(
+            'privacy_policy_title',
+            'privacy_policy_header_image',
+            'privacy_policy_description',            
+
+            'privacy_policy_meta_title',
+            'privacy_policy_meta_description',
+            'privacy_policy_meta_keywords',
+        
+
+            ));
+    }
+
+    public function showTermsAndConditions(){
+        $terms_and_conditions_title = GeneralHelper::getOption('terms_and_conditions_title');
+        $terms_and_conditions_header_image = GeneralHelper::getOption('terms_and_conditions_header_image');
+        $terms_and_conditions_description = GeneralHelper::getOption('terms_and_conditions_description');        
+
+        $terms_and_conditions_meta_title = GeneralHelper::getOption('terms_and_conditions_meta_title');
+        $terms_and_conditions_meta_description = GeneralHelper::getOption('terms_and_conditions_meta_description');
+        $terms_and_conditions_meta_keywords = GeneralHelper::getOption('terms_and_conditions_meta_keywords');
+
+        return view('cms_pages.terms_and_conditions',compact(
+            'terms_and_conditions_title',
+            'terms_and_conditions_header_image',
+            'terms_and_conditions_description',            
+
+            'terms_and_conditions_meta_title',
+            'terms_and_conditions_meta_description',
+            'terms_and_conditions_meta_keywords',
+        
+
+            ));
+    }
 }

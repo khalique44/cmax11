@@ -13,7 +13,7 @@
                         <div class="district-back-del-btn-area">
                             <a href="{{url('admin/projects')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-sm btn-warning">Back</a>
                             @if(isset($project))
-                                <a class="btn btn-sm btn-success pull-right" target="_blank" href='{{ url("/project/$project->slug/") }}' >
+                                &nbsp;<a class="btn btn-sm btn-success pull-right" target="_blank" href='{{ url("/project/$project->slug/") }}' >
                                                 View
                                             </a>
                             @endif
@@ -78,7 +78,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Progress<span>*</span></label>
-                                        <select name="progress" id="progress" class="form-control select2" required>
+                                        <select name="progress" id="progress" class="form-control select2" required data-placeholder="Select Progress">
                                             <option value="">Select Progress</option>
                                             @foreach($progress as $key => $prog)
                                                 <option value="{{ $key }}" {{ old('progress', $project->progress ?? '') === $key ? 'selected' : '' }}>{{ ucfirst($prog) }}</option>
@@ -90,7 +90,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label select2">Builder<span>*</span></label>
-                                        <select name="builder_id" id="builder_id" class="form-control select2" required>
+                                        <select name="builder_id" id="builder_id" class="form-control select2" required data-placeholder="Select Builder">
                                             <option value="">Select Builder </option>
                                             @foreach($builders as $builder)
                                                 <option value="{{ $builder->id }}" {{ old('builder_id', $project->builder_id ?? '') === $builder->id ? 'selected' : '' }}>{{ ucfirst($builder->builder_name) }}</option>
@@ -117,7 +117,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="form-label">City<span>*</span></label>
-                                        <select name="city_id" id="city_id" class="form-control select2" >
+                                        <select name="city_id" id="city_id" class="form-control select2"  data-placeholder="Select City">
                                             
                                             @foreach($cities as $city)
                                                 @if($city->id == 31594)
@@ -131,7 +131,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="form-label">Area<span>*</span> <span class="text-success text-right"><a href="javascript:;" class="add-main-area" data-bs-toggle="modal" data-bs-target="#areaModal"><i class="fa fa-plus-circle "></i></a></span></label>
-                                        <select name="area_id" id="area_id" class="form-control select2" >
+                                        <select name="area_id" id="area_id" class="form-control select2"  data-placeholder="Select Area">
                                             <option value="">Select Area</option>
                                             @foreach($areas as $area)
                                                 <option value="{{ $area->id }}" {{ old('area_id', $project->area_id ?? '') === $area->id ? 'selected' : '' }}>{{ ucfirst($area->name)  }}</option>
@@ -592,19 +592,29 @@
                                     <button type="button" class="btn btn-primary mt-2 btn-sm add-more"><i class="fa fa-plus"></i> Add More</button>
                                 </div>
                             </div>
-                            <div class="row">                            
+                            <div class="row mt-3">                            
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <label class="form-label">Payment Plan Duration<span>*</span></label>
+                                        <select data-placeholder="Select Payment Plan Duration" name="payment_plan_duration[]" id="payment_plan_duration" class="form-control select2" multiple  >
+                                            <option value="">Select Payment Plan Duration</option>
+                                            @foreach($payment_plan_duration as $key => $ppd)
+                                                <option value="{{ $key }}" @selected(isset($project->payment_plan_duration) && in_array($key,$project->payment_plan_duration) )  >{{ ucfirst($ppd) }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="">&nbsp;</div>
                                         <label class="form-label">Payment Plan</label>
                                         <input type="file" name="payment_plan[]" multiple class="form-control filepond" id="payment_plan" >
                                         <input type="hidden" id="uploaded-files2" name="uploaded_files2[]" />
                                             <input type="hidden" id="deleted-files2" name="deleted_files2[]" />
                                         <div class="uploaded-images file-pond-preview-wrapper" id="payment-preview" data-upload-type="payment_plan" data-allow-reorder="true" data-max-files="10" data-collection="payment_plan" data-preview="payment-preview">
                                             @if(isset($project))
-                                                @foreach($project->getMedia('payment_plan') as $media)
-                                                <div class="preview-box remove-media" data-media-id="{{ $media->id }}">
+                                                @foreach($project->getMedia('payment_plan')->sortBy('order_column') as $media)
+                                                <div class="media-item preview-box remove-media" data-media-id="{{ $media->id }}" data-id="{{ $media->id }}">
                                                     <div class="media-thumb">
-                                                        <img src="{{ asset($media->getUrl()) }}" alt="uploaded" >
+                                                        <a href="{{ asset($media->getUrl('webp')) }}" target="_blank" data-fancybox="payment-preview">
+                                                            <img src="{{ asset($media->getUrl()) }}" alt="uploaded" >
+                                                        </a>
                                                         <div class="remove-media">
                                                             <span title="Remove" class="remove-media " >Remove</span>
                                                         </div>
@@ -641,7 +651,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">                            
+                            <div class="row mt-3">                            
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Progress</label>
@@ -651,9 +661,11 @@
                                         <div class="uploaded-images file-pond-preview-wrapper" id="project-progress-preview" data-upload-type="project_progress" data-allow-reorder="true" data-max-files="10" data-collection="project_progress" data-preview="project-progress-preview">
                                             @if(isset($project))
                                                 @foreach($project->getMedia('project_progress') as $media)
-                                                <div class="preview-box remove-media" data-media-id="{{ $media->id }}">
+                                                <div class="media-item preview-box remove-media" data-media-id="{{ $media->id }}" data-id="{{ $media->id }}">
                                                     <div class="media-thumb">
-                                                        <img src="{{ asset($media->getUrl()) }}" alt="uploaded" >
+                                                        <a href="{{ asset($media->getUrl('webp')) }}" target="_blank" data-fancybox="project-progress-preview">
+                                                            <img src="{{ asset($media->getUrl('webp')) }}" alt="uploaded" >
+                                                        </a>
                                                         <div class="remove-media">
                                                             <span title="Remove" class="remove-media " >Remove</span>
                                                         </div>
@@ -690,19 +702,21 @@
                                 </div>
                             </div>
 
-                            <div class="row">                            
+                            <div class="row mt-3">                            
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Gallery Images</label>
                                         <input type="file" name="project_gallery[]" multiple class="form-control filepond"  >
                                         <input type="hidden" id="uploaded-files" name="uploaded_files[]" data-max-files="10" />
                                             <input type="hidden" id="deleted-files" name="deleted_files[]" />
-                                        <div class="uploaded-images file-pond-preview-wrapper" id="gallery-preview" data-upload-type="gallery" data-allow-reorder="true"   data-preview="gallery-preview" data-collection="project_gallery">
+                                        <div class="uploaded-images file-pond-preview-wrapper gallery" id="gallery-preview" data-upload-type="gallery" data-allow-reorder="true"   data-preview="gallery-preview" data-collection="project_gallery">
                                             @if(isset($project))
-                                                @foreach($project->getMedia('project_gallery') as $media)
-                                                <div class="preview-box remove-media" data-media-id="{{ $media->id }}">
+                                                @foreach($project->getMedia('project_gallery')->sortBy('order_column') as $media)
+                                                <div class="media-item preview-box remove-media" data-media-id="{{ $media->id }}" data-id="{{ $media->id }}">
                                                     <div class="media-thumb">
-                                                        <img src="{{ asset($media->getUrl()) }}" alt="uploaded" style="">
+                                                        <a href="{{ asset($media->getUrl('webp')) }}" target="_blank" data-fancybox="gallery-preview" >
+                                                            <img src="{{ asset($media->getUrl('webp')) }}" alt="uploaded" style="">
+                                                        </a>
                                                         <label class="form-label featured-image-checkbox-label"><input type="radio" name="featured_image" value="{{ $media->id }}" @checked($project->featured_media_id === $media->id)> Set Featured</label>
                                                         <div class="remove-media">
                                                             <span title="Remove" class="remove-media " >Remove</span>
@@ -739,7 +753,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row"> 
+                            <div class="row mt-3"> 
                                 <div class="col-md-3 mb-3 mt-3">
                                     <div class="form-group">
                                        
@@ -769,7 +783,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mt-3 display-none">
                                 <label class="form-label"><strong><a href="javascript:;" class="toggle-survey-fields" >Survey Fields</a></strong></label>
                                 <div class="survey-fields row {!! !$is_show_survey_fields ? 'display-none' : '' !!} border p-3 m-2 rounded bg-light">
                                      
@@ -940,7 +954,7 @@ function initMap() {
       bounds: karachiBounds,
       componentRestrictions: { country: 'pk' }, // Pakistan only
       strictBounds: true,
-      types: ["(regions)"]
+      types: ["geocode"]
     });
 
     autocomplete.addListener('place_changed', onPlaceChanged);
@@ -1008,7 +1022,7 @@ function onCityChange(cityName, area='', sub_area='') {
             // Set bounds for autocomplete
             const circle = new google.maps.Circle({
                 center: location,
-                radius: 1000 // ~30km
+                radius: 10000 // ~30km
             });
 
             autocomplete.setBounds(circle.getBounds());
@@ -1158,6 +1172,8 @@ $(document).on("click",".toggle-survey-fields", function(){
     });
         
     </script>
+
+
 @endif
 @endsection
 

@@ -7,6 +7,7 @@
     <title>Cmax</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{{ asset('assets/img/favicon.png') }}">
 
     <!--begin::Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
@@ -22,7 +23,7 @@
     <!--end::Fonts -->
     <link href="{{ asset('assets/error/error-v6.default.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/error/base/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="{!! asset('assets/images/favicon.png') !!}" />
+    <link rel="icon" href="{{ asset('assets/img/favicon.png') }}">
 
 </head>
 
@@ -33,7 +34,7 @@
 
 <!-- begin:: Page -->
 <div class="kt-grid kt-grid--ver kt-grid--root">
-    <div class="kt-grid__item kt-grid__item--fluid kt-grid  kt-error-v6" style="background-image: url('/public/assets/images/bg7.jpg');">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid  kt-error-v6" style="background-image: asset('assets/images/bg7.jpg');">
         <div class="kt-error_container">
             <div class="kt-error_subtitle kt-font-light">
                 <h1 class="kt-error-v1__number">404</h1>

@@ -20,4 +20,10 @@ class Area extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    // One area has many surveys
+    public function surveys()
+    {
+        return $this->hasMany(AreaSurvey::class, 'area_id');
+    }
 }

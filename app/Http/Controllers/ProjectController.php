@@ -98,6 +98,7 @@ class ProjectController extends Controller
         $priceTo         = $request->input('price_to');
         $bedrooms        = $request->input('bedrooms');
         $offer           = $request->input('offer');
+        $payment_plan_duration           = $request->input('payment_plan_duration');
         $priceFrom       = GeneralHelper::detectNumberUnit($priceFrom);
         $priceTo         = GeneralHelper::detectNumberUnit($priceTo);
         $searchedData    = $request->all();    
@@ -116,8 +117,6 @@ class ProjectController extends Controller
         /*->when($searchArea, function ($query, $searchArea) {
             $query->where('location', 'like', "%$searchArea%");
         })*/
-
-
 
         ->when($area, function ($query, $searchArea) {
             $query->whereHas('area', function ($q) use ($searchArea) {
@@ -147,6 +146,10 @@ class ProjectController extends Controller
         // Progress (e.g., under-construction, completed)
         ->when($progress && $progress != 'Select', function ($query) use ($progress) {
             $query->where('progress', $progress);
+        })
+
+        ->when($payment_plan_duration && $payment_plan_duration != 'Select', function ($query) use ($payment_plan_duration) {
+            $query->whereJsonContains('payment_plan_duration', $payment_plan_duration);
         })
 
         // Property Type
@@ -183,6 +186,9 @@ class ProjectController extends Controller
             });
         })
 
+
+        
+
         ->when($offer, function ($query, $offer) {
             $query->whereHas('offers', function ($q) use ($offer) {
                 $q->where('offer', $offer);
@@ -191,24 +197,33 @@ class ProjectController extends Controller
 
         
 
+        
+
        
 
-        $projects = $projects->with(['Area', 'subArea'])->where('is_active', true)->orderBy('position', 'asc')->paginate(10);
+        //$projects = $projects->with(['Area', 'subArea'])->where('is_active', true)->orderBy('position', 'asc')->paginate(10);
+        $projects = $projects->with(['Area', 'subArea'])
+        ->where('is_active', true)
+        ->orderByRaw("CASE WHEN refreshed_at >= ? THEN 0 ELSE 1 END", [now()->subMonth()])
+        ->orderBy('position', 'asc')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
         //dd(\DB::getQueryLog());
         $builders = Builder::where('is_active',1)->orderBy('builder_name','asc')->get();
         $progress = config('constants.progress');
         $property_types = config('constants.property_types');
         $bedrooms = config('constants.bedrooms');
         $offering = config('constants.offering');
+        $payment_plan_duration = config('constants.payment_plan_duration');
 
         if ($request->ajax()) {
-            return view('projects.partials.project_list', compact('builders','progress','property_types','bedrooms','projects','offering','searchedData','compare'))->render();
+            return view('projects.partials.project_list', compact('builders','progress','property_types','bedrooms','projects','offering','searchedData','compare','payment_plan_duration'))->render();
         }
 
         
 
         
-        return view('project-search-results',compact('builders','progress','property_types','bedrooms','projects','offering','searchedData','compare'));
+        return view('project-search-results',compact('builders','progress','property_types','bedrooms','projects','offering','searchedData','compare','payment_plan_duration'));
 
     }
 }

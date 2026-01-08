@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Carbon\Carbon;
 use App\Project;
 use App\Property;
 use App\Amenity;
@@ -72,11 +72,16 @@ class ProjectController extends Controller
                     $newStatus = $project->is_featured == 1 ? 0 : 1;
                     return '<a href="#" data-status="'.$newStatus.'" data-status-type="is_featured" data-status-label="'.$newLabel.'" class="updateStatus" data-model-name="project" data-id="'.$project->id.'" title="Click to '.$newLabel.'" >'.$statusHtml.'</a>';                    
                 }) */
-                ->editColumn('refreshed_at', function($project) {
+                ->editColumn('refreshed_at', function($project) { 
+                    if($project->is_refresh_expired === false)  {
+                       $btnColor = 'btn-secondary remove_refresh_project';   
+                       $title = $project->refresh_days_remaining." days remaining";                   
+                    }else{
+                       $btnColor = 'btn-primary refresh_project'; 
+                       $title = "Click to Refresh";                      
+                    }
                     
-                    return '<a href="'.route('projects.refresh', $project->id).'" class="btn btn-sm btn-warning"
-                                onclick="return confirm(\'Are you sure you want to refresh this project?\')">
-                                🔄 Refresh
+                    return '<a href="javascript:;" class="btn btn-sm '.$btnColor.' " data-project_id="'.$project->id.'" title="'.$title.'" ><i class="fa fa-refresh"></i>
                             </a>';                    
                 })
 
@@ -87,9 +92,12 @@ class ProjectController extends Controller
                     $statusHtml = GeneralHelper::getStatusLabel($label,$color);
                     $newLabel = $project->is_popular == 1 ? 'No' : 'Yes';
                     $newStatus = $project->is_popular == 1 ? 0 : 1;
-                    return '<a href="#" data-status="'.$newStatus.'" data-status-type="is_popular" data-status-label="'.$newLabel.'" class="updateStatus" data-model-name="project" data-id="'.$project->id.'" title="Click to '.$newLabel.'" >'.$statusHtml.'</a>';                    
+                    return '<a href="#" data-status="'.$newStatus.'" data-status-type="is_popular" data-status-label="'.$newLabel.'" class="updateStatus" data-model-name="project" data-id="'.$project->id.'" title="Click to '.$newLabel.'" >'.$statusHtml.'</a>';
+                                        
+                })->editColumn('project_title', function($project) {
+                    return $project->project_title.'<br><div class="very-small-text text-muted"><i class="fa fa-map-marker"></i> '.$project->alt_location.'</div>';                    
                 })
-                ->rawColumns(['action','is_active','refreshed_at','is_popular'])
+                ->rawColumns(['action','is_active','refreshed_at','is_popular','project_title'])
                 ->toJson();
         }
     }
@@ -112,13 +120,14 @@ class ProjectController extends Controller
         $cities = GeneralHelper::getCitiesByCountry(166);
         $price_types = config('constants.price_types');
         $offering = config('constants.offering');    
+        $payment_plan_duration = config('constants.payment_plan_duration');    
         $areas = Area::orderBy('name' , 'asc')->get();
         $sub_areas = SubArea::orderBy('name' , 'asc')->get();
         $features = Feature::where('is_active',1)->orderBy('name' , 'asc')->get();
         $is_show_survey_fields = false;
         
         
-        return view('admin.projects.create', compact('users','builders','progress','offering','area_types','bedrooms','bathrooms','cities','price_types','features','areas','sub_areas','is_show_survey_fields'));
+        return view('admin.projects.create', compact('users','builders','progress','offering','area_types','bedrooms','bathrooms','cities','price_types','features','areas','sub_areas','is_show_survey_fields','payment_plan_duration'));
     }
 
     /**
@@ -139,6 +148,7 @@ class ProjectController extends Controller
             'builder_id' => 'required',
             'city_id' => 'required',
             'location' => 'required',            
+            'payment_plan_duration' => 'required',            
             'images.*' => 'image|max:10240',
             'offering' => 'required|array|min:1|in:'.implode(",",$offering),
             'area_id' => 'required',
@@ -380,13 +390,14 @@ class ProjectController extends Controller
         $cities = GeneralHelper::getCitiesByCountry(166);
         $price_types = config('constants.price_types');
         $offering = config('constants.offering');       
+        $payment_plan_duration = config('constants.payment_plan_duration');
         $features = Feature::where('is_active',1)->orderBy('name' , 'asc')->get();   
         $areas = Area::orderBy('name' , 'asc')->get();
         $sub_areas = SubArea::orderBy('name' , 'asc')->get();   
         $is_show_survey_fields = GeneralHelper::showSurveyFileds($project);
         
         
-        return view('admin.projects.create', compact('project','users','builders','progress','offering','area_types','bedrooms','bathrooms','cities','price_types','features','areas','sub_areas','is_show_survey_fields'));
+        return view('admin.projects.create', compact('project','users','builders','progress','offering','area_types','bedrooms','bathrooms','cities','price_types','features','areas','sub_areas','is_show_survey_fields','payment_plan_duration'));
     }
 
     /**
@@ -407,6 +418,7 @@ class ProjectController extends Controller
             'builder_id' => 'required',
             'city_id' => 'required',
             'location' => 'required',            
+            'payment_plan_duration' => 'required',            
             'images.*' => 'image|max:2048',
             'offering' => 'required|array|min:1|in:'.implode(",",$offering),
             'area_id' => 'required',

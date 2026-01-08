@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Http\Helpers\FileHelper;
 
 
 
@@ -75,21 +76,17 @@ class BuilderController extends Controller
         $request->merge([
             'is_active' => $request->has('is_active') ? 1 : 0,
         ]);
+        
+        if ($request->hasFile('builder_logo_file')) {
 
-        $builder = Builder::create($request->except('images','_token'));
-
-        if ($request->has('media_ids')) {
+            $logoUrl = FileHelper::uploadImage($request->file('builder_logo_file'), 'builder_logos');
             
-            foreach ($request->media_ids['default'] as $mediaId) {
-                $media = Media::find($mediaId);
-                if ($media) {
-                    $media->model_type = Builder::class;
-                    $media->model_id = $builder->id;
-                    $media->collection_name = 'images'; // move it to real collection
-                    $media->save();
-                }
-            }
+            $request->merge([
+                'builder_logo' => $logoUrl,                
+            ]);
         }
+
+        $builder = Builder::create($request->except('builder_logo_file','_token'));
 
         return response()->json([
             'status' => 'success',
@@ -145,32 +142,18 @@ class BuilderController extends Controller
             'is_active' => $request->has('is_active') ? 1 : 0,
         ]);
 
-        $builder->update($request->except('images','_token','builder_id'));
-        // Remove deleted images
-        $deletedFiles = $request->input('deleted_files', []);
+        if ($request->hasFile('builder_logo_file')) {
 
-       if (!empty($deletedFiles)) {            
-            foreach ($deletedFiles as $id) {
-                if($id){
-                    $id = (json_decode($id));
-                    Media::whereIn('id', $id)->delete();
-                }
-                
-            }
+            $logoUrl = FileHelper::uploadImage($request->file('builder_logo_file'), 'builder_logos');
+            $request->merge([
+                'builder_logo' => $logoUrl,                
+            ]);
         }
 
+        $builder->update($request->except('builder_logo_file','_token','builder_id'));
+       
         
-        if ($request->has('media_ids')) {
-            foreach ($request->media_ids['default'] as $mediaId) {
-                $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
-                if ($media) {
-                    $media->model_type = Builder::class;
-                    $media->model_id = $builder->id;
-                    $media->collection_name = 'images'; // move it to real collection
-                    $media->save();
-                }
-            }
-        }
+
 
         return response()->json([
             'status' => 'success',
