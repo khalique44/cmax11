@@ -84,7 +84,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label">Address:<span>*</span></label>
-                                        <input type="text" name="contact_address" id="contact_address" class="form-control" value="{{ old('contact_address', $contact_address ?? '') }}" required>
+                                        <textarea  name="contact_address" id="contact_address" title="enter  address!" class="form-control" rows="8" placeholder="" required
+                                                     >{{ old('contact_address', $contact_address ?? '') }}</textarea>
+                                        
                                     </div>
                                 </div>
                             </div>
