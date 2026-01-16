@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Helpers\GeneralHelper;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormMail;
+use App\Mail\CareerFormMail;
 use App\Mail\PropertyInquiryMail;
+use App\Mail\ProjectInquiryMail;
 
 
 class CmsPage extends Controller
@@ -141,6 +143,36 @@ class CmsPage extends Controller
             ));
     }
 
+    public function submitCareerForm(Request $request)
+    {
+        $data = $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email',
+            'phone'   => 'nullable|string|max:20',
+            'area_of_interest' => 'required|string',
+        ]);
+
+        // Send email
+        Mail::to(config('constants.admin_email'))->send(new CareerFormMail($data));
+
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Career Form submitted!',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => $request->email,
+                'PHONE' => $request->phone,
+                'COMMENTS' => $request->area_of_interest,
+            ],
+            
+        ];
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
+
+        return response()->json(['message' => 'Thank you! Your message has been sent.']);
+
+    }
+
     public function showContactUs(){
 
         $contact_title = GeneralHelper::getOption('contact_title');
@@ -182,6 +214,20 @@ class CmsPage extends Controller
         // Send email
         Mail::to(config('constants.admin_email'))->send(new ContactFormMail($data));
 
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Contact Query submitted!',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => $request->email,
+                'PHONE' => $request->phone,
+                'COMMENTS' => $request->message,
+            ],
+            
+        ];
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
+
         return response()->json(['message' => 'Thank you! Your message has been sent.']);
 
     }
@@ -200,6 +246,60 @@ class CmsPage extends Controller
         ]);
 
         Mail::to(config('constants.admin_email'))->send(new PropertyInquiryMail($data));
+
+        $comments = 'Property Type: '.$request->property_type;
+        $comments .= 'Budget: '.$request->budget;
+        $comments .= 'Location: '.$request->location;
+        $comments .= 'Message: '.$request->message;
+
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Inquery Form submitted!',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => $request->email,
+                'PHONE' => $request->phone,
+                'COMMENTS' => $comments,
+            ],
+            
+        ];
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
+
+        return response()->json(['message' => 'Your inquiry has been sent successfully!']);
+    }
+
+    public function submitProjectInquiryForm(Request $request)
+    {
+        $data = $request->validate([
+            'name'          => 'required|string|max:255',
+            'email'         => 'required|email',
+            'phone'         => 'required|string|max:20',
+            'address'       => 'nullable|string',
+            'unit_type'     => 'nullable|string|max:255',            
+            'message'       => 'nullable|string',
+        ]);
+
+        Mail::to(config('constants.admin_email'))->send(new ProjectInquiryMail($request->all()));
+
+        $comments = 'Project Title: '.$request->unit_type;       
+        $comments = 'Unit Type: '.$request->unit_type;       
+        $comments .= 'Message: '.$request->message;
+        $comments .= 'Address: '.$request->address;
+
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Project Inquery Form submitted! ',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => $request->email,
+                'PHONE' => $request->phone,
+                'COMMENTS' => $comments,
+            ],
+            
+        ];
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
 
         return response()->json(['message' => 'Your inquiry has been sent successfully!']);
     }

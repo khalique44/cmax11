@@ -4,6 +4,8 @@ use Illuminate\Support\Collection;
 use App\GlobalSetting;
 use Carbon\Carbon;
 use App\Country;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class GeneralHelper
 {
@@ -293,4 +295,35 @@ class GeneralHelper
         }
 
     }*/
+
+    /**
+     * Send a request to the Bitrix24 REST API.
+     *
+     * @param array $data The data to be sent (as an associative array)
+     * @param string $method The Bitrix24 method (e.g., crm.lead)
+     * @param string $action The action (e.g., add, get, update)
+     * @return array|null
+     */
+    public static function sendBitrixRequest(array $data, string $method = 'crm.lead', string $action = 'add'): ?array
+    {
+        $baseUrl = config('constants.bitrix24.api_url');
+        $url = "{$baseUrl}/{$method}.{$action}";
+
+        try {
+            $response = Http::asForm() // Bitrix usually expects application/x-www-form-urlencoded
+                ->withoutVerifying()
+                ->post($url, $data);
+
+            if ($response->failed()) {
+                Log::error("Bitrix API Error: " . $response->body());
+                return null;
+            }
+
+            return $response->json();
+            
+        } catch (\Exception $e) {
+            Log::error("Bitrix Connection Error: " . $e->getMessage());
+            return null;
+        }
+    }
 }
