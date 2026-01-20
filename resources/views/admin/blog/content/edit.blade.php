@@ -12,7 +12,7 @@
                     <div class="distrcit-back-btn">
                         <div class="district-back-del-btn-area">
                             
-                            <a href="{{url('admin/blog/posts')}}" data-toggle="" data-target="#search-db-model"  class="btn">Back</a>
+                            <a href="{{url('admin/blog/posts')}}" class="btn btn-sm btn-warning">Back</a>
                         </div>
                     </div>
                 </div>
@@ -72,9 +72,9 @@
 
                                         @if(!empty($record->file_url))
                                         <div class="m-2">
-                                            <a href="{!! url('public') !!}/{{$record->file_url}}" target="_blank" class="available-image-area">
+                                            <a href="{{asset($record->file_url)}}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$record->file_url}}" class="logo" alt="Logo" width="150">
+                                                <img src="{{asset($record->file_url)}}" class="logo" alt="Logo" width="150">
                                                 
                                             </a>
                                         </div>
@@ -91,9 +91,9 @@
 
                                         @if(!empty($record->header_image))
                                         <div class="m-2">
-                                            <a href="{!! url('public') !!}/{{$record->header_image}}" target="_blank" class="available-image-area">
+                                            <a href="{{asset($record->header_image)}}" target="_blank" class="available-image-area">
                                                 
-                                                <img src="{!! url('public') !!}/{{$record->header_image}}" class="logo" alt="Logo" width="150">
+                                                <img src="{{asset($record->header_image)}}" class="logo" alt="Logo" width="150">
                                                 
                                             </a>
                                         </div>
@@ -120,7 +120,7 @@
                                     <button type="submit" href="javascript:void(0);" id="btn_save" class="btn btn-success mt-3">
                                         Update
                                     </button>
-
+                                    <a href="{{url('admin/blog/posts')}}" class="btn btn-warning mt-3">Back</a>
                                 </div>
                             </div>
                         </form>

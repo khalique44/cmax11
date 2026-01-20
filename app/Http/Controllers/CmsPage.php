@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Helpers\GeneralHelper;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormMail;
+use App\Mail\CareerFormMail;
 use App\Mail\PropertyInquiryMail;
+use App\Mail\ProjectInquiryMail;
 
 
 class CmsPage extends Controller
@@ -141,6 +143,36 @@ class CmsPage extends Controller
             ));
     }
 
+    public function submitCareerForm(Request $request)
+    {
+        $data = $request->validate([
+            'name'    => 'required|string|max:255',
+            'email'   => 'required|email',
+            'phone'   => 'nullable|string|max:20',
+            'area_of_interest' => 'required|string',
+        ]);
+
+        // Send email
+        Mail::to(config('constants.admin_email'))->send(new CareerFormMail($data));
+
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Career Form submitted!',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => $request->email,
+                'PHONE' => $request->phone,
+                'COMMENTS' => $request->area_of_interest,
+            ],
+            
+        ];
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
+
+        return response()->json(['message' => 'Thank you! Your message has been sent.']);
+
+    }
+
     public function showContactUs(){
 
         $contact_title = GeneralHelper::getOption('contact_title');
@@ -182,6 +214,20 @@ class CmsPage extends Controller
         // Send email
         Mail::to(config('constants.admin_email'))->send(new ContactFormMail($data));
 
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Contact Query submitted!',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => $request->email,
+                'PHONE' => $request->phone,
+                'COMMENTS' => $request->message,
+            ],
+            
+        ];
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
+
         return response()->json(['message' => 'Thank you! Your message has been sent.']);
 
     }
@@ -201,6 +247,149 @@ class CmsPage extends Controller
 
         Mail::to(config('constants.admin_email'))->send(new PropertyInquiryMail($data));
 
+        $comments = 'Property Type: '.$request->property_type;
+        $comments .= 'Budget: '.$request->budget;
+        $comments .= 'Location: '.$request->location;
+        $comments .= 'Message: '.$request->message;
+
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Inquery Form submitted!',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => $request->email,
+                'PHONE' => $request->phone,
+                'COMMENTS' => $comments,
+            ],
+            
+        ];
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
+
         return response()->json(['message' => 'Your inquiry has been sent successfully!']);
+    }
+
+    public function submitProjectInquiryForm(Request $request)
+    {
+        $data = $request->validate([
+            'name'          => 'required|string|max:255',
+            'email'         => 'required|email',
+            'phone'         => 'required|string|max:20',
+            'address'       => 'nullable|string',
+            'unit_type'     => 'nullable|string|max:255',            
+            'message'       => 'nullable|string',
+        ]);
+
+        Mail::to(config('constants.admin_email'))->send(new ProjectInquiryMail($request->all()));
+
+        $comments = 'Project Title: '.$request->unit_type;       
+        $comments = 'Unit Type: '.$request->unit_type;       
+        $comments .= 'Message: '.$request->message;
+        $comments .= 'Address: '.$request->address;
+
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Project Inquery Form submitted! ',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => $request->email,
+                'PHONE' => $request->phone,
+                'COMMENTS' => $comments,
+            ],
+            
+        ];
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
+
+        return response()->json(['message' => 'Your inquiry has been sent successfully!']);
+    }
+
+
+    public function showOurAgents(){
+        $our_agents_title = GeneralHelper::getOption('our_agents_title');
+        $our_agents_header_image = GeneralHelper::getOption('our_agents_header_image');
+        $our_agents_description = GeneralHelper::getOption('our_agents_description');        
+
+        $our_agents_meta_title = GeneralHelper::getOption('our_agents_meta_title');
+        $our_agents_meta_description = GeneralHelper::getOption('our_agents_meta_description');
+        $our_agents_meta_keywords = GeneralHelper::getOption('our_agents_meta_keywords');
+
+        return view('cms_pages.our_agents',compact(
+            'our_agents_title',
+            'our_agents_header_image',
+            'our_agents_description',            
+
+            'our_agents_meta_title',
+            'our_agents_meta_description',
+            'our_agents_meta_keywords',
+        
+
+            ));
+    }
+
+    public function showFaqs(){
+        $faqs_title = GeneralHelper::getOption('faqs_title');
+        $faqs_header_image = GeneralHelper::getOption('faqs_header_image');
+        $faqs_description = GeneralHelper::getOption('faqs_description');        
+
+        $faqs_meta_title = GeneralHelper::getOption('faqs_meta_title');
+        $faqs_meta_description = GeneralHelper::getOption('faqs_meta_description');
+        $faqs_meta_keywords = GeneralHelper::getOption('faqs_meta_keywords');
+
+        return view('cms_pages.faqs',compact(
+            'faqs_title',
+            'faqs_header_image',
+            'faqs_description',            
+
+            'faqs_meta_title',
+            'faqs_meta_description',
+            'faqs_meta_keywords',
+        
+
+            ));
+    }
+
+    public function showPrivacyPolicy(){
+        $privacy_policy_title = GeneralHelper::getOption('privacy_policy_title');
+        $privacy_policy_header_image = GeneralHelper::getOption('privacy_policy_header_image');
+        $privacy_policy_description = GeneralHelper::getOption('privacy_policy_description');        
+
+        $privacy_policy_meta_title = GeneralHelper::getOption('privacy_policy_meta_title');
+        $privacy_policy_meta_description = GeneralHelper::getOption('privacy_policy_meta_description');
+        $privacy_policy_meta_keywords = GeneralHelper::getOption('privacy_policy_meta_keywords');
+
+        return view('cms_pages.privacy_policy',compact(
+            'privacy_policy_title',
+            'privacy_policy_header_image',
+            'privacy_policy_description',            
+
+            'privacy_policy_meta_title',
+            'privacy_policy_meta_description',
+            'privacy_policy_meta_keywords',
+        
+
+            ));
+    }
+
+    public function showTermsAndConditions(){
+        $terms_and_conditions_title = GeneralHelper::getOption('terms_and_conditions_title');
+        $terms_and_conditions_header_image = GeneralHelper::getOption('terms_and_conditions_header_image');
+        $terms_and_conditions_description = GeneralHelper::getOption('terms_and_conditions_description');        
+
+        $terms_and_conditions_meta_title = GeneralHelper::getOption('terms_and_conditions_meta_title');
+        $terms_and_conditions_meta_description = GeneralHelper::getOption('terms_and_conditions_meta_description');
+        $terms_and_conditions_meta_keywords = GeneralHelper::getOption('terms_and_conditions_meta_keywords');
+
+        return view('cms_pages.terms_and_conditions',compact(
+            'terms_and_conditions_title',
+            'terms_and_conditions_header_image',
+            'terms_and_conditions_description',            
+
+            'terms_and_conditions_meta_title',
+            'terms_and_conditions_meta_description',
+            'terms_and_conditions_meta_keywords',
+        
+
+            ));
     }
 }

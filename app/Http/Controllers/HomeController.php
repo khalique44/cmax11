@@ -44,6 +44,7 @@ class HomeController extends Controller
         $property_types = config('constants.property_types');
         $bedrooms = config('constants.bedrooms');
         $offering = config('constants.offering');
+        $payment_plan_duration = config('constants.payment_plan_duration');
         $popular_projects = Project::with('offers','floorPlan','builder')->where('is_popular',true)->take(3)->orderBy('position', 'asc')->get();
         $latestPosts = Post::where('status', 'yes')
         ->latest()  // created_at DESC
@@ -55,10 +56,57 @@ class HomeController extends Controller
         $third_box_offer = GeneralHelper::getOption('third_box_offer');
         $fourth_box_offer = GeneralHelper::getOption('fourth_box_offer');
 
-        $first_box_offer_count = ProjectOffer::where('offer', strtolower($first_box_offer))->count();
+        $first_box_offer_count = Project::whereHas('offers', function ($q) use ($first_box_offer) {
+            $q->where('offer', strtolower($first_box_offer));
+        })->count();
+        $second_box_offer_count = Project::whereHas('offers', function ($q) use ($second_box_offer) {
+            $q->where('offer', strtolower($second_box_offer));
+        })->count();
+        $third_box_offer_count = Project::whereHas('offers', function ($q) use ($third_box_offer) {
+            $q->where('offer', strtolower($third_box_offer));
+        })->count();
+        $fourth_box_offer_count = Project::whereHas('offers', function ($q) use ($fourth_box_offer) {
+            $q->where('offer', strtolower($fourth_box_offer));
+        })->count();
+
+        /* $first_box_offer_count = ProjectOffer::where('offer', strtolower($first_box_offer))->count();
         $second_box_offer_count = ProjectOffer::where('offer', strtolower($second_box_offer))->count();
         $third_box_offer_count = ProjectOffer::where('offer', strtolower($third_box_offer))->count();
-        $fourth_box_offer_count = ProjectOffer::where('offer', strtolower($fourth_box_offer))->count();
+        $fourth_box_offer_count = ProjectOffer::where('offer', strtolower($fourth_box_offer))->count(); */
+
+        $first_box_area_id = GeneralHelper::getOption('first_box_location');
+        $second_box_area_id = GeneralHelper::getOption('second_box_location');
+        $third_box_area_id = GeneralHelper::getOption('third_box_location');
+        $fourth_box_area_id = GeneralHelper::getOption('fourth_box_location');
+        $fifth_box_area_id = GeneralHelper::getOption('fifth_box_location');
+        $sixth_box_area_id = GeneralHelper::getOption('sixth_box_location');
+
+        $first_box_location = Area::where('id', $first_box_area_id)->value('name');                
+        $second_box_location = Area::where('id', $second_box_area_id)->value('name');        
+        $third_box_location = Area::where('id', $third_box_area_id)->value('name');
+        $fourth_box_location = Area::where('id', $fourth_box_area_id)->value('name');        
+        $fifth_box_location = Area::where('id', $fifth_box_area_id)->value('name');       
+        $sixth_box_location = Area::where('id', $sixth_box_area_id)->value('name');
+      
+
+        $first_box_location_count = Project::whereHas('area', function ($q) use ($first_box_area_id) {
+            $q->where('area_id', strtolower($first_box_area_id));
+        })->count();
+        $second_box_location_count = Project::whereHas('area', function ($q) use ($second_box_area_id) {
+            $q->where('area_id', strtolower($second_box_area_id));
+        })->count();
+        $third_box_location_count = Project::whereHas('area', function ($q) use ($third_box_area_id) {
+            $q->where('area_id', strtolower($third_box_area_id));
+        })->count();
+        $fourth_box_location_count = Project::whereHas('area', function ($q) use ($fourth_box_area_id) {
+            $q->where('area_id', strtolower($fourth_box_area_id));
+        })->count();
+        $fifth_box_location_count = Project::whereHas('area', function ($q) use ($fifth_box_area_id) {
+            $q->where('area_id', strtolower($fifth_box_area_id));
+        })->count();
+        $sixth_box_location_count = Project::whereHas('area', function ($q) use ($sixth_box_area_id) {
+            $q->where('area_id', strtolower($sixth_box_area_id));
+        })->count();
 
         if(!empty($data->header_image)){
             
@@ -66,7 +114,7 @@ class HomeController extends Controller
             $header_image = url('public') .'/'.$data->header_image;
           } 
         }
-        return view('home',compact('data','header_image','testimonials','builders','progress','property_types','bedrooms','offering','popular_projects','latestPosts','compare','first_box_offer_count','second_box_offer_count','third_box_offer_count','fourth_box_offer_count'));
+        return view('home',compact('data','header_image','testimonials','builders','progress','property_types','bedrooms','offering','popular_projects','latestPosts','compare','first_box_offer_count','second_box_offer_count','third_box_offer_count','fourth_box_offer_count','payment_plan_duration','first_box_location','second_box_location','third_box_location','fourth_box_location','fifth_box_location','sixth_box_location','first_box_location_count','second_box_location_count','third_box_location_count','fourth_box_location_count','fifth_box_location_count','sixth_box_location_count'));
         
         //return '<H2>Coming Soon</H2';
     }
@@ -84,25 +132,63 @@ class HomeController extends Controller
     }*/
 
 
-    public function searchArea(Request $request){
-      $query = $request->get('query');
+    public function searchArea(Request $request)
+    {
+        $query = trim($request->get('query'));
 
-      $results = Area::with('subAreas')
-          ->where('name', 'like', '%' . $query . '%')
-          ->orderBy('name', 'asc') // Order areas alphabetically
-          ->get()
-          ->flatMap(function ($area) {
-              $list = collect([$area->name]); // Add area name first
-              foreach ($area->subAreas->sortBy('name') as $subArea) { // Order sub-areas alphabetically
-                  $list->push($area->name . ' - ' . $subArea->name);
-              }
-              return $list;
-          })
-          ->take(50)
-          ->values();
+        // Split query if contains hyphen
+        $searchArea = explode('-', $query, 2);
+        $areaPart = trim($searchArea[0] ?? '');
+        $subAreaPart = trim($searchArea[1] ?? '');
 
-      return response()->json($results);
+        $results = Area::with(['subAreas' => function ($q) use ($subAreaPart, $query) {
+                // Filter subareas only if searching specifically for them
+                if ($subAreaPart) {
+                    $q->where('name', 'like', '%' . $subAreaPart . '%');
+                }
+                $q->orderBy('name', 'asc');
+            }])
+            ->when($subAreaPart, function ($q) use ($areaPart, $subAreaPart) {
+                // If hyphen present → search both Area + SubArea parts
+                $q->where('name', 'like', '%' . $areaPart . '%')
+                ->orWhereHas('subAreas', function ($sub) use ($subAreaPart) {
+                    $sub->where('name', 'like', '%' . $subAreaPart . '%');
+                });
+            }, function ($q) use ($query) {
+                // If no hyphen → search only Area but will include all its SubAreas
+                $q->where('name', 'like', '%' . $query . '%')
+                ->orWhereHas('subAreas', function ($sub) use ($query) {
+                    $sub->where('name', 'like', '%' . $query . '%');
+                });
+            })
+            ->orderBy('name', 'asc')
+            ->get()
+            ->flatMap(function ($area) use ($query, $subAreaPart) {
+                $list = collect();
+
+                // Always include matching Area name
+                if (stripos($area->name, $query) !== false || !$subAreaPart) {
+                    $list->push($area->name);
+                }
+
+                // Always include *all* subareas for a matching area
+                foreach ($area->subAreas->sortBy('name') as $subArea) {
+                    $list->push($area->name . ' - ' . $subArea->name);
+                }
+
+                return $list;
+            })
+            ->unique()
+            ->take(50)
+            ->values();
+
+        return response()->json($results);
     }
+
+
+
+
+
 
 
    

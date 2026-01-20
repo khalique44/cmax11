@@ -1,6 +1,9 @@
 
 $(function(){
-	$("select.select2").select2();
+	$("select.select2").select2({
+        
+        placeholder: $("select.select2").data('placeholder'),
+    });
 });
 
 function showAjaxLoader(){
@@ -162,10 +165,6 @@ function successCallback(response){
 }
 
 
-
-
-
-
 /*-----CMAX----*/
 
 $(document).on("submit","form#builder-form",function(e){
@@ -231,6 +230,53 @@ function cmsSuccessCallback(response){
             displayMsg(msgArea,response.message,msgType);           
 
         },1000);
+    }else{
+
+         displayMsg(msgArea,response.message,msgType);
+    }
+    
+}
+
+
+$(document).on("submit","form#area-survey-form",function(e){
+    e.preventDefault();    
+    var frm = $('form#area-survey-form');
+    var formData = new FormData(frm[0]);
+    ajaxPostRequest("/surveys",formData,surveySuccessCallback,ajaxErrorCallback,true);    
+
+});
+
+$(document).on("submit","form#survey-form-update",function(e){
+    e.preventDefault();    
+    var survey_id = $('input[name="survey_id"]').val();
+    //var formData = $(this).serializeArray();
+    var frm = $('form#survey-form-update');
+    var formData = new FormData(frm[0]);
+    ajaxPostRequest("/surveys/"+survey_id,formData,surveySuccessCallback,ajaxErrorCallback,true);    
+
+});
+
+function surveySuccessCallback(response){
+
+    var  msgArea = $('.ajax-msg');
+    var msgType = 'error';
+
+    if(response.status && response.status == 'success'){
+        msgType = 'success'; 
+        displayMsg(msgArea,response.message,msgType);
+            if(response.action == 'created')  {
+                
+                $("form#area-survey-form")[0].reset();            
+                setTimeout(function(){ 
+                    document.location = $('meta[name="admin_url"]').attr('content')+"/surveys";
+                },1000);
+            }else{
+                setTimeout(function(){ 
+                    location.reload();
+                },1000);
+            }            
+            
+            
     }else{
 
          displayMsg(msgArea,response.message,msgType);
@@ -344,8 +390,10 @@ function ajaxErrorCallback(response){
         displayMsg(msgArea,html,msgType);         
         
     }else{
+        
+        var msg = (response.responseJSON.message) ?response.responseJSON.message : 'Server Error!';
 
-        displayMsg(msgArea,'Server Error!',msgType);
+        displayMsg(msgArea,msg,msgType);
     }
 }
 
@@ -459,11 +507,22 @@ FilePond.setOptions({
                         const container = document.getElementById(previewContainerId);
                         if (container) {
                             const wrapper = document.createElement('div');
-                            wrapper.classList.add('preview-box');
+                            wrapper.classList.add('media-item');
+                            wrapper.classList.add('preview-box');                           
+                            wrapper.classList.add('remove-media');
                             wrapper.dataset.mediaId = data.id;
+                            wrapper.dataset.id = data.id;
 
                             const img = document.createElement('img');
-                            img.src = data.url.replace("storage", "storage/app/public");
+                            img.src = data.url;
+
+                            const link = document.createElement('a');
+                            link.href = data.url;
+                            link.target = "_blank"; // opens in new tab
+                            link.setAttribute("data-fancybox", preview_id);
+                            link.appendChild(img);
+
+                            
 
                             const removeBtn = document.createElement('span');
                             removeBtn.classList.add('remove-media');
@@ -477,7 +536,7 @@ FilePond.setOptions({
 
                             const thumb = document.createElement('div');
                             thumb.classList.add('media-thumb');
-                            thumb.appendChild(img);
+                            thumb.appendChild(link);
                             console.log('preview_id:',preview_id)
                             if(preview_id == 'gallery-preview'){
                                 // Create radio input
@@ -841,3 +900,243 @@ $(document).on("change", "[name='featured_image']", function () {
     })
     .catch(err => console.error('❌ Error:', err)); */
 });
+
+$(document).on('click', 'a.refresh_project', function(){
+    var project_id = $(this).data('project_id');
+
+    Swal.fire({
+        title: 'Are you sure you want to refresh this project?',
+        text: "The porject will be refrehsed for one month period.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#146c43',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, Refresh it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if(typeof project_id === 'number' && !isNaN(project_id) && project_id !== null){
+                
+                document.location=$('meta[name="admin_url"]').attr('content')+"/projects/"+project_id+"/refresh";
+            }
+        }
+    });
+    
+});
+
+$(document).on('click', 'a.remove_refresh_project', function(){
+    var project_id = $(this).data('project_id');
+
+    Swal.fire({
+        title: 'Are you sure you want to clear this project from refreshed list?',
+        text: "The porject will be clear from refreshed list.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, Clear from Refresh!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if(typeof project_id === 'number' && !isNaN(project_id) && project_id !== null){
+                
+                document.location=$('meta[name="admin_url"]').attr('content')+"/projects/"+project_id+"/refresh";
+            }
+        }
+    });
+    
+});
+
+$('#search-area').on('keyup', function(e){
+    e.preventDefault(); 
+    var query = $(this).val();
+    var data = {query:query};
+
+    //ajaxPostRequest("/search-area",data,searchAreaCallback,ajaxErrorCallback,true);
+    $('#suggestions').html('<i class="fa fa-spinner fa-spin"></i>').show();
+    var formData = {query:query};
+    //showAjaxLoader();
+    $.ajax({
+        url: "/search-area",
+        type: "GET",
+        data: formData,
+        dataType: "json",
+        //contentType: false,
+        //processData: false, 
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        success: function(data) {
+            searchAreaCallback(data);
+            //hideAjaxLoader();
+        }
+    });
+});
+
+// When clicking a suggestion
+$(document).on('click', '.suggestion-item', function(){
+    $('#search-area').val($(this).text());
+    $('#suggestions').hide();
+});
+
+// Hide if clicked outside
+$(document).click(function(e) {
+    if (!$(e.target).closest('#search-area, #suggestions').length) {
+        $('#suggestions').hide();
+    }
+});
+
+function searchAreaCallback(response){
+    var  msgArea = $('.ajax-msg');
+    var msgType = 'error';
+    
+        msgType = 'success'; 
+
+        let suggestions = '';
+        response.forEach(function(item){
+            suggestions += '<div class="suggestion-item" style="padding:5px; cursor:pointer; font-size:11px;">'+item+'</div>';
+        });
+        $('#suggestions').html(suggestions).show();
+    
+
+    if(typeof response.errors !== 'undefined'){
+        $(response.errors).each(function(i,o){
+             displayMsg(msgArea,o,msgType);
+        });
+    }else{
+        //displayMsg(msgArea,response.msg,msgType);
+    }
+}
+
+$(document).on('click', 'a.remove_file', function(){
+    var id = $(this).data('id');
+    var path = $(this).data('path');
+
+    Swal.fire({
+        title: 'Are you sure you want to remove this file?',
+        text: "The file will be removed from disk.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Yes, Remove!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if(path !== null){
+                
+                document.location=path;
+            }
+        }
+    });
+    
+});
+
+$(function(){
+    $('#datepicker').datepicker({
+        todayHighlight:true,
+        startDate:'-5y',
+        format: "yyyy-mm-dd",
+        default: 'yyyy-mm-dd',
+        autoclose: true
+        /*beforeShowDay: function(date){                            
+            var formattedDate = formatDate(date);                            
+            if ($.inArray(formattedDate.toString(), available_Dates) == -1){
+                return {
+                    enabled : false
+                };
+            }
+            return;
+        }*/
+    });
+
+    var existingDate = $('#survey_date').val();
+    console.log('existingDate:',existingDate);
+    if (existingDate) {
+        
+        $('#datepicker').datepicker('setDate', existingDate);
+    }
+
+    $('#datepicker').datepicker().on('changeDate', function(e) {
+        var selectedDate = e.format(0,"yyyy-mm-dd");
+        $("input#survey_date").val(selectedDate);   
+
+        
+    });
+});
+
+$(document).ready(function() {
+    let gallery_preview = document.getElementById('gallery-preview');
+    if($("#gallery-preview").length > 0){
+        Sortable.create(gallery_preview, {
+            animation: 150,
+            onEnd: function (evt) {
+                var order = [];
+
+                $('#gallery-preview .media-item').each(function(index) {
+                    order.push({
+                        id: $(this).data('id'),
+                        position: index + 1
+                    });
+                });
+
+                updateMediaPosition(order);
+            }
+        });
+    }
+
+    let progress_preview = document.getElementById('project-progress-preview');
+    if($("#project-progress-preview").length > 0){
+        Sortable.create(progress_preview, {
+            animation: 150,
+            onEnd: function (evt) {
+                var order = [];
+
+                $('#project-progress-preview .media-item').each(function(index) {
+                    order.push({
+                        id: $(this).data('id'),
+                        position: index + 1
+                    });
+                });
+
+                updateMediaPosition(order);
+            }
+        });
+    }
+
+    let payment_preview = document.getElementById('payment-preview');
+    if($("#payment-preview").length > 0){
+        Sortable.create(payment_preview, {
+            animation: 150,
+            onEnd: function (evt) {
+                var order = [];
+
+                $('#payment-preview .media-item').each(function(index) {
+                    order.push({
+                        id: $(this).data('id'),
+                        position: index + 1
+                    });
+                });
+
+                updateMediaPosition(order);
+            }
+        });
+    }
+});
+
+
+function updateMediaPosition(order){
+    console.log('order:',order);
+    // Send AJAX to backend
+    $.ajax({
+        url: $('meta[name="admin_url"]').attr('content')+'/media/reorder',
+        method: "POST",
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            order: order
+        },
+        success: function(response) {
+            displayMsg('','Reorder saved','success');
+            console.log('Reorder saved');
+        },
+        error: function(xhr) {
+            displayMsg('','Error saving order:'+ xhr.responseText,'error');
+            console.error('Error saving order:', xhr.responseText);
+        }
+    });
+}

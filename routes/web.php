@@ -5,6 +5,7 @@
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Helpers\FileHelper;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectCompareController;
@@ -34,18 +35,14 @@ use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\AreaSurveyController;
 
-
-
-
-
-
-Route::get('/routecache', function (){
+/* Route::get('/routecache', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
 });
 Route::get('/routeconfig', function (){
     \Illuminate\Support\Facades\Artisan::call('cache:clear');
-});
+}); */
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -53,53 +50,19 @@ Route::get('resend-verification-mail/{token}', [HomeController::class, 'resendMa
 Route::get('waiting-for-approval/{token}', [UsersController::class, 'waitingForApprovalProUser'])->name('waiting-for-approval');
 
 
-Route::group(['namespace'=>'Auth'],function (){
-
-    
-    Route::get('login',  [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('login',  [LoginController::class, 'login']);
-    Auth::routes(['register' => false]);
-    Auth::routes(['password/reset' => false]);
-    
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-    Route::post('logout',  [LoginController::class, 'logout'])->name('logout');
-
-    Route::get('password/reset', function (){
-            return redirect('/login');
-    });
-    //Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-    //Route::get('password/reset/{token}/{email}', 'ResetPasswordController@showResetForm')->name('password.reset');
-    //Route::post('password/reset', 'ResetPasswordController@reset')->name('password.update');   
-
-});
-
-//Route::get('email-verification/{token}', 'UsersController@verifyUser')->name('email_verification');
 
 
-Route::group(['middleware' => ['auth']], function() {
 
-    Route::group(['middleware' => ['verified']], function() {       
-
-        Route::post('change-password','UsersController@changePassword')->name('change_password');
-        Route::post('update-address','UsersController@updateAddress')->name('update_address');
-        
-    });
-    Route::get('verify-email','UsersController@verifyEmail')->name('verify_email');
-    Route::get('resend-account-verify-email','UsersController@resendEmailVerifyMail')->name('resend_account_verify_email');
-    Route::get('dashboard','UsersController@dashboard')->name('dashboard');   
-    
-   
-});
 
 Route::group(array('prefix'=>'admin'), function (){
 
     //Route::get('/','AdminController@welcome')->name('admin.welcome');
-
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::get('secure-login', [LoginController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login',[LoginController::class, 'login']);
     Route::get('logout',[LoginController::class, 'logout'])->name('admin.logout');
     //https://stackoverflow.com/questions/77101604/target-class-admin-does-not-exist
     Route::group(array('middleware'=>'admin'), function (){
+       
         Route::get('dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('dashboard/get_users',[AdminController::class, 'getUsers'])->name('admin.dashboard.get_users');
         Route::get('dashboard/{id}',[AdminController::class, 'showDashboard'])->name('admin.showDashboard');		
@@ -107,7 +70,7 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::get('change-password',[ResetPasswordController::class, 'changePassword']);
         Route::post('change-password',[ResetPasswordController::class, 'updatePassword']);
 
-        Route::group(['prefix'=>'blog','namespace'=>'Blog'], function (){
+        Route::group(['prefix'=>'blog'], function (){
             Route::resource('general_settings', GeneralSettingController::class);
             Route::resource('posts', PostController::class);
             Route::post('posts/update_position',[PostController::class, 'updatePosition']);
@@ -194,28 +157,46 @@ Route::group(array('prefix'=>'admin'), function (){
         });
 
 
-        Route::get('cms-pages/about-us', [CmsPage::class,'aboutUs'])->name('cmspages.aboutus');
-        Route::get('cms-pages/career', [CmsPage::class,'career'])->name('cmspages.career');
-        Route::get('cms-pages/contact-us', [CmsPage::class,'contactUs'])->name('cmspages.contactus');
-        Route::post('cms-pages/save-about-us',[CmsPage::class,'saveAboutUs'])->name('cmspages.save-aboutus');
-        Route::post('cms-pages/save-career', [CmsPage::class,'saveCareer'])->name('cmspages.save-career');
+        Route::get('cms-pages/about-us', [AdminCmsPage::class,'aboutUs'])->name('cmspages.aboutus');
+        Route::get('cms-pages/career', [AdminCmsPage::class,'career'])->name('cmspages.career');
+        Route::get('cms-pages/contact-us', [AdminCmsPage::class,'contactUs'])->name('cmspages.contactus');
+        Route::get('cms-pages/our-agents', [AdminCmsPage::class,'ourAgents'])->name('cmspages.our_agents');
+        Route::get('cms-pages/faqs', [AdminCmsPage::class,'faqs'])->name('cmspages.faqs');
+        Route::get('cms-pages/privacy-policy', [AdminCmsPage::class,'privacyPolicy'])->name('cmspages.privay-policy');
+        Route::get('cms-pages/terms-and-conditions', [AdminCmsPage::class,'termsAndConditions'])->name('cmspages.terms_and_conditions');
+        Route::post('cms-pages/save-about-us',[AdminCmsPage::class,'saveAboutUs'])->name('cmspages.save-aboutus');
+        Route::post('cms-pages/save-career', [AdminCmsPage::class,'saveCareer'])->name('cmspages.save-career');
+        Route::post('cms-pages/save-contact-us', [AdminCmsPage::class,'saveContactUs'])->name('cmspages.save-contactus');
         Route::post('get-sub-area/{id}', [ProjectController::class,'getSubAreas'])->name('project.get-sub-area');
-        Route::post('cms-pages/save-contact-us', [ProjectController::class,'saveContactUs'])->name('cmspages.save-contactus');
+        Route::post('cms-pages/save-our-agents', [AdminCmsPage::class,'saveOurAgents'])->name('cmspages.save-our-agents');
+        Route::post('cms-pages/save-faqs', [AdminCmsPage::class,'saveFaqs'])->name('cmspages.save-faqs');
+        Route::post('cms-pages/save-privacy-policy', [AdminCmsPage::class,'savePrivacyPolicy'])->name('cmspages.save-privacy-policy');
+        Route::post('cms-pages/save-terms-and-conditions', [AdminCmsPage::class,'saveTermsAndConditions'])->name('cmspages.save-terms-and-conditions');
+        
         Route::resource('testimonials', TestimonialController::class);
         Route::get('project/update-status', [ProjectController::class,'updateStatus'])->name('project.update-status');
         Route::post('project/update-position', [ProjectController::class,'updatePosition'])->name('project.update-position');
         Route::post('/areas', [MainAreaController::class,'store'])->name('areas.store');
         Route::post('/sub-areas', [SubAreaController::class,'store'])->name('subareas.store');
+        Route::get('home-page/popular-locations', [HomePageController::class,'sectionPopularLocations'])->name('home-section.popular-locations');
+        Route::put('home-page/update-popular-locations', [HomePageController::class,'updatePopularLocations'])->name('home-section.update-popular-locations');
+        Route::get('home-page/dream-property', [HomePageController::class,'sectionDreamProperty'])->name('home-section.dream-property');
+        Route::put('home-page/update-dream-property', [HomePageController::class,'updateDreamProperty'])->name('home-section.update-dream-property');
         
+
         Route::get('home-page/project-types', [HomePageController::class,'sectionProjectTypes'])->name('home-section.project-types');
         Route::resource('home-page', HomePageController::class);
+        
         Route::resource('features', FeatureController::class);
         Route::get('/feature-data', [FeatureController::class,'getFeatures'])->name('features.data');
         Route::get('feature/update-status', [FeatureController::class,'updateStatus'])->name('feature.update-status');
         Route::post('/media/{media}/set-featured', [MediaController::class,'setFeatured'])->name('media.setFeatured');
         Route::get('/projects/{project}/refresh', [ProjectController::class,'refresh'])->name('projects.refresh');
+        Route::resource('surveys',AreaSurveyController::class);
+        Route::get('survey-data', [AreaSurveyController::class, 'getSurveys'])->name('surveys.data');
+        Route::get('/survey/remove-file/{id}', [AreaSurveyController::class, 'removeFile'])->name('file.remove');
+        Route::post('/media/reorder', [MediaController::class, 'reorder'])->name('admin.media.reorder');
 
-        
 
 
     });
@@ -226,22 +207,31 @@ Route::get('/home', function () {
     return redirect('/admin/dashboard');
 });
 Route::get('/admin', function () {
-    return redirect('/admin/login');
+    abort(404);
 });
-
+Route::get('/admin/login', function () {
+    abort(404);
+});
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search-area', [HomeController::class, 'searchArea'])->name('search-area');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.list');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('show');
 
-Route::get('/projects', [FrontProjectController::class, 'index'])->name('allprojects');
+Route::get('/project', [FrontProjectController::class, 'searchResults'])->name('allprojects');
+Route::get('/projects', [FrontProjectController::class, 'searchResults'])->name('allprojects');
 Route::get('/projects/search-results', [FrontProjectController::class, 'searchResults'])->name('search-results');
 Route::get('/project/{slug}',  [FrontProjectController::class, 'show'])->name('project.show');
 Route::get('/about-us', [CmsPage::class, 'showAboutUs'])->name('aboutus.show');
 Route::get('/career', [CmsPage::class, 'showCareer'])->name('career.show');
 Route::get('/contact-us', [CmsPage::class, 'showContactUs'])->name('contactus.show');
+Route::get('/our-agents', [CmsPage::class, 'showOurAgents'])->name('ouragents.show');
+Route::get('/faqs', [CmsPage::class, 'showFaqs'])->name('faqs.show');
+Route::get('/privacy-policy', [CmsPage::class, 'showPrivacyPolicy'])->name('privacy_policy.show');
+Route::get('/terms-and-conditions', [CmsPage::class, 'showTermsAndConditions'])->name('terms_and_conditions.show');
 Route::post('/contact-submit', [CmsPage::class, 'submitContactUs'])->name('contact.submit');
 Route::post('/property-submit', [CmsPage::class, 'submitInquiryForm'])->name('property.submit');
+Route::post('/career-submit', [CmsPage::class, 'submitCareerForm'])->name('career.submit');
+Route::post('/project-inquiry-submit', [CmsPage::class, 'submitProjectInquiryForm'])->name('project-inquiry.submit');
 
 
 
@@ -253,8 +243,27 @@ Route::post('/compare/clear', [ProjectCompareController::class, 'ajaxClear'])->n
 Route::get('/compare', [ProjectCompareController::class, 'index'])->name('projects.compare');
 Route::get('/compare/add/{id}', [ProjectCompareController::class, 'add'])->name('projects.compare.add');
 Route::get('/compare/remove/{id}', [ProjectCompareController::class, 'remove'])->name('projects.compare.remove');
+Route::get('/compare/search', [ProjectCompareController::class, 'searchProject'])->name('compare.searchProject');
 Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe');
 Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
+Route::get('/survey/download/{id}', [SurveyController::class, 'downloadDocument'])->name('file.download');
+Route::get('/survey/view/{id}', [SurveyController::class, 'viewDocument'])->name('file.view');
+Route::get('/survey/filter-data', [SurveyController::class, 'filterData'])->name('survey.filterData');
+
+Route::get('/file/view/{path}', function ($path) {
+    return FileHelper::viewFile($path);
+})->where('path', '.*');
+
+Route::get('/{path}', function ($path) {
+    return view('pdf-viewer', ['path' => $path]);
+})->where('path', '.*');
+
+// Download route
+Route::get('/download/{path}', function ($path) {
+    return FileHelper::downloadFile($path);
+})->where('path', '.*');
+
+
 
 
 

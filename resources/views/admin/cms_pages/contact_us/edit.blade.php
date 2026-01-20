@@ -69,22 +69,26 @@
                                 
                             </div>  
                             <div class="row">                                
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Phone Numebr:<span>*</span></label>
                                         <input type="text" name="contact_phone_number" id="contact_phone_number" class="form-control" value="{{ old('contact_phone_number', $contact_phone_number ?? '') }}" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Email Address:<span>*</span></label>
                                         <input type="text" name="contact_email_address" id="contact_email_address" class="form-control" value="{{ old('contact_email_address', $contact_email_address ?? '') }}" required>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Address:<span>*</span></label>
-                                        <input type="text" name="contact_address" id="contact_address" class="form-control" value="{{ old('contact_address', $contact_address ?? '') }}" required>
+                                        <textarea  name="contact_address" id="contact_address" title="enter  address!" class="form-control" rows="6" placeholder="" required
+                                                     >{{ old('contact_address', $contact_address ?? '') }}</textarea>
+                                        
                                     </div>
                                 </div>
                             </div>

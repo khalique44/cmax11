@@ -12,4 +12,9 @@ class Admin extends Authenticatable
     use Notifiable;
 
      protected $fillable = ['email','name','password','user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

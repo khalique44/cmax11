@@ -5,8 +5,8 @@
     <title>Cmax | Admin </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="admin_url" content="{{ url('admin') }}">
-    <link href="{!! asset('assets/fontawesome/css/all.min.css') !!}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{!! asset('assets/css/font-awesome-4.6.3.css') !!}" rel="stylesheet">
+    <link href="{!! asset('assets/css/bootstrap/bootstrap.min.css')!!}" rel="stylesheet">
     <link href="{!! asset('assets/css/animate.css')!!}" rel="stylesheet">
     <link href="{!! asset('assets/css/admin-style.css') !!}" rel="stylesheet">
 
@@ -36,7 +36,12 @@
     <!-- Include Google Places API JS -->
 
     <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google_map_api') }}&libraries=places"></script>
-    
+    <!-- Fancybox CSS -->
+<link rel="stylesheet" href="{!! asset('assets/css/fancybox/fancybox.css') !!}" />
+
+<!-- Fancybox JS -->
+<script src="{!! asset('assets/js/fancybox/fancybox.umd.js') !!}"></script>
+
 
     <style>
         .number_arrow::-webkit-inner-spin-button,
@@ -113,7 +118,7 @@
             <div class="logo">
                 <div  class="logo-image">
                     @php $header_logo = App\Http\Helpers\GeneralHelper::getOption('header_logo') @endphp
-                    <a href="{!! route('admin.dashboard') !!}" style="background:none; height: auto;"><img src="@if(!empty($header_logo))  {{ asset($header_logo) }} @else {!! asset('assets/images/logo-white.png') !!} @endif" class="logo" alt="Logo"></a>
+                    <a href="{!! route('home') !!}" target="_blank" style="background:none; height: auto;"><img src="@if(!empty($header_logo))  {{ asset($header_logo) }} @else {!! asset('assets/images/logo-white.png') !!} @endif" class="logo" alt="Logo"></a>
                 </div>
                 
             </div>
@@ -168,7 +173,8 @@
     @yield('content')
 
 <script src="{!! asset('assets/js/jquery.js') !!}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{!! asset('assets/js/bootstrap.bundle.min.js') !!}"></script>
+<script src="{!! asset('assets/js/Sortable.min.js') !!}"></script>
 <script src="{!! asset('assets/js/parallax.js') !!}"></script>
 <script src="{!! asset('assets/js/moment.min.js') !!}"></script>
 <script src="{!! asset('assets/js/bootstrap-datepicker.min.js') !!}"></script>
@@ -186,7 +192,7 @@
 
 
 <script src="{!! asset('assets/js/bootstrap-colorpicker.js') !!}"></script>
-<script src="{!! asset('assets/js/ckeditor.js') !!}"></script>
+<script src="https://cdn.tiny.cloud/1/gb5nlk8i6mdnt7nm1bjr4pwtpwvjmhg83sxzdd4dqv2wki3m/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="{!! asset('assets/js/jquery.timepicker.min.js') !!}"></script>
 
 <!-- FilePond Scripts -->
@@ -238,7 +244,29 @@ function demoFromHTML() {
 /* Common alert box for confirm to delete in modules*/
 
 $(document).ready(function() {
-    if($("textarea#txtEditor").length > 0){
+
+    tinymce.init({
+    selector: '#txtEditor,.txtEditor',
+    plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+    toolbar: 'undo redo | blocks fontfamily fontSize | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+    // Customizing the Font Size list
+    font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* if($("textarea#txtEditor").length > 0){
         ClassicEditor
         .create(document.querySelector('#txtEditor'))
         .then(editor => {
@@ -247,7 +275,7 @@ $(document).ready(function() {
         .catch(error => {
             console.error(error);
         });
-    }
+    } */
 
     /*document.querySelectorAll('.editor').forEach(el => {
         ClassicEditor.create(el)

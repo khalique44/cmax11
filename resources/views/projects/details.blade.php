@@ -6,7 +6,7 @@
 
   @include('layouts.includes.nav')
       
-  <section class="gallery-area pt-5 pb-5">
+  <section class="gallery-area pt-5 pb-md-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
@@ -20,12 +20,12 @@
                     <a href="#" class="launch-btn red-bg position-static">{{ $progress[$project->progress] ?? '' }}</a>
                     <a href="#" class="launch-btn position-static">{{ $project->offering ?? '' }}</a>
                </div>
-               <h1 class="mt-2 mainhead-inner">{{ $project->project_title }}</h1>
+               <h1 class="mt-4 mt-md-2 mainhead-inner">{{ $project->project_title }}</h1>
                <p class="loc-txt"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $project->alt_location ?? '' }} <a href="#location" title="See on the Map"><i class="fa fa-eye"></i></a></p>
 
 
             </div>
-            <div class="col-md-6 text-end">
+            <div class="col-md-6 text-md-end">
                 <h2 class="Starting-price mb-4"><span>Starting From</span>
 
                     {{ $project->price_range['min']['amount'] ?? ''}}
@@ -33,7 +33,7 @@
                     {{ $project->price_range['min']['unit'] ?? '' }} 
                     
                 </h2>
-                <div class="d-flex justify-content-end ">
+                <div class="d-md-flex justify-content-end details-btnss">
                     <div class="mb-2 me-2">
 
                         @if(in_array($project->id, $compare))
@@ -59,28 +59,29 @@
 
         <div class="row galleria mt-3">
           @php
-            $paymentPlans = $project->getMedia('payment_plan');                        
-            $projectProgress = $project->getMedia('project_progress');                        
-            $gallery = $project->getMedia('project_gallery'
-            );
+            $paymentPlans = $project->getMedia('payment_plan')->sortBy('order_column');                        
+            $projectProgress = $project->getMedia('project_progress')->sortBy('order_column');                        
+            $gallery = $project->getMedia('project_gallery')->sortBy('order_column');
             $firstImage = ($project->featuredImage) ? $project->featuredImage : $gallery->first();  // Get the first media
             $remainingImages = $gallery->slice(1);  // Skip the first media
           @endphp
 
             <div class="col-md-6">
                 @if(!empty($firstImage))
-                    <a href="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" data-lightbox="gallery-group">
-                        <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="" class="w-100">
-                    </a>
+                    <div class="gallery-main">
+                        <a href="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" data-lightbox="gallery-group">
+                            <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="" class="w-100 main-img-detail-pg">
+                        </a>
+                    </div>
                 @endif
             </div>
             <div class="col-md-6">
                 <div class="row">
                     @if(!empty($remainingImages))
                       @foreach($remainingImages as $key => $media)
-                        <div class="col-md-6" {!! ($key > 4) ? "style='display:none;'" : "" !!}>
-                          <div class="galleria-inside">
-                              <a href="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" data-lightbox="gallery-group"><img src="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" alt="" class="w-100"></a>
+                        <div class="col-6" {!! ($key > 4) ? "style='display:none;'" : "" !!}>
+                          <div class="gallery-box">
+                              <a href="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" data-lightbox="gallery-group"><img src="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" alt="" class=""></a>
                               @if($key == 4)
                                 <a href="#" class="btn-showgal"><img src="{{ asset('assets/img/gallery-iconwhite.png') }}" alt=""> Show all photos</a>
                               @endif
@@ -396,12 +397,12 @@
                                     <div class="col-md-4">
                                             
                                         @php 
-                                            $builderImages = $project->builder->getMedia('images');
-                                            $firstImage = $builderImages->first();
+                                            $builder_logo = $project->builder->builder_logo ?? asset('assets/img/no-image-1080x1080.png');
+                                            
 
                                         @endphp
                                         <div class="display-builder-logo">
-                                            <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="Builder Image" class="img-fluid mx-auto d-block" 
+                                            <img src="{{ asset($builder_logo) }}" alt="Builder Image" class="img-fluid mx-auto d-block" 
     style="max-width: 180px;">  
                                         </div>             
                                        
@@ -444,33 +445,40 @@
                     <div class="text-center pb-3">
                         <h2 class="main-h mb-4">Get In Touch</h2>
 
-                        <form class="calc-form">
+                        <form class="calc-form" id="project-inquiry">
+                            @csrf
                             <div class="form-group mt-3">
-                                <input type="text" placeholder="Name" class="form-control">
+                                <input type="text" name="name" placeholder="Name" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <input type="email" placeholder="Email" class="form-control">
+                                <input type="email" name="email" placeholder="Email" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" placeholder="Contact Number" class="form-control">
+                                <input type="text" name="phone" placeholder="Contact Number" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" placeholder="Provide your address" class="form-control">
+                                <input type="text" name="address" placeholder="Provide your address" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <select name="" id="" class="form-select">
+                                <select name="unit_type" id="unit_type" class="form-select">
                                     <option value="">Select Unit</option>
-                                    <option value="">Option</option>
+                                    @foreach($project->floorPlan as $key => $floorPlan)
+                                        <option value="{{ $floorPlan->title ?? '' }}">{{ $floorPlan->title ?? '' }}</option>
+                                    @endforeach
+                                    
                                 </select>
+                                <input type="hidden" name="project_title" value="{{ $project->project_title ?? '' }}" >
+                                <input type="hidden" name="project_url" value="/project/{{ $project->project_slug ?? '' }}" >
                             </div>
                             
                             <div class="form-group mt-3">
-                                <textarea name="" id="" placeholder="Message" class="form-textarea"></textarea>
+                                <textarea name="message" id="" placeholder="Message" class="form-textarea"></textarea>
                             </div>
                             
                             <div class="form-group mt-3">
-                                <button class="btn btn-red w-100">Submit</button>
+                                <button type="submit" class="btn btn-red w-100">Submit</button>
                             </div>
+                            <div class="project-inquiry-ajax-message"></div>
                         </form>
 
                      </div>

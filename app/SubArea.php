@@ -21,4 +21,10 @@ class SubArea extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    // One sub-area has many surveys
+    public function surveys()
+    {
+        return $this->hasMany(AreaSurvey::class, 'sub_area_id');
+    }
 }

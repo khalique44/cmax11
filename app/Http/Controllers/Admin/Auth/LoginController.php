@@ -36,16 +36,12 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout');
+        //$this->middleware('guest:admin')->except('logout');
     }
 
     protected function redirectTo()
     {
-        if ($this->guard()->getName() === 'admin') {
-            return '/admin/dashboard';
-        }
-
-        return '/home';
+       return '/admin/dashboard';
     }
 
     public function showLoginForm()
@@ -62,6 +58,6 @@ class LoginController extends Controller
     {
         $this->guard('admin')->logout();
         $request->session()->invalidate();
-        return redirect()->route('admin.login');
+        return redirect('admin/secure-login');
     }
 }

@@ -25,11 +25,10 @@
                         <tr>
                                                       
                             <th>Position</th>                            
-                            <th>Title</th>                            
-                            <th>Progress</th>                             
-                            <th>Added At</th>
+                            <th>Title</th> 
                             <th>Views</th>
-                            <th>Is Featured</th>
+                            <th>Added At</th>
+                            <th>Refresh</th>
                             <th>Is Popular</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -91,10 +90,9 @@ function renderActionColumn(id){
                 columns: [                     
                    
                     { data: 'position', name: 'position' },                   
-                    { data: 'project_title', name: 'project_title' },                   
-                    { data: 'progress', name: 'progress' }, 
-                    { data: 'created_at', name: 'created_at' },
+                    { data: 'project_title', name: 'project_title' }, 
                     { data: 'views', name: 'views' },
+                    { data: 'created_at', name: 'created_at' },
                     { data: 'refreshed_at', name: 'refreshed_at' },
                     { data: 'is_popular', name: 'is_popular' },
                     { data: 'is_active', name: 'is_active' },
@@ -102,7 +100,7 @@ function renderActionColumn(id){
                 ],
                 createdRow: function(row, data, dataIndex) {
                     // add a class
-                    //$(row).addClass('cursor-pointer sorting_1');
+                    $(row).addClass('cursor-pointer sorting_1');
 
                     // add data attributes from row data
                     $(row).attr('data-entry-id', data.id);
