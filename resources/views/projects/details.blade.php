@@ -462,9 +462,15 @@
                             <div class="form-group mt-3">
                                 <select name="unit_type" id="unit_type" class="form-select">
                                     <option value="">Select Unit</option>
-                                    @foreach($project->floorPlan as $key => $floorPlan)
-                                        <option value="{{ $floorPlan->title ?? '' }}">{{ $floorPlan->title ?? '' }}</option>
-                                    @endforeach
+
+                                    @if(!empty($project->offers))
+                                        @foreach($project->offers as $key => $savedOffer)
+                                            @if($savedOffer->offer == strtolower($offer))
+                                                <option value="{{ $savedOffer->title ?? '' }}">{{ $savedOffer->title ?? '' }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    
                                     
                                 </select>
                                 <input type="hidden" name="project_title" value="{{ $project->project_title ?? '' }}" >
