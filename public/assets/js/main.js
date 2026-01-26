@@ -305,12 +305,8 @@ $(document).ready(function(){
                 }
                 hideAjaxLoader();
             },
-            error: function(xhr){
-                let errors = xhr.responseJSON.errors;
-                if(errors && errors.email){
-                    displayMsg($('#subscribe-message'),errors.email[0],'danger');
-                   
-                }
+            error: function(response){
+                ajaxErrorCallback(response);
                 hideAjaxLoader();
             },
             always:function(){
@@ -333,9 +329,9 @@ $(document).ready(function(){
                 $('#contactForm')[0].reset();
                 hideAjaxLoader();
             },
-            error: function (xhr) {
-               
-                    displayMsg($('.contact-ajax-message'),'Something went wrong!','danger');                  
+            error: function (response) {
+                    ajaxErrorCallback(response);
+                    //displayMsg($('.contact-ajax-message'),'Something went wrong!','danger');                  
                 
                     hideAjaxLoader();
             },
@@ -345,7 +341,31 @@ $(document).ready(function(){
         });
     });
 
+    $('#career-form').on('submit', function (e) {
+        e.preventDefault();
+        showAjaxLoader();
 
+        $.ajax({
+            url: $('meta[name="home_url"]').attr('content')+"/career-submit", // your route
+            method: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+                
+                displayMsg($('.career-ajax-message'),response.message,'success');
+                $('#career-form')[0].reset();
+                hideAjaxLoader();
+            },
+            error: function (response) {
+                    ajaxErrorCallback(response);
+                    //displayMsg($('.career-ajax-message'),'Something went wrong!','danger');                  
+                
+                    hideAjaxLoader();
+            },
+            always:function(){
+                hideAjaxLoader();
+            }
+        });
+    });
 
     $('#propertyForm').on('submit', function (e) {
         e.preventDefault();
@@ -360,8 +380,35 @@ $(document).ready(function(){
                 hideAjaxLoader();
                 
             },
-            error: function () {
-                displayMsg($('.property-ajax-message'),'Something went wrong!','danger');     
+            error: function (response) {
+                ajaxErrorCallback(response);
+                //displayMsg($('.property-ajax-message'),'Something went wrong!','danger');     
+                
+                hideAjaxLoader();
+            },
+            always:function(){
+                hideAjaxLoader();
+            }
+        });
+    });
+
+    $('#project-inquiry').on('submit', function (e) {
+        e.preventDefault();
+        showAjaxLoader();
+        $.ajax({
+            url: $('meta[name="home_url"]').attr('content')+"/project-inquiry-submit",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+                displayMsg($('.project-inquiry-ajax-message'),response.message,'success');
+                $('#project-inquiry')[0].reset();
+                hideAjaxLoader();
+                
+            },
+            error: function (response) {
+                console.log(response.responseJSON?.message);
+                ajaxErrorCallback(response);
+                //displayMsg($('.project-inquiry-ajax-message'),response.responseJSON?.message,'danger');     
                 
                 hideAjaxLoader();
             },

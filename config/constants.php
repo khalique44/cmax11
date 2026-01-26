@@ -78,5 +78,8 @@ return [
                                 9 => '9 Years',
                                 10 => '10 Years+',
 
-                            ]
+    ],
+    'bitrix24' => [
+        'api_url' => env('BITRIX_API_URL','https://cmax.bitrix24.com/rest/21/7bxe2yjijxc5hcw0/'), 
+        ]
 ];

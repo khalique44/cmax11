@@ -445,33 +445,40 @@
                     <div class="text-center pb-3">
                         <h2 class="main-h mb-4">Get In Touch</h2>
 
-                        <form class="calc-form">
+                        <form class="calc-form" id="project-inquiry">
+                            @csrf
                             <div class="form-group mt-3">
-                                <input type="text" placeholder="Name" class="form-control">
+                                <input type="text" name="name" placeholder="Name" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <input type="email" placeholder="Email" class="form-control">
+                                <input type="email" name="email" placeholder="Email" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" placeholder="Contact Number" class="form-control">
+                                <input type="text" name="phone" placeholder="Contact Number" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" placeholder="Provide your address" class="form-control">
+                                <input type="text" name="address" placeholder="Provide your address" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <select name="" id="" class="form-select">
+                                <select name="unit_type" id="unit_type" class="form-select">
                                     <option value="">Select Unit</option>
-                                    <option value="">Option</option>
+                                    @foreach($project->floorPlan as $key => $floorPlan)
+                                        <option value="{{ $floorPlan->title ?? '' }}">{{ $floorPlan->title ?? '' }}</option>
+                                    @endforeach
+                                    
                                 </select>
+                                <input type="hidden" name="project_title" value="{{ $project->project_title ?? '' }}" >
+                                <input type="hidden" name="project_url" value="/project/{{ $project->project_slug ?? '' }}" >
                             </div>
                             
                             <div class="form-group mt-3">
-                                <textarea name="" id="" placeholder="Message" class="form-textarea"></textarea>
+                                <textarea name="message" id="" placeholder="Message" class="form-textarea"></textarea>
                             </div>
                             
                             <div class="form-group mt-3">
-                                <button class="btn btn-red w-100">Submit</button>
+                                <button type="submit" class="btn btn-red w-100">Submit</button>
                             </div>
+                            <div class="project-inquiry-ajax-message"></div>
                         </form>
 
                      </div>

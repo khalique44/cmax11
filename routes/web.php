@@ -230,6 +230,8 @@ Route::get('/privacy-policy', [CmsPage::class, 'showPrivacyPolicy'])->name('priv
 Route::get('/terms-and-conditions', [CmsPage::class, 'showTermsAndConditions'])->name('terms_and_conditions.show');
 Route::post('/contact-submit', [CmsPage::class, 'submitContactUs'])->name('contact.submit');
 Route::post('/property-submit', [CmsPage::class, 'submitInquiryForm'])->name('property.submit');
+Route::post('/career-submit', [CmsPage::class, 'submitCareerForm'])->name('career.submit');
+Route::post('/project-inquiry-submit', [CmsPage::class, 'submitProjectInquiryForm'])->name('project-inquiry.submit');
 
 
 

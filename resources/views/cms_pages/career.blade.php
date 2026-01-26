@@ -44,15 +44,16 @@
 					<div class="text-center pb-3">
 						<h2 class="main-h mb-4">Careers Form</h2>
 
-						<form class="calc-form">
+						<form class="calc-form" id="career-form">
+							@csrf
 							<div class="form-group mt-3">
-								<input type="text" placeholder="Name" class="form-control">
+								<input type="text" placeholder="Name" name="name" class="form-control">
 							</div>
 							<div class="form-group mt-3">
-								<input type="email" placeholder="Email" class="form-control">
+								<input type="email" placeholder="Email" name="email" class="form-control">
 							</div>
 							<div class="form-group mt-3">
-								<input type="text" placeholder="Contact Number" class="form-control">
+								<input type="text" placeholder="Contact Number" name="phone" class="form-control">
 							</div>
 
 							<div class="form-group mt-3">
@@ -65,8 +66,9 @@
 							</div>
 
 							<div class="form-group mt-3">
-								<button class="btn btn-red w-100">Submit Request</button>
+								<button type="submit" class="btn btn-red w-100">Submit Request</button>
 							</div>
+							<div class="career-ajax-message mt-3"></div>
 						</form>
 
 					</div>
