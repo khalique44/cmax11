@@ -166,6 +166,17 @@ class CmsPage extends Controller
             ],
             
         ];
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Career Form submitted!',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
+                'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
+                'COMMENTS' => 'Area of Interest: '.$request->area_of_interest,                
+            ],
+            
+        ];
 
         GeneralHelper::sendBitrixRequest($dataToBitrix);
 
@@ -219,9 +230,9 @@ class CmsPage extends Controller
                 'TITLE' => 'New Contact Query submitted!',
                 'NAME'  => $request->name,
                 'LAST_NAME' => '',
-                'EMAIL' => $request->email,
-                'PHONE' => $request->phone,
-                'COMMENTS' => $request->message,
+                'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
+                'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
+                'COMMENTS' => $request->message,                
             ],
             
         ];
@@ -257,9 +268,10 @@ class CmsPage extends Controller
                 'TITLE' => 'New Inquery Form submitted!',
                 'NAME'  => $request->name,
                 'LAST_NAME' => '',
-                'EMAIL' => $request->email,
-                'PHONE' => $request->phone,
+                'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
+                'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
                 'COMMENTS' => $comments,
+                'ADDRESS' => $request->location,
             ],
             
         ];
@@ -281,23 +293,35 @@ class CmsPage extends Controller
         ]);
 
         Mail::to(config('constants.admin_email'))->send(new ProjectInquiryMail($request->all()));
-
-        $comments = 'Project Title: '.$request->unit_type;       
-        $comments = 'Unit Type: '.$request->unit_type;       
+        
+        $project_title = $request->project_title ?? '';
+        $comments = 'Project Title: '.$project_title.'<br>';       
+        $comments .= 'Unit Type: '.$request->unit_type.'<br>';       
         $comments .= 'Message: '.$request->message;
-        $comments .= 'Address: '.$request->address;
+        
 
         $dataToBitrix = [
             'fields' => [
                 'TITLE' => 'New Project Inquery Form submitted! ',
                 'NAME'  => $request->name,
                 'LAST_NAME' => '',
-                'EMAIL' => $request->email,
-                'PHONE' => $request->phone,
+                'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
+                'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
                 'COMMENTS' => $comments,
+                'ADDRESS' => $request->address,
             ],
             
         ];
+        $data["fields"]["PHONE"][]=array("VALUE"=>"+923360321068","VALUE_TYPE"=>"WORK");
+
+               //[
+                       // [
+                        //    'VALUE'      => '555888',
+                        //    'VALUE_TYPE' => 'WORK',
+                     //   },
+
+
+         $data["fields"]["EMAIL"][]=array("VALUE"=>"hzafar2010@gmail.com","VALUE_TYPE"=>"WORK");
 
         GeneralHelper::sendBitrixRequest($dataToBitrix);
 
