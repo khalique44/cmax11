@@ -954,19 +954,34 @@ function initMap() {
       bounds: karachiBounds,
       componentRestrictions: { country: 'pk' }, // Pakistan only
       strictBounds: true,
-      types: ["geocode"]
+      //types: ["geocode"]
     });
 
     autocomplete.addListener('place_changed', onPlaceChanged);
 
     geocoder = new google.maps.Geocoder();
 
+    $(document).on('input','#gmap-location',function(){
+      const city = $('select#city_id').find('option:selected').text();
+        var area = $('select#area_id').find('option:selected').text();
+        //var sub_area = $('select#sub_area_id').find('option:selected').text();
+        var sub_area = $(this).val();
+        //console.log('city:',city,'area:',area,'sub_area:',sub_area);
+        if (city || area || sub_area) {
+            area = (area) ? ','+area : '';
+            sub_area = (sub_area) ? ','+sub_area : '';
+            onCityChange(city, area, sub_area);
+        }
+
+    });
+
     $(document).on('change','select#city_id, select#area_id, select#sub_area_id ', function(){
         
         const city = $('select#city_id').find('option:selected').text();
         var area = $('select#area_id').find('option:selected').text();
-        var sub_area = $('select#sub_area_id').find('option:selected').text();
-        console.log('city:',city,'area:',area,'sub_area:',sub_area);
+        //var sub_area = $('select#sub_area_id').find('option:selected').text();
+        var sub_area = $('#gmap-location').val();
+        //console.log('city:',city,'area:',area,'sub_area:',sub_area);
         if (city || area || sub_area) {
             area = (area) ? ','+area : '';
             sub_area = (sub_area) ? ','+sub_area : '';
@@ -1010,29 +1025,50 @@ function onPlaceChanged() {
 }
 
 // when city is selected from dropdown
-function onCityChange(cityName, area='', sub_area='') {
-    $("#gmap-location").attr('placeholder','Enter a Location');
-    geocoder.geocode({ address: area + cityName }, function (results, status) {
-        if (status === 'OK') {
+function onCityChange(cityName, area = '', sub_area = '') {
+    $("#gmap-location").attr('placeholder', 'Enter a Location');
+
+    // Build address properly
+    let addressParts = [];
+
+    if (sub_area) addressParts.push(sub_area);
+    if (area) addressParts.push(area);
+    if (cityName) addressParts.push(cityName);
+
+    addressParts.push('Pakistan'); // VERY IMPORTANT
+
+    var fullAddress = addressParts.join(', ');
+    fullAddress =  fullAddress.replace(/^[,\s]+/, '');
+
+    //console.log('Geocoding:', fullAddress);
+
+    geocoder.geocode({ address: fullAddress, region: 'pk' }, function (results, status) {
+        if (status === 'OK' && results.length) {
+
             const location = results[0].geometry.location;
+
             map.setCenter(location);
-            map.setZoom(12);
+            map.setZoom(15);
             marker.setPosition(location);
 
             // Set bounds for autocomplete
             const circle = new google.maps.Circle({
                 center: location,
-                radius: 10000 // ~30km
+                radius: 10000 // 10km for Karachi
             });
 
             autocomplete.setBounds(circle.getBounds());
-            $("#gmap-location").attr('placeholder','Search from '+cityName+' '+area+' '+sub_area);
+
+            $("#gmap-location").attr(
+                'placeholder',
+                'Search near ' + sub_area + ' ' + area
+            );
+
         } else {
-            console.error('City not found: ' + status);
+            console.error('Location not found:', status, fullAddress);
         }
     });
 }
-
 
 // Load on window
 google.maps.event.addDomListener(window, 'load', initMap);
