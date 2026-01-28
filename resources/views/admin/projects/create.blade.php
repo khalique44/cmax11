@@ -595,7 +595,7 @@
                             <div class="row mt-3">                            
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-label">Payment Plan Duration<span>*</span></label>
+                                        <label class="form-label">Payment Plan Duration</label>
                                         <select data-placeholder="Select Payment Plan Duration" name="payment_plan_duration[]" id="payment_plan_duration" class="form-control select2" multiple  >
                                             <option value="">Select Payment Plan Duration</option>
                                             @foreach($payment_plan_duration as $key => $ppd)
