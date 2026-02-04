@@ -1,0 +1,49 @@
+.form-control {
+	&::-webkit-input-placeholder {
+		color: $placeholder;
+	}
+	&::-moz-placeholder {
+		color: $placeholder;
+	}
+	&:-ms-input-placeholder {
+		color: $placeholder;
+	}
+	&:-moz-placeholder {
+		color: $placeholder;
+	}
+}
+.btn {
+    font-weight: 600;
+    padding: .3rem 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.fx-sliderIn {
+	position: relative;
+    z-index: 1;
+	&:hover {
+		background-color: transparent;
+	}
+}
+.fx-sliderIn::after {
+	transition: width 0.5s ease-in-out;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	content: "";
+	display: block;
+	position: absolute;
+	z-index: -1;
+	background-color: #000;
+  }
+.fx-sliderIn:hover::after,
+.fx-sliderIn.active::after {
+    transition: width 0.5s ease-in-out;
+    width: 100%;
+  }
+:checked + .fx-sliderIn::after,
+.fx-sliderIn.active::after {
+	width: 300%;
+}

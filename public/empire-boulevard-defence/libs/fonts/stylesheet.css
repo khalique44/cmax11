@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'AccentGraphicW00';
+    src: url('AccentGraphicW00-Bold.eot');
+    src: url('AccentGraphicW00-Bold.eot?#iefix') format('embedded-opentype'),
+        url('AccentGraphicW00-Bold.woff2') format('woff2'),
+        url('AccentGraphicW00-Bold.woff') format('woff'),
+        url('AccentGraphicW00-Bold.svg#AccentGraphicW00-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+

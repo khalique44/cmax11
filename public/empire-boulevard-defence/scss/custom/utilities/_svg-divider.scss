@@ -1,0 +1,20 @@
+// 
+// SVG positioning to create a division between sections
+// 
+
+.svg-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+// Positioning
+
+.svg-divider-top {
+  top: -1px;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+.svg-divider-bottom {
+  bottom: -1px;
+}

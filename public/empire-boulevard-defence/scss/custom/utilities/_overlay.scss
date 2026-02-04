@@ -1,0 +1,53 @@
+// 
+// Overlay utility
+// 
+
+.overlay {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+  }
+}
+
+// Context colors
+
+@each $color, $value in $theme-colors {
+  .overlay-#{$color}:before {
+    background: $value !important;
+  }
+}
+
+.overlay-white:before {
+  background: $white !important;
+}
+
+// Gradients
+
+.overlay-gradient-dark-bottom {
+  &:before {
+    background: linear-gradient(rgba(255, 255, 255, 0) 60%, rgba(29, 34, 45, 0.375) 100%);
+  }
+}
+
+.overlay-gradient-white-to-dark {
+  &:before {
+    background: linear-gradient(-180deg,#fff 0,rgba(255,255,255,.6) 25%,rgba(255,255,255,0) 100%), linear-gradient(-180deg,rgba(0,0,0,0) 0,rgba(0, 0, 0, 0.45) 100%);
+  }
+}
+
+// Opacities
+
+@each $size, $length in $sizes {
+  @if is-integer($size) {
+    .overlay-#{$size}:before {
+      opacity: $size / 100;
+    }
+  }
+}

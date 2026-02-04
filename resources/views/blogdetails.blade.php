@@ -2,6 +2,8 @@
 
 
 @section('content')
+@section('meta_title', html_entity_decode($post->title))
+@section('meta_description', html_entity_decode($post->description))
 
 
 @include('layouts.includes.nav')

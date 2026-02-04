@@ -1,0 +1,5 @@
+[30-Jan-2026 13:23:00 UTC] PHP Warning:  Undefined variable $interestedArray in /home/cmax/public_html/public/empire-boulevard-defence/index.php on line 138
+[30-Jan-2026 13:23:00 UTC] PHP Warning:  Trying to access array offset on null in /home/cmax/public_html/public/empire-boulevard-defence/index.php on line 138
+[30-Jan-2026 13:23:38 UTC] PHP Warning:  Undefined array key "2 Bedrooms" in /home/cmax/public_html/public/empire-boulevard-defence/index.php on line 138
+[03-Feb-2026 19:56:12 UTC] PHP Warning:  Undefined variable $interestedArray in /home/cmax/public_html/public/empire-boulevard-defence/index.php on line 138
+[03-Feb-2026 19:56:12 UTC] PHP Warning:  Trying to access array offset on null in /home/cmax/public_html/public/empire-boulevard-defence/index.php on line 138

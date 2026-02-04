@@ -1,0 +1,62 @@
+.thank_bg {
+	min-height: 75vh;
+    background-size: cover;
+}
+
+.thank_bg_box {
+    color: #fff;
+    max-width: 710px;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    height: 100%;
+    padding: 200px 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    h3 {
+	    font-weight: 600;
+    }
+}
+
+.thank_bg_ribin {
+    background-size: contain;
+    max-width: 357px;
+    height: 100px;
+    padding: 45px 0 0 0;
+    text-align: center;
+    margin: 0 auto 40px auto;
+    background-repeat: no-repeat;
+	h2 {
+		font-family: 'AccentGraphicW00';
+		color: #fff;
+	}
+}
+
+
+@media screen and (max-width: 1024px) {
+    .thank_bg_box {
+        padding: 150px 15px;
+    }
+
+
+
+
+}
+
+@media screen and (max-width: 991px) {
+    .thank_bg {
+        min-height: auto;
+    }
+
+
+}
+
+@media screen and (max-width: 680px) {
+    .thank_bg_box {
+        padding: 80px 15px;
+    }
+
+    
+}

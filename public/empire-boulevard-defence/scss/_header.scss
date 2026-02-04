@@ -1,0 +1,124 @@
+.page_header {
+    background-color: #fff;
+    padding: 20px 30px 30px 30px;
+    .row {
+        align-items: center;
+    }
+    .logo_inner_box {
+        .logo_box {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+            a {
+
+            }
+            li {
+                list-style: none;
+                width: 20%;
+                img {
+                    width: 70%;
+                }
+            }
+        }
+    }
+    .phone_number_box{
+        text-align: right;
+        max-width: 242px;
+        margin: 0 0 0 auto;
+        .phone_box{
+            position: relative;
+            padding: 12px 30px 12px 60px;
+            font-size: 24px;
+            font-weight: 600;
+            .phone_img{
+                position: absolute;
+                left: 0;
+                top: 0;
+                img {
+                   
+                }
+            }
+            a {
+                color: #000000;
+                margin: 0 10px;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 1024px) {
+    .page_header .phone_number_box .phone_box {
+        padding: 12px 30px 12px 60px;
+        font-size: 20px;
+    }
+
+
+
+}
+
+@media screen and (max-width: 991px) {
+    .page_header .logo_inner_box .logo_box {
+        justify-content: center;
+    }
+    .page_header .logo_inner_box .logo_box a {
+        text-align: center;
+    }
+    .logo_inner_box {
+        padding-bottom: 30px;
+    }
+    .page_header .phone_number_box .phone_box {
+        font-size: 24px;
+        justify-content: center;
+    }
+    .page_header .phone_number_box {
+        max-width: 100%;
+        margin: 0 0 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+@media screen and (max-width: 680px) {
+    .page_header .logo_inner_box .logo_box li img {
+        width: 100% !important;
+    }
+    .page_header .phone_number_box .phone_box {
+        font-size: 16px;
+        padding: 12px 30px 12px 30px;
+    }
+    .page_header .phone_number_box .phone_box .phone_img {
+        top: 7px;
+    }
+    .page_header .phone_number_box .phone_box .phone_img  img {
+        width: 30px;
+    }
+    .logo_inner_box {
+        padding-bottom: 10px;
+    }
+    .page_header .logo_inner_box .logo_box li {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .logo_inner_box {
+        padding-bottom: 0 !important;
+    }
+    .page_header {
+        background-color: #fff;
+        padding: 10px 30px 10px 30px;
+    }
+    .page_header .phone_number_box .phone_box {
+        font-size: 16px;
+        padding: 2px 30px 2px 30px;
+    }
+    .page_header .phone_number_box .phone_box .phone_img {
+        top: -2px;
+    }
+}
+
+
+

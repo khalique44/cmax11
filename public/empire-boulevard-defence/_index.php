@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <link href="https://fonts.googleapis.com/css?family=Anton|Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/intlTelInput.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo">
+            <a href="#"><img src="images/cmax.png" alt=""> </a>
+            <a href="#"><img src="images/empire.png" alt=""> </a>
+        </div>
+
+        <div class="number">
+            <img src="images/phone-icon.png" alt="">
+            <a href="tel:0321-822-2054">0321-822-2054,</a>
+            <a href="tel:0333-597-2707">0333-597-2707</a>
+        </div>
+    </div>
+</header>
+
+<section class="banner" style="background-image: url('images/mainbanner.jpg')">
+
+    <div class="container">
+
+        <div class="banner-text">
+
+            <div class="text-1">2, 3 & 4 Bedrooms</div>
+            <div class="text-2">Luxurious Apartments</div>
+            <div class="text-1">Just 1 Km From Main Khayban-E-Ittehad</div>
+
+            <div class="banner-list">
+                <strong>FEATURES:</strong>
+                <ul>
+                    <li>Easy Payment Plan</li>
+                    <li>Spacious Apartments</li>
+                    <li>Modern Architecture</li>
+                    <li>Just 1km from Main Khayban -E- Itttehad</li>
+                    <li>Equipped with all amenities of life</li>
+                </ul>
+            </div>
+
+            <div class="arrow-img">
+                <img src="images/arrow.png" alt="">
+            </div>
+
+        </div>
+
+        <div class=" banner-form">
+            <form method="post">
+
+            <p>Fill in the form below to schedule your site tour and receive project details in the next 24 hours. </p>
+
+            <div class="form-group">
+                <input type="text" name="name" value="" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <input id="phone"  name="phone" type="tel">
+            </div>
+            <div class="form-group">
+                <input type="text" name="email" value="" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="text" name="address" value="" placeholder="Address">
+            </div>
+            <div class="form-group">
+                <select>
+                    <option>Interested In</option>
+                    <option>Interested In</option>
+                    <option>Interested In</option>
+                    <option>Interested In</option>
+                    <option>Interested In</option>
+                    <option>Interested In</option>
+                </select>
+            </div>
+          
+                <input type="submit" name="btn_submit" value="YES! I am interested">
+            </form>
+        </div>
+
+    </div>
+
+</section>
+<?php
+if(isset($_POST['btn_submit'])) 
+    {
+         $to      = 'faraz.shoaib@pncsolutions.tech';
+         $name = $_POST['name'];
+         $phone = $_POST['phone'];
+         $email = $_POST['email'];
+         $address = $_POST['address'];
+         $subject = 'Contact Landing page';
+         $description = $_POST['description'];
+
+         $message = "Name : ".$name."<br>";
+         $message .= "Phone:".$phone."<br>";
+         $message .= "Email : ".$email."<br>";
+         $message .= "Address : ".$address."<br>";
+
+         $headers = 'From: webmaster@example.com' . "\r\n" .
+                'Reply-To: webmaster@example.com' . "\r\n" ;
+
+          $headers .= "MIME-Version: 1.0\r\n";
+          $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+          
+
+         $successMail=mail($to, $subject, $message, $headers); 
+           if ($successMail) {
+            $status= "mail has been sent";
+        }
+        else {
+            $status="something went wrong";
+
+        }
+   
+    }
+
+
+    
+  ?>
+
+<section class="map-box">
+    <div class="map-item">
+        <h3>OUR LOCATION</h3>
+
+        <p>Empire Boulevard,<br>
+            Defence View Housing society,<br>
+            Behind Redisson Lawn, Karachi</p>
+
+        <p>
+            <a href="tel:0321-822-2054">0321-822-2054</a>, <a href="tel:0333-597-2707">0333-597-2707</a>
+        </p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2019, CMAXrealestate, Inc. All Rights Reserved.</p>
+
+        <a href="#"><img src="images/facebook.png" alt=""></a>
+    </div>
+</footer>
+
+<script src="js/intlTelInput.min.js"></script>
+
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        initialCountry: "pk",
+        utilsScript: "js/utils.js",
+    });
+</script>
+
+</body>
+</html>

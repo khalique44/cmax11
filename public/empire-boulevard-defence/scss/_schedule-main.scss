@@ -1,0 +1,48 @@
+.schedule_bg {
+	padding-bottom: 20px;
+	.schedule_content {
+		max-width: 600px;
+		height: 61px;
+		padding: 14px 0;
+		text-align: center;
+		margin: 0 auto;
+		margin-bottom: 20px;
+		h2 {
+			font-family: 'AccentGraphicW00';
+			color: #fff;
+			background-color: #2958ad;
+			padding: 13px 0;
+			border-radius: 50px;
+			font-size: 1.7rem;
+		}
+	}
+}
+
+
+@media screen and (max-width: 680px) {
+	.schedule_bg {
+	    padding-bottom: 10px;
+	    padding-top: 30px;
+	}
+	.schedule_bg .schedule_content {
+		padding: 20px 15px 10px 15px;
+	    height: auto;
+	}
+	.schedule_bg .schedule_content h2 {
+		font-size: 1.2rem !important;
+	}
+	.page_main_section{
+		padding-bottom: 10px ;
+	}
+}
+
+@media screen and (max-width: 390px) {
+	.page_main_section{
+		padding-bottom: 50px;
+	}
+	.schedule_bg {
+		padding-bottom: 0px;
+		padding-top: 10px;
+	}
+
+}

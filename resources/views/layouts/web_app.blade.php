@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>NPC Worldwide</title>
+    <title>CMAX.pk Real Estate</title>
 
 
     <script src="{!! url('public/assets/js/jquery.js') !!}"></script>

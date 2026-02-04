@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="images/fav.png" />
+	<title>CMax | Empire Boulevard Defence</title>
+	
+	<!-- Fonts -->
+	<link rel="stylesheet" type="text/css" href="libs/fonts/stylesheet.css" />
+	
+	<link rel="stylesheet" type="text/css" href="libs/intlTelInput/intlTelInput.min.css" />
+	
+    <!-- Main Style -->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<!-- Main jQuery -->
+	<script src="libs/jquery/jquery.min.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+	<div class="page_header">
+		<div class="row align-end">
+			<div class="col-lg-8">
+				<div class="logo_inner_box">
+					<ul class="logo_box">
+						<li class="logo_img"><a href="#"><img src="images/new-cmax-logo.png" alt="chapal"></a></li>
+						<li class="logo_img"><a href="#"><img src="images/empire.png" alt="uptown"></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="phone_number_box">
+					<div class="phone_box">
+						<div class="phone_img">
+							<img src="images/phone_icon.png" alt="phone">
+						</div>
+						<a href="tel:03238222016"> 03238222016</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="thank_section">
+	<div class="thank_bg" style="background-image: url('images/thank-bg.jpg');">
+		<div class="thank_bg_box">
+			<div class="thank_bg_ribin" style="background-image: url(images/ribin-thank.png);">
+				<h2>THANK YOU</h2>
+			</div>
+			<h3>FOR SHOWING INTEREST IN Empire Boulevard.. OUR SALES TEAM WILL BE  IN TOUCH WITH YOU WITH IN 24-48 HOURS.</h3>
+		</div>
+	</div>
+
+	<div class="footer_section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9">
+					<p>© 2022, All Rights Reserved. - Powered By CMAX.pk</p>
+				</div>
+				<div class="col-lg-3">
+					<div class="soical_icon_img">
+						<ul>
+							<li>
+								<a href="https://www.instagram.com/cmax.pk/"><img src="images/instagram.png" alt="instagram"></a>
+							</li>
+							<li>
+								<a href="https://bit.ly/367lJO0"><img src="images/youtube.png" alt="youtube"></a>
+							</li>
+							<li>
+								<a href="https://www.facebook.com/cmaxrealestate"><img src="images/facebook.png" alt="facebook"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		
+</div>
+
+
+
+
+
+
+
+<script src="libs/intlTelInput/intlTelInput.min.js"></script>
+<script>
+	
+	$(document).ready(function () {
+	    $('#phonenumber').intlTelInput({
+	        separateDialCode: true,
+			//utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.6/js/utils.js',
+	        autoPlaceholder: true,
+	        preferredCountries: ['pk', 'us', 'gb']
+	    });
+
+	    $('#phonenumber').on("input", function () {
+	        if (/^0/.test(this.value)) {
+	            this.value = this.value.replace(/^0/, "")
+	        }
+	    })
+	    var emailval=jQuery('input[type="email"]');
+	    var phoneVal=jQuery('input[type="tel"]');
+
+	    var email;
+	    var phone;
+
+	    emailval.keyup(function() {
+	        if( !validate($(this).val(), 'email') ) {
+	            email = false;
+	        } else {
+	            email = true;
+	        }
+
+	        if( email !== true || phone !== true){
+	            jQuery(':input[type="submit"]').attr('disabled','disabled');
+	            console.log('disabled');
+	        } else {
+	            jQuery(':input[type="submit"]').removeAttr('disabled');
+	        }
+
+	    });
+	    phoneVal.keyup(function() {
+
+	        if( !validate( $(this).val(), 'tel' ) ) {
+	            phone = false;
+	        } else {
+	            phone = true;
+	        }
+
+	        if( email !== true || phone !== true ){
+	            jQuery(':input[type="submit"]').attr('disabled','disabled');                
+	        } else {
+	            jQuery(':input[type="submit"]').removeAttr('disabled');
+	        }
+
+	    });
+	    function validate(inputval, type){
+	        console.log(inputval.length);
+	        if(!inputval.length || inputval.length == 0 ){
+	            return false;
+	        }
+
+	        if(type == 'email'){
+	            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	            if(emailReg.test(inputval)){
+	                return true;
+	            } else {
+	                return false;
+	            }
+	        }
+	        if (type == 'tel') {
+	            var numReg= /^[0-9]*$/;
+	            if (numReg.test(inputval)) {
+	                return true;
+	            } else {
+	                return false;
+	            }
+	        }
+	    } 
+	});
+</script>
+
+
+</body>
+</html>

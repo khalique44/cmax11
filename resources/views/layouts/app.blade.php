@@ -4,15 +4,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="@yield('meta_description', 'cmax.pk')">
+    <meta name="keywords" content="@yield('meta_keywords', 'cmax.pk, real estate')">
+    <meta name="author" content="cmax.pk">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="{{ asset('assets/img/favicon.png') }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="home_url" content="{{ url('') }}">
 
-    <title>CMAX.pk Real Estate</title>
+    <title>
+        @hasSection('meta_title') 
+            @yield('meta_title') | CMAX 
+        @else 
+            CMAX.pk - Real Estate
+        @endif
+    </title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">

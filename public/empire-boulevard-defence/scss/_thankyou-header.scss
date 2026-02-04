@@ -1,0 +1,176 @@
+
+.thank_section {
+    .page_header {
+        .row {
+            align-items: end;
+        }
+        .logo_inner_box {
+            .logo_box {
+                display: flex;
+                align-items: end;
+                flex-wrap: nowrap;
+                margin: 0;
+                padding: 0;
+                a {
+                    display: inline-block;
+                }
+                li {
+                    list-style: none;
+                    width: unset;
+                    img {
+                        width: 70%;
+                    }
+                }
+            }
+        }
+        .phone_number_box{
+            text-align: left;
+            max-width: 100%;
+            .phone_box{
+                display: flex;
+                align-items: center;
+                position: relative;
+                background-color: #022e5c;
+                border-radius: 50px;
+                padding: 12px 30px 12px 80px;
+                color: #fff;
+                font-size: 24px;
+                font-weight: 600;
+            
+                .phone_img{
+                    position: absolute;
+                    left: 0;
+                    top: unset;
+                    img {
+                       
+                    }
+                }
+                a {
+                    color: #fff;
+                    margin: 0 10px;
+                }
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    .page_header .phone_number_box .phone_box {
+        padding: 12px 30px 12px 60px;
+        font-size: 20px;
+    }
+
+
+
+}
+
+@media screen and (max-width: 991px) {
+    .page_header .logo_inner_box .logo_box {
+        justify-content: center;
+    }
+    .page_header .logo_inner_box .logo_box a {
+        text-align: center;
+    }
+    .logo_inner_box {
+        padding-bottom: 30px;
+    }
+    .page_header .phone_number_box .phone_box {
+        font-size: 24px;
+        justify-content: center;
+    }
+}
+
+
+@media screen and (max-width: 680px) {
+    .page_header .logo_inner_box .logo_box li img {
+        width: 85%;
+    }
+    .page_header .phone_number_box .phone_box {
+        font-size: 16px;
+        padding: 12px 30px 12px 80px;
+    }
+    .thank_section .page_header .phone_number_box .phone_box {
+        font-size: 16px;
+        padding: 12px 30px 12px 80px;
+    }
+    .thank_section  .page_header .phone_number_box .phone_box .phone_img img {
+        width: 100%;
+    }
+    .thank_section  .logo_inner_box {
+        padding-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .page_header .phone_number_box .phone_box {
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+
+@media screen and (max-width: 1024px) {
+    .page_header .phone_number_box .phone_box {
+        padding: 12px 30px 12px 60px;
+        font-size: 20px;
+    }
+
+
+
+}
+
+@media screen and (max-width: 991px) {
+    .page_header .logo_inner_box .logo_box {
+        justify-content: center;
+    }
+    .page_header .logo_inner_box .logo_box a {
+        text-align: center;
+    }
+    .logo_inner_box {
+        padding-bottom: 30px;
+    }
+    .page_header .phone_number_box .phone_box {
+        font-size: 24px;
+        justify-content: center;
+    }
+    .page_header .phone_number_box {
+        max-width: 100%;
+        margin: 0 0 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+@media screen and (max-width: 680px) {
+    .page_header .logo_inner_box .logo_box li img {
+        width: 85%;
+    }
+    .page_header .phone_number_box .phone_box {
+        font-size: 16px;
+        padding: 12px 30px 12px 30px;
+    }
+    .page_header .phone_number_box .phone_box .phone_img {
+        top: 7px;
+    }
+    .page_header .phone_number_box .phone_box .phone_img  img{
+        width: 30px;
+    }
+    .logo_inner_box {
+        padding-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .page_header .phone_number_box .phone_box {
+        font-size: 12px;
+    }
+}
+
+
+
