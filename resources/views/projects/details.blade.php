@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('meta_title',  $project->project_title )
 
   
 @section('content')

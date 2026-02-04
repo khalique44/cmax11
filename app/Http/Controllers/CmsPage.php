@@ -90,9 +90,9 @@ class CmsPage extends Controller
         $aboutus_section3_image1 = GeneralHelper::getOption('aboutus_section3_image1');
         $aboutus_section3_image2 = GeneralHelper::getOption('aboutus_section3_image2');
 
-        $aboutus_meta_title = GeneralHelper::getOption('aboutus_meta_title');
-        $aboutus_meta_description = GeneralHelper::getOption('aboutus_meta_description');
-        $aboutus_meta_keywords = GeneralHelper::getOption('aboutus_meta_keywords');
+        $meta_title = GeneralHelper::getOption('aboutus_meta_title');
+        $meta_description = GeneralHelper::getOption('aboutus_meta_description');
+        $meta_keywords = GeneralHelper::getOption('aboutus_meta_keywords');
 
         return view('cms_pages.about_us',compact(
             'aboutus_title',
@@ -113,9 +113,9 @@ class CmsPage extends Controller
             'aboutus_section3_image1',
             'aboutus_section3_image2',
 
-            'aboutus_meta_title',
-            'aboutus_meta_description',
-            'aboutus_meta_keywords',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
         
 
             ));
@@ -126,18 +126,18 @@ class CmsPage extends Controller
         $career_header_image = GeneralHelper::getOption('career_header_image');
         $career_description = GeneralHelper::getOption('career_description');        
 
-        $career_meta_title = GeneralHelper::getOption('career_meta_title');
-        $career_meta_description = GeneralHelper::getOption('career_meta_description');
-        $career_meta_keywords = GeneralHelper::getOption('career_meta_keywords');
+        $meta_title = GeneralHelper::getOption('career_meta_title');
+        $meta_description = GeneralHelper::getOption('career_meta_description');
+        $meta_keywords = GeneralHelper::getOption('career_meta_keywords');
 
         return view('cms_pages.career',compact(
             'career_title',
             'career_header_image',
             'career_description',            
 
-            'career_meta_title',
-            'career_meta_description',
-            'career_meta_keywords',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
         
 
             ));
@@ -193,9 +193,9 @@ class CmsPage extends Controller
         $contact_address = GeneralHelper::getOption('contact_address');
         $contact_embed_map = GeneralHelper::getOption('contact_embed_map');
         
-        $contact_meta_title = GeneralHelper::getOption('contact_meta_title');
-        $contact_meta_description = GeneralHelper::getOption('contact_meta_description');
-        $contact_meta_keywords = GeneralHelper::getOption('contact_meta_keywords');
+        $meta_title = GeneralHelper::getOption('contact_meta_title');
+        $meta_description = GeneralHelper::getOption('contact_meta_description');
+        $meta_keywords = GeneralHelper::getOption('contact_meta_keywords');
 
         return view('cms_pages.contact_us',compact(
             'contact_title',
@@ -205,9 +205,9 @@ class CmsPage extends Controller
             'contact_address',
             'contact_embed_map',
               
-            'contact_meta_title',
-            'contact_meta_description',
-            'contact_meta_keywords',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
         
 
             ));
@@ -334,18 +334,18 @@ class CmsPage extends Controller
         $our_agents_header_image = GeneralHelper::getOption('our_agents_header_image');
         $our_agents_description = GeneralHelper::getOption('our_agents_description');        
 
-        $our_agents_meta_title = GeneralHelper::getOption('our_agents_meta_title');
-        $our_agents_meta_description = GeneralHelper::getOption('our_agents_meta_description');
-        $our_agents_meta_keywords = GeneralHelper::getOption('our_agents_meta_keywords');
+        $meta_title = GeneralHelper::getOption('our_agents_meta_title');
+        $meta_description = GeneralHelper::getOption('our_agents_meta_description');
+        $meta_keywords = GeneralHelper::getOption('our_agents_meta_keywords');
 
         return view('cms_pages.our_agents',compact(
             'our_agents_title',
             'our_agents_header_image',
             'our_agents_description',            
 
-            'our_agents_meta_title',
-            'our_agents_meta_description',
-            'our_agents_meta_keywords',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
         
 
             ));
@@ -356,18 +356,18 @@ class CmsPage extends Controller
         $faqs_header_image = GeneralHelper::getOption('faqs_header_image');
         $faqs_description = GeneralHelper::getOption('faqs_description');        
 
-        $faqs_meta_title = GeneralHelper::getOption('faqs_meta_title');
-        $faqs_meta_description = GeneralHelper::getOption('faqs_meta_description');
-        $faqs_meta_keywords = GeneralHelper::getOption('faqs_meta_keywords');
+        $meta_title = GeneralHelper::getOption('faqs_meta_title');
+        $meta_description = GeneralHelper::getOption('faqs_meta_description');
+        $meta_keywords = GeneralHelper::getOption('faqs_meta_keywords');
 
         return view('cms_pages.faqs',compact(
             'faqs_title',
             'faqs_header_image',
             'faqs_description',            
 
-            'faqs_meta_title',
-            'faqs_meta_description',
-            'faqs_meta_keywords',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
         
 
             ));
@@ -378,18 +378,18 @@ class CmsPage extends Controller
         $privacy_policy_header_image = GeneralHelper::getOption('privacy_policy_header_image');
         $privacy_policy_description = GeneralHelper::getOption('privacy_policy_description');        
 
-        $privacy_policy_meta_title = GeneralHelper::getOption('privacy_policy_meta_title');
-        $privacy_policy_meta_description = GeneralHelper::getOption('privacy_policy_meta_description');
-        $privacy_policy_meta_keywords = GeneralHelper::getOption('privacy_policy_meta_keywords');
+        $meta_title = GeneralHelper::getOption('privacy_policy_meta_title');
+        $meta_description = GeneralHelper::getOption('privacy_policy_meta_description');
+        $meta_keywords = GeneralHelper::getOption('privacy_policy_meta_keywords');
 
         return view('cms_pages.privacy_policy',compact(
             'privacy_policy_title',
             'privacy_policy_header_image',
             'privacy_policy_description',            
 
-            'privacy_policy_meta_title',
-            'privacy_policy_meta_description',
-            'privacy_policy_meta_keywords',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
         
 
             ));
@@ -400,18 +400,18 @@ class CmsPage extends Controller
         $terms_and_conditions_header_image = GeneralHelper::getOption('terms_and_conditions_header_image');
         $terms_and_conditions_description = GeneralHelper::getOption('terms_and_conditions_description');        
 
-        $terms_and_conditions_meta_title = GeneralHelper::getOption('terms_and_conditions_meta_title');
-        $terms_and_conditions_meta_description = GeneralHelper::getOption('terms_and_conditions_meta_description');
-        $terms_and_conditions_meta_keywords = GeneralHelper::getOption('terms_and_conditions_meta_keywords');
+        $meta_title = GeneralHelper::getOption('terms_and_conditions_meta_title');
+        $meta_description = GeneralHelper::getOption('terms_and_conditions_meta_description');
+        $meta_keywords = GeneralHelper::getOption('terms_and_conditions_meta_keywords');
 
         return view('cms_pages.terms_and_conditions',compact(
             'terms_and_conditions_title',
             'terms_and_conditions_header_image',
             'terms_and_conditions_description',            
 
-            'terms_and_conditions_meta_title',
-            'terms_and_conditions_meta_description',
-            'terms_and_conditions_meta_keywords',
+            'meta_title',
+            'meta_description',
+            'meta_keywords',
         
 
             ));
