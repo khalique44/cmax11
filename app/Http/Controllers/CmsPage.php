@@ -155,17 +155,7 @@ class CmsPage extends Controller
         // Send email
         Mail::to(config('constants.admin_email'))->send(new CareerFormMail($data));
 
-        $dataToBitrix = [
-            'fields' => [
-                'TITLE' => 'New Career Form submitted!',
-                'NAME'  => $request->name,
-                'LAST_NAME' => '',
-                'EMAIL' => $request->email,
-                'PHONE' => $request->phone,
-                'COMMENTS' => $request->area_of_interest,
-            ],
-            
-        ];
+
         $dataToBitrix = [
             'fields' => [
                 'TITLE' => 'New Career Form submitted!',
@@ -173,7 +163,8 @@ class CmsPage extends Controller
                 'LAST_NAME' => '',
                 'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
                 'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
-                'COMMENTS' => 'Area of Interest: '.$request->area_of_interest,                
+                'COMMENTS' => 'Area of Interest: '.$request->area_of_interest,
+                'SOURCE_ID' => 'WEB'                
             ],
             
         ];
@@ -232,7 +223,8 @@ class CmsPage extends Controller
                 'LAST_NAME' => '',
                 'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
                 'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
-                'COMMENTS' => $request->message,                
+                'COMMENTS' => $request->message,    
+                'SOURCE_ID' => 'WEB'            
             ],
             
         ];
@@ -272,6 +264,7 @@ class CmsPage extends Controller
                 'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
                 'COMMENTS' => $comments,
                 'ADDRESS' => $request->location,
+                'SOURCE_ID' => 'WEB'
             ],
             
         ];
@@ -309,6 +302,7 @@ class CmsPage extends Controller
                 'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
                 'COMMENTS' => $comments,
                 'ADDRESS' => $request->address,
+                'SOURCE_ID' => 'WEB'
             ],
             
         ];

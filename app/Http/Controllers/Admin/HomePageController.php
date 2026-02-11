@@ -73,7 +73,8 @@ class HomePageController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'home_section_project_type' => 'required|max:255',
+            'home_section_project_type' => 'max:255',
+            'home_section_project_type2' => 'max:255',
             'first_box_offer' => 'required|max:255',
             'second_box_offer' => 'required|max:255',
             'third_box_offer' => 'required|max:255',
@@ -111,6 +112,7 @@ class HomePageController extends Controller
        
         
         GeneralHelper::setOption('home_section_project_type',$request->home_section_project_type);
+        GeneralHelper::setOption('home_section_project_type2',$request->home_section_project_type2);
         GeneralHelper::setOption('first_box_offer',$request->first_box_offer);
         GeneralHelper::setOption('second_box_offer',$request->second_box_offer);
         GeneralHelper::setOption('third_box_offer',$request->third_box_offer);
@@ -136,6 +138,7 @@ class HomePageController extends Controller
 
         $offering = config('constants.offering');
         $home_section_project_type = GeneralHelper::getOption('home_section_project_type');
+        $home_section_project_type2 = GeneralHelper::getOption('home_section_project_type2');
         $first_box_offer = GeneralHelper::getOption('first_box_offer');
         $first_box_offer_image = GeneralHelper::getOption('first_box_offer_image');
 
@@ -148,7 +151,7 @@ class HomePageController extends Controller
         $fourth_box_offer = GeneralHelper::getOption('fourth_box_offer');
         $fourth_box_offer_image = GeneralHelper::getOption('fourth_box_offer_image');
 
-        return view('admin.home_page.home_page_sections.edit',compact('offering','home_section_project_type','first_box_offer','first_box_offer_image','second_box_offer','second_box_offer_image','third_box_offer','third_box_offer_image','fourth_box_offer','fourth_box_offer_image'));
+        return view('admin.home_page.home_page_sections.edit',compact('offering','home_section_project_type','home_section_project_type2','first_box_offer','first_box_offer_image','second_box_offer','second_box_offer_image','third_box_offer','third_box_offer_image','fourth_box_offer','fourth_box_offer_image'));
     }
 
 
@@ -162,7 +165,8 @@ class HomePageController extends Controller
     public function updatePopularLocations(Request $request)
     {
         $request->validate([
-            'home_section_popular_location' => 'required',
+            'popular_location_title' => 'max:255',
+            'home_section_popular_location' => 'required|max:255',
             'first_box_location' => 'required',
             'second_box_location' => 'required',
             'third_box_location' => 'required',
@@ -215,6 +219,7 @@ class HomePageController extends Controller
         }
        
         
+        GeneralHelper::setOption('popular_location_title',$request->popular_location_title);
         GeneralHelper::setOption('home_section_popular_location',$request->home_section_popular_location);
         GeneralHelper::setOption('first_box_location',$request->first_box_location);
         GeneralHelper::setOption('second_box_location',$request->second_box_location);
@@ -229,6 +234,7 @@ class HomePageController extends Controller
     public function sectionPopularLocations(){
 
         $areas = Area::orderBy('name' , 'asc')->get();
+        $popular_location_title = GeneralHelper::getOption('popular_location_title');
         $home_section_popular_location = GeneralHelper::getOption('home_section_popular_location');
         $first_box_location = GeneralHelper::getOption('first_box_location');
         $first_box_location_image = GeneralHelper::getOption('first_box_location_image');
@@ -254,16 +260,17 @@ class HomePageController extends Controller
         $eighth_box_location = GeneralHelper::getOption('eighth_box_location');
         $eighth_box_location_image = GeneralHelper::getOption('eighth_box_location_image'); */
 
-        return view('admin.home_page.home_page_sections.popular_locations.edit',compact('areas','home_section_popular_location','first_box_location','first_box_location_image','second_box_location','second_box_location_image','third_box_location','third_box_location_image','fourth_box_location','fourth_box_location_image','fifth_box_location','fifth_box_location_image','sixth_box_location','sixth_box_location_image'));
+        return view('admin.home_page.home_page_sections.popular_locations.edit',compact('areas','popular_location_title','home_section_popular_location','first_box_location','first_box_location_image','second_box_location','second_box_location_image','third_box_location','third_box_location_image','fourth_box_location','fourth_box_location_image','fifth_box_location','fifth_box_location_image','sixth_box_location','sixth_box_location_image'));
     }
 
     public function sectionDreamProperty(){
 
-        $home_section_dream_property = GeneralHelper::getOption('home_section_dream_property');
+        $dream_property_title1 = GeneralHelper::getOption('dream_property_title1');
+        $dream_property_title2 = GeneralHelper::getOption('dream_property_title2');
         $section_dream_property = GeneralHelper::getOption('section_dream_property');       
 
 
-        return view('admin.home_page.home_page_sections.dream_property.edit',compact('home_section_dream_property','section_dream_property'));
+        return view('admin.home_page.home_page_sections.dream_property.edit',compact('dream_property_title1','dream_property_title2','section_dream_property'));
     }
 
     /**
@@ -276,16 +283,108 @@ class HomePageController extends Controller
     public function updateDreamProperty(Request $request)
     {
         $request->validate([
-            'home_section_dream_property' => 'required',
+            'dream_property_title1' => 'max:255',
+            'dream_property_title2' => 'max:255',
             'section_dream_property' => 'required',
             
             
         ]);       
         
-        GeneralHelper::setOption('home_section_dream_property',$request->home_section_dream_property);
+        GeneralHelper::setOption('dream_property_title1',$request->dream_property_title1);
+        GeneralHelper::setOption('dream_property_title2',$request->dream_property_title2);
         GeneralHelper::setOption('section_dream_property',$request->section_dream_property);
             
 
         return redirect('/admin/home-page/dream-property')->with('success', 'Data saved successfully!');
+    }
+
+
+    public function sectionPopularProjects(){
+
+        $popular_projects_title1 = GeneralHelper::getOption('popular_projects_title1');
+        $popular_projects_title2 = GeneralHelper::getOption('popular_projects_title2');
+
+
+        return view('admin.home_page.home_page_sections.popular_projects.edit',compact('popular_projects_title1','popular_projects_title2'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePopularProjects(Request $request)
+    {
+        $request->validate([
+            'popular_projects_title1' => 'max:255',
+            'popular_projects_title2' => 'max:255',        
+                        
+        ]);       
+        
+        GeneralHelper::setOption('popular_projects_title1',$request->popular_projects_title1);
+        GeneralHelper::setOption('popular_projects_title2',$request->popular_projects_title2);
+                  
+        return redirect('/admin/home-page/popular-projects')->with('success', 'Data saved successfully!');
+    }
+
+    public function sectionInquiryForm(){
+
+        $inquiry_form_title1 = GeneralHelper::getOption('inquiry_form_title1');
+        $inquiry_form_title2 = GeneralHelper::getOption('inquiry_form_title2');
+
+
+        return view('admin.home_page.home_page_sections.inquiry_form.edit',compact('inquiry_form_title1','inquiry_form_title2'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateInquiryForm(Request $request)
+    {
+        $request->validate([
+            'inquiry_form_title1' => 'max:255',
+            'inquiry_form_title2' => 'max:255',        
+                        
+        ]);       
+        
+        GeneralHelper::setOption('inquiry_form_title1',$request->inquiry_form_title1);
+        GeneralHelper::setOption('inquiry_form_title2',$request->inquiry_form_title2);
+                  
+        return redirect('/admin/home-page/inquiry-form')->with('success', 'Data saved successfully!');
+    }
+
+
+    public function sectionLatestBlogs(){
+
+        $latest_blog_title = GeneralHelper::getOption('latest_blog_title');
+        
+
+        return view('admin.home_page.home_page_sections.our_latest_blogs.edit',compact('latest_blog_title'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateLatestBLogs(Request $request)
+    {
+        $request->validate([
+            'latest_blog_title' => 'max:255',            
+                        
+        ]);       
+        
+        GeneralHelper::setOption('latest_blog_title',$request->latest_blog_title);
+        
+                  
+        return redirect('/admin/home-page/latest-blogs')->with('success', 'Data saved successfully!');
     }
 }

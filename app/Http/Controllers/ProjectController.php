@@ -153,9 +153,9 @@ class ProjectController extends Controller
         })
 
         // Property Type
-        /*->when($propertyType, function ($query, $propertyType) {
+        ->when($propertyType, function ($query, $propertyType) {
             $query->whereIn('offering', explode(",",$propertyType));
-        })*/
+        })
         
 
         ->when($installment, function ($query, $installment) {
@@ -175,14 +175,15 @@ class ProjectController extends Controller
         })
         
         // Price Range (in related project_offers table)
-        ->when(($priceFrom && $priceTo && $propertyType), function ($query) use ($priceFrom, $priceTo, $propertyType) {
-            $query->whereHas('offers', function ($q) use ($priceFrom, $priceTo, $propertyType) {
+        
+        ->when(($priceFrom && $priceTo), function ($query) use ($priceFrom, $priceTo) {
+            $query->whereHas('offers', function ($q) use ($priceFrom, $priceTo) {
                 if(!empty($priceFrom['amount']) && !empty($priceTo['amount'])){
                     $q->whereBetween('price_from', [$priceFrom['amount'], $priceTo['amount']]);
                     $q->where('price_from_in_format', [$priceFrom['unit']]);
-                    $q->orWhere('price_to_in_format', [$priceTo['unit']]);
+                   // $q->orWhere('price_to_in_format', [$priceTo['unit']]);
                 }
-                $q->where('offer', [$propertyType]);
+                //$q->where('offer', [$propertyType]);
             });
         })
 
@@ -208,7 +209,7 @@ class ProjectController extends Controller
         ->orderBy('position', 'asc')
         ->orderBy('created_at', 'desc')
         ->paginate(10);
-        //dd(\DB::getQueryLog());
+       // dd(\DB::getQueryLog());
         $builders = Builder::where('is_active',1)->orderBy('builder_name','asc')->get();
         $progress = config('constants.progress');
         $property_types = config('constants.property_types');

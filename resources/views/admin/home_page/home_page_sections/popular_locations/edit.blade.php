@@ -22,8 +22,14 @@
                             {{method_field('PUT')}}
                             {{csrf_field()}}
 
-                            <div class="row">                                
-                                <div class="col-md-12">
+                            <div class="row">    
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Title: </label>
+                                        <input type="text" name="popular_location_title" id="popular_location_title" class="form-control" value="{{ old('popular_location_title', $popular_location_title ?? '') }}" >
+                                    </div>
+                                </div>                            
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Main Title:<span>*</span></label>
                                         <input type="text" name="home_section_popular_location" id="home_section_popular_location" class="form-control" value="{{ old('home_section_popular_location', $home_section_popular_location ?? '') }}" required>

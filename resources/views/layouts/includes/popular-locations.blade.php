@@ -1,4 +1,6 @@
 @php
+  $popular_location_title = GeneralHelper::getOption('popular_location_title');
+
   $home_section_popular_location = GeneralHelper::getOption('home_section_popular_location');
  
   $first_box_location_image = GeneralHelper::getOption('first_box_location_image');        
@@ -23,7 +25,7 @@
 <section class="py-5">
     <div class="container">
     <div class="row text-center pb-3">
-        <h5 class="sub-h">Explore</h5>
+        <h5 class="sub-h">{{ $popular_location_title ?? 'Explore'}}</h5>
         <h2 class="main-h">{{ $home_section_popular_location ?? 'Popular Locations' }}</h2>
     </div>
     <div class="row">

@@ -13,11 +13,15 @@
       
   
   @if($popular_projects->count() > 0)
+  @php 
+   $popular_projects_title1 = GeneralHelper::getOption('popular_projects_title1');
+   $popular_projects_title2 = GeneralHelper::getOption('popular_projects_title2');
+  @endphp
     <section class="py-5">
        <div class="container">
           <div class="row text-center pb-3">
-             <h5 class="sub-h">Discover</h5>
-             <h2 class="main-h">Popular Projects</h2>
+             <h5 class="sub-h">{{$popular_projects_title1 ?? 'Discover'}}</h5>
+             <h2 class="main-h">{{$popular_projects_title2 ?? 'Popular Projects'}}</h2>
           </div>
           <div class="row">
              @include('projects.partials.short_list',['projects' => $popular_projects])
@@ -33,46 +37,17 @@
 
   @include('layouts.includes.dream-property')
 
-  <section>
-     <div class="container pb-5" style="border-bottom: 1px solid #DCDCEB;">
-        <div class="row align-items-center">
-           <div data-aos="fade-right" class="col-md-4">
-              <h5 class="sub-h">Why choose us?</h5>
-              <h2 class="main-h">Benefits of Our Real Estate Services</h2>
-           </div>
-           <div data-aos="fade-left" class="col-md-8">
-              <div class="row">
-                 <div class="four col-md-4">
-                    <div class="counter-box colored">
-                       <span>$</span><span class="counter">520</span><span>+</span>
-                       <p>Million Real Estate Sold</p>
-                    </div>
-                 </div>
-                 <div class="four col-md-4">
-                    <div class="counter-box">
-                       <span class="counter">2000</span><span>+</span>
-                       <p>Over 2000 5 Star Reviews</p>
-                    </div>
-                 </div>
-                 <div class="four col-md-4">
-                    <div class="counter-box">
-                       <span class="counter">675</span> <span>Sold</span>
-                       <p>Over 2000 5 Star Reviews</p>
-                    </div>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </div>
-  </section>
-  
+  @include('layouts.includes.why-choose-us')
+    
   @include('layouts.includes.popular-locations')
 
-
+   @php 
+      $latest_blog_title = GeneralHelper::getOption('latest_blog_title');      
+   @endphp
   <section class="py-5">
      <div class="container">
         <div class="row text-center pb-3">
-           <h2 class="main-h">Our Latest Blog</h2>
+           <h2 class="main-h">{{$latest_blog_title ?? 'Our Latest Blog'}}</h2>
         </div>
         <div class="row">
           @if(!empty($latestPosts))
