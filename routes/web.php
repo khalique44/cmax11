@@ -164,6 +164,7 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::get('cms-pages/faqs', [AdminCmsPage::class,'faqs'])->name('cmspages.faqs');
         Route::get('cms-pages/privacy-policy', [AdminCmsPage::class,'privacyPolicy'])->name('cmspages.privay-policy');
         Route::get('cms-pages/terms-and-conditions', [AdminCmsPage::class,'termsAndConditions'])->name('cmspages.terms_and_conditions');
+        Route::get('home-page/why-choose-us', [AdminCmsPage::class,'whyChooseUs'])->name('home-section.why-choose-us');
         Route::post('cms-pages/save-about-us',[AdminCmsPage::class,'saveAboutUs'])->name('cmspages.save-aboutus');
         Route::post('cms-pages/save-career', [AdminCmsPage::class,'saveCareer'])->name('cmspages.save-career');
         Route::post('cms-pages/save-contact-us', [AdminCmsPage::class,'saveContactUs'])->name('cmspages.save-contactus');
@@ -172,16 +173,29 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::post('cms-pages/save-faqs', [AdminCmsPage::class,'saveFaqs'])->name('cmspages.save-faqs');
         Route::post('cms-pages/save-privacy-policy', [AdminCmsPage::class,'savePrivacyPolicy'])->name('cmspages.save-privacy-policy');
         Route::post('cms-pages/save-terms-and-conditions', [AdminCmsPage::class,'saveTermsAndConditions'])->name('cmspages.save-terms-and-conditions');
+        Route::post('cms-pages/save-why-choose-us', [AdminCmsPage::class,'saveWhyChooseUs'])->name('cms-pages.save-why-choose-us');
         
         Route::resource('testimonials', TestimonialController::class);
         Route::get('project/update-status', [ProjectController::class,'updateStatus'])->name('project.update-status');
         Route::post('project/update-position', [ProjectController::class,'updatePosition'])->name('project.update-position');
         Route::post('/areas', [MainAreaController::class,'store'])->name('areas.store');
         Route::post('/sub-areas', [SubAreaController::class,'store'])->name('subareas.store');
+        Route::get('/areas-data', [MainAreaController::class,'getAreas'])->name('areas.data');
+        Route::get('/get-subareas', [SubAreaController::class,'getSubAreas'])->name('subareas.data');
+        Route::resource('areas', MainAreaController::class);
+        Route::resource('subareas', SubAreaController::class);
         Route::get('home-page/popular-locations', [HomePageController::class,'sectionPopularLocations'])->name('home-section.popular-locations');
         Route::put('home-page/update-popular-locations', [HomePageController::class,'updatePopularLocations'])->name('home-section.update-popular-locations');
         Route::get('home-page/dream-property', [HomePageController::class,'sectionDreamProperty'])->name('home-section.dream-property');
         Route::put('home-page/update-dream-property', [HomePageController::class,'updateDreamProperty'])->name('home-section.update-dream-property');
+        Route::get('home-page/popular-projects', [HomePageController::class,'sectionPopularProjects'])->name('home-section.popular-projects');
+        Route::put('home-page/update-popular-projects', [HomePageController::class,'updatePopularProjects'])->name('home-section.update-popular-projects');
+
+        Route::get('home-page/inquiry-form', [HomePageController::class,'sectionInquiryForm'])->name('home-section.inquiry-form');
+        Route::put('home-page/update-inquiry-form', [HomePageController::class,'updateInquiryForm'])->name('home-section.update-inquiry-form');
+
+         Route::get('home-page/latest-blogs', [HomePageController::class,'sectionLatestBlogs'])->name('home-section.latest-blogs');
+        Route::put('home-page/update-latest-blogs', [HomePageController::class,'updateLatestBlogs'])->name('home-section.update-latest-blogs');
         
 
         Route::get('home-page/project-types', [HomePageController::class,'sectionProjectTypes'])->name('home-section.project-types');

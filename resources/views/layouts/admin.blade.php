@@ -251,7 +251,15 @@ $(document).ready(function() {
     toolbar: 'undo redo | blocks fontfamily fontSize | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
     // Customizing the Font Size list
     font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
-    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+    // 1. Tell TinyMCE to allow the <i> tag and its specific attributes
+    extended_valid_elements: 'i[class|aria-hidden]',
+
+    // 2. Prevent the editor from deleting "empty" tags
+    verify_html: false,
+    
+    // Optional: If you want to be extra safe, allow padding in empty tags
+    allow_conditional_comments: true
   });
 
 

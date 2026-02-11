@@ -42,12 +42,16 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapse5" class="panel-collapse collapse {!! str_contains($url,'/admin/projects') ? 'show' : '' !!}">
+                <div id="collapse5" class="panel-collapse collapse {!! str_contains($url,'/admin/projects') || str_contains($url,'/areas') || str_contains($url,'/subareas') ? 'show' : '' !!}">
                     <div class="panel-body">
                         <div class="accordions-content-link">
                             <ul>
                                 <li><a href="{{url('admin/projects/')}}">All Projects</a></li>
                                 <li><a href="{{url('admin/projects/create')}}">Add Project</a></li>
+                                <li><a href="{{url('admin/areas')}}">All Areas</a></li>
+                                <li><a href="{{url('admin/areas/create')}}">Add Area</a></li>
+                                <li><a href="{{url('admin/subareas')}}">All Sub Areas</a></li>
+                                <li><a href="{{url('admin/subareas/create')}}">Add Sub Area</a></li>
                                 
                             </ul>
                         </div>
@@ -103,12 +107,11 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapse6" class="panel-collapse collapse {!! str_contains($url,'/admin/cms-pages') || str_contains($url,'/home-page/project-types') || str_contains($url,'/home-page/popular-locations') ? 'show' : '' !!}">
+                <div id="collapse6" class="panel-collapse collapse {!! str_contains($url,'/admin/cms-pages')  ? 'show' : '' !!}">
                     <div class="panel-body">
                         <div class="accordions-content-link">
                             <ul>
-                                <li><a href="{{url('admin/home-page/project-types/')}}">Home Section Project Type</a></li>
-                                <li><a href="{{url('admin/home-page/popular-locations/')}}">Home Section Popular Locations</a></li>
+                                
                                 <li><a href="{{url('admin/cms-pages/about-us/')}}">About Us</a></li>
                                 <li><a href="{{url('admin/cms-pages/contact-us/')}}">Contact Us</a></li>
                                 <li><a href="{{url('admin/cms-pages/career/')}}">Career</a></li>
@@ -116,6 +119,36 @@
                                 <li><a href="{{url('admin/cms-pages/faqs/')}}">FAQs</a></li>
                                 <li><a href="{{url('admin/cms-pages/privacy-policy/')}}">Privacy Policy</a></li>
                                 <li><a href="{{url('admin/cms-pages/terms-and-conditions/')}}">Terms & Conditions</a></li>
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-bs-toggle="collapse" href="#collapse10" role="button" aria-expanded="false" aria-controls="collapse10">
+                        
+                            <i class="fa fa-file"></i>
+                            <strong>Home Page Sections</strong>
+                        </a>
+                    </h4>
+                </div>
+
+                <div id="collapse10" class="panel-collapse collapse {!! str_contains($url,'/admin/home-page') ? 'show' : '' !!}">
+                    <div class="panel-body">
+                        <div class="accordions-content-link">
+                            <ul>
+                                <li><a href="{{url('admin/home-page/project-types/')}}">Project Type</a></li>
+                                <li><a href="{{url('admin/home-page/popular-locations/')}}">Popular Locations</a></li>
+                                <li><a href="{{url('admin/home-page/why-choose-us/')}}">Why Choose Us</a></li>
+                                <li><a href="{{url('admin/home-page/dream-property/')}}">Dream Property</a></li>
+                                <li><a href="{{url('admin/home-page/popular-projects/')}}">Popular Projects</a></li>
+                                <li><a href="{{url('admin/home-page/latest-blogs')}}">Latest Blogs</a></li>
+                                <li><a href="{{url('admin/home-page/inquiry-form')}}">Inquiry Form</a></li>
+                                
+                               
                                 
                                 
                             </ul>

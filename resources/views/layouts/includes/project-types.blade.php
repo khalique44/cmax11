@@ -1,5 +1,6 @@
 @php
   $home_section_project_type = GeneralHelper::getOption('home_section_project_type');
+  $home_section_project_type2 = GeneralHelper::getOption('home_section_project_type2');
   $first_box_offer = GeneralHelper::getOption('first_box_offer');
   $first_box_offer_image = GeneralHelper::getOption('first_box_offer_image');        
   $second_box_offer = GeneralHelper::getOption('second_box_offer');
@@ -19,7 +20,7 @@
    <div class="container">
       <div class="row text-center pb-3">
          <h5 class="sub-h">{{ $home_section_project_type ?? 'Project Types'}}</h5>
-         <h2 class="main-h">Explore {{ $home_section_project_type ?? 'Project Types'}}</h2>
+         <h2 class="main-h">{{ $home_section_project_type2 ?? 'Explore Project Types'}}</h2>
       </div>
       <div class="row">
          <div data-aos="fade-up" class="col-6 col-md-6 col-lg-3 mb-3 mb-md-0">

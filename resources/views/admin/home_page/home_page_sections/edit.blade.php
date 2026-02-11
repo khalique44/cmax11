@@ -23,10 +23,16 @@
                             {{csrf_field()}}
 
                             <div class="row">                                
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-label">Main Title:<span>*</span></label>
-                                        <input type="text" name="home_section_project_type" id="home_section_project_type" class="form-control" value="{{ old('home_section_project_type', $home_section_project_type ?? '') }}" required>
+                                        <label class="form-label">Main Title:</label>
+                                        <input type="text" name="home_section_project_type" id="home_section_project_type" class="form-control" value="{{ old('home_section_project_type', $home_section_project_type ?? '') }}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Title 2:</label>
+                                        <input type="text" name="home_section_project_type2" id="home_section_project_type2" class="form-control" value="{{ old('home_section_project_type2', $home_section_project_type2 ?? '') }}" >
                                     </div>
                                 </div>
                             </div>

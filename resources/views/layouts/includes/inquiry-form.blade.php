@@ -1,7 +1,11 @@
+@php 
+	$inquiry_form_title1 = GeneralHelper::getOption('inquiry_form_title1');
+	$inquiry_form_title2 = GeneralHelper::getOption('inquiry_form_title2');
+@endphp
 <section class="cta-sec position-relative z-index-9">
 	<div class="container py-5 px-3 px-sm-5">
-		<h5 data-aos="fade-down" class="sub-h text-center" style="color: #fff;">Lets Get Started</h5>
-		<h2 data-aos="fade-down" class="main-h text-center" style="color: #fff;">Property Inquiry Form</h2>
+		<h5 data-aos="fade-down" class="sub-h text-center" style="color: #fff;">{{ $inquiry_form_title1 ?? 'Lets Get Started' }}</h5>
+		<h2 data-aos="fade-down" class="main-h text-center" style="color: #fff;">{{ $inquiry_form_title2 ?? 'Property Inquiry Form' }}</h2>
 		<div data-aos="fade-up" class="row mt-4">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">

@@ -515,4 +515,40 @@ class CmsPage extends Controller
             
         ]);
     }
+
+
+    public function whyChooseUs(){
+
+        $why_choose_us_title1 = GeneralHelper::getOption('why_choose_us_title1');
+        $why_choose_us_title2 = GeneralHelper::getOption('why_choose_us_title2');
+        $why_choose_us_description = GeneralHelper::getOption('why_choose_us_description');        
+       
+        
+        return view('admin.home_page.why_choose_us.edit',compact(
+            'why_choose_us_title1',
+            'why_choose_us_title2',
+            'why_choose_us_description',                          
+
+            ));
+    }
+    
+    public function saveWhyChooseUs(Request $request){
+
+        $request->validate([
+            'why_choose_us_title1' => 'max:255',            
+            'why_choose_us_title2' => 'max:255',   
+           
+        ]);        
+        
+        GeneralHelper::setOption('why_choose_us_title1',$request->why_choose_us_title1);
+        GeneralHelper::setOption('why_choose_us_title2',$request->why_choose_us_title2);
+        GeneralHelper::setOption('why_choose_us_description',$request->why_choose_us_description);       
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Settings Saved Successfully!',
+            
+        ]);
+    }
+    
 }
