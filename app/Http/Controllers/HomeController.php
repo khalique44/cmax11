@@ -87,6 +87,13 @@ class HomeController extends Controller
         $fourth_box_location = Area::where('id', $fourth_box_area_id)->value('name');        
         $fifth_box_location = Area::where('id', $fifth_box_area_id)->value('name');       
         $sixth_box_location = Area::where('id', $sixth_box_area_id)->value('name');
+
+        $home_page_header_image = GeneralHelper::getOption('home_page_header_image');
+        $home_page_title = GeneralHelper::getOption('home_page_title');
+        $home_page_description = GeneralHelper::getOption('home_page_description');
+        $meta_title = GeneralHelper::getOption('home_page_meta_title');
+        $meta_description = GeneralHelper::getOption('home_page_meta_description');
+        $meta_keywords = GeneralHelper::getOption('home_page_meta_keywords');
       
 
         $first_box_location_count = Project::whereHas('area', function ($q) use ($first_box_area_id) {
@@ -114,7 +121,7 @@ class HomeController extends Controller
             $header_image = url('public') .'/'.$data->header_image;
           } 
         }
-        return view('home',compact('data','header_image','testimonials','builders','progress','property_types','bedrooms','offering','popular_projects','latestPosts','compare','first_box_offer_count','second_box_offer_count','third_box_offer_count','fourth_box_offer_count','payment_plan_duration','first_box_location','second_box_location','third_box_location','fourth_box_location','fifth_box_location','sixth_box_location','first_box_location_count','second_box_location_count','third_box_location_count','fourth_box_location_count','fifth_box_location_count','sixth_box_location_count'));
+        return view('home',compact('data','header_image','testimonials','builders','progress','property_types','bedrooms','offering','popular_projects','latestPosts','compare','first_box_offer_count','second_box_offer_count','third_box_offer_count','fourth_box_offer_count','payment_plan_duration','first_box_location','second_box_location','third_box_location','fourth_box_location','fifth_box_location','sixth_box_location','first_box_location_count','second_box_location_count','third_box_location_count','fourth_box_location_count','fifth_box_location_count','sixth_box_location_count','home_page_title','home_page_description','home_page_header_image','meta_title','meta_description','meta_keywords'));
         
         //return '<H2>Coming Soon</H2';
     }

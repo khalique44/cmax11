@@ -6,140 +6,138 @@
         <div class="right-section-content">
             <div class="admin-sec-btn-area">
                 <div class="report-title-section">
-                    <h4>Home Page General Settings</h4>
+                    <h4>Manage Home Page</h4>
                 </div>
-                
+                <div class="district-back-del-btn-area">
+                    <div class="distrcit-back-btn">
+                        <div class="district-back-del-btn-area">
+                            <a href="{{url('admin/')}}" data-toggle="" data-target="#search-db-model"  class="btn">Back</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--  ===============================  -->
-            <!--  ======= Home Page Settings Update ===========  -->
-            <!--  ===============================  -->
+            
 
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    Please remove the following errors.
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @include("layouts.partials.messages")
+            <div class="ajax-msg"></div>
             <div class="row">
-                @include('layouts.partials.messages')
                 <div class="col-xs-12">
-                    <div class="district-form-content">
-                        <form class="district-fields" method="POST" action="{{url('admin/home_page/home_settings', array($home_settings->id))}}" enctype="multipart/form-data">
+                    <div class="district-form-content add-new-district-form">
+                        <form action="{{ route('home-section.update-home-settings') }}" method="POST" enctype="multipart/form-data" class="" id="home-settings">
                             {{method_field('PUT')}}
-                            {{csrf_field()}}
-                            <div class="form-group">
-                                <label>Title :</label>
-                                <input type="text" name="title" id="title" title="enter title!" class="district-input-field form-control" placeholder="Title"
-                                       value="{{$home_settings->title}}" required >
-                                <div id="msg_1">&nbsp;</div>
+                            @csrf
+
+                            <div class="row">
+                                <div class="col-md-12">   
+                                    <div class="form-group">
+                                        <label class="form-label">Title : </label>
+                                        <input type="text" name="home_page_title" id="home_page_title" class="form-control" value="{{ old('home_page_title', $home_page_title ?? '') }}"  >
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Description :</label>
-                                <textarea  name="description" id="description" title="enter description!" class="district-input-field form-control" rows="8" placeholder="Description"
-                                         >{{$home_settings->description}}</textarea>
-                                <div id="msg_2">&nbsp;</div>
+                            <div class="row">                                
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Description:</label>
+                                          <textarea  name="home_page_description" id="home_page_description" title="enter  description!" class="form-control txtEditor" rows="8" placeholder="description"  >{{old('home_page_description', $home_page_description)}}</textarea>
+                                    </div>
+                                </div>
+                                                               
                             </div>
-
-                            <div class="form-group">
-                                <label>Header Image (1920 &times; 915) :</label>
-                                <input type="file" name="header_image" id="header_image"  class="district-input-field form-control"  >
-                                @if(!empty($home_settings->header_image))
-                                <a href="{!! url('public') !!}/{{$home_settings->header_image}}" target="_blank"><img src="{!! url('public') !!}/{{$home_settings->header_image}}" class="logo" alt="Logo" width="50%"></a>
-                                @endif
-                            </div>
-
-                            <div class="form-group">
-                                <label>About Us Title :</label>
-                                <input type="text" name="about_us_title" id="about_us_title" title="enter about us title!" class="district-input-field form-control" placeholder="About Us Title"
-                                       value="{{$home_settings->about_us_title}}" required >
-                                <div id="msg_3">&nbsp;</div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label>About Us Description :</label>
-                                
-                                <textarea  name="about_us_description" id="about_us_description" title="enter about us description!" class="district-input-field form-control" rows="8" placeholder="About us description"
-                                         >{{$home_settings->about_us_description}}</textarea>
-                                
-                            </div>
-
                             
-
-
-                            <div class="form-group">
-                                <label>Testimonial Title :</label>
-                                <input type="text" name="testimonial_title" id="testimonial_title" title="enter Testimonial Title!" class="district-input-field form-control" placeholder="Testimonial Title"
-                                       value="{{$home_settings->testimonial_title}}" required >
-                                <div id="msg_4">&nbsp;</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Team Member Title :</label>
-                                <input type="text" name="team_member_title" id="team_member_title" title="enter Team Member Titl!" class="district-input-field form-control" placeholder="Team Member Title"
-                                       value="{{$home_settings->team_member_title}}" required >
-                                <div id="msg_5">&nbsp;</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Team Member Description :</label>
-                                <textarea  name="team_member_description" id="team_member_description" title="enter team member description!" class="district-input-field form-control" rows="8" placeholder="Team Member Description"
-                                         >{{$home_settings->team_member_description}}</textarea>
+                            <div class="row">                                
                                
+                                <div class="col-md-6">   
+                                    <div class="form-group">                                     
+                                        
+                                        <label>Upload Image</label>
+                                        <input type="file" name="home_page_header_image" id="home_page_header_image"  class="form-control">
+                                           
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">   
+                                    <div class="form-group">                                     
+                                        
+                                        @if(!empty($home_page_header_image))
+                                            <div class="">                       
+                                                <div class="form-group">
+                                                    <a href="{!! url($home_page_header_image) !!}/" target="_blank" class="available-image-area">
+                                                        
+                                                        <img src="{!! url($home_page_header_image) !!}" class="header-image" title="Header Image" alt="" width="">                                                    
+                                                    </a>                                          
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        @endif
+                                        
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>  
+
+                            <div class="row bg-light m-3">
+                                <h3 class="mt-3">Meta Info</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Meta Title :</label>
+                                            <input type="text" name="home_page_meta_title" id="home_page_meta_title" title="enter  meta title!" class="district-input-field form-control" placeholder="Meta Title"
+                                                   value="{{ old('home_page_meta_title', $home_page_meta_title ?? '') }}"  >
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Meta Description :</label>
+                                            <textarea  name="home_page_meta_description" id="home_page_meta_description" title="enter meta description!" class="district-input-field form-control" rows="8" placeholder="Meta Description"
+                                                     >{{ old('home_page_meta_description', $home_page_meta_description ?? '') }}</textarea>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Meta Keywords :</label>
+                                            <textarea  name="home_page_meta_keywords" id="home_page_meta_keywords" title="enter meta Keywords!" class="district-input-field form-control" rows="8" placeholder="Meta Keywords"
+                                                     >{{ old('home_page_meta_keywords', $home_page_meta_keywords ?? '') }}</textarea>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label>Contact Us Title :</label>
-                                <input type="text" name="contact_us_title" id="contact_us_title" title="enter Contact Us Title!" class="district-input-field form-control" placeholder="Contact Us Title"
-                                       value="{{$home_settings->contact_us_title}}" required >
-                                <div id="msg_6">&nbsp;</div>
-                            </div>
+                            <div class="row m-3">
 
-                            <div class="form-group">
-                                <label>Contact Us Title 2 :</label>
-                                <input type="text" name="contact_us_slogan" id="contact_us_slogan" title="enter Contact Us Title 2 !" class="district-input-field form-control" placeholder="Contact Us Title 2"
-                                       value="{{$home_settings->contact_us_slogan}}"  >
-                                <div id="msg_7">&nbsp;</div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label>Meta Title :</label>
-                                <input type="text" name="meta_title" id="meta_title" title="enter  meta title!" class="district-input-field form-control" placeholder="Meta Title"
-                                       value="{{$home_settings->meta_title}}"  >
-                                <div id="msg_8">&nbsp;</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Meta Description :</label>
-                                <textarea  name="meta_description" id="meta_description" title="enter meta description!" class="district-input-field form-control" rows="8" placeholder="Meta Description"
-                                         >{{$home_settings->meta_description}}</textarea>
-                                <div id="msg_9">&nbsp;</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Meta Keywords :</label>
-                                <textarea  name="meta_keywords" id="meta_keywords" title="enter meta Keywords!" class="district-input-field form-control" rows="8" placeholder="Meta Keywords"
-                                         >{{$home_settings->meta_keywords}}</textarea>
-                                <div id="msg_9">&nbsp;</div>
-                            </div>
-                            
-                            
-
-                            <div class="Create-district-btn">
-                                <button type="submit" href="javascript:void(0);" id="btn_save" class="btn enableOnInput3">
-                                    Update
-                                </button>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                       
+                                        <button type="submit" class="btn btn-success mt-3">Save</button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-    <script>
-        $('.btn_category_delete').on('click',function () {
-            var DataDeleteId = $(this).attr('data-delete-id');
-
-            $(".data-delete-form").attr('action', "{{ url('') }}/admin/modules/categories/"+DataDeleteId);
-        });
-    </script>
 @endsection
-
 
