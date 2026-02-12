@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\AreaSurveyController;
+use App\Http\Controllers\Admin\HomePage\HomeSettingController;
 
 /* Route::get('/routecache', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
@@ -194,8 +195,11 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::get('home-page/inquiry-form', [HomePageController::class,'sectionInquiryForm'])->name('home-section.inquiry-form');
         Route::put('home-page/update-inquiry-form', [HomePageController::class,'updateInquiryForm'])->name('home-section.update-inquiry-form');
 
-         Route::get('home-page/latest-blogs', [HomePageController::class,'sectionLatestBlogs'])->name('home-section.latest-blogs');
+        Route::get('home-page/latest-blogs', [HomePageController::class,'sectionLatestBlogs'])->name('home-section.latest-blogs');
         Route::put('home-page/update-latest-blogs', [HomePageController::class,'updateLatestBlogs'])->name('home-section.update-latest-blogs');
+
+        Route::get('home-page/home-settings', [HomePageController::class,'sectionHomePage'])->name('home-section.home-settings');
+        Route::put('home-page/update-home-settings', [HomePageController::class,'updateHomePage'])->name('home-section.update-home-settings');
         
 
         Route::get('home-page/project-types', [HomePageController::class,'sectionProjectTypes'])->name('home-section.project-types');
@@ -210,7 +214,6 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::get('survey-data', [AreaSurveyController::class, 'getSurveys'])->name('surveys.data');
         Route::get('/survey/remove-file/{id}', [AreaSurveyController::class, 'removeFile'])->name('file.remove');
         Route::post('/media/reorder', [MediaController::class, 'reorder'])->name('admin.media.reorder');
-
 
 
     });

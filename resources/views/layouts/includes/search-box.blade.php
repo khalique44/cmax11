@@ -1,10 +1,19 @@
-<section class="my-banner">
+@php $bg_image = "";  @endphp
+@if(!empty($home_page_header_image))
+   @php $bg_image = asset($home_page_header_image); @endphp
+@endif
+<section class="my-banner" style="{!! !empty($bg_image) ? 
+    'background: url('.$bg_image.');     
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;' : '' !!}">
      <div class="container">
         <div class="row">
            <div data-aos="fade-in" class="col-lg-12">
               <div class="first-heading mb-5">
-                 <h2 class="first-h">Karachi</h2>
-                 <h2 class="second-h mb-3 ms-2">Buy, Sell, <span style="color: #dd1c2f; font-family: 'PassengerDisplayExtraBold';">Rent</span> & <span style="color: #dd1c2f; font-family: 'PassengerDisplayExtraBold';">Invest</span></h2>
+                 <h2 class="first-h">{{$home_page_title ?? 'Karachi'}}</h2>
+                 {!! $home_page_description !!}
+                 
               </div>
               <!-- <p class="pe-lg-5 me-lg-5 sub-text">We provide a complete service for the sale, purchase or rental pf real estate.</p> -->
            </div>
@@ -14,7 +23,7 @@
            <div class="col-lg-11">
               <ul class="nav nav-tabs form-tab" id="myTab" role="tablist">
                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">New Project</button>
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Search Project</button>
                  </li>
                  
               </ul>

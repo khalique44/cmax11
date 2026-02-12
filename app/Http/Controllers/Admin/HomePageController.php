@@ -387,4 +387,49 @@ class HomePageController extends Controller
                   
         return redirect('/admin/home-page/latest-blogs')->with('success', 'Data saved successfully!');
     }
+
+
+    public function sectionHomePage(){
+
+        $home_page_title = GeneralHelper::getOption('home_page_title');
+        $home_page_description = GeneralHelper::getOption('home_page_description');
+        $home_page_header_image = GeneralHelper::getOption('home_page_header_image');        
+        $home_page_meta_title = GeneralHelper::getOption('home_page_meta_title');
+        $home_page_meta_description = GeneralHelper::getOption('home_page_meta_description');
+        $home_page_meta_keywords = GeneralHelper::getOption('home_page_meta_keywords');
+
+        return view('admin.home_page.general_settings.edit',compact('home_page_title','home_page_description','home_page_header_image','home_page_meta_title','home_page_meta_description','home_page_meta_keywords'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateHomePage(Request $request)
+    {
+        $request->validate([
+           'home_page_title' => 'max:255',
+           'home_page_header_image' => 'mimes:jpeg,png,jpg,gif,svg|max:5000|dimensions:max_width=1920',       
+                        
+        ]);       
+
+        if ($request->hasFile('home_page_header_image')) {
+
+            $url = FileHelper::uploadImage($request->file('home_page_header_image'), 'home_page_header_image');
+            
+            GeneralHelper::setOption('home_page_header_image',$url);
+        }
+        
+        GeneralHelper::setOption('home_page_title',$request->home_page_title);
+        GeneralHelper::setOption('home_page_description',$request->home_page_description);
+        GeneralHelper::setOption('home_page_meta_title',$request->home_page_meta_title);
+        GeneralHelper::setOption('home_page_meta_description',$request->home_page_meta_description);
+        GeneralHelper::setOption('home_page_meta_keywords',$request->home_page_meta_keywords);
+        
+                  
+        return redirect('/admin/home-page/home-settings')->with('success', 'Data saved successfully!');
+    }
 }
