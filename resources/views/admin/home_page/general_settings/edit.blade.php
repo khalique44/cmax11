@@ -58,20 +58,13 @@
                             
                             <div class="row">                                
                                
-                                <div class="col-md-6">   
+                                <div class="col-md-12">   
                                     <div class="form-group">                                     
                                         
-                                        <label>Upload Image</label>
+                                        <label class="form-label">Upload Image</label>
                                         <input type="file" name="home_page_header_image" id="home_page_header_image"  class="form-control">
                                            
-                                        
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">   
-                                    <div class="form-group">                                     
-                                        
-                                        @if(!empty($home_page_header_image))
+                                         @if(!empty($home_page_header_image))
                                             <div class="">                       
                                                 <div class="form-group">
                                                     <a href="{!! url($home_page_header_image) !!}/" target="_blank" class="available-image-area">
@@ -83,6 +76,13 @@
                                                 
                                             </div>
                                         @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">   
+                                    <div class="form-group">                                     
+                                        
+                                       
                                         
                                         
                                     </div>

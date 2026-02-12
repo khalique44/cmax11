@@ -140,6 +140,7 @@
                     <div class="panel-body">
                         <div class="accordions-content-link">
                             <ul>
+                                <li><a href="{{url('admin/home-page/home-settings/')}}">Title, Description & Header Image </a></li>
                                 <li><a href="{{url('admin/home-page/project-types/')}}">Project Type</a></li>
                                 <li><a href="{{url('admin/home-page/popular-locations/')}}">Popular Locations</a></li>
                                 <li><a href="{{url('admin/home-page/why-choose-us/')}}">Why Choose Us</a></li>
