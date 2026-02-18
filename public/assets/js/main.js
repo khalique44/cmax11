@@ -549,7 +549,7 @@ $(document).ready(function() {
         }
     });*/
 
-    $(document).on('change','#minPrice, #maxPrice', function() {
+    $(document).on('change','#minPrice', function() {
         var min = parseInt($('#minPrice').val()) || 0;
         var max = parseInt($('#maxPrice').val()) || 0;
 
@@ -557,9 +557,57 @@ $(document).ready(function() {
             $('#priceError').text('Max price must be greater than Min price!');
         } else {
             $('#priceError').text('');
+            //$(".dropdown-price-range-menu").hide();
         }
     });
 
+    $(document).on('change','#maxPrice', function() {
+        var min = parseInt($('#minPrice').val()) || 0;
+        var max = parseInt($('#maxPrice').val()) || 0;
+
+        if (min > max) {
+            $('#priceError').text('Max price must be greater than Min price!');
+        } else {
+            $('#priceError').text('');
+            $(".dropdown-price-range-menu").hide();
+        }
+    });
+
+    $(document).on('change','#minPrice2', function() {
+        var min = parseInt($('#minPrice2').val()) || 0;
+        var max = parseInt($('#maxPrice2').val()) || 0;
+
+        if (min > max) {
+            $('#priceError2').text('Max price must be greater than Min price!');
+        } else {
+            $('#priceError2').text('');
+            //$(".dropdown-price-range-menu").hide();
+        }
+    });
+
+    $(document).on('change','#maxPrice2', function() {
+        var min = parseInt($('#minPrice2').val()) || 0;
+        var max = parseInt($('#maxPrice2').val()) || 0;
+
+        if (min > max) {
+            $('#priceError2').text('Max price must be greater than Min price!');
+        } else {
+            $('#priceError2').text('');
+            $(".dropdown-price-range-menu").hide();
+        }
+    });
+
+    $(document).on('click', function(event) {
+        const $menu = $('.dropdown-price-range-menu');
+        const $button = $('.dropdown-price-range-toggle');
+
+        // If the click target is NOT the menu and NOT a child of the menu
+        // AND NOT the button that opens it...
+        if (!$menu.is(event.target) && $menu.has(event.target).length === 0 && !$button.is(event.target)) {
+            $menu.hide();
+        }
+    });
+    
     $(document).on('change','#minInstallment, #maxInstallment', function() {
         var min = parseInt($('#minInstallment').val()) || 0;
         var max = parseInt($('#maxInstallment').val()) || 0;

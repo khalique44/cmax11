@@ -144,7 +144,7 @@ class ProjectController extends Controller
                 //Rule::unique('projects', 'project_title'),
             ],                 
             'progress' => 'required',            
-            'project_logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
+            'project_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
             'builder_id' => 'required',
             'city_id' => 'required',
             'location' => 'required',            
@@ -158,6 +158,7 @@ class ProjectController extends Controller
             ],
             [                
                 'project_logo.max' => 'The logo must not be larger than 10 MB.',
+                'project_logo.mimes' => 'The logo allowed extensions are jpeg,png,jpg,gif,svg,webp.',
             ]
         );
 
@@ -427,6 +428,7 @@ class ProjectController extends Controller
             ],
             [                
                 'project_logo.max' => 'The logo must not be larger than 10 MB.',
+                'project_logo.mimes' => 'The logo allowed extensions are jpeg,png,jpg,gif,svg,webp.',
             ]
         );
 

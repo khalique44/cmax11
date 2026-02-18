@@ -23,7 +23,7 @@
            <div class="col-lg-11">
               <ul class="nav nav-tabs form-tab" id="myTab" role="tablist">
                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Search Project</button>
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Search Projects</button>
                  </li>
                  
               </ul>
@@ -58,25 +58,25 @@
                                   <label class="form-label">Monthly Installment</label>
                                   <select class="form-select select2" name="monthly_installment" id="monthly_installment_mobile">
                                     <option value="">Select</option>
-                                    <option value="50000:100000" >50,000 ~ 100,000</option>
-                                    <option value="100000:150000" >100,000 ~ 150,000</option>
-                                    <option value="150000:200000" >150,000 ~ 200,000</option>
-                                    <option value="200000:250000" >200,000 ~ 250,000</option>
-                                    <option value="250000:300000" >250,000 ~ 300,000</option>
-                                    <option value="300000:350000" >300,000 ~ 350,000</option>
-                                    <option value="350000:400000" >350,000 ~ 400,000</option>
-                                    <option value="400000:450000" >400,000 ~ 450,000</option>
-                                    <option value="450000:500000" >450,000 ~ 500,000</option>
-                                    <option value="500000:550000" >500,000 ~ 550,000</option>
-                                    <option value="550000:600000" >550,000 ~ 600,000</option>
-                                    <option value="600000:650000" >600,000 ~ 650,000</option>
-                                    <option value="650000:700000" >650,000 ~ 700,000</option>
-                                    <option value="700000:750000" >700,000 ~ 750,000</option>
-                                    <option value="700000:750000" >750,000 ~ 800,000</option>
-                                    <option value="800000:850000" >800,000 ~ 850,000</option>
-                                    <option value="850000:900000" >850,000 ~ 900,000</option>
-                                    <option value="900000:950000" >900,000 ~ 950,000</option>
-                                    <option value="950000:1000000" >950,000 ~ 1,000,000</option>
+                                    <option value="50000:100000" >Rs.50,000 ~ 100,000</option>
+                                    <option value="100000:150000" >Rs.100,000 ~ 150,000</option>
+                                    <option value="150000:200000" >Rs.150,000 ~ 200,000</option>
+                                    <option value="200000:250000" >Rs.200,000 ~ 250,000</option>
+                                    <option value="250000:300000" >Rs.250,000 ~ 300,000</option>
+                                    <option value="300000:350000" >Rs.300,000 ~ 350,000</option>
+                                    <option value="350000:400000" >Rs.350,000 ~ 400,000</option>
+                                    <option value="400000:450000" >Rs.400,000 ~ 450,000</option>
+                                    <option value="450000:500000" >Rs.450,000 ~ 500,000</option>
+                                    <option value="500000:550000" >Rs.500,000 ~ 550,000</option>
+                                    <option value="550000:600000" >Rs.550,000 ~ 600,000</option>
+                                    <option value="600000:650000" >Rs.600,000 ~ 650,000</option>
+                                    <option value="650000:700000" >Rs.650,000 ~ 700,000</option>
+                                    <option value="700000:750000" >Rs.700,000 ~ 750,000</option>
+                                    <option value="700000:750000" >Rs.750,000 ~ 800,000</option>
+                                    <option value="800000:850000" >Rs.800,000 ~ 850,000</option>
+                                    <option value="850000:900000" >Rs.850,000 ~ 900,000</option>
+                                    <option value="900000:950000" >Rs.900,000 ~ 950,000</option>
+                                    <option value="950000:1000000" >Rs.950,000 ~ 1,000,000</option>
                             
                                   </select>
                                   
@@ -115,27 +115,27 @@
                                                       
                                                       <select class="form-select select2" name="price_from" id="minPrice" style="width: 100%;">
                                                         <option value="">0</option>
-                                                        <option value="500000">500,000</option>
-                                                        <option value="1000000">1,000,000</option>
-                                                        <option value="2000000">2,000,000</option>
-                                                        <option value="3500000">3,500,000</option>
-                                                        <option value="5000000">5,000,000</option>
-                                                        <option value="6500000">6,500,000</option>
-                                                        <option value="8000000">8,000,000</option>
-                                                        <option value="10000000">10,000,000</option>
-                                                        <option value="12500000">12,500,000</option>
-                                                        <option value="15000000">15,000,000</option>
-                                                        <option value="17500000">17,500,000</option>
-                                                        <option value="20000000">20,000,000</option>
-                                                        <option value="25000000">25,000,000</option>
-                                                        <option value="30000000">30,000,000</option>
-                                                        <option value="40000000">40,000,000</option>
-                                                        <option value="50000000">50,000,000</option>
-                                                        <option value="75000000">75,000,000</option>
-                                                        <option value="100000000">100,000,000</option>
-                                                        <option value="250000000">250,000,000</option>
-                                                        <option value="500000000">500,000,000</option>
-                                                        <option value="1000000000">1,000,000,000</option>
+                                                        <option value="500000">Rs.500,000</option>
+                                                        <option value="1000000">Rs.1,000,000</option>
+                                                        <option value="2000000">Rs.2,000,000</option>
+                                                        <option value="3500000">Rs.3,500,000</option>
+                                                        <option value="5000000">Rs.5,000,000</option>
+                                                        <option value="6500000">Rs.6,500,000</option>
+                                                        <option value="8000000">Rs.8,000,000</option>
+                                                        <option value="10000000">Rs.10,000,000</option>
+                                                        <option value="12500000">Rs.12,500,000</option>
+                                                        <option value="15000000">Rs.15,000,000</option>
+                                                        <option value="17500000">Rs.17,500,000</option>
+                                                        <option value="20000000">Rs.20,000,000</option>
+                                                        <option value="25000000">Rs.25,000,000</option>
+                                                        <option value="30000000">Rs.30,000,000</option>
+                                                        <option value="40000000">Rs.40,000,000</option>
+                                                        <option value="50000000">Rs.50,000,000</option>
+                                                        <option value="75000000">Rs.75,000,000</option>
+                                                        <option value="100000000">Rs.100,000,000</option>
+                                                        <option value="250000000">Rs.250,000,000</option>
+                                                        <option value="500000000">Rs.500,000,000</option>
+                                                        <option value="1000000000">Rs.1,000,000,000</option>
                                                       </select>
                                                     </div>
                                                     <div class="col-md-6">
@@ -143,28 +143,28 @@
                                                       
                                                       <select class="form-select select2" name="price_to" id="maxPrice" style="width: 100%;">
                                                         <option value="">Any</option>
-                                                        <option value="500000">500,000</option>
-                                                        <option value="1000000">1,000,000</option>
-                                                        <option value="2000000">2,000,000</option>
-                                                        <option value="3500000">3,500,000</option>
-                                                        <option value="5000000">5,000,000</option>
-                                                        <option value="6500000">6,500,000</option>
-                                                        <option value="8000000">8,000,000</option>
-                                                        <option value="10000000">10,000,000</option>
-                                                        <option value="12500000">12,500,000</option>
-                                                        <option value="15000000">15,000,000</option>
-                                                        <option value="17500000">17,500,000</option>
-                                                        <option value="20000000">20,000,000</option>
-                                                        <option value="25000000">25,000,000</option>
-                                                        <option value="30000000">30,000,000</option>
-                                                        <option value="40000000">40,000,000</option>
-                                                        <option value="50000000">50,000,000</option>
-                                                        <option value="75000000">75,000,000</option>
-                                                        <option value="100000000">100,000,000</option>
-                                                        <option value="250000000">250,000,000</option>
-                                                        <option value="500000000">500,000,000</option>
-                                                        <option value="1000000000">1,000,000,000</option>
-                                                        <option value="5000000000">5,000,000,000</option>
+                                                        <option value="500000">Rs.500,000</option>
+                                                        <option value="1000000">Rs.1,000,000</option>
+                                                        <option value="2000000">Rs.2,000,000</option>
+                                                        <option value="3500000">Rs.3,500,000</option>
+                                                        <option value="5000000">Rs.5,000,000</option>
+                                                        <option value="6500000">Rs.6,500,000</option>
+                                                        <option value="8000000">Rs.8,000,000</option>
+                                                        <option value="10000000">Rs.10,000,000</option>
+                                                        <option value="12500000">Rs.12,500,000</option>
+                                                        <option value="15000000">Rs.15,000,000</option>
+                                                        <option value="17500000">Rs.17,500,000</option>
+                                                        <option value="20000000">Rs.20,000,000</option>
+                                                        <option value="25000000">Rs.25,000,000</option>
+                                                        <option value="30000000">Rs.30,000,000</option>
+                                                        <option value="40000000">Rs.40,000,000</option>
+                                                        <option value="50000000">Rs.50,000,000</option>
+                                                        <option value="75000000">Rs.75,000,000</option>
+                                                        <option value="100000000">Rs.100,000,000</option>
+                                                        <option value="250000000">Rs.250,000,000</option>
+                                                        <option value="500000000">Rs.500,000,000</option>
+                                                        <option value="1000000000">Rs.1,000,000,000</option>
+                                                        <option value="5000000000">Rs.5,000,000,000</option>
                                                       </select>
                                                     </div>
                                                   </div>
@@ -225,7 +225,7 @@
         <div class="d-block d-md-none">
            <ul class="banner-buttons">
               
-              <li><a href="#" data-bs-toggle="offcanvas" data-bs-target="#leftPopup" aria-controls="leftPopup">Search</a></li>
+              <li><a href="#" data-bs-toggle="offcanvas" data-bs-target="#leftPopup" aria-controls="leftPopup">Search Projects</a></li>
            </ul>
         </div>
 
@@ -264,25 +264,25 @@
                                   <label class="form-label">Monthly Installment</label>
                                   <select class="form-select select2" name="monthly_installment" id="monthly_installment">
                                     <option value="" selected>Select</option>
-                                    <option value="50000:100000" >50,000 ~ 100,000</option>
-                                    <option value="100000:150000" >100,000 ~ 150,000</option>
-                                    <option value="150000:200000" >150,000 ~ 200,000</option>
-                                    <option value="200000:250000" >200,000 ~ 250,000</option>
-                                    <option value="250000:300000" >250,000 ~ 300,000</option>
-                                    <option value="300000:350000" >300,000 ~ 350,000</option>
-                                    <option value="350000:400000" >350,000 ~ 400,000</option>
-                                    <option value="400000:450000" >400,000 ~ 450,000</option>
-                                    <option value="450000:500000" >450,000 ~ 500,000</option>
-                                    <option value="500000:550000" >500,000 ~ 550,000</option>
-                                    <option value="550000:600000" >550,000 ~ 600,000</option>
-                                    <option value="600000:650000" >600,000 ~ 650,000</option>
-                                    <option value="650000:700000" >650,000 ~ 700,000</option>
-                                    <option value="700000:750000" >700,000 ~ 750,000</option>
-                                    <option value="700000:750000" >750,000 ~ 800,000</option>
-                                    <option value="800000:850000" >800,000 ~ 850,000</option>
-                                    <option value="850000:900000" >850,000 ~ 900,000</option>
-                                    <option value="900000:950000" >900,000 ~ 950,000</option>
-                                    <option value="950000:1000000" >950,000 ~ 1,000,000</option>
+                                    <option value="50000:100000" > Rs.50,000 ~ 100,000</option>
+                                    <option value="100000:150000" > Rs.100,000 ~ 150,000</option>
+                                    <option value="150000:200000" > Rs.150,000 ~ 200,000</option>
+                                    <option value="200000:250000" > Rs.200,000 ~ 250,000</option>
+                                    <option value="250000:300000" > Rs.250,000 ~ 300,000</option>
+                                    <option value="300000:350000" > Rs.300,000 ~ 350,000</option>
+                                    <option value="350000:400000" > Rs.350,000 ~ 400,000</option>
+                                    <option value="400000:450000" > Rs.400,000 ~ 450,000</option>
+                                    <option value="450000:500000" > Rs.450,000 ~ 500,000</option>
+                                    <option value="500000:550000" > Rs.500,000 ~ 550,000</option>
+                                    <option value="550000:600000" > Rs.550,000 ~ 600,000</option>
+                                    <option value="600000:650000" > Rs.600,000 ~ 650,000</option>
+                                    <option value="650000:700000" > Rs.650,000 ~ 700,000</option>
+                                    <option value="700000:750000" > Rs.700,000 ~ 750,000</option>
+                                    <option value="700000:750000" > Rs.750,000 ~ 800,000</option>
+                                    <option value="800000:850000" > Rs.800,000 ~ 850,000</option>
+                                    <option value="850000:900000" > Rs.850,000 ~ 900,000</option>
+                                    <option value="900000:950000" > Rs.900,000 ~ 950,000</option>
+                                    <option value="950000:1000000" > Rs.950,000 ~ 1,000,000</option>
                             
                                   </select>
                                   
@@ -313,62 +313,62 @@
                                               <div class="dropdown-price-range-menu">
                                                   
                                                   <div class="row" >
-                                                    <span id="priceError" class="text-danger"></span>
+                                                    <span id="priceError2" class="text-danger"></span>
                                                     <div class="col-md-6">
                                                       <label class="form-label">Min</label>
                                                       
-                                                      <select class="form-select select2" name="price_from" id="minPrice" style="width: 100%;">
+                                                      <select class="form-select select2" name="price_from" id="minPrice2" style="width:60%;">
                                                         <option value="">0</option>
-                                                        <option value="500000">500,000</option>
-                                                        <option value="1000000">1,000,000</option>
-                                                        <option value="2000000">2,000,000</option>
-                                                        <option value="3500000">3,500,000</option>
-                                                        <option value="5000000">5,000,000</option>
-                                                        <option value="6500000">6,500,000</option>
-                                                        <option value="8000000">8,000,000</option>
-                                                        <option value="10000000">10,000,000</option>
-                                                        <option value="12500000">12,500,000</option>
-                                                        <option value="15000000">15,000,000</option>
-                                                        <option value="17500000">17,500,000</option>
-                                                        <option value="20000000">20,000,000</option>
-                                                        <option value="25000000">25,000,000</option>
-                                                        <option value="30000000">30,000,000</option>
-                                                        <option value="40000000">40,000,000</option>
-                                                        <option value="50000000">50,000,000</option>
-                                                        <option value="75000000">75,000,000</option>
-                                                        <option value="100000000">100,000,000</option>
-                                                        <option value="250000000">250,000,000</option>
-                                                        <option value="500000000">500,000,000</option>
-                                                        <option value="1000000000">1,000,000,000</option>
+                                                        <option value="500000">Rs.500,000</option>
+                                                        <option value="1000000">Rs.1,000,000</option>
+                                                        <option value="2000000">Rs.2,000,000</option>
+                                                        <option value="3500000">Rs.3,500,000</option>
+                                                        <option value="5000000">Rs.5,000,000</option>
+                                                        <option value="6500000">Rs.6,500,000</option>
+                                                        <option value="8000000">Rs.8,000,000</option>
+                                                        <option value="10000000">Rs.10,000,000</option>
+                                                        <option value="12500000">Rs.12,500,000</option>
+                                                        <option value="15000000">Rs.15,000,000</option>
+                                                        <option value="17500000">Rs.17,500,000</option>
+                                                        <option value="20000000">Rs.20,000,000</option>
+                                                        <option value="25000000">Rs.25,000,000</option>
+                                                        <option value="30000000">Rs.30,000,000</option>
+                                                        <option value="40000000">Rs.40,000,000</option>
+                                                        <option value="50000000">Rs.50,000,000</option>
+                                                        <option value="75000000">Rs.75,000,000</option>
+                                                        <option value="100000000">Rs.100,000,000</option>
+                                                        <option value="250000000">Rs.250,000,000</option>
+                                                        <option value="500000000">Rs.500,000,000</option>
+                                                        <option value="1000000000">Rs.1,000,000,000</option>
                                                       </select>
                                                     </div>
                                                     <div class="col-md-6">
                                                       <label class="form-label">Max</label>
                                                       
-                                                      <select class="form-select select2" name="price_to" id="maxPrice" style="width: 100%;">
+                                                      <select class="form-select select2" name="price_to" id="maxPrice2" style="width:60%;">
                                                         <option value="">Any</option>
-                                                        <option value="500000">500,000</option>
-                                                        <option value="1000000">1,000,000</option>
-                                                        <option value="2000000">2,000,000</option>
-                                                        <option value="3500000">3,500,000</option>
-                                                        <option value="5000000">5,000,000</option>
-                                                        <option value="6500000">6,500,000</option>
-                                                        <option value="8000000">8,000,000</option>
-                                                        <option value="10000000">10,000,000</option>
-                                                        <option value="12500000">12,500,000</option>
-                                                        <option value="15000000">15,000,000</option>
-                                                        <option value="17500000">17,500,000</option>
-                                                        <option value="20000000">20,000,000</option>
-                                                        <option value="25000000">25,000,000</option>
-                                                        <option value="30000000">30,000,000</option>
-                                                        <option value="40000000">40,000,000</option>
-                                                        <option value="50000000">50,000,000</option>
-                                                        <option value="75000000">75,000,000</option>
-                                                        <option value="100000000">100,000,000</option>
-                                                        <option value="250000000">250,000,000</option>
-                                                        <option value="500000000">500,000,000</option>
-                                                        <option value="1000000000">1,000,000,000</option>
-                                                        <option value="5000000000">5,000,000,000</option>
+                                                        <option value="500000">Rs.500,000</option>
+                                                        <option value="1000000">Rs.1,000,000</option>
+                                                        <option value="2000000">Rs.2,000,000</option>
+                                                        <option value="3500000">Rs.3,500,000</option>
+                                                        <option value="5000000">Rs.5,000,000</option>
+                                                        <option value="6500000">Rs.6,500,000</option>
+                                                        <option value="8000000">Rs.8,000,000</option>
+                                                        <option value="10000000">Rs.10,000,000</option>
+                                                        <option value="12500000">Rs.12,500,000</option>
+                                                        <option value="15000000">Rs.15,000,000</option>
+                                                        <option value="17500000">Rs.17,500,000</option>
+                                                        <option value="20000000">Rs.20,000,000</option>
+                                                        <option value="25000000">Rs.25,000,000</option>
+                                                        <option value="30000000">Rs.30,000,000</option>
+                                                        <option value="40000000">Rs.40,000,000</option>
+                                                        <option value="50000000">Rs.50,000,000</option>
+                                                        <option value="75000000">Rs.75,000,000</option>
+                                                        <option value="100000000">Rs.100,000,000</option>
+                                                        <option value="250000000">Rs.250,000,000</option>
+                                                        <option value="500000000">Rs.500,000,000</option>
+                                                        <option value="1000000000">Rs.1,000,000,000</option>
+                                                        <option value="5000000000">Rs.5,000,000,000</option>
                                                       </select>
                                                     </div>
                                                   </div>

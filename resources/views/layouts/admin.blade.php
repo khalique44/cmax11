@@ -259,7 +259,8 @@ $(document).ready(function() {
     verify_html: false,
     
     // Optional: If you want to be extra safe, allow padding in empty tags
-    allow_conditional_comments: true
+    allow_conditional_comments: true,
+    forced_root_block: 'p'
   });
 
 
