@@ -142,7 +142,7 @@
                                                       <label class="form-label">Max</label>
                                                       
                                                       <select class="form-select select2" name="price_to" id="maxPrice" style="width: 100%;">
-                                                        <option value="">Any</option>
+                                                        <option value="5000000000">Any</option>
                                                         <option value="500000">Rs.500,000</option>
                                                         <option value="1000000">Rs.1,000,000</option>
                                                         <option value="2000000">Rs.2,000,000</option>
@@ -346,7 +346,7 @@
                                                       <label class="form-label">Max</label>
                                                       
                                                       <select class="form-select select2" name="price_to" id="maxPrice2" style="width:60%;">
-                                                        <option value="">Any</option>
+                                                        <option value="5000000000">Any</option>
                                                         <option value="500000">Rs.500,000</option>
                                                         <option value="1000000">Rs.1,000,000</option>
                                                         <option value="2000000">Rs.2,000,000</option>

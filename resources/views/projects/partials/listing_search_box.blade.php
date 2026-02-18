@@ -103,7 +103,7 @@
                                     <label class="form-label">Max</label>
                                     
                                     <select class="form-select select2" name="price_to" id="maxPrice" style="width: 100%;">
-                                      <option value="" {{ $searchedData && $searchedData['price_from'] ==  '' ? 'selected' : '' }}>Any</option>
+                                      <option value="5000000000" {{ $searchedData && $searchedData['price_from'] ==  '' ? 'selected' : '' }}>Any</option>
                                       <option value="500000" {{ $searchedData && $searchedData['price_to'] ==  '500000' ? 'selected' : '' }}>Rs. 500,000</option>
                                       <option value="1000000" {{ $searchedData && $searchedData['price_to'] ==  '1000000' ? 'selected' : '' }}>Rs. 1,000,000</option>
                                       <option value="2000000" {{ $searchedData && $searchedData['price_to'] ==  '2000000' ? 'selected' : '' }}>Rs. 2,000,000</option>
@@ -283,7 +283,7 @@
                               <label class="form-label">Max</label>
                               
                               <select class="form-select" name="price_to" id="maxPrice2" style="width: 80%;">
-                                 <option value="" {{ $searchedData && $searchedData['price_from'] ==  '' ? 'selected' : '' }}>Any</option>
+                                 <option value="5000000000" {{ $searchedData && $searchedData['price_from'] ==  '' ? 'selected' : '' }}>Any</option>
                                  <option value="500000" {{ $searchedData && $searchedData['price_to'] ==  '500000' ? 'selected' : '' }}>Rs. 500,000</option>
                                  <option value="1000000" {{ $searchedData && $searchedData['price_to'] ==  '1000000' ? 'selected' : '' }}>Rs. 1,000,000</option>
                                  <option value="2000000" {{ $searchedData && $searchedData['price_to'] ==  '2000000' ? 'selected' : '' }}>Rs. 2,000,000</option>
