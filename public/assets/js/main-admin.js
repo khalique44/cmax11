@@ -374,26 +374,41 @@ function projectSuccessCallback(response){
 }
 
 
-function ajaxErrorCallback(response){
-
+function ajaxErrorCallback(response) {
     hideAjaxLoader();
-    var  msgArea = $('.ajax-msg');
+    var msgArea = $('.ajax-msg');
     var msgType = 'error';
 
-    if (response.responseJSON && response.responseJSON.errors){
-        let errors = response.responseJSON.errors;       
-        let html = '<ul >';
+    // 1. Check if a draft project was created despite the error
+    if (response.responseJSON && response.responseJSON.project && response.responseJSON.project.id) {
+        var projectId = response.responseJSON.project.id;
+        
+        // Show a temporary message so the user knows what's happening
+        displayMsg(msgArea, "Validation failed. Saving progress as draft and redirecting...", "error");
+
+        // 2. Redirect to the edit page after a short delay
+        // Replace '/admin/projects/' with your actual route prefix
+        setTimeout(function() {
+            window.location.href = '/admin/projects/' + projectId + '/edit';
+        }, 2000); 
+        
+        return; // Stop further error processing
+    }
+
+    // Standard Error Handling logic below
+    if (response.responseJSON && response.responseJSON.errors) {
+        let errors = response.responseJSON.errors;
+        let html = '<ul>';
         $.each(errors, function (key, value) {
             html += `<li>${value[0]}</li>`;
         });
         html += '</ul>';
-        displayMsg(msgArea,html,msgType);         
-        
-    }else{
-        
-        var msg = (response.responseJSON.message) ?response.responseJSON.message : 'Server Error!';
-
-        displayMsg(msgArea,msg,msgType);
+        displayMsg(msgArea, html, msgType);
+    } else {
+        var msg = (response.responseJSON && response.responseJSON.message) 
+                  ? response.responseJSON.message 
+                  : 'Server Error!';
+        displayMsg(msgArea, msg, msgType);
     }
 }
 
