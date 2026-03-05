@@ -377,7 +377,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label class="form-label">Bathrooms</label>
-                                                                                    <select name="{{$offer}}[bathroom][]" class="form-control">
+                                                                                    <select name="{{$offer}}[bathrooms][]" class="form-control">
                                                                                     <option value="">Select</option>
                                                                                         @foreach($bathrooms as $bathroom)
                                                                                             <option value="{{ $bathroom }}">{{ $bathroom }}</option>

@@ -155,16 +155,38 @@ class ProjectController extends Controller
             'project_logo.mimes' => 'The logo allowed extensions are jpeg,png,jpg,gif,svg,webp.',
         ];
 
-        // 2. Add Dynamic Rules (Offerings & Floorplans)
+        // 2. Add Dynamic Rules (Offerings & Floorplans)       
         $dynamicRules = [];
-        foreach ($request->input('offering', []) as $offer) {
+        foreach ((array)$request->input('offering', []) as $offer) {
             if ($request->has($offer)) {
                 $count = count($request->$offer['title'] ?? []);
                 for ($i = 0; $i < $count; $i++) {
                     $dynamicRules["{$offer}.title.$i"] = 'required|string|max:255';
                     $dynamicRules["{$offer}.price_from.$i"] = 'required|numeric|min:0';
-                    // ... add your other dynamic rules here ...
+                    $dynamicRules["{$offer}.price_type_from.$i"] = 'required';
+                    $dynamicRules["{$offer}.area.$i"] = 'required|string|min:0';
+                    $dynamicRules["{$offer}.area_type.$i"] = 'required';
+                    // Flats might have bedrooms/bathrooms, plots might not
+                    if (in_array($offer, ['flats', 'offices'])) {
+                        $dynamicRules["{$offer}.bedrooms.$i"] = 'required|integer|min:0';
+                        $dynamicRules["{$offer}.bathrooms.$i"] = 'required|integer|min:0';
+                    }
+
+                    if($request->filled('{$offer}.is_installment.$i')){
+                        $dynamicRules["{$offer}.installment_advance_amount.$i"] = 'required';
+                        $dynamicRules["{$offer}.number_of_instalments.$i"] = 'required';
+                        $dynamicRules["{$offer}.monthly_installment.$i"] = 'required';
+                    }
                 }
+            }
+        }
+
+        if ($request->has('floorplans')) {
+            $count = count($request->floorplans['title'] ?? []);
+            for ($i = 0; $i < $count; $i++) {
+                $dynamicRules["floorplans.title.$i"] = 'required|string|max:255';
+                $dynamicRules["floorplans.image.$i"] = 'required|image|max:10240';
+                $customMessages["floorplans.image.$i.max"] = "Image $i must not be greater than 10 MB.";
             }
         }
 
@@ -208,8 +230,114 @@ class ProjectController extends Controller
         // Note: Use 'forceFill' or ensure your model allows nullable fields for draft state
         $project = Project::create($request->except('project_logo','sub_area','project_gallery','payment_plan','_token', 'images'));
 
-        // ... Handle features, offerings, and floorplans creation logic ...
-        // (Ensure your loops check if keys exist before saving to avoid crashes on draft data)
+        $project->features()->sync($request->input('features', []));
+
+        $offerings = $request->has('offering') ? $request->offering : [];
+
+        foreach ((array)$request->input('offering', []) as $offer) {
+            if ($request->has($offer)) {
+                $count = count($request->$offer['title'] ?? []);
+                for ($i = 0; $i < $count; $i++) {
+
+                     $project->offers()->create([
+                        //'project_id' => $project->id,
+                        'offer' => $offer,
+                        'title' => $request->$offer['title'][$i],
+                        'area' => $request->$offer['area'][$i],
+                        'area_type' => $request->$offer['area_type'][$i],
+                        'bedrooms' => ($request->has("{$offer}.bedrooms.{$i}")) ? $request->$offer['bedrooms'][$i] : 0,
+                        'bathrooms' => ($request->has("{$offer}.bathrooms.{$i}")) ? $request->$offer['bathrooms'][$i] : 0,
+                        'price_from' => $request->$offer['price_from'][$i],
+                        'price_to' => $request->$offer['price_from'][$i],
+                        'price_from_in_format' => $request->$offer['price_type_from'][$i],
+                        'price_to_in_format' => $request->$offer['price_type_from'][$i],
+                        'is_installment' => $request->has("{$offer}.is_installment.{$i}") ? 1 : 0,
+                        'installment_advance_amount' => $request->$offer['installment_advance_amount'][$i],
+                        'number_of_instalments' => $request->$offer['number_of_instalments'][$i],
+                        'monthly_installment' => $request->$offer['monthly_installment'][$i],
+       
+                    ]);
+                   
+                }
+            }
+        }
+
+
+
+        $folderName = 'project_floor_plans_images';
+        $mediaUrl = '';
+
+        if ($request->has('floorplans')) {
+            $count = count($request->floorplans['title'] ?? []);
+            for ($i = 0; $i < $count; $i++) {
+
+                if(!empty($request->floorplans['image'][$i])){
+
+                    $image = $request->floorplans['image'][$i];                    
+
+                    $mediaUrl = FileHelper::uploadImage($image, 'project_floor_plans_images');
+                }
+
+
+                $project->floorPlan()->create([
+                    //'project_id' => $project->id,
+                    'title' => $request->floorplans['title'][$i],
+                    'media_url' => $mediaUrl,
+                    
+                ]);
+            }
+        }
+
+
+        if ($request->has('media_ids')) {
+            if (!empty($request->media_ids['project_gallery'])) {
+                foreach ($request->media_ids['project_gallery'] as $mediaId) {
+                    $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
+                    if ($media) {
+                        $media->model_type = Project::class;
+                        $media->model_id = $project->id;
+                        $media->collection_name = 'project_gallery'; // move it to real collection
+                        $media->save();
+                    }
+                }
+            }
+            if (!empty($request->media_ids['payment_plan'])) {
+                foreach ($request->media_ids['payment_plan'] as $mediaId) {
+                    $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
+                    if ($media) {
+                        $media->model_type = Project::class;
+                        $media->model_id = $project->id;
+                        $media->collection_name = 'payment_plan'; // move it to real collection
+                        $media->save();
+                    }
+                }
+            }
+            if (!empty($request->media_ids['project_progress'])) {
+                foreach ($request->media_ids['project_progress'] as $mediaId) {
+                    $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
+                    if ($media) {
+                        $media->model_type = Project::class;
+                        $media->model_id = $project->id;
+                        $media->collection_name = 'project_progress'; // move it to real collection
+                        $media->save();
+                    }
+                }
+            }
+        }
+
+
+        // Remove deleted images
+        $deletedFiles = $request->input('deleted_files', []);
+
+       if (!empty($deletedFiles)) {            
+            foreach ($deletedFiles as $id) {
+                if($id){
+                    $id = (json_decode($id));
+                    Media::whereIn('id', $id)->delete();
+                }
+                
+            }
+        }
 
         return response()->json([
             'status' => $isDraft ? 'draft_saved' : 'success',

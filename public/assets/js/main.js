@@ -475,10 +475,10 @@ AOS.init({
 });
 
 $(document).ready(function(){
-    $('.btn-showgal').on('click', function(e){
+   /*  $('.btn-showgal').on('click', function(e){
         e.preventDefault();
         $('a[data-lightbox="gallery-group"]').first().click();
-    });
+    }); */
 });
 $(document).ready(function(){
     var navbar = $('#navbar-example2');
@@ -924,5 +924,33 @@ $(document).ready(function () {
         maximumSelectionLength: 2,
         escapeMarkup: function (markup) { return markup; } // allow HTML
     });
+
+
+
+    // This binds to ALL fancybox instances
+Fancybox.bind("[data-fancybox]", {
+  // Navigation settings
+  infinite: true,      // Allows looping from last image back to first
+  Navigation: {
+    prevTpl: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M15 18l-6-6 6-6"/></svg>',
+    nextTpl: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M9 18l6-6-6-6"/></svg>',
+  },
+
+  // Zoom settings for clear reading of plans
+  Images: {
+    Panzoom: {
+      maxScale: 3,
+    },
+  },
+
+  // UI Buttons
+  Toolbar: {
+    display: {
+      left: ["infobar"],
+      middle: ["zoomIn", "zoomOut", "toggle1to1"],
+      right: ["slideshow", "thumbs", "close"],
+    },
+  },
+});
 
 });
