@@ -70,7 +70,7 @@
             <div class="col-md-6">
                 @if(!empty($firstImage))
                     <div class="gallery-main">
-                        <a href="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" data-lightbox="gallery-group">
+                        <a href="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" data-fancybox="gallery-group">
                             <img src="{{  GeneralHelper::getMediaWithPublicDir($firstImage->getUrl('webp')) }}" alt="" class="w-100 main-img-detail-pg">
                         </a>
                     </div>
@@ -82,7 +82,7 @@
                       @foreach($remainingImages as $key => $media)
                         <div class="col-6" {!! ($key > 4) ? "style='display:none;'" : "" !!}>
                           <div class="gallery-box">
-                              <a href="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" data-lightbox="gallery-group"><img src="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" alt="" class=""></a>
+                              <a href="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" data-fancybox="gallery-group"><img src="{{   GeneralHelper::getMediaWithPublicDir($media->getUrl('webp')) }}" alt="" class=""></a>
                               @if($key == 4)
                                 <a href="#" class="btn-showgal"><img src="{{ asset('assets/img/gallery-iconwhite.png') }}" alt=""> Show all photos</a>
                               @endif
@@ -320,7 +320,7 @@
                                         <div class="tab-pane fade {{ ($key == 0) ? 'show active' : '' }}" id="home-floorplan-tab-{{ $floorPlan->id }}" role="tabpanel" aria-labelledby="floorplan-tab-{{ $floorPlan->id }}">
                                             <div>
                                                 @if($floorPlan->media_url)
-                                                    <a href="{{ asset($floorPlan->media_url) }}" data-lightbox="gallery-group3" class="card-img">
+                                                    <a href="{{ asset($floorPlan->media_url) }}" data-fancybox="gallery-group3" class="card-img">
                                                         
                                                             <img src="{{ asset($floorPlan->media_url) }}" alt="" width="50%">
                                                         
@@ -347,7 +347,7 @@
                                         <li class="show active" id="home-paymentplan-tab-{{ $paymentPlan->id }}" role="" >
                                            
                                             @if($paymentPlan->getUrl('webp'))
-                                                <a href="{{  GeneralHelper::getMediaWithPublicDir($paymentPlan->getUrl('webp')) }}" data-lightbox="gallery-group2" class="card-img">
+                                                <a href="{{  GeneralHelper::getMediaWithPublicDir($paymentPlan->getUrl('webp')) }}" data-fancybox="gallery-group2" class="card-img">
                                                     
                                                         <img src="{{  GeneralHelper::getMediaWithPublicDir($paymentPlan->getUrl('webp')) }}" alt="" >
                                                     
@@ -374,7 +374,7 @@
                                         <li class="show active" id="home-paymentplan-tab-{{ $progress->id }}" role="" >
                                            
                                             @if($progress->getUrl('webp'))
-                                                <a href="{{  GeneralHelper::getMediaWithPublicDir($progress->getUrl('webp')) }}" data-lightbox="gallery-group2" class="card-img">
+                                                <a href="{{  GeneralHelper::getMediaWithPublicDir($progress->getUrl('webp')) }}" data-fancybox="gallery-group4" class="card-img">
                                                     
                                                         <img src="{{  GeneralHelper::getMediaWithPublicDir($progress->getUrl('webp')) }}" alt="" >
                                                     
