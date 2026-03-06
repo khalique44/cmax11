@@ -81,7 +81,7 @@
                                         <select name="progress" id="progress" class="form-control select2" required data-placeholder="Select Progress">
                                             <option value="">Select Progress</option>
                                             @foreach($progress as $key => $prog)
-                                                <option value="{{ $key }}" {{ old('progress', $project->progress ?? '') === $key ? 'selected' : '' }}>{{ ucfirst($prog) }}</option>
+                                                <option value="{{ $key }}" {{ old('progress', $project->progress ?? '') == $key ? 'selected' : '' }}>{{ ucfirst($prog) }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -93,7 +93,7 @@
                                         <select name="builder_id" id="builder_id" class="form-control select2" required data-placeholder="Select Builder">
                                             <option value="">Select Builder </option>
                                             @foreach($builders as $builder)
-                                                <option value="{{ $builder->id }}" {{ old('builder_id', $project->builder_id ?? '') === $builder->id ? 'selected' : '' }}>{{ ucfirst($builder->builder_name) }}</option>
+                                                <option value="{{ $builder->id }}" {{ old('builder_id', $project->builder_id ?? '') == $builder->id ? 'selected' : '' }}>{{ ucfirst($builder->builder_name) }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -121,7 +121,7 @@
                                             
                                             @foreach($cities as $city)
                                                 @if($city->id == 31594)
-                                                    <option value="{{ $city->id }}" {{ old('city_id', $project->city_id ?? '') === $city->id ? 'selected' : '' }} >{{ ucfirst($city->name)  }}</option>
+                                                    <option value="{{ $city->id }}" {{ old('city_id', $project->city_id ?? '') == $city->id ? 'selected' : '' }} >{{ ucfirst($city->name)  }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -134,7 +134,7 @@
                                         <select name="area_id" id="area_id" class="form-control select2"  data-placeholder="Select Area">
                                             <option value="">Select Area</option>
                                             @foreach($areas as $area)
-                                                <option value="{{ $area->id }}" {{ old('area_id', $project->area_id ?? '') === $area->id ? 'selected' : '' }}>{{ ucfirst($area->name)  }}</option>
+                                                <option value="{{ $area->id }}" {{ old('area_id', $project->area_id ?? '') == $area->id ? 'selected' : '' }}>{{ ucfirst($area->name)  }}</option>
                                             @endforeach
                                         </select>
                                     </div>                                    
@@ -284,7 +284,7 @@
                                                                                         <select name="{{$offer}}[price_type_from][]" id="price_type_from_{{$offer}}" class="form-control" >
                                                                                         
                                                                                             @foreach($price_types as $key => $price_type)
-                                                                                                <option value="{{ $price_type }}" {{ old('price_type_from', $savedOffer->price_from_in_format ?? '') === $price_type ? 'selected' : '' }}>{{ ucfirst($price_type) }}</option>
+                                                                                                <option value="{{ $price_type }}" {{ old('price_type_from', $savedOffer->price_from_in_format ?? '') == $price_type ? 'selected' : '' }}>{{ ucfirst($price_type) }}</option>
                                                                                             @endforeach
                                                                                         </select>
                                                                                     </div>
@@ -300,25 +300,25 @@
                                        
                                         <div class="form-check">
                                             <label >
-                                                <input class="form-check-input installment-checkbox" value="1" type="checkbox" name="{{$offer}}[is_installment][]" {{  $savedOffer->is_installment === 1 ? 'checked' : '' }}>
+                                                <input class="form-check-input installment-checkbox" value="1" type="checkbox" name="{{$offer}}[is_installment][]" {{  $savedOffer->is_installment == 1 ? 'checked' : '' }}>
                                                 <strong>Is Installment</strong>
                                             </label>
                                         </div>                                    
                                     </div>
                                 </div>
-                                <div class="col-md-3 mt-3 is_installment {{ $savedOffer->is_installment ?? '' === 1 ? '' : 'display-none' }}">
+                                <div class="col-md-3 mt-3 is_installment {{ $savedOffer->is_installment ?? '' == 1 ? '' : 'display-none' }}">
                                     <div class="form-group">
                                         <label class="form-label">Advance Amount<span>*</span></label>
                                         <input type="text" name="{{$offer}}[installment_advance_amount][]" class="form-control" value="{{ $savedOffer->installment_advance_amount ?? '' }}" >  
                                     </div> 
                                 </div>
-                                <div class="col-md-3 mt-3 is_installment {{ $savedOffer->is_installment ?? '' === 1 ? '' : 'display-none' }}">
+                                <div class="col-md-3 mt-3 is_installment {{ $savedOffer->is_installment ?? '' == 1 ? '' : 'display-none' }}">
                                     <div class="form-group">
                                         <label class="form-label">Number of Installments<span>*</span></label>
                                         <input type="number" name="{{$offer}}[number_of_instalments][]" class="form-control" value="{{   $savedOffer->number_of_instalments ?? '' }}" >  
                                     </div> 
                                 </div>
-                                <div class="col-md-3 mt-3 is_installment {{ $savedOffer->is_installment ?? '' === 1 ? '' : 'display-none' }}">
+                                <div class="col-md-3 mt-3 is_installment {{ $savedOffer->is_installment ?? '' == 1 ? '' : 'display-none' }}">
                                     <div class="form-group">
                                         <label class="form-label">Monthly Installment<span>*</span></label>
                                         <input type="text" name="{{$offer}}[monthly_installment][]" class="form-control" value="{{ $savedOffer->monthly_installment  ?? '' }}" >  
@@ -398,7 +398,7 @@
                                                                                 <select name="{{$offer}}[price_type_from][]" id="price_type_from_{{$offer}}" class="form-control" >
                                                                                 
                                                                                     @foreach($price_types as $key => $price_type)
-                                                                                        <option value="{{ $price_type }}" {{ old('price_type_from', $project->price_type_from ?? '') === $price_type ? 'selected' : '' }}>{{ ucfirst($price_type) }}</option>
+                                                                                        <option value="{{ $price_type }}" {{ old('price_type_from', $project->price_type_from ?? '') == $price_type ? 'selected' : '' }}>{{ ucfirst($price_type) }}</option>
                                                                                     @endforeach
                                                                                 </select>
                                                                             </div>
@@ -717,7 +717,7 @@
                                                         <a href="{{ asset($media->getUrl('webp')) }}" target="_blank" data-fancybox="gallery-preview" >
                                                             <img src="{{ asset($media->getUrl('webp')) }}" alt="uploaded" style="">
                                                         </a>
-                                                        <label class="form-label featured-image-checkbox-label"><input type="radio" name="featured_image" value="{{ $media->id }}" @checked($project->featured_media_id === $media->id)> Set Featured</label>
+                                                        <label class="form-label featured-image-checkbox-label"><input type="radio" name="featured_image" value="{{ $media->id }}" @checked($project->featured_media_id == $media->id)> Set Featured</label>
                                                         <div class="remove-media">
                                                             <span title="Remove" class="remove-media " >Remove</span>
                                                         </div>
