@@ -890,7 +890,7 @@ function subAreaSuccessRecord(response){
 
 $(document).on("change", "[name='featured_image']", function () {
     $("#featured_media_id").val($(this).val());
-     var media_id = $(this).val();
+    /* var media_id = $(this).val();
     showAjaxLoader();
     fetch(`/admin/media/${media_id}/set-featured`, {
         method: 'POST',
@@ -913,7 +913,7 @@ $(document).on("change", "[name='featured_image']", function () {
         }
         hideAjaxLoader();
     })
-    .catch(err => console.error('❌ Error:', err)); 
+    .catch(err => console.error('❌ Error:', err)); */
 });
 
 $(document).on('click', 'a.refresh_project', function(){
