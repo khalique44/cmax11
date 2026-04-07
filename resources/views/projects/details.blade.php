@@ -44,12 +44,12 @@
                         @endif
                      </div>
                     <div class="call-btn mb-2">
-                        <a href="tel:{{ $project->builder->mobile_number ?? '#' }}">
+                        <a href="tel:{{ $project->user->mobile_number ?? '#' }}">
                             <img src="{{ asset('assets/img/phone-icon.svg') }}" alt="">
                             Call</a>
                     </div>
                     <div class="whatsapp-btn mb-3">
-                        <a href="tel:{{ $project->builder->mobile_number ?? '#' }}">
+                        <a href="tel:{{ $project->user->whatsapp_number ?? '#' }}">
                             <img src="{{ asset('assets/img/whatsapp-icon.svg') }}" alt="">
                             Whatsapp</a>
                     </div>
@@ -411,11 +411,6 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h5>{{ $project->builder->builder_name ?? '' }}</h5>
-                                        
-                                        
-                                        <p class="mb-1"> {!! $project->builder->email ? 'Email: '. $project->builder->email : '' !!}</p>
-                                        <p class=""> {!! $project->builder->address ? 'Address: '. $project->builder->address : '' !!}</p>
-                                        
                                         
                                     </div>
                                 </div>

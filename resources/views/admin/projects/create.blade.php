@@ -75,7 +75,7 @@
                                 
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label">Progress<span>*</span></label>
                                         <select name="progress" id="progress" class="form-control select2" required data-placeholder="Select Progress">
@@ -87,13 +87,25 @@
                                     </div>
                                 </div>
                                
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="form-label select2">Builder<span>*</span></label>
                                         <select name="builder_id" id="builder_id" class="form-control select2" required data-placeholder="Select Builder">
                                             <option value="">Select Builder </option>
                                             @foreach($builders as $builder)
                                                 <option value="{{ $builder->id }}" {{ old('builder_id', $project->builder_id ?? '') == $builder->id ? 'selected' : '' }}>{{ ucfirst($builder->builder_name) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-label select2">Contact Person<span>*</span></label>
+                                        <select name="user_id" id="user_id" class="form-control select2" required data-placeholder="Select Contact Person">
+                                            <option value="">Select Contact Person </option>
+                                            @foreach($users as $user)
+                                                <option value="{{ $user->id }}" {{ old('builder_id', $project->user_id ?? '') == $user->id ? 'selected' : '' }}>{{ ucfirst($user->first_name) .' '. ucfirst($user->last_name)}}</option>
                                             @endforeach
                                         </select>
                                     </div>

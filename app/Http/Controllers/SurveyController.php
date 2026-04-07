@@ -109,13 +109,14 @@ class SurveyController extends Controller
     public function downloadDocument($id)
     {
         $record = AreaSurvey::findOrFail($id);       
+        $record->increment('download_counts');
         return FileHelper::downloadFile($record->file_url);
     }
 
     public function viewDocument($id)
     {
         $record = AreaSurvey::findOrFail($id);  
-
+        $record->increment('download_counts');
         return FileHelper::viewFile($record->file_url);
     }
 

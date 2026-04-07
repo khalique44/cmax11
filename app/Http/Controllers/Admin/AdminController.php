@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Subscription;
 use App\User;
+use App\AreaSurvey;
+use App\Project;
 use App\LaundryBooking;
 use App\ReportedIssues;
 use Illuminate\Support\Str;
@@ -27,8 +29,16 @@ class AdminController extends Controller
 
     public function dashboard(Request $request)
     {
+        $totalSurveysDownloaded = AreaSurvey::sum('download_counts');
+        $totalViews = Project::sum('views');       
+        // Inventory Metrics (Status-based)
+        $preLaunch = Project::where('progress', 'new_launch')->count();
+        $underConstruction = Project::where('progress', 'under_construction')->count();
+        $readyToMove = Project::where('progress', 'ready')->count();
+        $activeListings = Project::where('is_active', true)->count();
+        $inactiveListings = Project::where('is_active', false)->count();
         
-        return view('admin.welcome');
+        return view('admin.welcome',compact('totalViews','preLaunch','underConstruction','readyToMove','activeListings','inactiveListings','totalSurveysDownloaded'));
 
     }
 

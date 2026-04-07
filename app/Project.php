@@ -19,7 +19,7 @@ class Project extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes, OptimizesMedia;
 
     protected $fillable = [        
-    	'builder_id','city_id','area_id','sub_area_id','project_title','description','progress','area','location','latitude','longitude','logo_url','offering','is_lease','is_active','added_by','rate_per_square','development_charges','utility_charges','distance','project_floors','project_start_date', 'is_featured','is_popular','position','featured_media_id','refreshed_at','payment_plan_duration'
+    	'builder_id','user_id','city_id','area_id','sub_area_id','project_title','description','progress','area','location','latitude','longitude','logo_url','offering','is_lease','is_active','added_by','rate_per_square','development_charges','utility_charges','distance','project_floors','project_start_date', 'is_featured','is_popular','position','featured_media_id','refreshed_at','payment_plan_duration'
     ];
 
 	protected $casts = [
@@ -86,6 +86,11 @@ class Project extends Model implements HasMedia
     public function builder()
 	{
 	    return $this->belongsTo(Builder::class);
+	}
+
+	public function user()
+	{
+	    return $this->belongsTo(User::class);
 	}
 
     public function registerMediaConversions(Media $media = null): void
