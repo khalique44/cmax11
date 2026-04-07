@@ -107,7 +107,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $users = User::where(['status'=>1,'type'=> User::MEMBER])->orderBy('first_name','asc')->orderBy('last_name','asc')->get();
+        $users = User::where(['status'=>1])->orderBy('first_name','asc')->orderBy('last_name','asc')->get();
         $builders = Builder::where('is_active',1)->orderBy('builder_name','asc')->get();
         $progress = config('constants.progress');
         $amenities = Amenity::where('is_active',1)->orderBy('name' , 'asc')->get();
@@ -362,7 +362,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $users = User::where(['status'=>1,'type'=> User::MEMBER])->orderBy('first_name','asc')->orderBy('last_name','asc')->get();
+        $users = User::where(['status'=>1])->orderBy('first_name','asc')->orderBy('last_name','asc')->get();
         $builders = Builder::where('is_active',1)->orderBy('builder_name','asc')->get();
         $progress = config('constants.progress');
         $amenities = Amenity::where('is_active',1)->orderBy('name' , 'asc')->get();

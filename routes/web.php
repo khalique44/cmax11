@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\AreaSurveyController;
 use App\Http\Controllers\Admin\HomePage\HomeSettingController;
+use App\Http\Controllers\Admin\UsersController;
 
 /* Route::get('/routecache', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
