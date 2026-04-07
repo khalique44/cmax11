@@ -142,6 +142,7 @@ class ProjectController extends Controller
             'project_title' => ['required'],
             'progress' => 'required',
             'builder_id' => 'required',
+            'user_id' => 'required',
             'city_id' => 'required',
             'location' => 'required',
             'offering' => 'required|array|min:1|in:'.implode(",", $offering),
@@ -153,6 +154,7 @@ class ProjectController extends Controller
         $customMessages = [
             'project_logo.max' => 'The logo must not be larger than 10 MB.',
             'project_logo.mimes' => 'The logo allowed extensions are jpeg,png,jpg,gif,svg,webp.',
+            'user_id.required' => 'Please select a Contact Person form the list.',
         ];
 
         // 2. Add Dynamic Rules (Offerings & Floorplans)       
@@ -399,6 +401,7 @@ class ProjectController extends Controller
             'progress' => 'required',            
             'project_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
             'builder_id' => 'required',
+            'user_id' => 'required',
             'city_id' => 'required',
             'location' => 'required',            
             //'payment_plan_duration' => 'required',            
@@ -411,6 +414,7 @@ class ProjectController extends Controller
             [                
                 'project_logo.max' => 'The logo must not be larger than 10 MB.',
                 'project_logo.mimes' => 'The logo allowed extensions are jpeg,png,jpg,gif,svg,webp.',
+                'user_id.required' => 'Please select a Contact Person form the list.',
             ]
         );
 

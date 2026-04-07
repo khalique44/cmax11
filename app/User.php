@@ -116,4 +116,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Admin::class, 'user_id');
     }
+
+    public function project()
+    {
+        return $this->hasOne(Project::class);
+    }
 }
