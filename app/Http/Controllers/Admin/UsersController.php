@@ -131,9 +131,6 @@ class UsersController extends Controller
             
         ]);
 
-        
-
-
         $user = User::create($request->all());
         if(!$user){
             return redirect()->back('error','User not created');
