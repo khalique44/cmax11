@@ -81,7 +81,7 @@ class UsersController extends Controller
                     return '<a class="btn btn-sm btn-primary" href="'.url("admin/users/$user->id/edit").'" class="btn-sm btn-success action-button">
                                             Edit
                                         </a>
-                                        <a type="button" href="#" class="delete-rec btn-sm btn-danger" data-route="/admin/users/'.$user->id.'" data-tableid="usersTable"   data-id="'.$user->id.'">
+                                        <a type="button" href="#" class="delete-rec btn btn-sm btn-danger" data-route="/admin/users/'.$user->id.'" data-tableid="usersTable"   data-id="'.$user->id.'">
                                             Delete
                                         </a>';
                 })
@@ -115,51 +115,29 @@ class UsersController extends Controller
     public function storeUsers(Request $request){
 
         $request->validate([
-            //'username'      => 'required|string|regex:/\w*$/|max:255|unique:users,username',
+            
             'email'         => 'required|string|max:150|unique:users,email',
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'phone'         => 'required',
-            //'address_1'     => 'required',
-            //'city'          => 'required',
-            //'gender'        => 'required',
-            //'country'       => 'required',
-            //'state'         => 'required',
-            //'registration_year'         => 'required',
-            'password'      => 'required|string|min:8|confirmed',
+            'mobile_number'         => 'required',           
+            
         ]);
 
-        $token = str_random(60).time();
+        $password = "!2#4%6ABC";
 
         $request->merge([
-            'date_of_birth' => date('Y-m-d',strtotime($request->date_of_birth)),
-            'password' => Hash::make($request->password),
-            'remember_token' => $token,
-            'qr_code' => str_random(60).time().$token,
-            'is_admin_user' => 1,
-            //'membership_token' => $membership_token
+            
+            'password' => Hash::make($password),
+            
         ]);
 
-        // if type admin then add admin 
-        $adminUser = [
-                        'email' => $request->email,
-                        'password' => $request->password,
-                        'name' => $request->first_name.' '.$request->last_name,
-                    ];
-        if(empty($request->username)){
-            $request->merge(['username' => $request->email]);
-        }
+        
 
 
         $user = User::create($request->all());
         if(!$user){
             return redirect()->back('error','User not created');
-        }
-
-        if($request->type == User::ADMIN){
-            $adminUser['user_id'] = $user->id;
-            Admin::create($adminUser);
-        }
+        }        
 
         return redirect()->route('users.index')->with('success','Record has been saved successfully');
     }
@@ -194,42 +172,18 @@ class UsersController extends Controller
             return abort(404);
         }
 
-        $password = $request->password;
-       
-        $pass_val = '';
-        $expiry_date_validate = '';
-        if($password != '') {
-            $pass_val = 'sometimes|string|min:8|confirmed';
-        }
-
-
+        $password = "!2#4%6ABC";
         $request->validate([
-            //'username'      => 'required|string|regex:/\w*$/|max:255|unique:users,username,'.$user->id,
+           
             'email'         => 'required|string|max:150|unique:users,email,'.$user->id,
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'phone'         => 'required',
-            //'address_1'     => 'required',
-            //'city'          => 'required',
-            //'gender'        => 'required',
-            //'country'       => 'required',
-            //'state'         => 'required',
-            //'registration_year'         => 'required',
-            'password' => $pass_val,
-            //'card_expiry_date' => 'required',
+            'mobile_number'         => 'required',
+            'password' => $password,
+            
         ]);
 
-        /*$request->merge([
-            'date_of_birth' => date('Y-m-d',strtotime($request->date_of_birth))
-        ]);*/
 
-        /*if($request->type == "athlete" || $request->type == "pro-athlete" ){
-            $request->merge(['registration_type_id' => null]);
-        } else{
-            if($request->registration_type){
-                $request->merge(['registration_type_id' => $request->registration_type]);
-            }
-        }*/
 
         if($password) {
             $request->merge(['password' => Hash::make($password)]);
@@ -239,45 +193,12 @@ class UsersController extends Controller
 
         }
 
-        /*if($request->is_paid == '1'){
-            $request->merge(['is_admin_user' => true]);
-        }*/       
-
-		$user->update($request->all());
-
-        // if type admin then add admin 
-        $adminUser = [
-                        'email' => $request->email,
-                        'user_id' => $user->id
-                        
-                    ];
-        if($request->type == User::ADMIN){
-            $admin = Admin::updateOrCreate($adminUser);
-
-            $updateAdmin = [
-                                'password' => $request->password,
-                                'name' => $request->first_name.' '.$request->last_name,
-                            ];
-
-            if($admin){
-               $admin->update($updateAdmin);
-            }               
-            
-        }
+       	$user->update($request->all());
 
         return redirect()->route('users.index')->with('success','Record has been updated successfully');
 
    }
 
-    /*public function destroy($id)
-    {
-        $user = User::find($id);
-        if(!$user){
-            return abort(404);
-        }
-        User::Where('id',$id)->delete();
-        return redirect()->route('users.index')->with('success','Record has been deleted successfully');
-    }*/
 
     public function destroy($id)
     {

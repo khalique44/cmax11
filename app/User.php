@@ -18,14 +18,15 @@ class User extends Authenticatable
     
     use Notifiable, SoftDeletes;
 
-    protected $fillable = ['type','first_name', 'middle_name', 'last_name', 'email','username', 'password', 'phone', 'gender','mobile_number','whatsapp_number',
-                            'date_of_birth', 'address_1', 'address_2', 'country', 'state', 'city', 'district_id', 'last_year_member',
-                            'registration_type_id', 'registration_year', 'membership_token', 'ack', 'qr_code', 'profile_pic_url',
-                            'facebook_url', 'twitter_url', 'remember_token','active','status','is_admin_user','is_paid','is_verified','is_imported','apartment_id'
+    protected $fillable = ['type','first_name', 'middle_name', 'last_name', 'email','username', 'password', 'phone', 'gender','mobile_number','whatsapp_number','active','status','is_verified'
                         ];
 
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'created_at' => 'date:Y-M-d'
     ];
 
     public function subscriptions(){
