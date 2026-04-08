@@ -9,9 +9,8 @@
                     <h4>All Users</h4>
                 </div>
                 <div class="database-btn">
-                    <a href="" data-toggle="modal" data-target="#search-db-model"  class="BE-btn hidden">Search Database</a>
-                    <a href="{{ url('admin/users') }}" class="BE-btn hidden"> Clear</a>
-                    <a href="{{url('admin/users/create')}}" data-toggle="" data-target="#search-db-model"  class="BE-btn">Add User</a></br></br>
+                    
+                    <a href="{{url('admin/users/create')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-success">Add User</a></br></br>
                 </div>
             </div>
        
@@ -26,9 +25,7 @@
                         <tr>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Username</th>
-                            <th>Type</th>                            
+                            <th>Email</th>                         
                             <th>Created At</th>
                             <th>Action</th>
                         </tr>
@@ -55,9 +52,7 @@
                    
                     { data: 'first_name', name: 'first_name' },
                     { data: 'last_name', name: 'last_name' },
-                    { data: 'email', name: 'email' },
-                    { data: 'username', name: 'username' },
-                    { data: 'type', name: 'type' },
+                    { data: 'email', name: 'email' },                    
                     { data: 'created_at', name: 'created_at' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
