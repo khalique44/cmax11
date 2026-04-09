@@ -18,6 +18,7 @@ use App\Project;
 use App\LaundryBooking;
 use App\ReportedIssues;
 use Illuminate\Support\Str;
+use Illuminate\Support\Number;
 use Yajra\DataTables\Contracts\DataTable;
 use Carbon\Carbon;
 
@@ -30,7 +31,9 @@ class AdminController extends Controller
     public function dashboard(Request $request)
     {
         $totalSurveysDownloaded = AreaSurvey::sum('download_counts');
-        $totalViews = Project::sum('views');       
+        $totalViews = Project::sum('views');    
+        $totalLeadClicks = Project::sum('lead_clicks');    
+        //$totalViews = Number::abbreviate(78888);   
         // Inventory Metrics (Status-based)
         $preLaunch = Project::where('progress', 'new_launch')->count();
         $underConstruction = Project::where('progress', 'under_construction')->count();
@@ -38,7 +41,7 @@ class AdminController extends Controller
         $activeListings = Project::where('is_active', true)->count();
         $inactiveListings = Project::where('is_active', false)->count();
         
-        return view('admin.welcome',compact('totalViews','preLaunch','underConstruction','readyToMove','activeListings','inactiveListings','totalSurveysDownloaded'));
+        return view('admin.welcome',compact('totalViews','totalLeadClicks','preLaunch','underConstruction','readyToMove','activeListings','inactiveListings','totalSurveysDownloaded'));
 
     }
 
