@@ -10,6 +10,7 @@ use App\Mail\ContactFormMail;
 use App\Mail\CareerFormMail;
 use App\Mail\PropertyInquiryMail;
 use App\Mail\ProjectInquiryMail;
+use App\Project;
 
 
 class CmsPage extends Controller
@@ -271,6 +272,8 @@ class CmsPage extends Controller
 
         GeneralHelper::sendBitrixRequest($dataToBitrix);
 
+        GeneralHelper::incrementOption($request->property_type.'_inqueries');
+
         return response()->json(['message' => 'Your inquiry has been sent successfully!']);
     }
 
@@ -287,6 +290,8 @@ class CmsPage extends Controller
 
         Mail::to(config('constants.admin_email'))->send(new ProjectInquiryMail($request->all()));
         
+        $project_id = $request->project_id ?? '';
+        $project = Project::find($project_id);
         $project_title = $request->project_title ?? '';
         $comments = 'Project Title: '.$project_title.'<br>';       
         $comments .= 'Unit Type: '.$request->unit_type.'<br>';       
@@ -318,6 +323,12 @@ class CmsPage extends Controller
          $data["fields"]["EMAIL"][]=array("VALUE"=>"hzafar2010@gmail.com","VALUE_TYPE"=>"WORK");
 
         GeneralHelper::sendBitrixRequest($dataToBitrix);
+
+        $sessionKey = 'project_lead_clicks_' . $project->id;
+        if (!session()->has($sessionKey)) {
+            $project->increment('lead_clicks');
+            session()->put($sessionKey, true);
+        }
 
         return response()->json(['message' => 'Your inquiry has been sent successfully!']);
     }

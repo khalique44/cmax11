@@ -326,4 +326,22 @@ class GeneralHelper
             return null;
         }
     }
+
+    public static function incrementOption($key, $amount = 1)
+    {
+       
+
+        $updated =  \DB::table('global_settings')
+            ->where('option_key', $key)
+            ->update([
+                'option_value' => \DB::raw('option_value + '.$amount)
+            ]);
+
+        if ($updated === 0) {
+            \DB::table('global_settings')->insert([
+                'option_key' => $key,
+                'option_value' => $amount
+            ]);
+        }
+    }
 }

@@ -21,28 +21,23 @@
         <div class="col-md-3">
             <div class="card border-0 shadow-sm text-center p-3">
                 <div class="text-muted small fw-bold text-uppercase">Total Project Views</div>
-                <div class="h3 mb-0">{{ number_format($totalViews ?? 0)  }}</div>
+                <div class="h3 mb-0">{{ \Illuminate\Support\Number::abbreviate($totalViews ?? 0) }}</div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card border-0 shadow-sm text-center p-3">
                 <div class="text-muted small fw-bold text-uppercase">Downloaded Surveys</div>
-                <div class="h3 mb-0 text-primary">{{ number_format($totalSurveysDownloaded ?? 0)  }}</div>
+                <div class="h3 mb-0 text-primary">{{ \Illuminate\Support\Number::abbreviate($totalSurveysDownloaded ?? 0) }}</div>
             </div>
         </div>
-        <div class="col-md-2">
+        
+        <div class="col-md-3">
             <div class="card border-0 shadow-sm text-center p-3">
-                <div class="text-muted small fw-bold text-uppercase">Favorites</div>
-                <div class="h3 mb-0 text-danger">♥ {{ number_format($totalFavorites ?? 0)  }}</div>
+                <div class="text-muted small fw-bold text-uppercase">Total Clicks</div>
+                <div class="h3 mb-0">{{ \Illuminate\Support\Number::abbreviate($totalLeadClicks ?? 0) }}</div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="card border-0 shadow-sm text-center p-3">
-                <div class="text-muted small fw-bold text-uppercase">Details Clicks</div>
-                <div class="h3 mb-0">{{ number_format($totalClicks ?? 0)  }}</div>
-            </div>
-        </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             <div class="card border-0 shadow-sm text-center p-3">
                 <div class="text-muted small fw-bold text-uppercase">Inquiries</div>
                 <div class="h3 mb-0 text-success">{{ number_format($contactClicks ?? 0)  }}</div>

@@ -470,6 +470,7 @@
                                     
                                 </select>
                                 <input type="hidden" name="project_title" value="{{ $project->project_title ?? '' }}" >
+                                <input type="hidden" name="project_id" value="{{ $project->id ?? '' }}" >
                                 <input type="hidden" name="project_url" value="/project/{{ $project->project_slug ?? '' }}" >
                             </div>
                             
