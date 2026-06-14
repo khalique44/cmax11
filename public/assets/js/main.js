@@ -419,6 +419,33 @@ $(document).ready(function(){
     });
 
 
+    $('#property-inquiry').on('submit', function (e) {
+        e.preventDefault();
+        showAjaxLoader();
+        $.ajax({
+            url: $('meta[name="home_url"]').attr('content')+"/property-inquiry-submit",
+            method: "POST",
+            data: $(this).serialize(),
+            success: function (response) {
+                displayMsg($('.property-inquiry-ajax-message'),response.message,'success');
+                $('#property-inquiry')[0].reset();
+                hideAjaxLoader();
+                
+            },
+            error: function (response) {
+                console.log(response.responseJSON?.message);
+                ajaxErrorCallback(response);
+                //displayMsg($('.property-inquiry-ajax-message'),response.responseJSON?.message,'danger');     
+                
+                hideAjaxLoader();
+            },
+            always:function(){
+                hideAjaxLoader();
+            }
+        });
+    });
+
+
 
 });
 

@@ -22,6 +22,12 @@ class SubArea extends Model
         return $this->hasMany(Project::class);
     }
 
+    // One sub area has many properties
+    public function properties()
+    {
+        return $this->hasMany(Properties::class);
+    }
+
     // One sub-area has many surveys
     public function surveys()
     {

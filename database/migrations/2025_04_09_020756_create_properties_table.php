@@ -13,7 +13,7 @@ class CreatePropertiesTable extends Migration
                 $table->increments('id');
                 $table->unsignedBigInteger('builder_id');
                 $table->string('property_title');
-                $table->text('description');
+                $table->text('description')->nullable();
                 $table->enum('property_type', ['home', 'apartment', 'plot', 'commercial']);
                 $table->enum('purpose', ['rent', 'sell']);
                 //$table->string('progress');

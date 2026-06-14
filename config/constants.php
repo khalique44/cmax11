@@ -30,6 +30,16 @@ return [
                             'sell' => 'Sell', 
                             'rent' => 'Rent', 
                         ],
+    'furnishing' => [
+                        'furnished' => 'Furnished',
+                        'semi-furnished' => 'Semi-Furnished',
+                        'unfurnished' => 'Unfurnished',
+                    ],
+    'listing_types' => [
+                        'owner' => 'Owner',
+                        'agent' => 'Agent',
+                        'builder' => 'Builder/Developer',
+                    ],
     'progress' => [
                             'under_construction' => 'Under Construction ', 
                             'new_launch' => 'New Launch ', 
@@ -56,6 +66,8 @@ return [
     'bathrooms' => [1,2,3,4,5,6,'6+'],
 
     'project_text_limit' => 200,
+    
+    'property_text_limit' => 200,
 
     'project_features' => [
                             'Prayer Area', 

@@ -10,6 +10,9 @@ use App\Amenity;
 use App\Category;
 use App\Builder;
 use App\User;
+use App\Feature;
+use App\Area;
+use App\SubArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
@@ -61,79 +64,125 @@ class PropertyController extends Controller
         $bathrooms = config('constants.bathrooms');
         $purposes = config('constants.purpose');
         $cities = GeneralHelper::getCitiesByCountry(166);
+        $areas = Area::orderBy('name' , 'asc')->get();
+        $furnishing = config('constants.furnishing');
+        $listing_types = config('constants.listing_types');
 
-        return view('admin.properties.create', compact('users','builders','amenities','categories','area_types','property_types','bedrooms','bathrooms','purposes','cities'));
+        return view('admin.properties.create', compact('users','builders','amenities','categories','area_types','property_types','bedrooms','bathrooms','purposes','cities','areas','furnishing','listing_types'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePropertyRequest $request)
+    public function store(Request $request) // Change StorePropertyRequest to Request to prevent auto-validation
     {
-        
-
-        $validated = $request->validate(array_merge([
-            'property_title' => 'required',
-            'project_id' => 'sometimes|required',
-            'builder_id' => 'required|numeric',
-            'property_type' => 'required',
-            'purpose' => 'required',
-            'location' => 'required',
-            'price' => 'required|numeric',
+        // 1. Define your rules
+        $rules = [ 
+            'property_title' => 'sometimes|required',
+            //'project_id'     => 'sometimes|required',
+            //'builder_id'     => 'sometimes|required|numeric',
+            'property_type'  => 'sometimes|required',
+            'purpose'        => 'sometimes|required',
+            'location'       => 'sometimes|required',
+            'price'          => 'sometimes|required|numeric',
             'is_installment' => 'nullable',
-            'area' => 'required|numeric',
-            'email' => 'required|email',
-            'phone_number' => 'required',
-            'images.*' => 'image|max:2048',
-            ], $request->filled('is_installment') ? [
-                'installment_advance_amount' => 'required|numeric',
-                'number_of_instalments' => 'required|numeric|',
-                'monthly_installment' => 'required|numeric',
-                ] : [])
-        );
+            'area'           => 'sometimes|required|numeric',
+            'email'          => 'sometimes|required|email',
+            'phone_number'   => 'sometimes|required',
+            'bedrooms'       => 'required',
+            'bathroom'       => 'required',
+            'description'    => 'required',
+            'email'          => 'required',
+            'images.*'       => 'sometimes|image|max:2048',
+        ];
 
-        // Using bootstrap switcher which return on/off text
+        // 2. Add conditional rules for installments
+        if ($request->filled('is_installment')) {
+            $rules['installment_advance_amount'] = 'required|numeric';
+            $rules['number_of_instalments']      = 'required|numeric';
+            $rules['monthly_installment']        = 'required|numeric';
+        }
+
+        // 3. Run the Validator manually
+        $validator = Validator::make($request->all(), $rules);
+        $isDraft = $validator->fails();
+
+        // 5. Handle Sub Area & Logo (Logic remains same)
+        $sub_area_id = 0;
+        if(!empty($request->sub_area)){
+            $subArea = SubArea::firstOrCreate([
+                'name' => $request->sub_area,
+                'area_id' => $request->area_id,
+            ]);
+            $sub_area_id = $subArea->id ?? 0;
+        }
+
+        // 4. Merge additional data
+        // Note: I fixed a typo in your 'is_installment' merge key below
         $request->merge([
-            'is_active' => $request->has('is_active') ? 1 : 0,
-            'is_installemnt' => $request->has('is_installemnt') ? 1 : 0,
-            'added_by' => auth('admin')->user()->id,
+            'sub_area_id'    => $sub_area_id,
+            'is_active'      => $request->has('is_active') ? 1 : 0,
+            'is_verified'    => $request->has('is_verified') ? 1 : 0,
+            'is_featured'    => $request->has('is_featured') ? 1 : 0,
+            'ready_for_possession' => $request->has('ready_for_possession') ? 1 : 0, 
+            'is_installment' => $request->has('is_installment') ? 1 : 0, // Fixed typo: 'is_installemnt' -> 'is_installment'
+            'added_by'       => auth('admin')->user()->id,
+            'status'         => $isDraft ? 'draft' : 'published', // Handy for tracking record state
         ]);
 
-        if(!$request->filled('is_installment')){
-           $request->merge([
-                'installment_advance_amount' => '',
-                'number_of_instalments' => '',
-                'monthly_installment' => '',                
+        // Handle empty installment fields if not active
+        if (!$request->filled('is_installment')) {
+            $request->merge([
+                'installment_advance_amount' => null,
+                'number_of_instalments'      => null,
+                'monthly_installment'        => null,                
             ]); 
         }
 
-        $property = Property::create($request->except('amenities', 'images','_token'));
 
-        // Sync amenities
+        
+
+        // 5. Create Record
+        // Explicitly grab all inputs after merge, excluding what we don't want in the table
+        $data = $request->except(['amenities', 'images', '_token', 'media_ids', 'deleted_files']);
+        $property = Property::create($data);
+
+        // 6. Sync amenities
         if ($request->has('amenities')) {
             $property->amenities()->sync($request->input('amenities'));
         }
 
-
+        // 7. Handle Media (Spatie)
         if ($request->has('media_ids')) {
             foreach ($request->media_ids as $mediaId) {
                 $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
                 if ($media) {
-                    $media->model_type = Property::class;
-                    $media->model_id = $property->id;
-                    $media->collection_name = 'images'; // move it to real collection
-                    $media->save();
+                    $media->update([
+                        'model_type' => Property::class,
+                        'model_id'   => $property->id,
+                        'collection_name' => 'images'
+                    ]);
+                }
+            }
+        }
+
+        // 8. Remove deleted images
+        if ($request->filled('deleted_files')) {            
+            foreach ($request->input('deleted_files') as $id) {
+                if ($id) {
+                    $decodedIds = is_array($id) ? $id : json_decode($id, true);
+                    \Spatie\MediaLibrary\MediaCollections\Models\Media::whereIn('id', (array)$decodedIds)->delete();
                 }
             }
         }
 
         return response()->json([
-            'status' => 'success',
-            'message' => 'Property created successfully!',
-            'property' => $property,
-            'project_id' => $request->has('project_id') ? $request->project_id : ''
-        ]);        
-
+            'status'      => $isDraft ? 'draft_saved' : 'success',
+            'message'     => $isDraft ? 'Validation failed. Progress saved as draft.' : 'Property created successfully!',
+            'errors'      => $isDraft ? $validator->errors() : null,
+            'property'    => $property,
+            'property_id' => $property->id
+        ], $isDraft ? 200 : 201); // Use 200 even for drafts so AJAX 'success' callback triggers
     }
 
     /**
@@ -161,8 +210,11 @@ class PropertyController extends Controller
         $bathrooms = config('constants.bathrooms');
         $purposes = config('constants.purpose');
         $cities = GeneralHelper::getCitiesByCountry(166);
+        $areas = Area::orderBy('name' , 'asc')->get();
+        $furnishing = config('constants.furnishing');
+        $listing_types = config('constants.listing_types');
 
-        return view('admin.properties.create', compact('property','users','builders','amenities','categories','area_types','property_types','purposes','bedrooms','bathrooms','cities'));
+        return view('admin.properties.create', compact('property','users','builders','amenities','categories','area_types','property_types','bedrooms','bathrooms','purposes','cities','areas','furnishing','listing_types'));
     }
 
     /**
@@ -174,17 +226,21 @@ class PropertyController extends Controller
 
         $validated = $request->validate(array_merge([
             //'property_title' => 'required',
-            'builder_id' => 'required|numeric',
-            'property_type' => 'required',
-            'purpose' => 'required',
-            //'progress' => 'required',
-            'location' => 'required',
-            'price' => 'required|numeric',
+            //'builder_id' => 'required|numeric',
+            'property_type'  => 'sometimes|required',
+            'purpose'        => 'sometimes|required',
+            'location'       => 'sometimes|required',
+            'price'          => 'sometimes|required|numeric',
             'is_installment' => 'nullable',
-            'area' => 'required|numeric',
-            'email' => 'required|email',
-            'phone_number' => 'required',
-            'images.*' => 'image|max:2048',
+            'area'           => 'sometimes|required|numeric',
+            'email'          => 'sometimes|required|email',
+            'phone_number'   => 'sometimes|required',
+            'bedrooms'       => 'required',
+            'bathrooms'       => 'required',
+            'description'    => 'required',
+            'email'          => 'required',
+            'images.*'       => 'sometimes|image|max:2048',
+            'video_url'      => 'sometimes|url|active_url',
             ], $request->filled('is_installment') ? [
                 'installment_advance_amount' => 'required|numeric',
                 'number_of_instalments' => 'required|numeric|',
@@ -192,10 +248,30 @@ class PropertyController extends Controller
                 ] : [])
         );
 
+
+        $sub_area_id = 0;
+
+        if(!empty($request->sub_area)){
+
+            $subArea = SubArea::firstOrCreate(
+                [
+                    'name' => $request->sub_area,
+                    'area_id' => $request->area_id,
+                ]
+            );
+
+            $sub_area_id = $subArea->id ?? 0;
+
+        }
+
         // Using bootstrap switcher which return on/off text
         $request->merge([
             'is_active' => $request->has('is_active') ? 1 : 0,
-            'is_installemnt' => $request->has('is_installemnt') ? 1 : 0,
+            'is_installment' => $request->has('is_installment') ? 1 : 0,
+            'is_verified'    => $request->has('is_verified') ? 1 : 0,
+            'is_featured'    => $request->has('is_featured') ? 1 : 0,
+            'ready_for_possession' => $request->has('ready_for_possession') ? 1 : 0, 
+            'sub_area_id' => $sub_area_id, 
             'added_by' => auth('admin')->user()->id,
         ]);
 
@@ -206,6 +282,8 @@ class PropertyController extends Controller
                 'monthly_installment' => '',                
             ]); 
         }
+        
+        
 
         $property->update($request->except('amenities', 'images'));
         $property->amenities()->sync($request->input('amenities', []));   
@@ -225,15 +303,18 @@ class PropertyController extends Controller
 
 
         if ($request->has('media_ids')) {
-            foreach ($request->media_ids as $mediaId) {
-                $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
-                if ($media) {
-                    $media->model_type = Property::class;
-                    $media->model_id = $property->id;
-                    $media->collection_name = 'images'; // move it to real collection
-                    $media->save();
+            if (!empty($request->media_ids['property_gallery'])) {
+                foreach ($request->media_ids['property_gallery'] as $mediaId) {
+                    $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
+                    if ($media) {
+                        $media->model_type = Property::class;
+                        $media->model_id = $property->id;
+                        $media->collection_name = 'property_gallery'; // move it to real collection
+                        $media->save();
+                    }
                 }
             }
+
         }
 
         return response()->json([
