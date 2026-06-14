@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('property_amunities', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('property_id');
-            $table->unsignedBigInteger('amenity_id');                        
-            $table->timestamps();
+        Schema::table('amenities', function (Blueprint $table) {
+            $table->string('icon')->nullable()->after('name');
+            $table->string('file_url')->nullable()->after('icon');
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('property_amunities');
+        Schema::table('amenities', function (Blueprint $table) {
+            //
+        });
     }
 };

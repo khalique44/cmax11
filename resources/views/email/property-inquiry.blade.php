@@ -22,9 +22,23 @@
                 <p><strong>Name:</strong> {{ $data['name'] }}</p>
                 <p><strong>Email:</strong> {{ $data['email'] }}</p>
                 <p><strong>Phone:</strong> {{ $data['phone'] }}</p>
-                <p><strong>Property Type:</strong> {{ $data['property_type'] }}</p>
-                <p><strong>Budget:</strong> {{ $data['budget'] ?? 'N/A' }}</p>
-                <p><strong>Location Preferences:</strong> {{ $data['location'] ?? 'N/A' }}</p>
+                @if(isset($data['property_type']) && !empty( $data['property_type']))
+                    <p><strong>Property Type:</strong> {{ $data['property_type'] }}</p>
+                @endif
+                @if(isset($data['property_title']) && !empty( $data['property_title']))
+                    <p><strong>Property Name:</strong> {{ $data['property_title'] }}</p>
+                @endif
+                @if(isset($data['property_url']) && !empty( $data['property_url']))
+                    <p><strong>Property URL:</strong> {{ $data['property_url'] }}</p>
+                @endif
+                @if(isset($data['budget']) && !empty( $data['budget']))
+                    <p><strong>Budget:</strong> {{ $data['budget'] ?? 'N/A' }}</p>
+                @endif
+                @if(isset($data['location']) && !empty( $data['location']))
+                    <p><strong>Location Preferences:</strong> {{ $data['location'] ?? 'N/A' }}</p>
+                @endif
+                
+                
                 <p><strong>Message:</strong></p>
                 <p style="background:#f9f9f9; padding:10px; border-radius:5px;">{{ $data['message'] ?? 'No additional message' }}</p>
             </td>

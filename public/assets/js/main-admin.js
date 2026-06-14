@@ -285,18 +285,23 @@ function surveySuccessCallback(response){
 }
 
 $(document).on("submit","form#property-form",function(e){
-    e.preventDefault();    
-   
-    var formData = $(this).serializeArray();
-    ajaxPostRequest("/properties",formData,propertySuccessCallback,ajaxErrorCallback,true);    
+
+    e.preventDefault(); 
+
+    var frm = $('form#property-form');
+    var formData = new FormData(frm[0]);   
+
+    ajaxPostRequest("/properties",formData,propertySuccessCallback,ajaxErrorCallback,true);       
 
 });
 
 $(document).on("submit","form#property-form-update",function(e){
+
     e.preventDefault();    
     var id = $('input[name="property_id"]').val();
-    var formData = $(this).serializeArray();
-    ajaxPostRequest("/properties/"+id,formData,propertySuccessCallback,ajaxErrorCallback,true);    
+    var frm = $('form#property-form-update');
+    var formData = new FormData(frm[0]); 
+    ajaxPostRequest("/properties/"+id,formData,propertySuccessCallback,ajaxErrorCallback,true);
 
 });
 
@@ -305,17 +310,17 @@ function propertySuccessCallback(response){
     var  msgArea = $('.ajax-msg');
     var msgType = 'error';
 
-    if(response.status && response.status == 'success'){
+    if(response.status){
         msgType = 'success'; 
         
         setTimeout(function(){            
             displayMsg(msgArea,response.message,msgType);
             $("form#property-form")[0].reset();
-            FilePond.find(document.querySelector('#filepond')).removeFiles();
-            $("#uploaded-preview").html('');
-
-            if(response.project_id){
-                location.reload();
+            FilePond.find(document.querySelector('.filepond')).removeFiles();
+            $(".uploaded-images").html('');
+            console.log('response.property.id:'+response.property.id)
+            if(response.property.id){
+                document.location=window.cmax.adminUrl+"/properties/"+response.property.id+"/edit";
             }
 
         },1000);
@@ -495,14 +500,14 @@ FilePond.setOptions({
                     //console.log(res)
                     const data = JSON.parse(res);
                     var preview_id = 'uploaded-preview';
-                    if(data.mediaKey == 'project_gallery'){
+                    if(data.mediaKey == 'project_gallery' || data.mediaKey == 'property_gallery'){
                         preview_id = 'gallery-preview';
                     } else if(data.mediaKey == 'payment_plan'){
                         preview_id = 'payment-preview';
                     } else if(data.mediaKey == 'project_progress'){
                         preview_id = 'project-progress-preview';
                     }
-
+                    
                     const inputElement = document.getElementById(preview_id); // Works now
 
                     if (!inputElement) return; // Just in case
@@ -515,7 +520,7 @@ FilePond.setOptions({
                     hidden.name = `media_ids[${collection}][]`;
                     hidden.value = data.id;
                     inputElement.closest('form').appendChild(hidden);
-
+                    console.log('data.id:',data.id)
                     // Preview container
                     const previewContainerId = inputElement.dataset.preview;
                     if (previewContainerId) {
@@ -1132,6 +1137,7 @@ $(document).ready(function() {
             }
         });
     }
+    
 });
 
 
@@ -1156,4 +1162,15 @@ function updateMediaPosition(order){
     });
 }
 
+
+// this is using in properties add/update section
+
+jQuery(document).on("change", "input[name='listing_type']", function(){
+
+    if($(this).val() == 'builder'){
+        $(".builder-info").removeClass("display-none");
+    }else{       
+        $(".builder-info").addClass("display-none");
+    }
+});
 

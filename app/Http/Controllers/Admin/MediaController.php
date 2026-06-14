@@ -22,6 +22,8 @@ class MediaController extends Controller
             $mediaKey = 'project_logo';
         }else if($request->has('project_progress')){
             $mediaKey = 'project_progress';
+        }else if($request->has('property_gallery')){
+            $mediaKey = 'property_gallery';
         }
         // Temporarily assign media to a dummy model (or no model at all)
         $tempModel = new TemporaryUpload(); // or just any placeholder model

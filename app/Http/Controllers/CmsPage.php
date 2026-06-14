@@ -11,6 +11,7 @@ use App\Mail\CareerFormMail;
 use App\Mail\PropertyInquiryMail;
 use App\Mail\ProjectInquiryMail;
 use App\Project;
+use App\Property;
 
 
 class CmsPage extends Controller
@@ -327,6 +328,62 @@ class CmsPage extends Controller
         $sessionKey = 'project_lead_clicks_' . $project->id;
         if (!session()->has($sessionKey)) {
             $project->increment('lead_clicks');
+            session()->put($sessionKey, true);
+        }
+
+        return response()->json(['message' => 'Your inquiry has been sent successfully!']);
+    }
+
+    public function submitPropertyInquiryForm(Request $request)
+    {
+        $data = $request->validate([
+            'name'          => 'required|string|max:255',
+            'email'         => 'required|email',
+            'phone'         => 'required|string|max:20',
+            'address'       => 'nullable|string',
+            'property_title'     => 'nullable|string|max:255',            
+            'message'       => 'nullable|string',
+        ]);
+
+        Mail::to(config('constants.admin_email'))->send(new PropertyInquiryMail($request->all()));
+        
+        $property_id = $request->property_id ?? '';
+        $property = Property::find($property_id);
+        $property_title = $request->property_title ?? '';
+        $comments = 'Property Name: '.$property_title.'<br>';       
+        $comments .= 'Property URL: '.$request->property_url.'<br>';       
+        $comments .= 'Message: '.$request->message;
+        
+
+        $dataToBitrix = [
+            'fields' => [
+                'TITLE' => 'New Property Inquery Form submitted! ',
+                'NAME'  => $request->name,
+                'LAST_NAME' => '',
+                'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
+                'PHONE' => [["VALUE"=>$request->phone,"VALUE_TYPE"=>"WORK"]],
+                'COMMENTS' => $comments,
+                'ADDRESS' => $request->address,
+                'SOURCE_ID' => 'WEB'
+            ],
+            
+        ];
+        //$data["fields"]["PHONE"][]=array("VALUE"=>"+923360321068","VALUE_TYPE"=>"WORK");
+
+               //[
+                       // [
+                        //    'VALUE'      => '555888',
+                        //    'VALUE_TYPE' => 'WORK',
+                     //   },
+
+
+        // $data["fields"]["EMAIL"][]=array("VALUE"=>"hzafar2010@gmail.com","VALUE_TYPE"=>"WORK");
+
+        GeneralHelper::sendBitrixRequest($dataToBitrix);
+
+        $sessionKey = 'property_lead_clicks_' . $property->id;
+        if (!session()->has($sessionKey)) {
+            $property->increment('lead_clicks');
             session()->put($sessionKey, true);
         }
 

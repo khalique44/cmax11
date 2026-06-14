@@ -21,6 +21,12 @@ class Area extends Model
         return $this->hasMany(Project::class);
     }
 
+    // One area has many properties
+    public function properties()
+    {
+        return $this->hasMany(Properties::class);
+    }
+
     // One area has many surveys
     public function surveys()
     {

@@ -12,6 +12,7 @@ use App\Http\Controllers\ProjectCompareController;
 use App\Http\Controllers\CmsPage;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProjectController as FrontProjectController;
+use App\Http\Controllers\PropertyController as FrontPropertyController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\Admin\MediaController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Admin\MainAreaController;
 use App\Http\Controllers\Admin\SubAreaController;
 use App\Http\Controllers\Admin\HomePageController;
 use App\Http\Controllers\Admin\FeatureController;
+use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -209,6 +211,13 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::resource('features', FeatureController::class);
         Route::get('/feature-data', [FeatureController::class,'getFeatures'])->name('features.data');
         Route::get('feature/update-status', [FeatureController::class,'updateStatus'])->name('feature.update-status');
+
+
+        Route::resource('amenities', AmenityController::class);
+        Route::get('/amenity-data', [AmenityController::class,'getAmenities'])->name('amenities.data');
+        Route::get('amenity/update-status', [AmenityController::class,'updateStatus'])->name('amenity.update-status');
+
+
         Route::post('/media/{media}/set-featured', [MediaController::class,'setFeatured'])->name('media.setFeatured');
         Route::get('/projects/{project}/refresh', [ProjectController::class,'refresh'])->name('projects.refresh');
         Route::resource('surveys',AreaSurveyController::class);
@@ -239,6 +248,13 @@ Route::get('/project', [FrontProjectController::class, 'searchResults'])->name('
 Route::get('/projects', [FrontProjectController::class, 'searchResults'])->name('allprojects');
 Route::get('/projects/search-results', [FrontProjectController::class, 'searchResults'])->name('search-results');
 Route::get('/project/{slug}',  [FrontProjectController::class, 'show'])->name('project.show');
+
+Route::get('/property', [FrontPropertyController::class, 'searchResults'])->name('allproperties');
+Route::get('/properties', [FrontPropertyController::class, 'searchResults'])->name('allproperties');
+Route::get('/properties/search-results', [FrontPropertyController::class, 'searchResults'])->name('search-results');
+Route::get('/property/{slug}',  [FrontPropertyController::class, 'show'])->name('property.show');
+
+
 Route::get('/about-us', [CmsPage::class, 'showAboutUs'])->name('aboutus.show');
 Route::get('/career', [CmsPage::class, 'showCareer'])->name('career.show');
 Route::get('/contact-us', [CmsPage::class, 'showContactUs'])->name('contactus.show');
@@ -250,6 +266,7 @@ Route::post('/contact-submit', [CmsPage::class, 'submitContactUs'])->name('conta
 Route::post('/property-submit', [CmsPage::class, 'submitInquiryForm'])->name('property.submit');
 Route::post('/career-submit', [CmsPage::class, 'submitCareerForm'])->name('career.submit');
 Route::post('/project-inquiry-submit', [CmsPage::class, 'submitProjectInquiryForm'])->name('project-inquiry.submit');
+Route::post('/property-inquiry-submit', [CmsPage::class, 'submitPropertyInquiryForm'])->name('property-inquiry.submit');
 
 
 

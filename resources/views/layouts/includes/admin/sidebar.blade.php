@@ -191,7 +191,27 @@
                         <div class="accordions-content-link">
                             <ul>
                                 <li><a href="{{url('admin/features')}}">All Features</a></li>
-                                <li><a href="{{url('admin/features/create')}}">Add New Post</a></li>                                
+                                <li><a href="{{url('admin/features/create')}}">Add New Feature</a></li>                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-bs-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapse11">
+                        
+                            <i class="fa fa-file"></i>
+                            <strong>Amenities</strong>
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse11" class="panel-collapse collapse {!! str_contains($url,'/amenities') ? 'show' : '' !!}">
+                    <div class="panel-body">
+                        <div class="accordions-content-link">
+                            <ul>
+                                <li><a href="{{url('admin/amenities')}}">All Amenities</a></li>
+                                <li><a href="{{url('admin/amenities/create')}}">Add New Amenity</a></li>                                
                             </ul>
                         </div>
                     </div>

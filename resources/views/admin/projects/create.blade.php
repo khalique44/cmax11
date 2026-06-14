@@ -848,7 +848,7 @@
                                         <input type="hidden" name="deleted-floor-plan[]" id="deleted-floor-plan">
                                         <input type="hidden" name="featured_media_id" id="featured_media_id" value="{{ isset($project) ? $project->featured_media_id : 0 }}">
                                         <button type="submit" class="btn btn-success mt-3">{{ isset($project) ? 'Update' : 'Save' }}</button>
-                                        <button type="submit" class="btn btn-warning mt-3">Back</button>
+                                        <a href="{{url('admin/projects')}}"   class="btn btn-sm btn-warning">Back</a>
                                     </div>
                                 </div>
                                 
