@@ -15,6 +15,7 @@ use App\Subscription;
 use App\User;
 use App\AreaSurvey;
 use App\Project;
+use App\Property;
 use App\LaundryBooking;
 use App\ReportedIssues;
 use Illuminate\Support\Str;
@@ -31,17 +32,31 @@ class AdminController extends Controller
     public function dashboard(Request $request)
     {
         $totalSurveysDownloaded = AreaSurvey::sum('download_counts');
-        $totalViews = Project::sum('views');    
-        $totalLeadClicks = Project::sum('lead_clicks');    
-        //$totalViews = Number::abbreviate(78888);   
+        $totalViews = Project::sum('views');            
+        $totalLeadClicks = Project::sum('lead_clicks'); 
+       
+       
         // Inventory Metrics (Status-based)
         $preLaunch = Project::where('progress', 'new_launch')->count();
         $underConstruction = Project::where('progress', 'under_construction')->count();
         $readyToMove = Project::where('progress', 'ready')->count();
         $activeListings = Project::where('is_active', true)->count();
         $inactiveListings = Project::where('is_active', false)->count();
+        $popularProjects = Project::where('is_popular', true)->count();
+        $featuredProjects = Project::where('is_featured', true)->count();
+
+
+        $totalPropertyViews = Property::sum('views');   
+        $totalPropertyLeadClicks = Property::sum('lead_clicks'); 
+        $totalPropertySell = Property::where('purpose', 'sell')->count();
+        $totalPropertyRent = Property::where('purpose', 'rent')->count();
+        $totalPropertyHome = Property::where('property_type', 'home')->count();
+        $totalPropertyPlot = Property::where('property_type', 'plot')->count();
+        $totalPropertyCommercial = Property::where('property_type', 'commercial')->count();
+        $activeProperty = Property::where('is_active', true)->count();
+        $inactiveProperty = Property::where('is_active', false)->count();
         
-        return view('admin.welcome',compact('totalViews','totalLeadClicks','preLaunch','underConstruction','readyToMove','activeListings','inactiveListings','totalSurveysDownloaded'));
+        return view('admin.welcome',compact('totalViews','totalLeadClicks','preLaunch','underConstruction','readyToMove','activeListings','inactiveListings','totalSurveysDownloaded','popularProjects','featuredProjects','totalPropertyViews','totalPropertyLeadClicks','totalPropertySell','totalPropertyRent','totalPropertyHome','totalPropertyPlot','totalPropertyCommercial','activeProperty','inactiveProperty'));
 
     }
 

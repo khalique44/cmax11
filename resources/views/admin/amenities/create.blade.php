@@ -30,32 +30,46 @@
                             <form class="has-filepond" method="POST" action="{{url('admin/amenities/')}}" enctype="multipart/form-data" id="amenity-form">
                                  {{csrf_field()}}
                                 
+                                <div class="row">
+                                    <div class="col-md-6 mb-3 mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Amenity Name<span>*</span></label>
+                                            <input type="text" name="name" id="name" title="enter amenity name!" class="district-input-field form-control" placeholder="Amenity Name" required value="{{old('name')}}">                                    
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3 mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Property Type<span>*</span></label>
+                                            <select name="property_type" id="property_type" class="form-control select2" required>
+                                                <option value="">Select Property Type</option>
+                                                @foreach($property_types as $type)
+                                                    <option value="{{ $type }}" {{ old('property_type') == $type ? 'selected' : '' }}>{{ ucfirst($type) }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row"   >
+                                    <div class="col-md-6 mb-3 mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Icon</label>
+                                            <input type="text" name="icon" id="icon" title="enter amenity icon!" class="district-input-field form-control" placeholder="Amenity icon"  value="{{old('icon')}}">                                    
+                                        </div>
+                                    </div>
                                     
-                                <div class="col-xs-12 mb-3 mt-3">
-                                    <div class="form-group">
-                                        <label>*Amenity Name :</label>
-                                        <input type="text" name="name" id="name" title="enter amenity name!" class="district-input-field form-control" placeholder="Amenity Name" required value="{{old('name')}}">                                    
-                                    </div>
-                                </div>
+                                    <div class="col-md-6 mb-3 mt-3">   
+                                        <div class="form-group">
+                                            <!-- File Upload -->
+                                            <div class="pond-container">
+                                                <label class="form-label">Upload Image</label>
+                                                <input type="file" name="file_url" id="file_url"  class="form-control">
+                                            </div>                                       
+                                            
+                                        </div>                                    
 
-                                <div class="col-xs-12 mb-3 mt-3">
-                                    <div class="form-group">
-                                        <label>Icon :</label>
-                                        <input type="text" name="icon" id="icon" title="enter amenity icon!" class="district-input-field form-control" placeholder="Amenity icon"  value="{{old('icon')}}">                                    
-                                    </div>
+                                    </div>  
                                 </div>
-                                
-                                <div class="col-xs-12 mb-3 mt-3">   
-                                    <div class="form-group">
-                                        <!-- File Upload -->
-                                        <div class="pond-container">
-                                            <label>Upload Images</label>
-                                            <input type="file" name="file_url" id="file_url"  class="form-control">
-                                        </div>                                       
-                                        
-                                    </div>                                    
-
-                                </div>  
 
                                                           
 

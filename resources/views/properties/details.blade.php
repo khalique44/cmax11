@@ -33,7 +33,7 @@
 
             </div>
             <div class="col-md-6 text-md-end">
-                <h2 class="Starting-price mb-4"><span>Starting From</span>
+                <h2 class="Starting-price mb-4"><span>Price</span>
 
                    {{ $property->custom_price['amount'] ?? ''}} {{ $property->custom_price['unit'] ?? '' }}
                     
@@ -208,9 +208,7 @@
                             
                             @endif
                             
-                            <li><span>Progress</span> Underconstruction</li>
-                            <li><span>Types</span> Apartment</li>
-                            <li><span>Price Range</span> 1 crore - 1 crore 80 lakh </li>
+                           
                         </ul>
                     </div>
                     
@@ -228,21 +226,22 @@
                             </ul>
                         </div>
                     @endif
-                    
-                    <div class="sec-gal mt-4" id="video">
-                        <h3 class="mb-3">Property Video</h3>
-                        <div class="inside-map pt-4">
-                           
-                            <iframe 
-                                src="{{ $property->video_url }}" 
-                                width="560" 
-                                height="315" 
-                                frameborder="0" 
-                                allowfullscreen>
-                            </iframe>
+                    @if( $property->video_url )
+                        <div class="sec-gal mt-4" id="video">
+                            <h3 class="mb-3">Property Video</h3>
+                            <div class="inside-map pt-4">
                             
+                                <iframe 
+                                    src="{{ $property->video_url }}" 
+                                    width="560" 
+                                    height="315" 
+                                    frameborder="0" 
+                                    allowfullscreen>
+                                </iframe>
+                                
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="sec-gal mt-4" id="location">
                         <h3 class="mb-3">Property Location</h3>
                         <div class="inside-map pt-4">

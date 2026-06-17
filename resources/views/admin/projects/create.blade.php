@@ -11,7 +11,7 @@
                 <div class="district-back-del-btn-area">
                     <div class="distrcit-back-btn">
                         <div class="district-back-del-btn-area">
-                            <a href="{{url('admin/projects')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-sm btn-warning">Back</a>
+                            <a href="{{url('admin/projects')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-sm btn-warning mb-3">Back</a>
                             @if(isset($project))
                                 &nbsp;<a class="btn btn-sm btn-success pull-right" target="_blank" href='{{ url("/project/$project->slug/") }}' >
                                                 View

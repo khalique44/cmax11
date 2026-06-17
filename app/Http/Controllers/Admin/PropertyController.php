@@ -40,11 +40,16 @@ class PropertyController extends Controller
                     return '<a class="btn btn-sm btn-primary" href="'.url("admin/properties/$property->id/edit").'" class="btn-sm btn-success action-button">
                                             Edit
                                         </a>
+                                        <a class="btn btn-sm btn-success" target="_blank" href="'.url("/property/$property->slug/").'" >
+                                            View
+                                        </a>
                                         <a type="button" href="#" class="delete-rec btn btn-sm btn-danger" data-route="/admin/properties/'.$property->id.'" data-tableid="propertiesTable"   data-id="'.$property->id.'">
                                             Delete
                                         </a>';
+                })->editColumn('property_title', function($property) {
+                    return $property->property_title.'<br><div class="very-small-text text-muted"><i class="fa fa-map-marker"></i> '.$property->alt_location.'</div>';                    
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','property_title'])
                 ->make(true);
         }
     }
@@ -240,7 +245,7 @@ class PropertyController extends Controller
             'description'    => 'required',
             'email'          => 'required',
             'images.*'       => 'sometimes|image|max:2048',
-            'video_url'      => 'sometimes|url|active_url',
+            'video_url'      => 'nullable|url|active_url',
             ], $request->filled('is_installment') ? [
                 'installment_advance_amount' => 'required|numeric',
                 'number_of_instalments' => 'required|numeric|',

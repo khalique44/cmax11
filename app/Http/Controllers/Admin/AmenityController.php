@@ -65,7 +65,8 @@ class AmenityController extends Controller
      */
     public function create()
     {
-        return view('admin.amenities.create');
+        $property_types = config('constants.property_types');
+        return view('admin.amenities.create',compact('property_types'));
     }
 
     /**
@@ -76,6 +77,7 @@ class AmenityController extends Controller
         $request->validate([
             'name' => 'required|max:255',            
             'file_url' => 'mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'property_type' => 'required|max:255',
         ]);
 
         $request->merge([
@@ -109,10 +111,11 @@ class AmenityController extends Controller
     public function edit($id)
     {
         $record = Amenity::find($id);
+        $property_types = config('constants.property_types');
         if(!$record){
             return abort(404);
         }
-        return view('admin.amenities.edit',compact('record'));
+        return view('admin.amenities.edit',compact('record','property_types'));
     }
 
     /**
@@ -122,6 +125,7 @@ class AmenityController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',            
+            'property_type' => 'required|max:255',            
             
         ]);
 
