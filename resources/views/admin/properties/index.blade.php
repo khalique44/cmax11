@@ -48,13 +48,13 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('properties.data') }}",
-                 pageLength: 5,
+                 pageLength: 50,
                 columns: [
                    
                     { data: 'property_title', name: 'property_title' },
                     { data: 'property_type', name: 'property_type' },                    
                     { data: 'purpose', name: 'purpose' },                    
-                    { data: 'price', name: 'price' },
+                    { data: 'formatted_price', name: 'formatted_price' },
                     { data: 'created_at', name: 'created_at' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],

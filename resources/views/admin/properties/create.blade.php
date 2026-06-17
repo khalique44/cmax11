@@ -11,7 +11,10 @@
                 <div class="district-back-del-btn-area">
                     <div class="distrcit-back-btn">
                         <div class="district-back-del-btn-area">
-                            <a href="{{url('admin/properties')}}"   class="btn btn-warning  mt-3">Back</a>
+                            <a href="{{url('admin/properties')}}"   class="btn btn-sm btn-warning  mb-3">Back</a>
+                            &nbsp;<a class="btn btn-sm btn-success pull-right" target="_blank" href='{{ url("/property/$property->slug/") }}' >
+                                                View
+                                            </a>
                         </div>
                     </div>
                 </div>

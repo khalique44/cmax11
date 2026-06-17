@@ -17,7 +17,7 @@ class Property extends Model implements HasMedia
     use HasFactory, InteractsWithMedia, SoftDeletes;
 
     protected $fillable = [        
-    	'builder_id','project_id','city_id','property_title','description',
+    	'builder_id','project_id','city_id','property_title','slug','description',
     	'property_type','category_id','purpose','progress','location','latitude',
     	'longitude','price','area','area_type','bedrooms','bathrooms','floor',
     	'is_installment','installment_advance_amount','number_of_instalments',
@@ -29,7 +29,7 @@ class Property extends Model implements HasMedia
         'created_at' => 'date:Y-M-d'
     ];
 
-    protected $appends = ['alt_location'];
+    protected $appends = ['alt_location','formatted_price'];
 
     protected static function boot()
 	{
@@ -109,6 +109,13 @@ class Property extends Model implements HasMedia
     {
         return GeneralHelper::detectNumberUnit($this->price);
     }
+
+    public function getFormattedPriceAttribute()
+    {
+        $price = (GeneralHelper::detectNumberUnit($this->price));
+        return $price['amount'].' '.$price['unit'];
+    }
+
 
     public function getInstallmentAdvanceAttribute()
     {

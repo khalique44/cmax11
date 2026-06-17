@@ -9,7 +9,7 @@
                 </div>
                 <div class="district-back-del-btn-area">
                     <div class="distrcit-back-btn">
-                        <a href="{{url('admin/amenities/')}}" data-toggle="" data-target="#search-db-model"  class="btn">Back</a>
+                        <a href="{{url('admin/amenities/')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-warning mb-3">Back</a>
 
                     </div>
                 </div>
@@ -27,40 +27,52 @@
                                  {{csrf_field()}}
                                 @method('PUT')
                                 
-                                    
-                                <div class="col-xs-12 mb-3 mt-3">
-                                    <div class="form-group">
-                                        <label>*Amenity Name :</label>
-                                        <input type="text" name="name" id="name" title="enter amenity name!" class="district-input-field form-control" placeholder="Amenity Name" required value="{{old('name',$record->name)}}">                                    
+                                <div class="row">    
+                                    <div class="col-md-6 mb-3 mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Amenity Name <span>*</span></label>
+                                            <input type="text" name="name" id="name" title="enter amenity name!" class="district-input-field form-control" placeholder="Amenity Name" required value="{{old('name',$record->name)}}">                                    
+                                        </div>
+                                    </div>
+                                        
+                                    <div class="col-md-6 mb-3 mt-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Property Type<span>*</span></label>
+                                            <select name="property_type" id="property_type" class="form-control select2" required>
+                                                <option value="">Select Property Type</option>
+                                                @foreach($property_types as $type)
+                                                    <option value="{{ $type }}" {{ old('property_type', $record->property_type ?? '') === $type ? 'selected' : '' }}>{{ ucfirst($type) }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-
                                 
 
-
-                                <div class="col-xs-12 mb-3 mt-3">
+                            <div class="row">
+                                <div class="col-md-6 mb-3 mt-3">
                                     <div class="form-group">
-                                        <label>Icon : <i class="fa {{old('icon',$record->icon)}}"></i></label>
+                                        <label class="form-label">Icon  <i class="fa {{old('icon',$record->icon)}}"></i></label>
                                         <input type="text" name="icon" id="icon" title="enter amenity icon!" class="district-input-field form-control" placeholder="Amenity icon"  value="{{old('icon',$record->icon)}}">                                    
                                     </div>
                                 </div>                 
                                
                                 
-                                <div class="col-xs-12 mb-3 mt-3">   
+                                <div class="col-md-6 mb-3 mt-3">   
                                     <div class="form-group">
                                         <!-- File Upload -->
                                         <div class="pond-container">
-                                            <label>Upload Images</label>
-                                            <input type="file" name="file_url" id="file_url" multiple class="form-control">
+                                            <label class="form-label">Upload Image</label>
+                                            <input type="file" name="file_url" id="file_url" class="form-control">
                                            
                                         </div>
 
                                         @if(!empty($record->file_url))
                                             <div class="">                       
                                                 <div class="form-group">
-                                                    <a href="{!! url('public') !!}/{{$record->file_url}}" target="_blank" class="available-image-area">
+                                                    <a href="{!! url('') !!}/{{$record->file_url}}" target="_blank" class="available-image-area">
                                                         
-                                                        <img src="{!! url('public') !!}/{{$record->file_url}}" class="header-image" title="Header Image" alt="" width="100">                                                    
+                                                        <img src="{!! url('') !!}/{{$record->file_url}}" class="header-image" title="Header Image" alt="" width="100">                                                    
                                                     </a>                                          
                                                     
                                                 </div>
@@ -71,6 +83,7 @@
 
 
                                 </div>  
+                            </div>
 
                                                           
 
