@@ -251,7 +251,7 @@ Route::get('/project/{slug}',  [FrontProjectController::class, 'show'])->name('p
 
 Route::get('/property', [FrontPropertyController::class, 'searchResults'])->name('allproperties');
 Route::get('/properties', [FrontPropertyController::class, 'searchResults'])->name('allproperties');
-Route::get('/properties/search-results', [FrontPropertyController::class, 'searchResults'])->name('search-results');
+Route::get('/properties/search-results', [FrontPropertyController::class, 'searchResults'])->name('properties-search-results');
 Route::get('/property/{slug}',  [FrontPropertyController::class, 'show'])->name('property.show');
 
 

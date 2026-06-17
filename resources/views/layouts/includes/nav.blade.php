@@ -61,7 +61,7 @@
                <a class="nav-link" href="{{ route('projects.compare'); }}">Compare</a>
             </li>
             <li class="nav-item">
-               <a class="nav-link" href="{{ route('allproperties'); }}">Properties</a>
+               <a class="nav-link" href="{{ route('properties-search-results'); }}">Properties</a>
             </li>
             <li class="nav-item">
                <a class="nav-link menu-btn" href="{{ route('contactus.show'); }}">Contact Us</a>
