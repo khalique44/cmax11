@@ -138,6 +138,13 @@
                             </div>
 
                             <div class="row">
+                                <div class="form-group">
+                                    <label class="form-label">Head Scripts:</label>
+                                    <textarea name="head_scripts" id="head_scripts" class="form-control" >{{old('head_scripts',$head_scripts)}}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mt-5">
                                 <div class="Create-district-btn">
                                     <button type="submit" href="javascript:void(0);" id="btn_save" class="btn  btn-success">
                                         Save

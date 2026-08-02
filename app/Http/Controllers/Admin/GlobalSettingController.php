@@ -27,8 +27,9 @@ class GlobalSettingController extends Controller
         $footer_last_column_heading = GeneralHelper::getOption('footer_last_column_heading');
         $copy_right_text = GeneralHelper::getOption('copy_right_text');
         $global_date_format = GeneralHelper::getOption('global_date_format');
+        $head_scripts = GeneralHelper::getOption('head_scripts');
         
-        return view('admin.global_settings.edit',compact('header_logo','footer_logo','footer_text_under_logo','facebook_url','instagram_url','twitter_url','youtube_url','footer_center_column_heading','footer_last_column_heading','copy_right_text','global_date_format'));
+        return view('admin.global_settings.edit',compact('header_logo','footer_logo','footer_text_under_logo','facebook_url','instagram_url','twitter_url','youtube_url','footer_center_column_heading','footer_last_column_heading','copy_right_text','global_date_format','head_scripts'));
     }
 
     /**
@@ -100,6 +101,7 @@ class GlobalSettingController extends Controller
         GeneralHelper::setOption('footer_last_column_heading',$request->footer_last_column_heading);
         GeneralHelper::setOption('copy_right_text',$request->copy_right_text);
         GeneralHelper::setOption('global_date_format',$request->global_date_format);
+        GeneralHelper::setOption('head_scripts',$request->head_scripts);
         
 
         if(!empty($request->header_logo)){
