@@ -45,6 +45,14 @@
     <link href="{{ asset('select2/select2.min.css') }}" rel="stylesheet" />
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    <script src="{{ asset('select2/select2.js') }}"></script>
+  
+
+
+@php 
+$head_scripts = GeneralHelper::getOption('head_scripts');  
+@endphp     
+{!! $head_scripts ?? '' !!}
+    
 
 </head>
 

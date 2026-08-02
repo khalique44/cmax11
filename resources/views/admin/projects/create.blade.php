@@ -662,6 +662,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-label">Bitrix Project ID:</label>
+                                        <input type="text" name="bitrix_project_id" id="bitrix_project_id" class="form-control" value="{{ old('bitrix_project_id', $project->bitrix_project_id ?? '') }}" >
+                                    </div>
+                                </div>
+                                
+                            </div>
 
                             <div class="row mt-3">                            
                                 <div class="col-md-12">
@@ -848,7 +857,7 @@
                                         <input type="hidden" name="deleted-floor-plan[]" id="deleted-floor-plan">
                                         <input type="hidden" name="featured_media_id" id="featured_media_id" value="{{ isset($project) ? $project->featured_media_id : 0 }}">
                                         <button type="submit" class="btn btn-success mt-3">{{ isset($project) ? 'Update' : 'Save' }}</button>
-                                        <a href="{{url('admin/projects')}}"   class="btn btn-sm btn-warning">Back</a>
+                                        <a href="{{url('admin/projects')}}"   class="btn btn-warning mt-3">Back</a>
                                     </div>
                                 </div>
                                 
