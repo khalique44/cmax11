@@ -981,3 +981,20 @@ Fancybox.bind("[data-fancybox]", {
 });
 
 });
+
+
+
+    const phoneInputField = document.querySelector("#phone_input");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+        preferredCountries: ["pk", "ae", "us", "gb"],
+        separateDialCode: true,
+        showSelectedDialCode: true,
+        nationalMode: false,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+    });
+
+    // Form submit hotay waqt full number pass karne ke liye
+    document.querySelector("#project-inquiry").addEventListener("submit", function (e) {
+        const fullNumber = phoneInput.getNumber();
+        document.querySelector("#full_phone").value = fullNumber;
+    });
