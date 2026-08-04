@@ -1541,3 +1541,19 @@ color: #6b7280;
         height: 187px;
     }
 }
+
+
+/* Selected flag image hide karne ke liye */
+.iti__selected-flag .iti__flag {
+    display: none !important;
+}
+
+/* Dropdown list se flag images hide karne ke liye */
+.iti__country-list .iti__flag {
+    display: none !important;
+}
+
+/* Extra blank space ko adjust karne ke liye */
+.iti__selected-flag {
+    padding-left: 8px !important;
+}

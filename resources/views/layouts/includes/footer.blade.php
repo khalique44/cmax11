@@ -59,7 +59,9 @@
   <!-- Bootstrap JS -->
    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
   <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('assets/js/intlTelInput.min.js') }}"></script>
   <script src="{{ asset('assets/js/main.js') }}?v={{ time() }}"></script>
+
 
 
 

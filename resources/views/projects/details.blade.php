@@ -450,11 +450,10 @@
                                 <input type="email" name="email" placeholder="Email" class="form-control">
                             </div>
                             <div class="form-group mt-3">
-                                <input type="text" name="phone" placeholder="Contact Number" class="form-control">
+                                <input type="tel" id="phone_input" placeholder="Contact Number" class="form-control">
+                                <input type="hidden" name="phone" id="full_phone">
                             </div>
-                            <div class="form-group mt-3">
-                                <input type="text" name="address" placeholder="Provide your address" class="form-control">
-                            </div>
+                            
                             <div class="form-group mt-3">
                                 <select name="unit_type" id="unit_type" class="form-select">
                                     <option value="">Select Unit</option>
