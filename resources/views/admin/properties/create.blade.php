@@ -12,9 +12,11 @@
                     <div class="distrcit-back-btn">
                         <div class="district-back-del-btn-area">
                             <a href="{{url('admin/properties')}}"   class="btn btn-sm btn-warning  mb-3">Back</a>
-                            &nbsp;<a class="btn btn-sm btn-success pull-right" target="_blank" href='{{ url("/property/$property->slug/") }}' >
-                                                View
-                                            </a>
+                            @if(isset($project))
+                                &nbsp;<a class="btn btn-sm btn-success pull-right" target="_blank" href='{{ url("/property/$property->slug/") }}' >
+                                                    View
+                                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>
