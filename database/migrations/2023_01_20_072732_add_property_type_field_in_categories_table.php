@@ -14,7 +14,7 @@ class AddPropertyTypeFieldInCategoriesTable extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->enum('property_type', ['home', 'commercial', 'plot'])->nullable()->after('name');
+            $table->enum('property_type', ['home', 'commercial', 'plot','apartment'])->nullable()->after('name');
             $table->boolean('is_active')->default(true)->after('property_type');
         });
     }
