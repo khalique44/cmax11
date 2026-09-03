@@ -301,7 +301,7 @@ class CmsPage extends Controller
 
         $dataToBitrix = [
             'fields' => [
-                'TITLE' => 'New Project Inquery Form submitted! ',
+                'TITLE' => 'Project Inquery - '.$project_title,
                 'NAME'  => $request->name,
                 'LAST_NAME' => '',
                 'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
@@ -357,7 +357,7 @@ class CmsPage extends Controller
 
         $dataToBitrix = [
             'fields' => [
-                'TITLE' => 'New Property Inquery Form submitted! ',
+                'TITLE' => 'Property Inquery - '.$property_title,
                 'NAME'  => $request->name,
                 'LAST_NAME' => '',
                 'EMAIL' => [["VALUE"=>$request->email,"VALUE_TYPE"=>"WORK"]],
