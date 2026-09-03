@@ -26,8 +26,9 @@
                             <th>Title</th>
                             <th>Type</th>                             
                             <th>Purpose</th>
-                            <th>Price</th>
+                            <th>Price/Rent</th>
                             <th>Added At</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -56,6 +57,7 @@
                     { data: 'purpose', name: 'purpose' },                    
                     { data: 'formatted_price', name: 'formatted_price' },
                     { data: 'created_at', name: 'created_at' },
+                    { data: 'is_active', name: 'is_active' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],
                 paging: true, // Ensure pagination is enabled
