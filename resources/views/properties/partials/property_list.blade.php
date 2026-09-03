@@ -46,6 +46,12 @@
                             @endif
                             <li><i class="fa fa-building"></i> {{ $property->property_type ?? '' }}</li>
                             <li><i class="fa fa-arrows"></i> {{ $property->area_size ?? '' }}  </li>
+                            @if($property->bedrooms)
+                            <li><i class="fa fa-bed"></i> {{ $property->bedrooms }} @if($property->bedrooms != 'Studio') {{ $property->bedrooms == 1 ? 'Bedroom' : 'Bedrooms' }} @endif </li>
+                            @endif
+                            @if($property->bathrooms)
+                            <li><i class="fa fa-bath"></i> {{ $property->bathrooms }} {{ $property->bathrooms == 1 ? 'Bathroom' : 'Bathrooms' }} </li>
+                            @endif
                         </ul>
                         <hr>
                         <div class="row mt-4 align-items-center">

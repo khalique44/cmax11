@@ -232,14 +232,14 @@
                                     </div>
                                     <div class="col-md-3 is_installment {{ $property->is_installment ?? '' === 1 ? '' : 'display-none' }}">
                                         <div class="form-group">
-                                            <label class="form-label">Monthly Installment (PKR)<span>*</span></label>
+                                            <label class="form-label font-small">Monthly Installment (PKR)<span>*</span></label>
                                             <input type="text" name="monthly_installment" class="form-control" value="{{ old('monthly_installment', $property->monthly_installment ?? '') }}" >  
                                         </div> 
                                     </div>
                                 </div>
 
                                 <div class="row rfp-area " {{ $property->purpose ?? '' == 'rent' ? "style=display:none;" : '' }}>
-                                    <div class="col-md-3  mt-4">
+                                    <div class="col-md-6  mt-4">
                                         <div class="form-group">
                                         
                                             <div class="form-check form-switch">
