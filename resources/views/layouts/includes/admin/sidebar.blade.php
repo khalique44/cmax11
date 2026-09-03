@@ -42,7 +42,7 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapse5" class="panel-collapse collapse {!! str_contains($url,'/admin/projects') || str_contains($url,'/areas') || str_contains($url,'/subareas') ? 'show' : '' !!}">
+                <div id="collapse5" class="panel-collapse collapse {!! str_contains($url,'/admin/projects') || str_contains($url,'/areas') || str_contains($url,'/subareas') || str_contains($url,'/features') ? 'show' : '' !!}">
                     <div class="panel-body">
                         <div class="accordions-content-link">
                             <ul>
@@ -52,6 +52,8 @@
                                 <li><a href="{{url('admin/areas/create')}}">Add Area</a></li>
                                 <li><a href="{{url('admin/subareas')}}">All Sub Areas</a></li>
                                 <li><a href="{{url('admin/subareas/create')}}">Add Sub Area</a></li>
+                                <li><a href="{{url('admin/features')}}">All Features</a></li>
+                                <li><a href="{{url('admin/features/create')}}">Add New Feature</a></li>
                                 
                             </ul>
                         </div>
@@ -66,12 +68,16 @@
                         </a>
                     </h4>
                 </div>
-                <div id="collapse2" class="panel-collapse collapse {!! str_contains($url,'/admin/properties') ? 'show' : '' !!}">
+                <div id="collapse2" class="panel-collapse collapse {!! str_contains($url,'/admin/properties') || str_contains($url,'/amenities') || str_contains($url,'/categories') ? 'show' : '' !!}">
                     <div class="panel-body">
                         <div class="accordions-content-link">
                             <ul>
                                 <li><a href="{{url('admin/properties/')}}">All Properties</a></li>
                                 <li><a href="{{url('admin/properties/create')}}">Add Property</a></li>
+                                <li><a href="{{url('admin/amenities')}}">All Amenities</a></li>
+                                <li><a href="{{url('admin/amenities/create')}}">Add New Amenity</a></li>
+                                <li><a href="{{url('admin/categories')}}">All Categories</a></li>
+                                <li><a href="{{url('admin/categories/create')}}">Add New Catgeory</a></li>
                                 
                             </ul>
                         </div>
@@ -177,45 +183,10 @@
                     </div>
                 </div>
 
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-bs-toggle="collapse" href="#collapse8" role="button" aria-expanded="false" aria-controls="collapse8">
-                        
-                            <i class="fa fa-file"></i>
-                            <strong>Features</strong>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse8" class="panel-collapse collapse {!! str_contains($url,'/features') ? 'show' : '' !!}">
-                    <div class="panel-body">
-                        <div class="accordions-content-link">
-                            <ul>
-                                <li><a href="{{url('admin/features')}}">All Features</a></li>
-                                <li><a href="{{url('admin/features/create')}}">Add New Feature</a></li>                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
+                
 
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-bs-toggle="collapse" href="#collapse11" role="button" aria-expanded="false" aria-controls="collapse11">
-                        
-                            <i class="fa fa-file"></i>
-                            <strong>Amenities</strong>
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse11" class="panel-collapse collapse {!! str_contains($url,'/amenities') ? 'show' : '' !!}">
-                    <div class="panel-body">
-                        <div class="accordions-content-link">
-                            <ul>
-                                <li><a href="{{url('admin/amenities')}}">All Amenities</a></li>
-                                <li><a href="{{url('admin/amenities/create')}}">Add New Amenity</a></li>                                
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="panel-heading">
                     <h4 class="panel-title">

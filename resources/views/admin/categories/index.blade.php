@@ -6,11 +6,11 @@
         <div class="right-section-content">
             <div class="admin-sec-btn-area">
                 <div class="report-title-section">
-                    <h4>All Amenities</h4>
+                    <h4>All Categories</h4>
                 </div>
                 <div class="database-btn">                 
   
-                    <a href="{{url('admin/amenities/create')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-success"><i class="fa fa-plus"></i> Add Amenity</a></br></br>
+                    <a href="{{url('admin/categories/create')}}" data-toggle="" data-target="#search-db-model"  class="btn btn-success"><i class="fa fa-plus"></i> Add Category</a></br></br>
                 </div>
             </div>
        
@@ -25,9 +25,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Property Type</th> 
-                            <th>Icon</th> 
-                            <th>Image</th> 
+                            <th>Property Type</th>
                             <th>Status</th>                           
                             <th>Actions</th>
                         </tr>
@@ -48,15 +46,13 @@
             $('#mainTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('amenities.data') }}",
+                ajax: "{{ route('categories.data') }}",
                  pageLength: 10,
                 columns: [
                    
                     { data: 'id', name: 'id' },
-                    { data: 'name', name: 'name' },
-                    { data: 'property_type', name: 'property_type' },
-                    { data: 'icon', name: 'icon' },
-                    { data: 'file_url', name: 'file_url' },
+                    { data: 'name', name: 'name' },                    
+                    { data: 'property_type', name: 'property_type' },                    
                     { data: 'is_active', name: 'is_active' },
                     { data: 'action', name: 'action', orderable: false, searchable: false }
                 ],

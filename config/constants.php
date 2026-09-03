@@ -16,7 +16,8 @@ return [
     'property_types' => [
                             'home', 
                             'plot', 
-                            'commercial'
+                            'commercial',
+                            'apartment'
                         ],
 
     'offering' => [

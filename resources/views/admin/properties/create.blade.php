@@ -12,7 +12,7 @@
                     <div class="distrcit-back-btn">
                         <div class="district-back-del-btn-area">
                             <a href="{{url('admin/properties')}}"   class="btn btn-sm btn-warning  mb-3">Back</a>
-                            @if(isset($project))
+                            @if(isset($property))
                                 &nbsp;<a class="btn btn-sm btn-success pull-right" target="_blank" href='{{ url("/property/$property->slug/") }}' >
                                                     View
                                                 </a>
@@ -54,7 +54,7 @@
                                             <div class="d-flex align-items-center">
                                                 @foreach($purposes as $key => $purpose)
                                                 <div class="form-check form-check-inline">
-                                                    <input type="radio"  name="purpose" class="form-check-input" id="purpose-{{ $key }}" value="{{ $key }}" {{ old('purpose', $property->purpose ?? 'sell') === $key ? 'checked' : '' }} required  ><label class="form-check-label" for="purpose-{{ $key }}">{{ ucfirst($purpose) }}</label>
+                                                    <input type="radio"  name="purpose" class="form-check-input property-purpose" id="purpose-{{ $key }}" value="{{ $key }}" {{ old('purpose', $property->purpose ?? 'sell') === $key ? 'checked' : '' }} required  ><label class="form-check-label" for="purpose-{{ $key }}">{{ ucfirst($purpose) }}</label>
                                                 </div>
                                                 @endforeach
                                                 
@@ -181,7 +181,7 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label class="form-label">Price (PKR)<span>*</span></label>
+                                            <label class="form-label property-price">{{ $property->purpose ?? '' == 'rent' ? 'Montly Rent (PKR)' : 'Price (PKR)' }}<span>*</span></label>
                                             <input type="number" name="price" class="form-control" value="{{ old('price', $property->price ?? '') }}" required>
                                         </div>
                                     </div>
@@ -208,7 +208,7 @@
 
                            
 
-                                <div class="row">
+                                <div class="row installment-area " {{ $property->purpose ?? '' == 'rent' ? "style=display:none;" : '' }}>
                                     <div class="col-md-3  mt-4">
                                         <div class="form-group">
                                         
@@ -238,7 +238,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row rfp-area " {{ $property->purpose ?? '' == 'rent' ? "style=display:none;" : '' }}>
                                     <div class="col-md-3  mt-4">
                                         <div class="form-group">
                                         

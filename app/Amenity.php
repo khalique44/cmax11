@@ -11,7 +11,7 @@ class Amenity extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name','icon','file_url','is_active'
+        'name','icon','file_url','is_active','property_type'
 
     ];
 

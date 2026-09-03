@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('amenities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->enum('property_type', ['home', 'commercial', 'plot'])->nullable();
+            $table->enum('property_type', ['home', 'commercial', 'plot','apartment'])->nullable();
             $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps();

@@ -686,6 +686,8 @@ $(document).on("change", "select#property_type", function(){
         $(".amenity-plot").hide();
         $(".amenity-commercial").hide();
         $(".category-commercial").hide();
+        $(".amenity-apartment").hide();
+        $(".category-apartment").hide();
 
     }else if($(this).val() == 'plot'){
 
@@ -695,12 +697,27 @@ $(document).on("change", "select#property_type", function(){
         $(".category-home").hide();
         $(".amenity-commercial").hide();
         $(".category-commercial").hide();
+        $(".amenity-apartment").hide();
+        $(".category-apartment").hide();
 
 
     }else if($(this).val() == 'commercial'){
 
         $(".amenity-commercial").show();
         $(".category-commercial").show();
+        $(".amenity-plot").hide();
+        $(".amenity-home").hide();
+        $(".category-plot").hide();
+        $(".category-home").hide();
+        $(".amenity-apartment").hide();
+        $(".category-apartment").hide();
+        
+    }else if($(this).val() == 'apartment'){
+
+        $(".amenity-apartment").show();
+        $(".category-apartment").show();
+        $(".amenity-commercial").hide();       
+        $(".category-commercial").hide();
         $(".amenity-plot").hide();
         $(".amenity-home").hide();
         $(".category-plot").hide();
@@ -1174,3 +1191,18 @@ jQuery(document).on("change", "input[name='listing_type']", function(){
     }
 });
 
+jQuery(document).on('change','input.property-purpose', function() {
+    // Radio button ki selected value check karein
+    var selectedPurpose = jQuery('input.property-purpose:checked').val();
+
+
+    if (selectedPurpose && selectedPurpose.toLowerCase() === 'rent') {
+        jQuery('.property-price').text('Monthly Rent (PKR)*');
+        jQuery('.installment-area').hide();
+        jQuery('.rfp-area').hide();
+    } else {
+        jQuery('.property-price').text('Price (PKR)*');
+        jQuery('.installment-area').show();
+        jQuery('.rfp-area').show();
+    }
+});

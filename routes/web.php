@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\AreaSurveyController;
 use App\Http\Controllers\Admin\HomePage\HomeSettingController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /* Route::get('/routecache', function (){
     \Illuminate\Support\Facades\Artisan::call('config:cache');
@@ -216,6 +217,10 @@ Route::group(array('prefix'=>'admin'), function (){
         Route::resource('amenities', AmenityController::class);
         Route::get('/amenity-data', [AmenityController::class,'getAmenities'])->name('amenities.data');
         Route::get('amenity/update-status', [AmenityController::class,'updateStatus'])->name('amenity.update-status');
+
+        Route::resource('categories', CategoryController::class);
+        Route::get('/category-data', [CategoryController::class,'getCategories'])->name('categories.data');
+        Route::get('category/update-status', [CategoryController::class,'updateStatus'])->name('category.update-status');
 
 
         Route::post('/media/{media}/set-featured', [MediaController::class,'setFeatured'])->name('media.setFeatured');

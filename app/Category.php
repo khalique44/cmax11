@@ -9,7 +9,7 @@ class Category extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','property_type','is_active'];
 
     public function scopeActive($query){
         return $query->where('active','yes')->get();

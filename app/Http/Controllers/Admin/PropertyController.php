@@ -159,15 +159,14 @@ class PropertyController extends Controller
 
         // 7. Handle Media (Spatie)
         if ($request->has('media_ids')) {
-            foreach ($request->media_ids as $mediaId) {
+            foreach ($request->media_ids['property_gallery'] as $mediaId) {
                 $media = \Spatie\MediaLibrary\MediaCollections\Models\Media::find($mediaId);
                 if ($media) {
-                    $media->update([
-                        'model_type' => Property::class,
-                        'model_id'   => $property->id,
-                        'collection_name' => 'images'
-                    ]);
-                }
+                    $media->model_type = Property::class;
+                    $media->model_id = $property->id;
+                    $media->collection_name = 'images'; // move it to real collection
+                    $media->save();
+                }                
             }
         }
 
