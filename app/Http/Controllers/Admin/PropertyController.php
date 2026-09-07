@@ -49,7 +49,13 @@ class PropertyController extends Controller
                 })->editColumn('property_title', function($property) {
                     return $property->property_title.'<br><div class="very-small-text text-muted"><i class="fa fa-map-marker"></i> '.$property->alt_location.'</div>';                    
                 })
-                ->rawColumns(['action','property_title'])
+                ->editColumn('is_active', function($property) {
+                    $status = GeneralHelper::getStatusLabel($property->is_active);
+                    $label = $property->is_active == 1 ? 'Deactive' : 'Active';
+                    $newStatus = $property->is_active == 1 ? 0 : 1;
+                    return '<a href="#" data-status="'.$newStatus.'" data-status-type="is_active" data-status-label="'.$label.'" class="updateStatus" data-model-name="property" data-id="'.$property->id.'" title="Click to '.$label.'" >'.$status.'</a>';                    
+                })
+                ->rawColumns(['action','property_title','is_active'])
                 ->make(true);
         }
     }
@@ -345,5 +351,19 @@ class PropertyController extends Controller
 
         $property->delete();
         return response()->json(['success' => 'Record deleted successfully.']);
+    }
+
+
+    public function updateStatus(Request $request){
+       
+        $record = Property::findOrFail($request->model_id);   
+
+        $record->update([$request->status_type => $request->status]);
+        
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Record updated successfully!'
+        ]);
     }
 }

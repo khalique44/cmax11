@@ -182,7 +182,9 @@ Route::group(array('prefix'=>'admin'), function (){
         
         Route::resource('testimonials', TestimonialController::class);
         Route::get('project/update-status', [ProjectController::class,'updateStatus'])->name('project.update-status');
+        Route::get('property/update-status', [PropertyController::class,'updateStatus'])->name('property.update-status');
         Route::post('project/update-position', [ProjectController::class,'updatePosition'])->name('project.update-position');
+        
         Route::post('/areas', [MainAreaController::class,'store'])->name('areas.store');
         Route::post('/sub-areas', [SubAreaController::class,'store'])->name('subareas.store');
         Route::get('/areas-data', [MainAreaController::class,'getAreas'])->name('areas.data');
