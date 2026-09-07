@@ -345,9 +345,9 @@ class PropertyController extends Controller
   
         $property = Property::with('media')->findOrFail($id);
 
-        foreach ($property->media as $media) {
+        /* foreach ($property->media as $media) {
             Storage::disk('public')->delete($media->file_path);
-        }
+        } */
 
         $property->delete();
         return response()->json(['success' => 'Record deleted successfully.']);
