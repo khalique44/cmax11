@@ -372,6 +372,47 @@ ul#select2-compare-projects-container{
 
 }
 
+
+
+/* Container aspect ratios for perfect responsiveness */
+.gallery-main {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Square ratio or adjust as needed */
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-box {
+    width: 100%;
+    aspect-ratio: 1 / 0.95; /* Matches half of main gallery height */
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Image scaling */
+.gallery-main img, 
+.gallery-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Mobile Responsiveness (Screen size < 768px) */
+@media (max-width: 767px) {
+    .gallery-main {
+        aspect-ratio: 16 / 9; /* Mobile par landscape view */
+        margin-bottom: 10px;
+    }
+    
+    .gallery-box {
+        aspect-ratio: 4 / 3;
+    }
+}
+
 /* ------ End code by KHL ------ */
 
 
