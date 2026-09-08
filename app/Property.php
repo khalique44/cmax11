@@ -135,13 +135,35 @@ class Property extends Model implements HasMedia
 
     	$areaName =  $this->Area->name ??  ''; 
     	$subAreaName =  $this->subArea->name ??  ''; 
-    	$subAreaName = $subAreaName ? ', '.$subAreaName : '';
+    	$subAreaName2 = $subAreaName ? ', '.$subAreaName : '';
     	$location =  $this->location ??  ''; 
-
-    	if(empty($areaName) && empty($subAreaName)){
+        
+    	if((empty($areaName) && empty($subAreaName)) || (trim($areaName) == trim($subAreaName))){
     		 return $location;
     	}else{
-    		 return $areaName.$subAreaName;
+    		 return $areaName.$subAreaName2;
+    	}
+    }
+
+    public function getListingPriceTitleAttribute(){
+
+    	$purpose =  $this->purpose ??  ''; 
+
+    	if($purpose == 'rent'){
+    		 return 'Monthly Rent';
+    	}else{
+    		 return 'Starting Price';
+    	}
+    }
+
+    public function getDetailPagePriceTitleAttribute(){
+
+    	$purpose =  $this->purpose ??  ''; 
+
+    	if($purpose == 'rent'){
+    		 return 'Monthly Rent';
+    	}else{
+    		 return 'Price';
     	}
     }
 

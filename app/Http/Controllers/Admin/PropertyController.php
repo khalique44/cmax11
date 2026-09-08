@@ -100,8 +100,8 @@ class PropertyController extends Controller
             'area'           => 'sometimes|required|numeric',
             'email'          => 'sometimes|required|email',
             'phone_number'   => 'sometimes|required',
-            'bedrooms'       => 'required',
-            'bathroom'       => 'required',
+            //'bedrooms'       => 'sometimes|required',
+            //'bathrooms'       => 'sometimes|required',
             'description'    => 'required',
             'email'          => 'required',
             'images.*'       => 'sometimes|image|max:2048',
@@ -170,7 +170,7 @@ class PropertyController extends Controller
                 if ($media) {
                     $media->model_type = Property::class;
                     $media->model_id = $property->id;
-                    $media->collection_name = 'images'; // move it to real collection
+                    $media->collection_name = 'property_gallery'; // move it to real collection
                     $media->save();
                 }                
             }
@@ -245,8 +245,8 @@ class PropertyController extends Controller
             'area'           => 'sometimes|required|numeric',
             'email'          => 'sometimes|required|email',
             'phone_number'   => 'sometimes|required',
-            'bedrooms'       => 'required',
-            'bathrooms'       => 'required',
+            //'bedrooms'       => 'sometimes|required',
+            //'bathrooms'       => 'sometimes|required',
             'description'    => 'required',
             'email'          => 'required',
             'images.*'       => 'sometimes|image|max:2048',

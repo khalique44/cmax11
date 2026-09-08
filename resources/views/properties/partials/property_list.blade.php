@@ -56,7 +56,7 @@
                         <hr>
                         <div class="row mt-4 align-items-center">
                             <div class="col-md-4">
-                                <h6 class="crore-h"><span style="font-size: 13px;">Starting Price</span><br>{{ $property->custom_price['amount'] ?? ''}} {{ $property->custom_price['unit'] ?? '' }} </h6>
+                                <h6 class="crore-h"><span style="font-size: 13px;">{{ $property->listing_price_title ?? 'Price' }}</span><br>{{ $property->custom_price['amount'] ?? ''}} {{ $property->custom_price['unit'] ?? '' }} </h6>
                             </div>
                             
                             <div class="col-md-8 text-md-end">

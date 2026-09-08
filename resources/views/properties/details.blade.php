@@ -33,7 +33,7 @@
 
             </div>
             <div class="col-md-6 text-md-end">
-                <h2 class="Starting-price mb-4"><span>Price</span>
+                <h2 class="Starting-price mb-4"><span>{{ $property->detail_page_price_title ?? 'Price' }}</span>
 
                    {{ $property->custom_price['amount'] ?? ''}} {{ $property->custom_price['unit'] ?? '' }}
                     
@@ -164,7 +164,7 @@
                         <ul class="listwith">
                             <li><span>Purpose</span> {{ $purpose[$property->purpose] ?? '' }}</li>
                             <li><span>Property Type</span> {{ ucfirst($property->property_type) ?? '' }}</li>
-                            <li><span>Location</span> {{ $property->alt_location ?? '' }}</li>
+                            <li><span>Location</span> {{ $property->alt_location ?? '' }} <a href="#location" title="See on the Map"><i class="fa fa-eye"></i></a></li>
                             <li><span>Area Size</span> {{ $property->area_size ?? '' }}</li>
                             <li><span>Listing Type</span> {{ $listing_types[$property->listing_type] ?? '' }}</li>
                             @if($property->listing_type == 'builder')
