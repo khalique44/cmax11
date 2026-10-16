@@ -456,7 +456,7 @@
                                     
                                 </div>
 
-                                <div class="row mt-3 builder-info display-none">                                
+                                <div class="row mt-3 builder-info {{ (!empty($property->listing_type) && $property->listing_type == 'builder') ? '' : 'display-none'  }} ">                                
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Company Name<span>*</span></label>
@@ -467,6 +467,36 @@
                                         <div class="form-group">
                                             <label class="form-label">Project Name</label>
                                             <input type="text" name="project_name" class="form-control" value="{{ old('project_name', $property->project_name ?? '') }}" >
+                                        </div>
+                                    </div>
+                               
+                                </div>
+
+                                <div class="row mt-3 agent-info {{ (!empty($property->listing_type) && $property->listing_type == 'agent') ? '' : 'display-none'  }} ">                                
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Agent Name<span>*</span></label>
+                                            <input type="text" name="agent_name" class="form-control" value="{{ old('agent_name', $property->agent_name ?? '') }}" >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Agent Email<span>*</span></label>
+                                            <input type="email" name="agent_email" class="form-control" value="{{ old('agent_email', $property->agent_email ?? '') }}" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Agent Phone</label>
+                                            <input type="text" name="agent_phone" class="form-control" value="{{ old('agent_phone', $property->agent_phone ?? '') }}" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-label">Agent Whatsapp</label>
+                                            <input type="text" name="agent_whatsapp" class="form-control" value="{{ old('agent_whatsapp', $property->agent_whatsapp ?? '') }}" >
                                         </div>
                                     </div>
                                

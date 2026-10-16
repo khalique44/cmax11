@@ -1186,8 +1186,13 @@ jQuery(document).on("change", "input[name='listing_type']", function(){
 
     if($(this).val() == 'builder'){
         $(".builder-info").removeClass("display-none");
-    }else{       
+        $(".agent-info").addClass("display-none");
+    }else if($(this).val() == 'agent'){       
         $(".builder-info").addClass("display-none");
+        $(".agent-info").removeClass("display-none");
+    }else{
+        $(".builder-info").addClass("display-none");
+        $(".agent-info").addClass("display-none");
     }
 });
 

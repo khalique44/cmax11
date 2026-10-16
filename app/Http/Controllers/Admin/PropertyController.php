@@ -98,12 +98,11 @@ class PropertyController extends Controller
             'price'          => 'sometimes|required|numeric',
             'is_installment' => 'nullable',
             'area'           => 'sometimes|required|numeric',
-            'email'          => 'sometimes|required|email',
+            'email'          => 'sometimes|required|email',           
             'phone_number'   => 'sometimes|required',
             //'bedrooms'       => 'sometimes|required',
             //'bathrooms'       => 'sometimes|required',
             'description'    => 'required',
-            'email'          => 'required',
             'images.*'       => 'sometimes|image|max:2048',
         ];
 
@@ -112,6 +111,13 @@ class PropertyController extends Controller
             $rules['installment_advance_amount'] = 'required|numeric';
             $rules['number_of_instalments']      = 'required|numeric';
             $rules['monthly_installment']        = 'required|numeric';
+        }
+        if ($request->listing_type == 'builder') {
+            //$rules['company_name'] = 'required';
+        }
+        if ($request->listing_type == 'agent') {
+            //$rules['agent_name'] = 'required';
+            //$rules['agent_email'] = 'required|email';
         }
 
         // 3. Run the Validator manually
@@ -247,15 +253,19 @@ class PropertyController extends Controller
             'phone_number'   => 'sometimes|required',
             //'bedrooms'       => 'sometimes|required',
             //'bathrooms'       => 'sometimes|required',
-            'description'    => 'required',
-            'email'          => 'required',
+            'description'    => 'required',           
             'images.*'       => 'sometimes|image|max:2048',
             'video_url'      => 'nullable|url|active_url',
             ], $request->filled('is_installment') ? [
                 'installment_advance_amount' => 'required|numeric',
                 'number_of_instalments' => 'required|numeric|',
                 'monthly_installment' => 'required|numeric',
-                ] : [])
+                ] : [],
+                ($request->listing_type == 'builder') ? ['company_name' => 'required'] : [],
+                ($request->listing_type == 'agent') ? ['agent_name' => 'required', 'agent_email' => 'required|email'] : [],
+
+        
+            )
         );
 
 
