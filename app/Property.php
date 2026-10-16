@@ -23,7 +23,7 @@ class Property extends Model implements HasMedia
     	'longitude','price','area','area_type','bedrooms','bathrooms','floor',
     	'is_installment','installment_advance_amount','number_of_instalments',
     	'monthly_installment', 'utilities','is_lease','is_active','contact_name','email','phone_number',
-    	'listed_by','added_by','area_id','sub_area_id','featured_media_id','total_floors','furnish','ready_for_possession','video_url','mobile_number','whatsapp_number','landline_number','listing_type','company_name','project_name','is_featured','is_verified'
+    	'listed_by','added_by','area_id','sub_area_id','featured_media_id','total_floors','furnish','ready_for_possession','video_url','mobile_number','whatsapp_number','landline_number','listing_type','company_name','project_name','agent_name','agent_email','agent_phone','agent_whatsapp','is_featured','is_verified'
     ];
 
     protected $casts = [

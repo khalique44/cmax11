@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->text('head_scripts')->nullable()->after('payment_plan_duration');
-            $table->unsignedBigInteger('bitrix_project_id')->default(0)->after('head_scripts');
+            $table->unsignedBigInteger('bitrix_project_id')->default(0)->nullable()->after('head_scripts');
         });
     }
 
