@@ -98,7 +98,7 @@ class PropertyController extends Controller
             'price'          => 'sometimes|required|numeric',
             'is_installment' => 'nullable',
             'area'           => 'sometimes|required|numeric',
-            'email'          => 'sometimes|required|email',           
+            //'email'          => 'sometimes|required|email',           
             'phone_number'   => 'sometimes|required',
             //'bedrooms'       => 'sometimes|required',
             //'bathrooms'       => 'sometimes|required',
@@ -249,7 +249,7 @@ class PropertyController extends Controller
             'price'          => 'sometimes|required|numeric',
             'is_installment' => 'nullable',
             'area'           => 'sometimes|required|numeric',
-            'email'          => 'sometimes|required|email',
+            //'email'          => 'sometimes|required|email',
             'phone_number'   => 'sometimes|required',
             //'bedrooms'       => 'sometimes|required',
             //'bathrooms'       => 'sometimes|required',
@@ -262,7 +262,7 @@ class PropertyController extends Controller
                 'monthly_installment' => 'required|numeric',
                 ] : [],
                 ($request->listing_type == 'builder') ? ['company_name' => 'required'] : [],
-                ($request->listing_type == 'agent') ? ['agent_name' => 'required', 'agent_email' => 'required|email'] : [],
+                ($request->listing_type == 'agent') ? ['agent_name' => 'required'] : [],
 
         
             )

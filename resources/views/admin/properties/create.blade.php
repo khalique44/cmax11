@@ -416,8 +416,8 @@
                                     </div>                              
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="form-label">Email<span>*</span></label>
-                                            <input type="email" name="email" class="form-control" value="{{ old('email', $property->email ?? '') }}" required>
+                                            <label class="form-label">Email</label>
+                                            <input type="email" name="email" class="form-control" value="{{ old('email', $property->email ?? '') }}" >
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -481,7 +481,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="form-label">Agent Email<span>*</span></label>
+                                            <label class="form-label">Agent Email</label>
                                             <input type="email" name="agent_email" class="form-control" value="{{ old('agent_email', $property->agent_email ?? '') }}" >
                                         </div>
                                     </div>
